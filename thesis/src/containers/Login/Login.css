@@ -1,0 +1,55 @@
+.Container{
+  display: flex;
+  flex-direction: row;
+  max-width: 960px;
+  height: 100vh;
+  margin: auto;
+  border: solid;
+}
+
+.PasswordText{
+  font-size: 20px;
+}
+.UsernameText{
+  font-size: 20px;
+}
+
+.UserInputContainer{
+  flex: 1;
+  background-color: red;
+  display: flex;
+  align-items: center;
+}
+
+.UserInputBox{
+  flex: 1;
+  background-color: purple;
+
+}
+
+.AboutContainer{
+  flex: 1;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AboutBox{
+  background-color: yellow;
+}
+
+
+.AboutTitle{
+  margin-left: 30px;
+  font-size: 33px;
+}
+
+.About{
+  background-color: green;
+  margin: 30px;
+  margin-top: 15px;
+  font-size: 20px;
+  border: solid;
+  border-width: thin;
+}
