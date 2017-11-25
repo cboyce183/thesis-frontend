@@ -1,0 +1,20 @@
+.PanelPosition {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PanelContainer {
+  width: 620px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.PanelSquare {
+  border: 1px solid black;
+  width: 300px;
+  height: 300px;
+}
