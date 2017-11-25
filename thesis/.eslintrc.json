@@ -32,8 +32,10 @@
         "react/no-string-refs": "error",
         "react/no-typos": "error",
         "react/jsx-key": "error",
-        "react/jsx-pascal-case": "error",
-        "react/jsx-wrap-multilines": "error",
+        "react/jsx-pascal-case": [
+            1
+        ],
+        "react/jsx-wrap-multilines": "warn",
         "indent": [
             "error",
             2
@@ -51,7 +53,8 @@
             "single"
         ],
         "no-trailing-spaces": [
-            "error"
-        ]
+            "warn"
+        ],
+        "no-console": "warn"
     }
 }
