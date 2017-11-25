@@ -19,7 +19,7 @@ class Panel extends Component {
             <PanelSquare
               isSummary={true}
               title="Available Zen"
-              zen="173"
+              zen="1346"
             />
             <PanelSquare
               alter="cart"

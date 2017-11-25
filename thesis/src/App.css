@@ -6,6 +6,10 @@
   height: 100vh;
 }
 
+.cogwheel {
+  fill: green;
+}
+
 .container {
   position: relative;
   width: 100%;
