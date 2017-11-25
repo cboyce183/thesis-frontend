@@ -18,6 +18,7 @@ class Panel extends Component {
             <div className="PanelSquare">
             </div>
           </div>
+          <h6>powered by Zendama</h6>
         </div>
       </div>
     );
