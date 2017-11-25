@@ -23,6 +23,17 @@
     "rules": {
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "react/no-multi-comp": "error",
+        "react/require-render-return": "error",
+        "react/jsx-closing-bracket-location": [
+            1,
+            "tag-aligned"
+        ],
+        "react/no-string-refs": "error",
+        "react/no-typos": "error",
+        "react/jsx-key": "error",
+        "react/jsx-pascal-case": "error",
+        "react/jsx-wrap-multilines": "error",
         "indent": [
             "error",
             2
