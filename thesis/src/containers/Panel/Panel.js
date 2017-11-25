@@ -1,5 +1,7 @@
 import React, { Component, } from 'react';
 
+import PanelSquare from '../../components/PanelSquare/PanelSquare';
+
 import '../../App.css';
 import './Panel.css';
 
@@ -9,38 +11,24 @@ class Panel extends Component {
       <div className="MaxWidth">
         <div className="PanelPosition">
           <div className="PanelContainer">
-            <div className="PanelSquare">
-              <div className="Wrapper">
-                <h5>Remaining Zen</h5>
-                <div className="Currency">
-                  <h1>173</h1>
-                  <h2>ż</h2>
-                </div>
-              </div>
-            </div>
-            <div className="PanelSquare">
-              <div className="Wrapper">
-                <h5>Available Zen</h5>
-                <div className="Currency">
-                  <h1>1209</h1>
-                  <h2>ż</h2>
-                </div>
-              </div>
-            </div>
-            <div className="PanelSquare">
-              <img
-                className="PanelImg"
-                alt="settings"
-                src={require('../../assets/cart.svg')}
-              />
-            </div>
-            <div className="PanelSquare Settings">
-              <img
-                className="PanelImg"
-                alt="settings"
-                src={require('../../assets/settings.svg')}
-              />
-            </div>
+            <PanelSquare
+              isSummary={true}
+              title="Remaining Zen"
+              zen="173"
+            />
+            <PanelSquare
+              isSummary={true}
+              title="Available Zen"
+              zen="173"
+            />
+            <PanelSquare
+              alter="cart"
+              image={require('../../assets/cart.svg')}
+            />
+            <PanelSquare
+              alter="settings"
+              image={require('../../assets/settings.svg')}
+            />
           </div>
           <h6>powered by Zendama</h6>
         </div>
