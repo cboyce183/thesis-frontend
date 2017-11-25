@@ -16,6 +16,7 @@ class Panel extends Component {
             <div className="PanelSquare">
             </div>
             <div className="PanelSquare">
+              <img alt="settings" src={require('../../assets/settings.svg')}/>
             </div>
           </div>
           <h6>powered by Zendama</h6>
