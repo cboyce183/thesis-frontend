@@ -1,55 +1,198 @@
 .Container{
-  display: flex;
-  flex-direction: row;
   max-width: 960px;
   height: 100vh;
   margin: auto;
-  border: solid;
+  background-color: transparent;
 }
 
-.PasswordText{
-  font-size: 20px;
-}
-.UsernameText{
-  font-size: 20px;
+
+
+.MainPannel{
+  display: flex;
+  flex-direction: row;
+  max-width: 960px;
+  height: 61.8vh;
+  margin: auto;
+  padding-top: 122.222px;
 }
 
 .UserInputContainer{
   flex: 1;
-  background-color: red;
+  background-color: transparent;
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 .UserInputBox{
-  flex: 1;
-  background-color: purple;
-
+  height: 360px;
+  background-color: transparent;
+  height: 364px;
+  display: flex;
 }
 
-.AboutContainer{
+.UserInputBox:focus {
+  border: 10px solid black;
+  outline: 10;
+}
+
+.ZenNameBox{
+  height: 77px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.TitleBox{
+  font-size: 35px;
+  background-color: btransparent;
+}
+.NewCompanyRout{
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.LoginMessage{
+  font-size: 10px;
+  margin-left: 0;
+}
+
+.CompanyQuestion{
+
+}
+.CompSignPageRoute{
+  font-weight: bold;
+  margin-left: 5px;
+  color: 'black',
+}
+
+.CompSignPageRoute:hover{
+  color: grey;
+}
+
+.UserInput{
+  background-color: transparent;
+  margin-top: 75px;
+}
+
+.LoginDetails{
   flex: 1;
-  background-color: blue;
+  background-color: transparent;
+}
+.LoginSend{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.sendBox{
+  flex: 0.618;
+  background-color: transparent;
   display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+.LoginButton{
+  /*margin-left: 32px;
+  margin-top: 39px;*/
+  width: 138.8888px;
+}
+
+.sendlogo{
+  flex: 1;
+  background-color: transparent;
+  background-image: url('./../../assetsJames/userImage.svg');
+  background-size: cover;
+}
+
+.PasswordText{
+  font-size: 20px;
+  width: 100%;
+}
+.UsernameText{
+  font-size: 20px;
+  width: 100%;
+  /*width: 258.88px;*/
+}
+
+.UsernameLable{
+  font-size: 12.28
+}
+.PasswordLable{
+  font-size: 12.28
+}
+
+/*the about section */
+.AboutContainer{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
 }
 
 .AboutBox{
-  background-color: yellow;
+  flex: 1;
+  background-color: transparent;
 }
-
 
 .AboutTitle{
-  margin-left: 30px;
-  font-size: 33px;
+  flex: 0.618;
+  backgroun-color: transparent;
+  /*font-size: 20px;*/
+  display: flex;
 }
 
+.Information{
+  flex: 1;
+  background-color: transparent;
+  font-size: 13px;
+  margin: 10px;
+}
+.CompanyLoginRout{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
 .About{
-  background-color: green;
+  background-color: transparent;
   margin: 30px;
   margin-top: 15px;
   font-size: 20px;
   border: solid;
   border-width: thin;
 }
+
+.ButtonToCompany{
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/170px-Apple_logo_black.svg.png');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+
+.ButtonToFB{
+  background-image: url('https://image.freepik.com/free-icon/facebook-logo_318-49940.jpg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.ButtonToTwit{
+  background-image: url('http://www.nationaleap.com/wordpress/wp-content/uploads/2017/02/black-and-white-twitter-logo-transparent_100736.png');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.ButtonToInsta{
+  background-image: url('http://www.madterrorfest.com/wp-content/uploads/2017/11/instagram-logo-vector-black-and-white-instagram-logos-in-vector-format-eps-ai-cdr-svg-free-download-logo-templates.jpg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+/*//*/
