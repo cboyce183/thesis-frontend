@@ -20,7 +20,6 @@ class Panel extends Component {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         if (res.isAdmin) {
           if (!res.catalog.length) this.setState({pending: ['catalog',],});
           if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
@@ -28,7 +27,7 @@ class Panel extends Component {
         }
         this.setState({loaded: true,});
       })
-      .catch(e => console.log(e));
+      .catch(e => console.error(e));
   }
 
   handleLogout() {
