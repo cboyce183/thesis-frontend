@@ -3,11 +3,16 @@ import React, { Component, } from 'react';
 import { Link, } from 'react-router-dom';
 
 import PanelSquare from '../../components/PanelSquare/PanelSquare';
+import NextSteps from '../../components/NextSteps/NextSteps';
 
 import '../../App.css';
 import './Panel.css';
 
 class Panel extends Component {
+  constructor(props) {
+    super(props);
+    //this will contain the fetch which will contain the flag for next steps if missing info and will specify isAdmin.
+  }
 
   handleLogout() {
     //this method will handle logout.
@@ -15,14 +20,43 @@ class Panel extends Component {
 
   //======================= RENDERING
 
+  renderNextSteps(arr) {
+    return arr.map((el,i) => {
+      if (el === 'users') {
+        return (
+          <NextSteps
+            text="add employees to Zendama"
+            step={i+1}
+            link="/settings"
+          />
+        )
+      } if (el === 'catalog') {
+        return (
+          <NextSteps
+            text="add rewards to your Zendama Catalog"
+            step={i+1}
+            link="/settings"
+          />
+        )
+      }
+    })
+  }
+
   render() {
+    const nextSteps = this.renderNextSteps(['catalog','users',])
     return (
       <div className="MaxWidth">
         <div className="PanelPosition">
-          <div className="Logout">
-            <Link to="/logout">
-              <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/>
-            </Link>
+          <div className="Header">
+            <div className="NextSteps">
+              <p>Next Steps</p>
+              {nextSteps}
+            </div>
+            <div className="Logout">
+              <Link to="/logout">
+                <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/>
+              </Link>
+            </div>
           </div>
           <div className="PanelContainer">
             <PanelSquare
