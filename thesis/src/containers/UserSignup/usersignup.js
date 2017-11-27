@@ -36,14 +36,28 @@ class UserSignup extends Component {
   }
 
   imageProfileOrNot(bool){
-    if (!bool) return( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
+    if (!bool) {
+      var reader = new FileReader();
+      reader.readAsDataURL(this.state.profilePic[0]);
+      reader.onloadend = () => {
+        this.setState({base64Image: reader.result,})
+      }
+    }
+  }
+
+  imageChange(bool){
     if (bool) {
       var reader = new FileReader();
       reader.readAsDataURL(this.state.profilePic[0]);
-      reader.onload = function(){
-        // this.state.base64Image = reader.result;
-      };
-      return( <img src={this.state.base64Image} className="ProfilePic"/> )
+      reader.onloadend = () => {
+        this.setState({base64Image: reader.result, profilePicLoad: false,})
+      }
+    }
+    // console.log(this.state.base64Image)
+    if (!this.state.base64Image) {
+      return ( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
+    } else {
+      return <img src={this.state.base64Image} className="ProfilePic"/>
     }
   }
 
@@ -63,7 +77,7 @@ class UserSignup extends Component {
                   <input className="UsernameText"
                     type="email"
                     value={this.state.email}
-                    placeholder="Email"
+                    placeholder="email@address.com"
                     onChange={(e) => this.setState({email: e.target.value,})}
                   />
                   {/* <label className="PasswordLable" >Password:</label> */}
@@ -91,9 +105,11 @@ class UserSignup extends Component {
                   <div className="LoadProfilePicture">
                     <div className="myLabel">
                       <input type="file"
-                        onChange={(e) => this.setState({
-                          profilePic: e.target.files,
-                          profilePicLoad: true,})}
+                        onChange={(e) => {
+                          this.setState({
+                            profilePic: e.target.files,
+                            profilePicLoad: true,})
+                        }}
                       />
                       <span>Add profile picture</span>
                     </div>
@@ -103,7 +119,11 @@ class UserSignup extends Component {
               </div>
               <div className="LoginSend">
                 <div className="ProfilePicBox">
-                  {this.imageProfileOrNot(this.state.profilePicLoad)}
+                  {
+                    this.imageChange(this.state.profilePicLoad)
+
+                    //
+                  }
                 </div>
                 <div className="SignupBox">
                   <input onClick={() => {

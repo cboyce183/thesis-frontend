@@ -21,7 +21,7 @@ class Login extends Component {
   loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/login-fail', {
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/login', {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {
