@@ -210,7 +210,7 @@
 }
 
 .ButtonToCompany{
-  background-image: url('./../../assetsJames/companyLogo.svg');
+  background-image: url('./../../assets/companyLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
@@ -218,19 +218,19 @@
 
 
 .ButtonToFB{
-  background-image: url('./../../assetsJames/facebookLogo.svg');
+  background-image: url('./../../assets/facebookLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
 }
 .ButtonToTwit{
-  background-image: url('./../../assetsJames/twitterLogo.svg');
+  background-image: url('./../../assets/twitterLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
 }
 .ButtonToInsta{
-  background-image: url('./../../assetsJames/instaLogo.svg');
+  background-image: url('./../../assets/instaLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;

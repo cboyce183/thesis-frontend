@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import { NavLink, } from 'react-router-dom'
-import './usersignup.css'
+import './UserSignup.css'
 // import base64 from 'base-64'
 // import { connect, } from 'react-redux'
 
@@ -36,7 +36,7 @@ class UserSignup extends Component {
   }
 
   imageProfileOrNot(bool){
-    if (!bool) return( <img src={require('../../assetsJames/userImage.svg')} className="ProfilePic"/> )
+    if (!bool) return( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
     if (bool) {
       var reader = new FileReader();
       reader.readAsDataURL(this.state.profilePic[0]);

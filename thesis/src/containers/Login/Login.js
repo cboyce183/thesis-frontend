@@ -70,7 +70,7 @@ class Login extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={(e) => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input onClick={() => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
                   {this.accessNotification(this.state.noAccess)}
                 </div>
               </div>
