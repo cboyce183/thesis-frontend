@@ -55,7 +55,7 @@ class Panel extends Component {
             key={i}
             text="add rewards to your Zendama Catalog"
             step={i+1}
-            link="/settings"
+            link="/catalog"
           />
         )
       }
@@ -69,21 +69,7 @@ class Panel extends Component {
     );
   }
 
-  renderTipOrPay() {
-
-  }
-
-  renderLedger() {
-
-  }
-
   render() {
-    // const tip = this.state.isAdmin
-    // ?
-    // :
-    // const ledger = this.state.isAdmin
-    // ?
-    // :
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps(this.state.pending)
       : '';
