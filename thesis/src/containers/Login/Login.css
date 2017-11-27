@@ -1,0 +1,193 @@
+.Container{
+  max-width: 960px;
+  height: 100vh;
+  margin: auto;
+  background-color: transparent;
+}
+
+.MainPannel{
+  display: flex;
+  flex-direction: row;
+  max-width: 960px;
+  height: 61.8vh;
+  margin: auto;
+  padding-top: 122.222px;
+}
+
+.UserInputContainer{
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.UserInputBox{
+  height: 360px;
+  background-color: transparent;
+  height: 364px;
+  display: flex;
+}
+
+.UserInputBox:focus {
+  border: 10px solid black;
+  outline: 10;
+}
+
+.ZenNameBox{
+  height: 77px;
+  width: 100%;
+  background-color: transparent;
+}
+
+.TitleBox{
+  font-size: 35px;
+  background-color: btransparent;
+}
+.NewCompanyRout{
+  background-color: transparent;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.LoginMessage{
+  font-size: 10px;
+  margin-left: 0;
+}
+
+.CompanyQuestion{
+
+}
+.CompSignPageRoute{
+  font-weight: bold;
+  margin-left: 5px;
+  color: 'black',
+}
+
+.CompSignPageRoute:hover{
+  color: grey;
+}
+
+.UserInput{
+  background-color: transparent;
+  margin-top: 75px;
+}
+
+.LoginDetails{
+  flex: 1;
+  background-color: transparent;
+}
+.LoginSend{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.sendBox{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: red;
+  font-size: 12px;
+}
+
+.LoginButton{
+  /*margin-left: 32px;
+  margin-top: 39px;*/
+  width: 138.8888px;
+}
+
+.sendlogo{
+  flex: 1;
+  background-color: transparent;
+  background-image: url('./../../assets/userImage.svg');
+  background-size: cover;
+}
+
+.PasswordText{
+  font-size: 20px;
+  width: 100%;
+}
+.EmailText{
+  font-size: 20px;
+  width: 100%;
+  /*width: 258.88px;*/
+}
+
+/*the about section */
+.AboutContainer{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.AboutBox{
+  flex: 1;
+  background-color: transparent;
+}
+
+.AboutTitle{
+  flex: 0.618;
+  backgroun-color: transparent;
+  /*font-size: 20px;*/
+  display: flex;
+}
+
+.Information{
+  flex: 1;
+  background-color: transparent;
+  font-size: 13px;
+  margin: 10px;
+}
+.CompanyLoginRout{
+  flex: 0.618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+.About{
+  background-color: transparent;
+  margin: 30px;
+  margin-top: 15px;
+  font-size: 20px;
+  border: solid;
+  border-width: thin;
+}
+
+.ButtonToCompany{
+  background-image: url('./../../assets/companyLogo.svg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+
+.ButtonToFB{
+  background-image: url('./../../assets/facebookLogo.svg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.ButtonToTwit{
+  background-image: url('./../../assets/twitterLogo.svg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+.ButtonToInsta{
+  background-image: url('./../../assets/instaLogo.svg');
+  background-size: contain;
+  width: 20px;
+  height: 20px;
+}
+
+/*//*/
