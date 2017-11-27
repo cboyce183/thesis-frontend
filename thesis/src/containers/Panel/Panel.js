@@ -4,6 +4,7 @@ import { Link, } from 'react-router-dom';
 
 import PanelSquare from '../../components/PanelSquare/PanelSquare';
 import NextSteps from '../../components/NextSteps/NextSteps';
+import Loader from '../../components/Loader/Loader';
 
 import '../../App.css';
 import './Panel.css';
@@ -14,6 +15,7 @@ class Panel extends Component {
     this.state = {
       pending: [],
       isAdmin: false,
+      loaded: false,
     }
     fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
       .then(res => res.json())
@@ -23,6 +25,7 @@ class Panel extends Component {
           if (!res.catalog.length) this.setState({pending: ['catalog',],});
           if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
           this.setState({isAdmin:res.isAdmin,});
+          this.setState({loaded: true,});
         }
       })
       .catch(e => console.log(e));
@@ -84,7 +87,7 @@ class Panel extends Component {
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps(this.state.pending)
       : '';
-    return (
+    return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="PanelPosition">
           <div className="Header">
@@ -119,6 +122,13 @@ class Panel extends Component {
               link="/settings"
             />
           </div>
+          <h6>powered by Zendama</h6>
+        </div>
+      </div>
+    ) : (
+      <div className="MaxWidth">
+        <div className="PanelPosition">
+          <Loader/>
           <h6>powered by Zendama</h6>
         </div>
       </div>
