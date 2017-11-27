@@ -1,5 +1,7 @@
 import React, { Component, } from 'react';
 
+import { Link, } from 'react-router-dom';
+
 import PanelSquare from '../../components/PanelSquare/PanelSquare';
 
 import '../../App.css';
@@ -18,26 +20,32 @@ class Panel extends Component {
       <div className="MaxWidth">
         <div className="PanelPosition">
           <div className="Logout">
-            <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/>
+            <Link to="/logout">
+              <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/>
+            </Link>
           </div>
           <div className="PanelContainer">
             <PanelSquare
               isSummary={true}
               title="Remaining Zen"
               zen="173"
+              link="/tiporpay"
             />
             <PanelSquare
               isSummary={true}
               title="Available Zen"
               zen="1346"
+              link="/ledger"
             />
             <PanelSquare
               alter="cart"
               image={require('../../assets/cart.svg')}
+              link="/catalog"
             />
             <PanelSquare
               alter="settings"
               image={require('../../assets/settings.svg')}
+              link="/settings"
             />
           </div>
           <h6>powered by Zendama</h6>
@@ -46,5 +54,5 @@ class Panel extends Component {
     );
   }
 }
-//remeber to leave index.js as it was!!!!!
+
 export default Panel;
