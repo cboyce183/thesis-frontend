@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './companyregistry1.css';
 import { Link } from 'react-router-dom';
+import Captcha from 'react-captcha';
 
-const Captcha = require('react-captcha');
+
 
 class CompanyRegistry1 extends Component {
 
@@ -14,24 +15,25 @@ class CompanyRegistry1 extends Component {
       companyEmail: '',
       companyUserName: '',
       companyPassword: '',
+      companyPassword2: '',
       companyLogo:'',
     }
   }
 
-//   getCompanySignIn (data) {
-//   const config = new Request (`http://localhost:3000/CompanyRegistry1${data}`, {
-//     method: 'GET',
-//     headers: new Headers({
-//       'Accept': 'application/json',
-//       'Content-Type': 'application/json'
-//     })
-//   })
-//   return fetch(config);
-// }
+
+handleCompanySignIn = () => {
+  console.log('Company email: ' + this.state.companyEmail);
+  console.log('Company username: ' + this.state.companyUserName);
+  console.log('Company password: ' + this.state.companyPassword);
+  console.log('Company password: ' + this.state.companyPassword2);
+  console.log('Company logo: ' + this.state.companyLogo);
+}
 
 repeatPassword = (str1, str2) => {
-  if(str1 !== str2){
-
+  if (this.state.companyPassword !== this.state.companyPassword2){
+    return alert('Please enter the same password.');
+  } else{
+    this.handleCompanySignIn()
   }
 }
 
@@ -45,16 +47,16 @@ repeatPassword = (str1, str2) => {
             type="Email"
             placeholder="Company-Email@mailbox.com"
             id="exampleEmailInput"
-            value={this.state.companyUsername}
-            onChange={(e) => this.setState({companyUsername: e.target.value,})}
+            value={this.state.companyEmail}
+            onChange={(e) => this.setState({companyEmail: e.target.value,})}
             />
             <input
             className="u-full-width"
             type="Email"
             placeholder="Company Username"
             id="exampleEmailInput"
-            value={this.state.companyEmail}
-            onChange={(e) => this.setState({companyEmail: e.target.value,})}
+            value={this.state.companyUserName}
+            onChange={(e) => this.setState({companyUserName: e.target.value,})}
             />
             <input
             className="u-full-width"
@@ -67,15 +69,10 @@ repeatPassword = (str1, str2) => {
             className="u-full-width"
             type="password"
             placeholder="Repeat Password"
-            value={this.state.companyPassword}
-            onChange={(e) => this.setState({companyPassword: e.target.value,})}
+            value={this.state.companyPassword2}
+            onChange={(e) => this.setState({companyPassword2: e.target.value,})}
             />
-            <Captcha
-            sitekey = '6LddoDoUAAAAANRFc_JW4zyweDbErXN0EglvHuIz'
-            lang = 'en'
-            theme = 'dark'
-            type = 'image'
-            callback = {(value) => console.log(value)}/>
+            <div className="g-recaptcha" data-sitekey="6LddoDoUAAAAANRFc_JW4zyweDbErXN0EglvHuIz"></div>
           </div>
           <div className='company-logo'>
             <div className="img-input">
@@ -94,6 +91,8 @@ repeatPassword = (str1, str2) => {
                 className="button-primary nxt-btn"
                 type="submit"
                 value="Next"
+                onChange={this.handleCompanySignIn}
+                onClick={() => this.repeatPassword()}
                 />
               </div>
             </Link>

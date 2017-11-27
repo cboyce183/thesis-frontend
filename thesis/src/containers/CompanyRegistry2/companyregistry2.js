@@ -13,26 +13,30 @@ class CompanyRegistry2 extends Component {
       coinName:'',
       wklyAllow:'',
     }
-    console.log(this.coinName);
+    console.log(this.props);
   }
 
     getCompanySignIn (data) {
-    const config = new Request (`http://localhost:3000/CompanyRegistry2${data}`, {
+    return fetch (`http://localhost:3000/CompanyRegistry2`, {
       method: 'POST',
-      headers: new Headers({
+      headers:{
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }),
+        'Content-Type': 'application/json',
+      },
       body: {
-        companyEmail:'',
-        companyUserName: '',
-        companyPassword: '',
-        companyLogo:'',
-        coinName:'',
-        wklyAllow:'',
+        companyEmail:data.companyEmail,
+        companyUserName: data.companyUserName,
+        companyPassword: data.companyPassword,
+        companyLogo: data.companyLogo,
+        coinName: data.coinName,
+        wklyAllow: data.wklyAllow
       }
     })
-    return fetch(config);
+  }
+
+  handleCompanyCurrency = () => {
+    console.log('Company coinName: ' + this.state.coinName);
+    console.log('Company weekly allowance: ' + this.state.wklyAllow);
   }
 
   render() {
@@ -45,27 +49,28 @@ class CompanyRegistry2 extends Component {
           <div className="company-coin-info">
             <div className="coin-name-allow-cont">
               <p>Name Your Company Currency</p>
-              <input
-              className="u-full-width coin-info"
-              type="email"
-              placeholder="Currency Name"
-              id="exampleEmailInput"
-              value={this.state.coinName}
-              onChange={(e) => this.setState({coinName: e.target.value,})}
-              />
-              <input
-              className="u-full-width coin-info"
-              type="email"
-              placeholder="Weekly Allowance $"
-              id="exampleEmailInput"
-              value={this.state.wklyAllow}
-              onChange={(e) => this.setState({wklyAllow: e.target.value,})}
-              />
+                <input
+                className="u-full-width coin-info"
+                type="email"
+                placeholder="Currency Name"
+                id="exampleEmailInput"
+                value={this.state.coinName}
+                onChange={(e) => this.setState({coinName: e.target.value,})}
+                />
+                <input
+                className="u-full-width coin-info"
+                type="number"
+                placeholder="Weekly Allowance $"
+                id="exampleEmailInput"
+                value={this.state.wklyAllow}
+                onChange={(e) => this.setState({wklyAllow: e.target.value,})}
+                />
               <Link to={{pathname: '/panel'}}>
               <input
               className="button-primary nxt-btn"
               type="submit"
               value="Next"
+              onClick={this.handleCompanyCurrency}
               />
               </Link>
             </div>
