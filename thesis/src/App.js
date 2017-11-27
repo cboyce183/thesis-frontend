@@ -3,7 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import { Landing } from './containers/Landing/landing';
 import CompanyRegistry1 from './containers/CompanyRegistry1/companyregistry1';
-import { CompanyRegistry2 } from './containers/CompanyRegistry2/companyregistry2';
+import  CompanyRegistry2 from './containers/CompanyRegistry2/companyregistry2';
 import { Login } from './containers/Login/login';
 import { TiporPay } from './containers/TiporPay/tiporpay';
 import { Ledger } from './containers/Ledger/ledger';
