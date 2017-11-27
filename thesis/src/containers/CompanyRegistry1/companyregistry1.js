@@ -3,6 +3,7 @@ import '../../App.css';
 import './companyregistry1.css';
 import { Link } from 'react-router-dom';
 
+const Captcha = require('react-captcha');
 
 class CompanyRegistry1 extends Component {
 
@@ -16,6 +17,23 @@ class CompanyRegistry1 extends Component {
       companyLogo:'',
     }
   }
+
+//   getCompanySignIn (data) {
+//   const config = new Request (`http://localhost:3000/CompanyRegistry1${data}`, {
+//     method: 'GET',
+//     headers: new Headers({
+//       'Accept': 'application/json',
+//       'Content-Type': 'application/json'
+//     })
+//   })
+//   return fetch(config);
+// }
+
+repeatPassword = (str1, str2) => {
+  if(str1 !== str2){
+
+  }
+}
 
   render() {
     return (
@@ -45,6 +63,19 @@ class CompanyRegistry1 extends Component {
             value={this.state.companyPassword}
             onChange={(e) => this.setState({companyPassword: e.target.value,})}
             />
+            <input
+            className="u-full-width"
+            type="password"
+            placeholder="Repeat Password"
+            value={this.state.companyPassword}
+            onChange={(e) => this.setState({companyPassword: e.target.value,})}
+            />
+            <Captcha
+            sitekey = '6LddoDoUAAAAANRFc_JW4zyweDbErXN0EglvHuIz'
+            lang = 'en'
+            theme = 'dark'
+            type = 'image'
+            callback = {(value) => console.log(value)}/>
           </div>
           <div className='company-logo'>
             <div className="img-input">

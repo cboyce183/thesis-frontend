@@ -13,8 +13,27 @@ class CompanyRegistry2 extends Component {
       coinName:'',
       wklyAllow:'',
     }
+    console.log(this.coinName);
   }
 
+    getCompanySignIn (data) {
+    const config = new Request (`http://localhost:3000/CompanyRegistry2${data}`, {
+      method: 'POST',
+      headers: new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }),
+      body: {
+        companyEmail:'',
+        companyUserName: '',
+        companyPassword: '',
+        companyLogo:'',
+        coinName:'',
+        wklyAllow:'',
+      }
+    })
+    return fetch(config);
+  }
 
   render() {
     return (
@@ -29,7 +48,7 @@ class CompanyRegistry2 extends Component {
               <input
               className="u-full-width coin-info"
               type="email"
-              placeholder="Coin Name"
+              placeholder="Currency Name"
               id="exampleEmailInput"
               value={this.state.coinName}
               onChange={(e) => this.setState({coinName: e.target.value,})}
@@ -59,5 +78,6 @@ class CompanyRegistry2 extends Component {
     );
   }
 }
+
 
 export default CompanyRegistry2;
