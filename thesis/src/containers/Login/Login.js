@@ -29,7 +29,7 @@ class Login extends Component {
       }
       if (response.status === 200){
         this.saveAccessToken(response.json().token);
-        // window.location = '/landing'
+        window.location = '/panel'
       }
     })
   }
