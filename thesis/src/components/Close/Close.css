@@ -1,25 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500');
+
 .Close {
-  position: absolute;
-  right: 32px;
-  top: 32px;
-  width: 32px;
-  height: 32px;
-  opacity: 0.3;
+  /* border: 1px solid black; */
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 200;
+  font-size: 35px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.Close:hover {
+
+@keyframes moveAnim {
+  0% { transform: rotate(0deg); opacity:0.5 }
+  100% { transform: rotate(180deg); opacity:1}
+}
+
+img:hover {
+  animation: moveAnim 0.5s cubic-bezier(0.175, 0.0885, 0.32, 1);
   opacity: 1;
 }
-.Close:before, .Close:after {
-  position: absolute;
-  left: 15px;
-  content: ' ';
-  height: 33px;
-  width: 2px;
-  background-color: #333;
-}
-.Close:before {
-  transform: rotate(45deg);
-}
-.Close:after {
-  transform: rotate(-45deg);
+
+img {
+  transition: all 0.75s cubic-bezier(0.175, 0.885, 0.32, 1);
+  opacity: 0.5;
+  height: 100%;
+  background-color: none;
 }
