@@ -20,3 +20,15 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.Logout {
+  margin-top: 10px;
+  height: 30px;
+  width: 30px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.LogoutIco {
+  height: 100%;
+}

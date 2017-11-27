@@ -6,10 +6,20 @@ import '../../App.css';
 import './Panel.css';
 
 class Panel extends Component {
+
+  handleLogout() {
+    //this method will handle logout.
+  }
+
+  //======================= RENDERING
+
   render() {
     return (
       <div className="MaxWidth">
         <div className="PanelPosition">
+          <div className="Logout">
+            <img className="LogoutIco" src={require('../../assets/logout.svg')}/>
+          </div>
           <div className="PanelContainer">
             <PanelSquare
               isSummary={true}
