@@ -17,7 +17,7 @@ class Panel extends Component {
       isAdmin: false,
       loaded: false,
     }
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         console.log(res);
@@ -25,8 +25,8 @@ class Panel extends Component {
           if (!res.catalog.length) this.setState({pending: ['catalog',],});
           if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
           this.setState({isAdmin:res.isAdmin,});
-          this.setState({loaded: true,});
         }
+        this.setState({loaded: true,});
       })
       .catch(e => console.log(e));
   }
@@ -128,6 +128,8 @@ class Panel extends Component {
     ) : (
       <div className="MaxWidth">
         <div className="PanelPosition">
+          <div className="Header">
+          </div>
           <Loader/>
           <h6>powered by Zendama</h6>
         </div>
