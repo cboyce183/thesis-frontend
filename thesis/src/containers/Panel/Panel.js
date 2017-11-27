@@ -92,7 +92,6 @@ class Panel extends Component {
             <div className="Logout">
               <Link style={{textDecoration:'none',}} to="/logout">
                 <h6>logout</h6>
-                {/* <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/> */}
               </Link>
             </div>
           </div>
@@ -105,8 +104,8 @@ class Panel extends Component {
             />
             <PanelSquare
               isSummary={true}
-              title="Available Zen"
-              zen="1346"
+              title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
+              zen={this.state.isAdmin ? '64219' : '1346'}
               link="/ledger"
             />
             <PanelSquare

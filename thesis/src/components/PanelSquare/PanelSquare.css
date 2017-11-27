@@ -24,21 +24,32 @@
 .Wrapper {
   text-align: center;
   background-color: white;
+  width: 100%;
 }
 
 .Currency {
+  width: 80%;
+  margin:auto;
   background-color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 p, h1, h2, h5, img {
   background-color: white;
 }
 
-.Currency > h1 {
+.Zen {
   font-size: 90px;
   line-height: 52px;
+  text-align: right;
+}
+
+.Infinity {
+  font-size: 200px;
+  text-align: center;
+  width: 100%;
 }
 
 .Currency > h2 {
