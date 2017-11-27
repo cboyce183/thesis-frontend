@@ -24,8 +24,9 @@
 
 .Logout {
   height: 60%;
-  width: 30px;
+  width: 100%;
   align-self: flex-start;
+  text-align: right;
   cursor: pointer;
 }
 
@@ -44,6 +45,7 @@
 
 .NextSteps {
   height: 100%;
+  width: 440px;
   display: flex;
   flex-direction: column;
   /* justify-content: space-between; */
