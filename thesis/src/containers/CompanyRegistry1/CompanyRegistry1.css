@@ -1,0 +1,42 @@
+@import 'https://fonts.googleapis.com/css?family=Raleway';
+
+.MaxWidth {
+  padding: 200px;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+.company-reg-container{
+  display: flex;
+  padding-top: 50px;
+  padding: 50px;
+  text-align: center;
+}
+.company-siginup-info{
+  height: 450px;
+  width: 350px;
+  padding: 40px;
+}
+
+input {
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  padding-left: 100px;
+
+}
+
+
+.company-logo{
+  height: 450px;
+  width: 450px;
+}
+
+.nxt-btn{
+  position: relative;
+  left:6px;
+  margin-top: 100px;
+}
+
+.powered-by {
+  font-size: x-small;
+}
