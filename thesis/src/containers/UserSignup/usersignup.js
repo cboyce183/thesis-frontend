@@ -1,67 +1,63 @@
 import React, { Component, } from 'react';
 import { NavLink, } from 'react-router-dom'
-import './Login.css'
-import base64 from 'base-64'
+import './usersignup.css'
+// import base64 from 'base-64'
 // import { connect, } from 'react-redux'
 
-class Login extends Component {
+class UserSignup extends Component {
   constructor(props){
     super(props)
     this.state = {
-      password: '',
+      password1: '',
+      password2: '',
       username: '',
+      email: '',
+      profilePic: '',
     }
   }
 
-  saveAccessToken(token){
-    localStorage.setItem('token', token)
-
-  }
-
-  loginRequest(loginData){
-    let headers = new Headers();
-    headers.append('Authorization', 'Basic ' + base64.encode(loginData.username + ':' + loginData.password));
-    fetch('http://localhost:8080/login', {
-      headers: headers,
-    })
-      .then(response => response.json())
-      .then(r => {
-        window.location = '/landing'
-      })
-  }
 
   render() {
-    console.log(this.props)
     return (
       <div className="Container">
         <div className="MainPannel">
           <div className="UserInputContainer">
             <div className="ZenNameBox">
               <div className="TitleBox">Z e n d a m a</div>
-              <div className="LoginMessage">login to your account</div>
+              <div className="LoginMessage"> sign up for your account</div>
             </div>
             <div className="UserInputBox">
               <div className="LoginDetails">
                 <div className="UserInput">
                   {/* <label className="UsernameLable" >Username:</label> */}
                   <input className="UsernameText"
-                    type="text"
-                    value={this.state.username}
+                    type="email"
+                    value={this.state.email}
                     placeholder="Email"
-                    onChange={(e) => this.setState({username: e.target.value,})}
+                    onChange={(e) => this.setState({email: e.target.value,})}
                   />
                   {/* <label className="PasswordLable" >Password:</label> */}
                   <input type="password" className="PasswordText"
-                    value={this.state.password}
+                    value={this.state.username}
+                    placeholder="Username"
+                    onChange={(e) => this.setState({username: e.target.value,})}
+                  />
+                  <input type="password" className="PasswordText"
+                    value={this.state.password1}
                     placeholder="Password"
-                    onChange={(e) => this.setState({password: e.target.value,})}
+                    onChange={(e) => this.setState({password1: e.target.value,})}
+                  />
+                  <input type="password" className="PasswordText"
+                    value={this.state.password2}
+                    placeholder="Password check"
+                    onChange={(e) => this.setState({password2: e.target.value,})}
                   />
                 </div>
               </div>
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={(e) => {e; this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input onClick={(e) => {e; this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Sign up"/>
                 </div>
               </div>
             </div>
@@ -101,4 +97,4 @@ class Login extends Component {
 
 
 
-export default (Login);
+export default (UserSignup);
