@@ -1,0 +1,34 @@
+* {
+  color: black;
+  border-color: black;
+}
+
+.PanelPosition {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.PanelContainer {
+  width: 650px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.Logout {
+  margin-top: 10px;
+  height: 30px;
+  width: 30px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+
+.LogoutIco {
+  height: 100%;
+}
