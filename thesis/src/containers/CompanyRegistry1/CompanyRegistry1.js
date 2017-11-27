@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './companyregistry1.css';
+import './CompanyRegistry1.css';
 import { Link } from 'react-router-dom';
 import Captcha from 'react-captcha';
 

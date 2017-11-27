@@ -1,10 +1,10 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
-.MaxWidth {
+/* .MaxWidth {
   padding: 200px;
   text-align: center;
   font-family: 'Raleway', sans-serif;
-}
+} */
 
 .company-reg-container{
   display: flex;
