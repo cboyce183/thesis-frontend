@@ -18,7 +18,7 @@ class Panel extends Component {
       <div className="MaxWidth">
         <div className="PanelPosition">
           <div className="Logout">
-            <img className="LogoutIco" src={require('../../assets/logout.svg')}/>
+            <img alt="logout" className="LogoutIco" src={require('../../assets/logout.svg')}/>
           </div>
           <div className="PanelContainer">
             <PanelSquare
