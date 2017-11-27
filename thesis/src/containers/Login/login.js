@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 import { NavLink, } from 'react-router-dom'
 import './Login.css'
 import base64 from 'base-64'
-// import { connect, } from 'react-redux'
+
 
 class Login extends Component {
   constructor(props){
@@ -15,7 +15,6 @@ class Login extends Component {
 
   saveAccessToken(token){
     localStorage.setItem('token', token)
-
   }
 
   loginRequest(loginData){
@@ -24,14 +23,18 @@ class Login extends Component {
     fetch('http://localhost:8080/login', {
       headers: headers,
     })
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 200){
+          return response.json()
+        }
+      })
       .then(r => {
+        this.saveAccessToken(r.body)
         window.location = '/landing'
       })
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="Container">
         <div className="MainPannel">
@@ -61,7 +64,7 @@ class Login extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={(e) => {e; this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input onClick={(e) => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
                 </div>
               </div>
             </div>

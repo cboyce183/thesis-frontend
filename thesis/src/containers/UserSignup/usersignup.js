@@ -57,14 +57,13 @@ class UserSignup extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={(e) => {e; this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Sign up"/>
+                  {/* <input onClick={(e) => {e; this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Sign up"/> */}
                 </div>
               </div>
             </div>
           </div>
           <div className="AboutContainer">
             <div className="AboutBox">
-              {/* <img className="UserImage" src='./../../../assetsJames/userImage.svg'/> */}
             </div>
             <div className="AboutTitle">
               <div className="Information">

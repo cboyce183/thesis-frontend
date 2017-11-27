@@ -168,7 +168,7 @@
 }
 
 .ButtonToCompany{
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/170px-Apple_logo_black.svg.png');
+  background-image: url('./../../assetsJames/companyLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
@@ -176,19 +176,19 @@
 
 
 .ButtonToFB{
-  background-image: url('https://image.freepik.com/free-icon/facebook-logo_318-49940.jpg');
+  background-image: url('./../../assetsJames/facebookLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
 }
 .ButtonToTwit{
-  background-image: url('http://www.nationaleap.com/wordpress/wp-content/uploads/2017/02/black-and-white-twitter-logo-transparent_100736.png');
+  background-image: url('./../../assetsJames/twitterLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
 }
 .ButtonToInsta{
-  background-image: url('http://www.madterrorfest.com/wp-content/uploads/2017/11/instagram-logo-vector-black-and-white-instagram-logos-in-vector-format-eps-ai-cdr-svg-free-download-logo-templates.jpg');
+  background-image: url('./../../assetsJames/instaLogo.svg');
   background-size: contain;
   width: 20px;
   height: 20px;
