@@ -9,7 +9,8 @@ class Login extends Component {
     super(props)
     this.state = {
       password: '',
-      username: '',
+      email: '',
+      noAccess: false,
     }
   }
 
@@ -19,19 +20,22 @@ class Login extends Component {
 
   loginRequest(loginData){
     let headers = new Headers();
-    headers.append('Authorization', 'Basic ' + base64.encode(loginData.username + ':' + loginData.password));
-    fetch('http://localhost:8080/login', {
+    headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/login-fail', {
       headers: headers,
+    }).then(response => {
+      if (response.status === 401) {
+        this.setState({noAccess: true,})
+      }
+      if (response.status === 200){
+        this.saveAccessToken(response.json().token);
+        // window.location = '/landing'
+      }
     })
-      .then(response => {
-        if (response.status === 200){
-          return response.json()
-        }
-      })
-      .then(r => {
-        this.saveAccessToken(r.body)
-        window.location = '/landing'
-      })
+  }
+
+  accessNotification(bool){
+    if (bool) return <div> wrong email or password </div>
   }
 
   render() {
@@ -46,17 +50,19 @@ class Login extends Component {
             <div className="UserInputBox">
               <div className="LoginDetails">
                 <div className="UserInput">
-                  {/* <label className="UsernameLable" >Username:</label> */}
-                  <input className="UsernameText"
+                  {/* <label className="emailLable" >email:</label> */}
+                  <input className="EmailText"
                     type="text"
-                    value={this.state.username}
+                    value={this.state.email}
                     placeholder="Email"
-                    onChange={(e) => this.setState({username: e.target.value,})}
+                    onFocus={() => this.setState({noAccess: false, email: '',})}
+                    onChange={(e) => this.setState({email: e.target.value,})}
                   />
                   {/* <label className="PasswordLable" >Password:</label> */}
                   <input type="password" className="PasswordText"
                     value={this.state.password}
                     placeholder="Password"
+                    onFocus={() => this.setState({noAccess: false, password: '',})}
                     onChange={(e) => this.setState({password: e.target.value,})}
                   />
                 </div>
@@ -65,6 +71,7 @@ class Login extends Component {
                 <div className="sendlogo"></div>
                 <div className="sendBox">
                   <input onClick={(e) => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  {this.accessNotification(this.state.noAccess)}
                 </div>
               </div>
             </div>

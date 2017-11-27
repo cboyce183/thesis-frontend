@@ -10,7 +10,6 @@ import  Ledger from './containers/Ledger/ledger';
 import  Catalog from './containers/Catalog/catalog';
 import  Settings from './containers/Settings/settings';
 import  Logout from './containers/Logout/logout';
-import UserSignup from './containers/UserSignup/usersignup';
 
 class App extends Component {
   render() {
@@ -25,7 +24,6 @@ class App extends Component {
         <Route path="/catalog" component={Catalog}/>
         <Route path="/settings" component={Settings}/>
         <Route path="/logout" component={Logout}/>
-        <Route path="/usersignup" component={UserSignup}/>
       </div>
     );
   }
