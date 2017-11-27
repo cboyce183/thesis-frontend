@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './companyregistry2.css';
+import './CompanyRegistry2.css';
 import { Link } from 'react-router-dom';
 
 
