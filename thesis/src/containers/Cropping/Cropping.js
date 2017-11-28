@@ -2,7 +2,7 @@ import React, { Component, } from 'react';
 // import { NavLink, } from 'react-router-dom';
 import { Cropper, } from 'react-image-cropper';
 import './Cropping.css'
-import OriginalImage from './../../assets/userImage.svg'
+// import OriginalImage from './../../assets/userImage.svg'
 
 
 class Cropping extends Component {
