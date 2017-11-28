@@ -54,7 +54,7 @@ class CompanyRegistry2 extends Component {
           </div>
           <div className="company-coin-info">
             <div className="coin-name-allow-cont">
-              <p>Name Your Company Currency</p>
+              <p className='label-currency'>Name Your Company Currency</p>
               <input
                 className="u-full-width coin-info"
                 type="email"

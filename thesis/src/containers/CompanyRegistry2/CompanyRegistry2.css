@@ -4,7 +4,7 @@
   text-align: center;
   font-family: 'Raleway', sans-serif;
   display: flex;
-  margin-top: 200px;
+  margin-top: 150px;
 }
 
 .company-reg2-container{
@@ -36,6 +36,7 @@ input {
   padding-left: 85px;
 }
 
+
 .powered-by-coin {
   font-size: x-small;
   margin-top: 150px;
@@ -44,4 +45,8 @@ input {
 
 .company-coin-logo{
   margin-left: 150px;
+}
+
+.label-currency{
+  margin-bottom: 35px;
 }
