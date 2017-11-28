@@ -14,8 +14,14 @@
   position: absolute;
   background-color: white;
   width: 99.4%;
+  height: 250px;
+  overflow-y: scroll;
   border: 1px solid black;
   border-top: none;
+}
+
+.UserList::-webkit-scrollbar {
+  display: none;
 }
 
 .UserItem {

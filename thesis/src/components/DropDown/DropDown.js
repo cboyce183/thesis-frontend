@@ -9,7 +9,22 @@ class DropDown extends Component {
   state = {
     users: false,
     selected: [],
+    list: [],
   }
+
+  componentDidMount() {
+    this.setState({list: this.props.arr,})
+  }
+
+
+  handleFilters(event) {
+    const filtered = event.value
+      ? this.state.list.filter(el => el.username.includes(event.value))
+      : this.props.arr;
+    this.setState({list: filtered,});
+  }
+
+  //=====================================RENDERING
 
   renderUserDropdown(arr) {
     return arr.map((el,i) => {
@@ -31,7 +46,7 @@ class DropDown extends Component {
   }
 
   render() {
-    const dropdown = this.renderUserDropdown(this.props.arr);
+    const dropdown = this.renderUserDropdown(this.state.list);
     return (
       <div className="DropDown">
         <input
@@ -39,6 +54,7 @@ class DropDown extends Component {
           type="text"
           onFocus={this.renderUserList}
           onBlur={this.renderUserList}
+          onChange={(e) => this.handleFilters(e.target)}
         />
         { this.state.users
           ? (
