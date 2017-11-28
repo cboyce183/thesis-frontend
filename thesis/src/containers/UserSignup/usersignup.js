@@ -102,7 +102,7 @@ class UserSignup extends Component {
                       this.setState({password2: e.target.value,})
                     }}
                   />
-                  <div className="LoadProfilePicture">
+                  {/* <div className="LoadProfilePicture">
                     <div className="myLabel">
                       <input type="file"
                         onChange={(e) => {
@@ -112,8 +112,16 @@ class UserSignup extends Component {
                         }}
                       />
                       <span>Add profile picture</span>
-                    </div>
-                  </div>
+                    </div> */}
+                    <input type="submit" className="PasswordText" id="pass2"
+                      value={this.state.password2}
+                      placeholder="Password"
+                      value="Choose profile image"
+                      onFocus={() => this.removePasswordWarning()}
+                      onClick={() => window.location = '/cropping'}
+                    />
+
+                  {/* </div> */}
 
                 </div>
               </div>

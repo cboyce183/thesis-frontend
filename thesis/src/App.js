@@ -12,6 +12,7 @@ import Catalog from './containers/Catalog/Catalog';
 import Settings from './containers/Settings/Settings';
 import Logout from './containers/Logout/Logout';
 import UserSignup from './containers/UserSignup/UserSignup';
+import Cropping from './containers/Cropping/Cropping'
 
 class App extends Component {
   render() {
@@ -28,6 +29,7 @@ class App extends Component {
         <Route path="/settings" component={Settings}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/usersignup" component={UserSignup}/>
+        <Route path="/cropping" component={Cropping}/>
       </div>
     );
   }
