@@ -8,6 +8,7 @@ import ReactFileReader from 'react-file-reader';
 
 
 
+
 class CompanyRegistry1 extends Component {
 
   constructor(props) {
