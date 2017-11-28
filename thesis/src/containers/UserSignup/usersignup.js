@@ -3,48 +3,58 @@ import { NavLink, } from 'react-router-dom'
 import './UserSignup.css'
 // import base64 from 'base-64'
 // import { connect, } from 'react-redux'
+import { connect, } from 'react-redux';
+import { UserName, Password1, Password2, Email, ClearEmail, ClearPassword1, ClearPassword2,} from './../../actions/index.js'
+
 
 class UserSignup extends Component {
   constructor(props){
     super(props)
     this.state = {
-      password1: '',
-      password2: '',
-      username: '',
-      email: '',
-      profilePic: null,
-      profilePicLoad: false,
       passwordNotEqual: false,
-      base64Image: null,
+      emailIsInvalid: false,
     }
   }
 
-  // userSignupRequest(){
-  //   fetch('http://localhost:8080/', {
-  //     method: 'POST',
-  //     body: {
-  //       password: this.state.password,
-  //       username: this.stare.username,
-  //       email: this.state.email,
-  //       profilePic: this.state.profilePic,
-  //     }
-  //   })
-  // }
-
-  arePasswordsTheSame(){
-    if (this.state.password1 === this.state.password2) {
-      return true;
+  userSignupRequest(theProps){
+    if (this.state.passwordNotEqual && this.state.emailIsInvalid) {
+      fetch('http://localhost:8080/', {
+        method: 'POST',
+        body: {
+          UserImage:  theProps.UserImage,
+          UserEmail:  theProps.UserEmail,
+          UserPasssword:  theProps.UserPasssword2,
+          UserName: theProps.UserName,
+        },
+      })
     } else {
-      this.setState({password1 : '', password2 : '', passwordNotEqual: true,})
+      console.log("error cannot send!!!")
+    }
+
+  }
+
+  arePasswordsTheSame(theProps){
+    console.log("the password test...")
+    if (theProps.UserPasssword1 === theProps.UserPasssword2) {
+      console.log(true)
+    } else {
+      this.setState({passwordNotEqual: true,})
     }
   }
 
   removePasswordWarning(){
     this.setState({passwordNotEqual: false,})
   }
+  removeEmailIsInvalid(){
+    this.setState({emailIsInvalid: false,})
+  }
 
   warningPassWordNotEqual(bool){
     if(bool) return (<div> Passwords are not equal. </div>)
+  }
+
+  warningEmailInvalid(bool){
+    if(bool) return (<div> Email is invalid. </div>)
   }
 
   imageProfileOrNot(bool){
@@ -57,22 +67,22 @@ class UserSignup extends Component {
     }
   }
 
-  // imageChange(bool){
-  //   if (bool) {
-  //     var reader = new FileReader();
-  //     reader.readAsDataURL(this.state.profilePic[0]);
-  //     reader.onloadend = () => {
-  //       this.setState({base64Image: reader.result, profilePicLoad: false,})
-  //     }
-  //   }
-  //   if (!this.state.base64Image) {
-  //     return ( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
-  //   } else {
-  //     return <img src={this.state.base64Image} className="ProfilePic"/>
-  //   }
-  // }
+  checkEmailValid(email){
+    var re = /\S+@\S+\.\S+/;
+    const bool = re.test(email)
+    this.setState({emailIsInvalid: !bool,});
+  }
+
+  imageChange(image){
+    if (!image) {
+      return <img alt="" src={require('./../../assets/userImage.svg')} className="ProfilePic"/>
+    } else {
+      return <img alt="" src={image} className="ProfilePic"/>
+    }
+  }
 
   render() {
+    console.log(this.state)
     return (
       <div className="Container">
         <div className="MainPannel">
@@ -87,56 +97,66 @@ class UserSignup extends Component {
                   {/* <label className="UsernameLable" >Username:</label> */}
                   <input className="EmailText"
                     type="email"
-                    value={this.state.email}
+                    value={this.props.UserEmail}
                     placeholder="email@address.com"
-                    onChange={(e) => this.setState({email: e.target.value,})}
+                    onFocus={() => {
+                      this.props.clearEmail()
+                      this.removeEmailIsInvalid()
+                    }}
+                    onChange={(e) =>
+                      this.props.email(e.target.value)
+                    }
                   />
                   {/* <label className="PasswordLable" >Password:</label> */}
                   <input type="text" className="UsernameText"
-                    value={this.state.username}
+                    value={this.props.UserName}
                     placeholder="Username"
-                    onChange={(e) => this.setState({username: e.target.value,})}
+                    onChange={(e) =>
+                      this.props.username(e.target.value)
+                    }
                   />
                   <input type="password" className="PasswordText"
-                    value={this.state.password1}
+                    value={this.props.UserPasssword1}
                     placeholder="Password"
-                    onFocus={() => this.removePasswordWarning()}
+                    onFocus={() => {
+                      this.props.clearPassword1()
+                      this.removePasswordWarning()
+                    }}
                     onChange={(e) => {
-                      this.setState({password1: e.target.value,})
+                      this.props.password1(e.target.value)
                     }}
                   />
                   <input type="password" className="PasswordText" id="pass2"
-                    value={this.state.password2}
+                    value={this.props.UserPasssword2}
                     placeholder="Password"
-                    onFocus={() => this.removePasswordWarning()}
+                    onFocus={() => {
+                      this.props.clearPassword2()
+                      this.removePasswordWarning()
+                    }}
                     onChange={(e) => {
-                      this.setState({password2: e.target.value,})
+                      this.props.password2(e.target.value)
                     }}
                   />
-                  <input type="submit" className="PasswordText" id="pass2"
-                    value={this.state.password2}
-                    placeholder="Password"
-                    value="Choose profile image"
-                    onFocus={() => this.removePasswordWarning()}
-                    onClick={() => window.location = '/cropping'}
-                  />
+                  <NavLink to='/cropping'>
+                    <input type="submit" className="PasswordText" id="pass2"
+                      value="Choose profile image"
+                    />
+                  </NavLink>
                 </div>
               </div>
               <div className="LoginSend">
                 <div className="ProfilePicBox">
-                  {/* {
-                    this.imageChange(this.state.profilePicLoad)
-
-                    //
-                  } */}
+                  {this.imageChange(this.props.UserImage)}
                 </div>
                 <div className="SignupBox">
                   <input onClick={() => {
-                    this.arePasswordsTheSame()
+                    this.arePasswordsTheSame(this.props)
+                    this.checkEmailValid(this.props.UserEmail)
                   }}
                   className="LoginButton" type="submit" value="Sign up"
                   />
                   {this.warningPassWordNotEqual(this.state.passwordNotEqual)}
+                  {this.warningEmailInvalid(this.state.emailIsInvalid)}
                 </div>
               </div>
             </div>
@@ -172,4 +192,23 @@ class UserSignup extends Component {
   }
 }
 
-export default (UserSignup);
+const mapStateToProps = (state) => ({
+  UserImage: state.UserImage,
+  UserEmail: state.UserInfo.email,
+  UserPasssword1: state.UserInfo.password1,
+  UserPasssword2: state.UserInfo.password2,
+  UserName: state.UserInfo.username,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  // saveUserInfoToState: (info) => dispatch(saveUserInfoToState(info)),
+  username: (name) => dispatch(UserName(name)),
+  password1: (pass) => dispatch(Password1(pass)),
+  password2: (pass) => dispatch(Password2(pass)),
+  email: (email) => dispatch(Email(email)),
+  clearEmail: () => dispatch(ClearEmail()),
+  clearPassword1: () => dispatch(ClearPassword1()),
+  clearPassword2: () => dispatch(ClearPassword2()),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserSignup);

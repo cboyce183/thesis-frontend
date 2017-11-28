@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   saveAccessToken(token){
-    localStorage.setItem('token', token)
+    window.localStorage.setItem('token', token)
   }
 
   loginRequest(loginData){
