@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import '../../App.css';
 import './CompanyRegistry2.css';
-import { Link } from 'react-router-dom';
-
+import { Link, } from 'react-router-dom';
+import { connect, } from 'react-redux';
 
 class CompanyRegistry2 extends Component {
 
@@ -13,31 +13,37 @@ class CompanyRegistry2 extends Component {
       coinName:'',
       wklyAllow:'',
     }
-    console.log(this.props);
   }
 
-    getCompanySignIn (data) {
-    return fetch (`http://localhost:3000/CompanyRegistry2`, {
+  getCompanySignIn (data) {
+    const {
+      companyEmail,
+      companyUserName,
+      companyPassword,
+      companyLogo,
+    } = this.props.saveCompanyInfo
+    return fetch ('https://private-b133c5-zendama.apiary-mock.com/company', {
       method: 'POST',
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: {
-        companyEmail:data.companyEmail,
-        companyUserName: data.companyUserName,
-        companyPassword: data.companyPassword,
-        companyLogo: data.companyLogo,
+        companyEmail,
+        companyUserName,
+        companyPassword,
+        companyLogo,
         coinName: data.coinName,
-        wklyAllow: data.wklyAllow
-      }
+        wklyAllow: data.wklyAllow,
+      },
     })
   }
 
-  handleCompanyCurrency = () => {
-    console.log('Company coinName: ' + this.state.coinName);
-    console.log('Company weekly allowance: ' + this.state.wklyAllow);
-  }
+  handleCompanyCurrency = (e) => {
+    this.setState({
+      coinName: e.target.value,
+      wklyAllow: e.target.value,
+    })}
 
   render() {
     return (
@@ -48,30 +54,28 @@ class CompanyRegistry2 extends Component {
           </div>
           <div className="company-coin-info">
             <div className="coin-name-allow-cont">
-              <p>Name Your Company Currency</p>
-                <input
+              <p className='label-currency'>Name Your Company Currency</p>
+              <input
                 className="u-full-width coin-info"
-                type="email"
+                type="text"
                 placeholder="Currency Name"
-                id="exampleEmailInput"
                 value={this.state.coinName}
                 onChange={(e) => this.setState({coinName: e.target.value,})}
-                />
-                <input
+              />
+              <input
                 className="u-full-width coin-info"
                 type="number"
                 placeholder="Weekly Allowance $"
-                id="exampleEmailInput"
                 value={this.state.wklyAllow}
                 onChange={(e) => this.setState({wklyAllow: e.target.value,})}
-                />
-              <Link to={{pathname: '/panel'}}>
-              <input
-              className="button-primary nxt-btn"
-              type="submit"
-              value="Next"
-              onClick={this.handleCompanyCurrency}
               />
+              <Link to={{pathname: '/panel',}}>
+                <input
+                  className="button-primary nxt-btn"
+                  type="submit"
+                  value="Next"
+                  onClick={this.handleCompanyCurrency}
+                />
               </Link>
             </div>
           </div>
@@ -84,5 +88,8 @@ class CompanyRegistry2 extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  saveInfo: state.saveCompanyInfo,
+});
 
-export default CompanyRegistry2;
+export default connect(mapStateToProps)(CompanyRegistry2);

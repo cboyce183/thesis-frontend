@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import '../../App.css';
 import './CompanyRegistry1.css';
-import { Link } from 'react-router-dom';
-import Captcha from 'react-captcha';
+import { Link, } from 'react-router-dom';
+import { connect, } from 'react-redux';
+import { saveCompanyInfo, } from '../../actions';
+import ReactFileReader from 'react-file-reader';
 
 
 
@@ -17,25 +19,29 @@ class CompanyRegistry1 extends Component {
       companyPassword: '',
       companyPassword2: '',
       companyLogo:'',
+      displayImg:false,
+      imagePath:'',
     }
   }
 
-
-handleCompanySignIn = () => {
-  console.log('Company email: ' + this.state.companyEmail);
-  console.log('Company username: ' + this.state.companyUserName);
-  console.log('Company password: ' + this.state.companyPassword);
-  console.log('Company password: ' + this.state.companyPassword2);
-  console.log('Company logo: ' + this.state.companyLogo);
-}
-
-repeatPassword = (str1, str2) => {
-  if (this.state.companyPassword !== this.state.companyPassword2){
-    return alert('Please enter the same password.');
-  } else{
-    this.handleCompanySignIn()
+  handleCompanySignIn = () => {
+    this.repeatPassword()
+      ? this.props.saveCompanyInfo(this.state)
+      : alert('Passwords do not match');
   }
-}
+
+  handleFiles = files => {
+    this.setState({
+      imagePath:files.base64,
+      displayImg: true,
+    })
+  }
+
+  repeatPassword = () => {
+    return this.state.companyPassword !== this.state.companyPassword2
+      ? true
+      : false;
+  }
 
   render() {
     return (
@@ -43,65 +49,74 @@ repeatPassword = (str1, str2) => {
         <div className='company-reg-container'>
           <div className='company-siginup-info'>
             <input
-            className="u-full-width"
-            type="Email"
-            placeholder="Company-Email@mailbox.com"
-            id="exampleEmailInput"
-            value={this.state.companyEmail}
-            onChange={(e) => this.setState({companyEmail: e.target.value,})}
+              className="u-full-width"
+              type="email"
+              placeholder="Company-Email@mailbox.com"
+              id="exampleEmailInput"
+              value={this.state.companyEmail}
+              onChange={(e) => this.setState({companyEmail: e.target.value,})}
             />
             <input
-            className="u-full-width"
-            type="Email"
-            placeholder="Company Username"
-            id="exampleEmailInput"
-            value={this.state.companyUserName}
-            onChange={(e) => this.setState({companyUserName: e.target.value,})}
+              className="u-full-width"
+              type="text"
+              placeholder="Company Username"
+              id="exampleEmailInput"
+              value={this.state.companyUserName}
+              onChange={(e) => this.setState({companyUserName: e.target.value,})}
             />
             <input
-            className="u-full-width"
-            type="password"
-            placeholder="Password"
-            value={this.state.companyPassword}
-            onChange={(e) => this.setState({companyPassword: e.target.value,})}
+              className="u-full-width"
+              type="password"
+              placeholder="Password"
+              value={this.state.companyPassword}
+              onChange={(e) => this.setState({companyPassword: e.target.value,})}
             />
             <input
-            className="u-full-width"
-            type="password"
-            placeholder="Repeat Password"
-            value={this.state.companyPassword2}
-            onChange={(e) => this.setState({companyPassword2: e.target.value,})}
+              className="u-full-width"
+              type="password"
+              placeholder="Repeat Password"
+              value={this.state.companyPassword2}
+              onChange={(e) => this.setState({companyPassword2: e.target.value,})}
             />
-            <div className="g-recaptcha" data-sitekey="6LddoDoUAAAAANRFc_JW4zyweDbErXN0EglvHuIz"></div>
           </div>
           <div className='company-logo'>
-            <div className="img-input">
+            <div className='add-logo'>
               <p>Add Your Company Logo</p>
-              <input
-              type="file"
-              name="pic"
-              accept="image/*"
-              value={this.state.companyLogo}
-              onChange={(e) => this.setState({companyLogo: e.target.value,})}
-              />
+              <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+                <button className='btn-upload'>Upload</button>
+              </ReactFileReader>
             </div>
-            <Link to={{pathname: '/companyregistry2'}}>
+            <div className="img-input">
+              <div >
+                {
+                  this.state.displayImg && (
+                    <img src={this.state.imagePath} alt='company Logo'/>
+                  )
+                }
+              </div>
+            </div>
+
+            <Link to={'/companyregistry2'}>
               <div>
                 <input
-                className="button-primary nxt-btn"
-                type="submit"
-                value="Next"
-                onChange={this.handleCompanySignIn}
-                onClick={() => this.repeatPassword()}
+                  className="button-primary nxt-btn-cp"
+                  type="submit"
+                  value="Next"
+                  onClick={this.handleCompanySignIn}
                 />
               </div>
             </Link>
           </div>
         </div>
-          <p className="powered-by">Powered by Zendama</p>
+        <p className="powered-by">Powered by Zendama</p>
       </div>
     );
   }
 }
 
-export default CompanyRegistry1;
+const mapDispatchToProps = (dispatch) => ({
+  saveCompanyInfo: (data) => dispatch(saveCompanyInfo(data)),
+});
+
+
+export default connect(null, mapDispatchToProps)(CompanyRegistry1);
