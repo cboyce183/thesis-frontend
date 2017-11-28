@@ -19,14 +19,14 @@ class Cropping extends Component {
 
   handleImageLoaded(state){
     this.setState({
-      [state + 'Loaded']: true
+      [state + 'Loaded']: true,
     });
   }
 
   handleClick(state){
     let node = this.refs[state];
     this.setState({
-      [state]: node.crop()
+      [state]: node.crop(),
     });
   }
 
@@ -87,8 +87,5 @@ class Cropping extends Component {
     )
   }
 }
-
-
-
 
 export default (Cropping);
