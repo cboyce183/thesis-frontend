@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "base-64": "^0.1.0",
     "react": "^16.1.1",
     "react-captcha": "^2.0.9",
     "react-dom": "^16.1.1",
+    "react-image-cropper": "^1.1.2",
     "react-file-reader": "^1.1.3",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
