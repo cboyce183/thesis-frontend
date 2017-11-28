@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
-import { NavLink, } from 'react-router-dom'
-import './Login.css'
-import base64 from 'base-64'
+import { NavLink, } from 'react-router-dom';
+import './Login.css';
+import  base64  from 'base-64';
 
 
 class Login extends Component {
