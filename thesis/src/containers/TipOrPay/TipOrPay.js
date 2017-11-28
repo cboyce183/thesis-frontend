@@ -4,6 +4,7 @@ import React, { Component, } from 'react';
 
 import Loader from '../../components/Loader/Loader';
 import Close from '../../components/Close/Close';
+import DropDown from '../../components/DropDown/DropDown';
 
 import '../../App.css';
 import './TipOrPay.css';
@@ -45,22 +46,7 @@ class TipOrPay extends Component {
 
   //======================= RENDERING
 
-  renderUserDropdown(arr) {
-    const options = arr.map((el,i) => {
-      return (
-        <option key={i} value={el.id}>{el.username}</option>
-      )
-    });
-    return (
-      <select className="u-full-width">
-        <option value="Option 1">the person you want to give zen to</option>
-        {options}
-      </select>
-    )
-  }
-
   render() {
-    const userSelect = this.renderUserDropdown(this.state.userList);
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="Centering">
@@ -73,7 +59,10 @@ class TipOrPay extends Component {
               <div className="TipForm">
                 <div className="TipInput">
                   <h5>who?</h5>
-                  {userSelect}
+                  <DropDown
+                    placeh="the person you want to give zen to"
+                    arr={this.state.userList}
+                  />
                   <h5>how much?</h5>
                   <input
                     type="number"
