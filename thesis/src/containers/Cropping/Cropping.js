@@ -1,8 +1,8 @@
 import React, { Component, } from 'react';
 import { Cropper, } from 'react-image-cropper';
+import { connect, } from 'react-redux';
+import { doneCroppedImage, } from './../../actions'
 import './Cropping.css'
-
-
 
 class Cropping extends Component {
   constructor(props){
@@ -38,9 +38,9 @@ class Cropping extends Component {
       }
     }
     if (!this.state.base64Image) {
-      return (<img src={require('../../assets/userImage.svg')} className="ImageCropper"/> )
+      return (<img alt="" src={require('../../assets/userImage.svg')} className="LoadedImageCrop"/> )
     } else {
-      return <Cropper className="LoadedImage" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
+      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
     }
   }
 
@@ -85,4 +85,12 @@ class Cropping extends Component {
   }
 }
 
-export default (Cropping);
+const mapStateToProps = (state) => ({
+  image: state.CroppedUserImage,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addCroppedImage: (Image) => dispatch(doneCroppedImage(Image))
+})
+
+export default connect(mapStateToProps, null)(Cropping);

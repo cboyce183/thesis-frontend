@@ -7,3 +7,10 @@ export const saveCompanyInfo = (data) => {
     data,
   }
 };
+
+export const doneCroppedImage = (Cimage) => {
+  return {
+    type: types.CROPPED_USER_IMAGE,
+    image: Cimage,
+  }
+};
