@@ -9,8 +9,10 @@ class Close extends Component {
 
   render() {
     return (
-      <Link to={this.props.link}>
-        <div href="#" class="Close" />
+      <Link style={{textDecoration:'none',}}to={this.props.link}>
+        <div className="Close">
+          <img alt="close button" className="CloseImg" src={require('../../assets/cross-out.svg')}/>
+        </div>
       </Link>
     )
   }
