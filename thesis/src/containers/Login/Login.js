@@ -21,7 +21,7 @@ class Login extends Component {
   loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/login-fail', {
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/login', {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {
@@ -70,7 +70,7 @@ class Login extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={(e) => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input onClick={() => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
                   {this.accessNotification(this.state.noAccess)}
                 </div>
               </div>

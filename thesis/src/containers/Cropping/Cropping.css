@@ -1,0 +1,95 @@
+.ContainerCrop{
+  max-width: 960px;
+  height: 100vh;
+  margin: auto;
+  background-color: transparent;
+}
+
+.MainPannelCrop{
+  display: flex;
+  flex-direction: row;
+  max-width: 960px;
+  height: 61.8vh;
+  margin: auto;
+  padding-top: 122.222px;
+  background-color: transparent;
+}
+
+.UserInputContainerCrop{
+  flex: .618;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  /*overflow-y: scroll;*/
+}
+
+.LoadedImage{
+  background-size: cover;
+}
+
+.AboutContainerCrop{
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+.ImageLoad{
+  flex: 0.618;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.FileLoad{
+  font-size: 14px;
+  width: 200px;
+}
+
+.CropButton{
+  flex: 0.618;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.CropperButton{
+  width: 200px;
+}
+
+.DoneBox{
+  width: 200px;
+}
+
+.CroppedImageBox{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CroppedImageContainer{
+  width: 150px;
+  height: 150px;
+  border: solid;
+  border-width: thin;
+}
+
+.CroppedImage{
+  width: 150px;
+  height: 150px;
+}
+
+.ImageCropperCrop{
+  background-size: cover;
+  max-width: 150px;
+}
+
+.TitlePicture{
+  width: 350px;
+  text-align: center;
+  font-size: 30px;
+}
