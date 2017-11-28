@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import '../../App.css';
 import './CompanyRegistry2.css';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { Link, } from 'react-router-dom';
+import { connect, } from 'react-redux';
 
 class CompanyRegistry2 extends Component {
 
@@ -13,18 +13,16 @@ class CompanyRegistry2 extends Component {
       coinName:'',
       wklyAllow:'',
     }
-    console.log(this.props);
   }
 
-    getCompanySignIn (data) {
-      const {
-        companyEmail,
-        companyUserName,
-        companyPassword,
-        companyLogo
-      } = this.props.saveCompanyInfo
-      console.log(this.props.saveCompanyInfo);
-    return fetch (`http://localhost:3000/CompanyRegistry2`, {
+  getCompanySignIn (data) {
+    const {
+      companyEmail,
+      companyUserName,
+      companyPassword,
+      companyLogo,
+    } = this.props.saveCompanyInfo
+    return fetch ('https://private-b133c5-zendama.apiary-mock.com/company', {
       method: 'POST',
       headers:{
         'Accept': 'application/json',
@@ -36,15 +34,16 @@ class CompanyRegistry2 extends Component {
         companyPassword,
         companyLogo,
         coinName: data.coinName,
-        wklyAllow: data.wklyAllow
-      }
+        wklyAllow: data.wklyAllow,
+      },
     })
   }
 
-  handleCompanyCurrency = () => {
-    console.log('Company coinName: ' + this.state.coinName);
-    console.log('Company weekly allowance: ' + this.state.wklyAllow);
-  }
+  handleCompanyCurrency = (e) => {
+    this.setState({
+      coinName: e.target.value,
+      wklyAllow: e.target.value,
+    })}
 
   render() {
     return (
@@ -56,29 +55,29 @@ class CompanyRegistry2 extends Component {
           <div className="company-coin-info">
             <div className="coin-name-allow-cont">
               <p>Name Your Company Currency</p>
-                <input
+              <input
                 className="u-full-width coin-info"
                 type="email"
                 placeholder="Currency Name"
                 id="exampleEmailInput"
                 value={this.state.coinName}
                 onChange={(e) => this.setState({coinName: e.target.value,})}
-                />
-                <input
+              />
+              <input
                 className="u-full-width coin-info"
                 type="number"
                 placeholder="Weekly Allowance $"
                 id="exampleEmailInput"
                 value={this.state.wklyAllow}
                 onChange={(e) => this.setState({wklyAllow: e.target.value,})}
-                />
-              <Link to={{pathname: '/panel'}}>
-              <input
-              className="button-primary nxt-btn"
-              type="submit"
-              value="Next"
-              onClick={this.handleCompanyCurrency}
               />
+              <Link to={{pathname: '/panel',}}>
+                <input
+                  className="button-primary nxt-btn"
+                  type="submit"
+                  value="Next"
+                  onClick={this.handleCompanyCurrency}
+                />
               </Link>
             </div>
           </div>

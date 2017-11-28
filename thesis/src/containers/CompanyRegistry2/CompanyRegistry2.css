@@ -33,10 +33,15 @@ input {
 .coin-name-allow-cont{
   padding: 40px;
   text-align: center;
+  padding-left: 85px;
 }
 
 .powered-by-coin {
   font-size: x-small;
   margin-top: 150px;
   text-align: center;
+}
+
+.company-coin-logo{
+  margin-left: 150px;
 }
