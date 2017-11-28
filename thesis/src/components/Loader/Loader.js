@@ -8,7 +8,7 @@ class PanelSquare extends Component {
   render() {
     return (
       <div className="Wrap">
-        <div class="Spinner"></div>
+        <div className="Spinner"></div>
       </div>
     )
   }
