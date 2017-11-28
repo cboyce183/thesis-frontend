@@ -37,7 +37,7 @@ class UserSignup extends Component {
             console.log('error you er fucked')
           }
           if (response.status === 200){
-            window.location = '/login'
+            window.location = '/ledger'
           }
         })
     } else {
