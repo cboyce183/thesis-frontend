@@ -16,7 +16,11 @@ class Panel extends Component {
       pending: [],
       isAdmin: false,
       loaded: false,
+      remaning: 0,
+      received: 0,
     }
+    //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
+    // if (window.localStorage.getItem('token')) {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
@@ -24,15 +28,20 @@ class Panel extends Component {
           if (!res.catalog.length) this.setState({pending: ['catalog',],});
           if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
           this.setState({isAdmin:res.isAdmin,});
-          window.localStorage.setItem('user', )
+        } else {
+          this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
         }
         this.setState({loaded: true,});
       })
       .catch(e => console.error(e));
+    // } else {
+    //   window.location = '/login';
+    // }
   }
 
   handleLogout() {
-    //this method will handle logout.
+    window.localStorage.removeItem('token');
+    window.location = '/logout'
   }
 
   //======================= RENDERING
@@ -79,22 +88,20 @@ class Panel extends Component {
           <div className="Header">
             {nextSteps}
             <div className="Logout">
-              <Link style={{textDecoration:'none',}} to="/logout">
-                <h6>logout</h6>
-              </Link>
+              <h6 onClick={this.handleLogout}>logout</h6>
             </div>
           </div>
           <div className="PanelContainer">
             <PanelSquare
               isSummary={true}
               title="Remaining Zen"
-              zen={this.state.isAdmin ? '∞' : '173'}
+              zen={this.state.isAdmin ? '∞' : this.state.available}
               link="/tiporpay"
             />
             <PanelSquare
               isSummary={true}
               title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
-              zen={this.state.isAdmin ? '64219' : '1346'}
+              zen={this.state.isAdmin ? '64219' : this.state.received}
               link="/ledger"
             />
             <PanelSquare
