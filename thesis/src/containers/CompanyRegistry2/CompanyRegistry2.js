@@ -57,9 +57,8 @@ class CompanyRegistry2 extends Component {
               <p className='label-currency'>Name Your Company Currency</p>
               <input
                 className="u-full-width coin-info"
-                type="email"
+                type="text"
                 placeholder="Currency Name"
-                id="exampleEmailInput"
                 value={this.state.coinName}
                 onChange={(e) => this.setState({coinName: e.target.value,})}
               />
@@ -67,7 +66,6 @@ class CompanyRegistry2 extends Component {
                 className="u-full-width coin-info"
                 type="number"
                 placeholder="Weekly Allowance $"
-                id="exampleEmailInput"
                 value={this.state.wklyAllow}
                 onChange={(e) => this.setState({wklyAllow: e.target.value,})}
               />

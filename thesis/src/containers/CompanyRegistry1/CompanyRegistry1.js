@@ -24,92 +24,94 @@ class CompanyRegistry1 extends Component {
     }
   }
 
-handleCompanySignIn = () => {
-  this.props.saveCompanyInfo(this.state);
-}
+  handleCompanySignIn = () => {
+    this.repeatPassword()
+      ? this.props.saveCompanyInfo(this.state)
+      : alert('Passwords do not match');
+  }
 
-handleFiles = files => {
-  this.setState({
-    imagePath:files.base64,
-    displayImg: true,
-  })
-}
+  handleFiles = files => {
+    this.setState({
+      imagePath:files.base64,
+      displayImg: true,
+    })
+  }
 
-repeatPassword = () => {
-  return this.state.companyPassword !== this.state.companyPassword2
-    ? true
-    : false;
-}
+  repeatPassword = () => {
+    return this.state.companyPassword !== this.state.companyPassword2
+      ? true
+      : false;
+  }
 
-render() {
-  return (
-    <div className="MaxWidth">
-      <div className='company-reg-container'>
-        <div className='company-siginup-info'>
-          <input
-            className="u-full-width"
-            type="Email"
-            placeholder="Company-Email@mailbox.com"
-            id="exampleEmailInput"
-            value={this.state.companyEmail}
-            onChange={(e) => this.setState({companyEmail: e.target.value,})}
-          />
-          <input
-            className="u-full-width"
-            type="Email"
-            placeholder="Company Username"
-            id="exampleEmailInput"
-            value={this.state.companyUserName}
-            onChange={(e) => this.setState({companyUserName: e.target.value,})}
-          />
-          <input
-            className="u-full-width"
-            type="password"
-            placeholder="Password"
-            value={this.state.companyPassword}
-            onChange={(e) => this.setState({companyPassword: e.target.value,})}
-          />
-          <input
-            className="u-full-width"
-            type="password"
-            placeholder="Repeat Password"
-            value={this.state.companyPassword2}
-            onChange={(e) => this.setState({companyPassword2: e.target.value,})}
-          />
-        </div>
-        <div className='company-logo'>
-          <div className='add-logo'>
-            <p>Add Your Company Logo</p>
-            <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-              <button className='btn-upload'>Upload</button>
-            </ReactFileReader>
+  render() {
+    return (
+      <div className="MaxWidth">
+        <div className='company-reg-container'>
+          <div className='company-siginup-info'>
+            <input
+              className="u-full-width"
+              type="email"
+              placeholder="Company-Email@mailbox.com"
+              id="exampleEmailInput"
+              value={this.state.companyEmail}
+              onChange={(e) => this.setState({companyEmail: e.target.value,})}
+            />
+            <input
+              className="u-full-width"
+              type="text"
+              placeholder="Company Username"
+              id="exampleEmailInput"
+              value={this.state.companyUserName}
+              onChange={(e) => this.setState({companyUserName: e.target.value,})}
+            />
+            <input
+              className="u-full-width"
+              type="password"
+              placeholder="Password"
+              value={this.state.companyPassword}
+              onChange={(e) => this.setState({companyPassword: e.target.value,})}
+            />
+            <input
+              className="u-full-width"
+              type="password"
+              placeholder="Repeat Password"
+              value={this.state.companyPassword2}
+              onChange={(e) => this.setState({companyPassword2: e.target.value,})}
+            />
           </div>
-          <div className="img-input">
-            <div >
-              {
-                this.state.displayImg && (
-                  <img src={this.state.imagePath} alt='company Logo'/>
-                )
-              }
+          <div className='company-logo'>
+            <div className='add-logo'>
+              <p>Add Your Company Logo</p>
+              <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+                <button className='btn-upload'>Upload</button>
+              </ReactFileReader>
             </div>
-          </div>
+            <div className="img-input">
+              <div >
+                {
+                  this.state.displayImg && (
+                    <img src={this.state.imagePath} alt='company Logo'/>
+                  )
+                }
+              </div>
+            </div>
 
-          <Link to={{pathname: '/companyregistry2',}}>
-            <div>
-              <input
-                className="button-primary nxt-btn-cp"
-                type="submit"
-                value="Next"
-                onClick={this.handleCompanySignIn}
-              />
-            </div>
-          </Link>
+            <Link to={'/companyregistry2'}>
+              <div>
+                <input
+                  className="button-primary nxt-btn-cp"
+                  type="submit"
+                  value="Next"
+                  onClick={this.handleCompanySignIn}
+                />
+              </div>
+            </Link>
+          </div>
         </div>
+        <p className="powered-by">Powered by Zendama</p>
       </div>
-      <p className="powered-by">Powered by Zendama</p>
-    </div>
-  );
-}
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch) => ({
