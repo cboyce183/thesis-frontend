@@ -21,17 +21,20 @@ class Login extends Component {
   loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/login', {
+    fetch('http://192.168.0.37:3000/login', {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {
-        this.setState({noAccess: true,})
+        console.log(" error 401")
+        // this.setState({noAccess: true,})
       }
       if (response.status === 200){
-        this.saveAccessToken(response.json().token);
-        window.location = '/panel'
+        return (response.json())
+        // this.saveAccessToken(response.json().token);
+        // window.location = '/panel'
       }
     })
+    .then(r => this.saveAccessToken(r.token))
   }
 
   accessNotification(bool){

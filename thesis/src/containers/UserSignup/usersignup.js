@@ -21,22 +21,23 @@ class UserSignup extends Component {
   userSignupRequest(theProps){
     if (this.state.passwordsValid && this.state.emailValid && theProps.UserPassword2 !== '') {
       const UserDataObject = {
-        UserImage:  theProps.UserImage,
-        UserEmail:  theProps.UserEmail,
-        UserPasssword:  theProps.UserPasssword2,
-        UserName: theProps.UserName,
+        profilePic:  theProps.UserImage,
+        email:  theProps.UserEmail,
+        password:  theProps.UserPasssword2,
+        username: theProps.UserName,
       }
-      fetch('http://localhost:8080/', {
+      console.log('User data object post request.', UserDataObject)
+      fetch('http://192.168.0.37:3000/signup-user', {
         method: 'POST',
-        body: UserDataObject,
+        headers: {'Content-Type' : 'application/json',},
+        body: JSON.stringify(UserDataObject),
       })
         .then(response => {
           if (response.status === 401) {
-            this.setState({noAccess: true,})
+            console.log('error you er fucked')
           }
           if (response.status === 200){
-            this.saveAccessToken(response.json().token);
-            window.location = '/panel'
+            window.location = '/login'
           }
         })
     } else {
