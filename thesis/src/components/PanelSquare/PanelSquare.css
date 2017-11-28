@@ -65,3 +65,12 @@ p, h1, h2, h5, img {
   margin-right: 197px;
   margin-bottom: 197px;
 }
+
+.Hovering {
+  opacity: 0.6;
+  transition: opacity 0.35s ease-in;
+}
+
+.Hovering:hover {
+  opacity: 1;
+}

@@ -24,6 +24,7 @@ class Panel extends Component {
           if (!res.catalog.length) this.setState({pending: ['catalog',],});
           if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
           this.setState({isAdmin:res.isAdmin,});
+          window.localStorage.setItem('user', )
         }
         this.setState({loaded: true,});
       })
