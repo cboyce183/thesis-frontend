@@ -11,6 +11,7 @@
   padding-top: 50px;
   padding: 50px;
   text-align: center;
+  margin-top: 200px;
 }
 .company-siginup-info{
   height: 450px;
@@ -31,12 +32,36 @@ input {
   width: 450px;
 }
 
-.nxt-btn{
+.company-logo p{
+  height: 90px;
+  line-height: 90px;
+  text-align: center;
+}
+
+.nxt-btn-cp{
   position: relative;
   left:6px;
-  margin-top: 100px;
+  margin-top: 0px;
 }
 
 .powered-by {
   font-size: x-small;
+  text-align: center;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
+.btn-upload{
+  margin: 30px;
+}
+
+.img-input{
+  padding: 30px;
+}
+
+.add-logo{
+  display: flex;
 }
