@@ -11,6 +11,7 @@
   padding-top: 50px;
   padding: 50px;
   text-align: center;
+  margin-top: 200px;
 }
 .company-siginup-info{
   height: 450px;
@@ -39,4 +40,5 @@ input {
 
 .powered-by {
   font-size: x-small;
+  text-align: center;
 }

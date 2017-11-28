@@ -1,0 +1,1 @@
+export const SAVE_COMPANY_INFO = 'SAVE_COMPANY_INFO';

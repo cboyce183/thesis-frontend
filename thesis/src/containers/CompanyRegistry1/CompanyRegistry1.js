@@ -3,6 +3,9 @@ import '../../App.css';
 import './CompanyRegistry1.css';
 import { Link } from 'react-router-dom';
 import Captcha from 'react-captcha';
+import { connect } from 'react-redux';
+import { saveCompanyInfo } from '../../actions';
+import ReactFileReader from 'react-file-reader';
 
 
 
@@ -17,7 +20,10 @@ class CompanyRegistry1 extends Component {
       companyPassword: '',
       companyPassword2: '',
       companyLogo:'',
+      displayImg:false,
+      imagePath:'',
     }
+
   }
 
 
@@ -27,15 +33,25 @@ handleCompanySignIn = () => {
   console.log('Company password: ' + this.state.companyPassword);
   console.log('Company password: ' + this.state.companyPassword2);
   console.log('Company logo: ' + this.state.companyLogo);
+  // if(this.repeatPassword){
+  //   return alert('Please enter the same password.')
+  // }
+  this.props.saveCompanyInfo(this.state);
 }
 
-repeatPassword = (str1, str2) => {
-  if (this.state.companyPassword !== this.state.companyPassword2){
-    return alert('Please enter the same password.');
-  } else{
-    this.handleCompanySignIn()
-  }
+handleFiles = files => {
+  console.log(files, 'pic info');
+  this.setState({
+    imagePath:files.base64,
+    displayImg: true
+  })
 }
+
+repeatPassword = () => {
+  return this.state.companyPassword !== this.state.companyPassword2
+    ? true
+    : false;
+  }
 
   render() {
     return (
@@ -72,18 +88,24 @@ repeatPassword = (str1, str2) => {
             value={this.state.companyPassword2}
             onChange={(e) => this.setState({companyPassword2: e.target.value,})}
             />
-            <div className="g-recaptcha" data-sitekey="6LddoDoUAAAAANRFc_JW4zyweDbErXN0EglvHuIz"></div>
+            <Captcha
+            sitekey = '6LfWqjoUAAAAAJQ8zuAH7tmUWYYx6VZ5Jrah7gEs'
+            lang = 'en'
+            theme = 'light'
+            type = 'image'
+            callback = {(value) => console.log(value)}/>
           </div>
           <div className='company-logo'>
             <div className="img-input">
               <p>Add Your Company Logo</p>
-              <input
-              type="file"
-              name="pic"
-              accept="image/*"
-              value={this.state.companyLogo}
-              onChange={(e) => this.setState({companyLogo: e.target.value,})}
-              />
+              {
+                this.state.displayImg && (
+                  <img src={this.state.imagePath}/>
+                )
+              }
+            <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+                <button className='btn'>Upload</button>
+              </ReactFileReader>
             </div>
             <Link to={{pathname: '/companyregistry2'}}>
               <div>
@@ -91,8 +113,8 @@ repeatPassword = (str1, str2) => {
                 className="button-primary nxt-btn"
                 type="submit"
                 value="Next"
-                onChange={this.handleCompanySignIn}
-                onClick={() => this.repeatPassword()}
+                //onChange={this.repeatPassword}
+                onClick={this.handleCompanySignIn}
                 />
               </div>
             </Link>
@@ -104,4 +126,9 @@ repeatPassword = (str1, str2) => {
   }
 }
 
-export default CompanyRegistry1;
+const mapDispatchToProps = (dispatch) => ({
+  saveCompanyInfo: (data) => dispatch(saveCompanyInfo(data)),
+});
+
+
+export default connect(null, mapDispatchToProps)(CompanyRegistry1);

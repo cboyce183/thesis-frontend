@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './CompanyRegistry2.css';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 
 class CompanyRegistry2 extends Component {
 
@@ -17,6 +17,13 @@ class CompanyRegistry2 extends Component {
   }
 
     getCompanySignIn (data) {
+      const {
+        companyEmail,
+        companyUserName,
+        companyPassword,
+        companyLogo
+      } = this.props.saveCompanyInfo
+      console.log(this.props.saveCompanyInfo);
     return fetch (`http://localhost:3000/CompanyRegistry2`, {
       method: 'POST',
       headers:{
@@ -24,10 +31,10 @@ class CompanyRegistry2 extends Component {
         'Content-Type': 'application/json',
       },
       body: {
-        companyEmail:data.companyEmail,
-        companyUserName: data.companyUserName,
-        companyPassword: data.companyPassword,
-        companyLogo: data.companyLogo,
+        companyEmail,
+        companyUserName,
+        companyPassword,
+        companyLogo,
         coinName: data.coinName,
         wklyAllow: data.wklyAllow
       }
@@ -84,5 +91,8 @@ class CompanyRegistry2 extends Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  saveInfo: state.saveCompanyInfo,
+});
 
-export default CompanyRegistry2;
+export default connect(mapStateToProps)(CompanyRegistry2);
