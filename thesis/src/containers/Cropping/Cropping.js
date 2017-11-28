@@ -1,8 +1,7 @@
 import React, { Component, } from 'react';
-// import { NavLink, } from 'react-router-dom';
 import { Cropper, } from 'react-image-cropper';
 import './Cropping.css'
-// import OriginalImage from './../../assets/userImage.svg'
+
 
 
 class Cropping extends Component {
@@ -30,7 +29,6 @@ class Cropping extends Component {
     });
   }
 
-
   imageChange(bool){
     if (bool) {
       var reader = new FileReader();
@@ -39,11 +37,10 @@ class Cropping extends Component {
         this.setState({base64Image: reader.result, profilePicLoad: false,})
       }
     }
-    // console.log(this.state.base64Image)
     if (!this.state.base64Image) {
       return (<img src={require('../../assets/userImage.svg')} className="ImageCropper"/> )
     } else {
-      return <Cropper src={this.state.base64Image} ref="image" onImgLoad={() => this.handleImageLoaded('image')}/>
+      return <Cropper className="LoadedImage" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
     }
   }
 
@@ -58,7 +55,7 @@ class Cropping extends Component {
             </div>
             <div className="AboutContainerCrop">
               <div className="ImageLoad">
-                <span>Add your profile picture</span>
+                <div className="TitlePicture">Add your profile picture</div>
                 <input className="FileLoad" type="file"
                   onChange={(e) => {
                     this.setState({

@@ -19,9 +19,21 @@ class UserSignup extends Component {
     }
   }
 
+  // userSignupRequest(){
+  //   fetch('http://localhost:8080/', {
+  //     method: 'POST',
+  //     body: {
+  //       password: this.state.password,
+  //       username: this.stare.username,
+  //       email: this.state.email,
+  //       profilePic: this.state.profilePic,
+  //     }
+  //   })
+  // }
+
   arePasswordsTheSame(){
     if (this.state.password1 === this.state.password2) {
-      console.log(true)
+      return true;
     } else {
       this.setState({password1 : '', password2 : '', passwordNotEqual: true,})
     }
@@ -45,21 +57,20 @@ class UserSignup extends Component {
     }
   }
 
-  imageChange(bool){
-    if (bool) {
-      var reader = new FileReader();
-      reader.readAsDataURL(this.state.profilePic[0]);
-      reader.onloadend = () => {
-        this.setState({base64Image: reader.result, profilePicLoad: false,})
-      }
-    }
-    // console.log(this.state.base64Image)
-    if (!this.state.base64Image) {
-      return ( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
-    } else {
-      return <img src={this.state.base64Image} className="ProfilePic"/>
-    }
-  }
+  // imageChange(bool){
+  //   if (bool) {
+  //     var reader = new FileReader();
+  //     reader.readAsDataURL(this.state.profilePic[0]);
+  //     reader.onloadend = () => {
+  //       this.setState({base64Image: reader.result, profilePicLoad: false,})
+  //     }
+  //   }
+  //   if (!this.state.base64Image) {
+  //     return ( <img src={require('../../assets/userImage.svg')} className="ProfilePic"/> )
+  //   } else {
+  //     return <img src={this.state.base64Image} className="ProfilePic"/>
+  //   }
+  // }
 
   render() {
     return (
@@ -74,14 +85,14 @@ class UserSignup extends Component {
               <div className="LoginDetails">
                 <div className="UserInput">
                   {/* <label className="UsernameLable" >Username:</label> */}
-                  <input className="UsernameText"
+                  <input className="EmailText"
                     type="email"
                     value={this.state.email}
                     placeholder="email@address.com"
                     onChange={(e) => this.setState({email: e.target.value,})}
                   />
                   {/* <label className="PasswordLable" >Password:</label> */}
-                  <input type="password" className="PasswordText"
+                  <input type="text" className="UsernameText"
                     value={this.state.username}
                     placeholder="Username"
                     onChange={(e) => this.setState({username: e.target.value,})}
@@ -102,36 +113,22 @@ class UserSignup extends Component {
                       this.setState({password2: e.target.value,})
                     }}
                   />
-                  {/* <div className="LoadProfilePicture">
-                    <div className="myLabel">
-                      <input type="file"
-                        onChange={(e) => {
-                          this.setState({
-                            profilePic: e.target.files,
-                            profilePicLoad: true,})
-                        }}
-                      />
-                      <span>Add profile picture</span>
-                    </div> */}
-                    <input type="submit" className="PasswordText" id="pass2"
-                      value={this.state.password2}
-                      placeholder="Password"
-                      value="Choose profile image"
-                      onFocus={() => this.removePasswordWarning()}
-                      onClick={() => window.location = '/cropping'}
-                    />
-
-                  {/* </div> */}
-
+                  <input type="submit" className="PasswordText" id="pass2"
+                    value={this.state.password2}
+                    placeholder="Password"
+                    value="Choose profile image"
+                    onFocus={() => this.removePasswordWarning()}
+                    onClick={() => window.location = '/cropping'}
+                  />
                 </div>
               </div>
               <div className="LoginSend">
                 <div className="ProfilePicBox">
-                  {
+                  {/* {
                     this.imageChange(this.state.profilePicLoad)
 
                     //
-                  }
+                  } */}
                 </div>
                 <div className="SignupBox">
                   <input onClick={() => {
@@ -174,8 +171,5 @@ class UserSignup extends Component {
     )
   }
 }
-
-
-
 
 export default (UserSignup);

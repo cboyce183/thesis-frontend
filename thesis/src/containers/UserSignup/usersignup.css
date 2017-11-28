@@ -28,11 +28,6 @@
   display: flex;
 }
 
-.UserInputBox:focus {
-  border: 10px solid black;
-  outline: 10;
-}
-
 .ZenNameBox{
   height: 77px;
   width: 100%;
@@ -55,9 +50,6 @@
   margin-left: 0;
 }
 
-.CompanyQuestion{
-
-}
 .CompSignPageRoute{
   font-weight: bold;
   margin-left: 5px;
