@@ -11,42 +11,53 @@ class UserSignup extends Component {
   constructor(props){
     super(props)
     this.state = {
-      passwordNotEqual: false,
-      emailIsInvalid: false,
+      passwordsValid: false,
+      passwordWarning: false,
+      emailValid: false,
+      emailWarning: false,
     }
   }
 
   userSignupRequest(theProps){
-    if (this.state.passwordNotEqual && this.state.emailIsInvalid) {
+    if (this.state.passwordsValid && this.state.emailValid && theProps.UserPassword2 !== '') {
+      const UserDataObject = {
+        UserImage:  theProps.UserImage,
+        UserEmail:  theProps.UserEmail,
+        UserPasssword:  theProps.UserPasssword2,
+        UserName: theProps.UserName,
+      }
       fetch('http://localhost:8080/', {
         method: 'POST',
-        body: {
-          UserImage:  theProps.UserImage,
-          UserEmail:  theProps.UserEmail,
-          UserPasssword:  theProps.UserPasssword2,
-          UserName: theProps.UserName,
-        },
+        body: UserDataObject,
       })
+        .then(response => {
+          if (response.status === 401) {
+            this.setState({noAccess: true,})
+          }
+          if (response.status === 200){
+            this.saveAccessToken(response.json().token);
+            window.location = '/panel'
+          }
+        })
     } else {
-      console.log("error cannot send!!!")
+      console.log('error cannot send!!!')
     }
 
   }
 
   arePasswordsTheSame(theProps){
-    console.log("the password test...")
     if (theProps.UserPasssword1 === theProps.UserPasssword2) {
-      console.log(true)
+      this.setState({passwordsValid: true,})
     } else {
-      this.setState({passwordNotEqual: true,})
+      this.setState({passwordWarning: true,})
     }
   }
 
   removePasswordWarning(){
-    this.setState({passwordNotEqual: false,})
+    this.setState({passwordWarning: false,})
   }
   removeEmailIsInvalid(){
-    this.setState({emailIsInvalid: false,})
+    this.setState({emailWarning: false,})
   }
 
   warningPassWordNotEqual(bool){
@@ -70,7 +81,13 @@ class UserSignup extends Component {
   checkEmailValid(email){
     var re = /\S+@\S+\.\S+/;
     const bool = re.test(email)
-    this.setState({emailIsInvalid: !bool,});
+    console.log('email bool', bool)
+    if (bool) {
+      this.setState({emailValid: true,});
+    }
+    else {
+      this.setState({emailWarning: true,});
+    }
   }
 
   imageChange(image){
@@ -149,14 +166,15 @@ class UserSignup extends Component {
                   {this.imageChange(this.props.UserImage)}
                 </div>
                 <div className="SignupBox">
-                  <input onClick={() => {
-                    this.arePasswordsTheSame(this.props)
-                    this.checkEmailValid(this.props.UserEmail)
+                  <input onClick={async () => {
+                    await this.arePasswordsTheSame(this.props)
+                    await this.checkEmailValid(this.props.UserEmail)
+                    await this.userSignupRequest(this.props)
                   }}
                   className="LoginButton" type="submit" value="Sign up"
                   />
-                  {this.warningPassWordNotEqual(this.state.passwordNotEqual)}
-                  {this.warningEmailInvalid(this.state.emailIsInvalid)}
+                  {this.warningPassWordNotEqual(this.state.passwordWarning)}
+                  {this.warningEmailInvalid(this.state.emailWarning)}
                 </div>
               </div>
             </div>
