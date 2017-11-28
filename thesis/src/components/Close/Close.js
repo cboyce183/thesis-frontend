@@ -11,7 +11,7 @@ class Close extends Component {
     return (
       <Link style={{textDecoration:'none',}}to={this.props.link}>
         <div className="Close">
-          <img src={require('../../assets/cross-out.svg')}/>
+          <img alt="close button" className="CloseImg" src={require('../../assets/cross-out.svg')}/>
         </div>
       </Link>
     )
