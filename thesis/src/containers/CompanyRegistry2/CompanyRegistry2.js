@@ -1,56 +1,53 @@
 import React, { Component, } from 'react';
 import '../../App.css';
 import './CompanyRegistry2.css';
-import { Link, } from 'react-router-dom';
 import { connect, } from 'react-redux';
+import { saveCompanyInfo, } from '../../actions';
+
 
 class CompanyRegistry2 extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       coinName:'',
       wklyAllow:'',
     }
   }
 
-  getCompanySignIn (data) {
+  getCompanySignIn = (data) => {
     const {
       companyEmail,
       companyUserName,
       companyPassword,
       companyLogo,
-    } = this.props.saveCompanyInfo
-    return fetch ('https://private-b133c5-zendama.apiary-mock.com/company', {
+    } = this.props.saveInfo
+    fetch ('https://private-b133c5-zendama.apiary-mock.com/company', {
       method: 'POST',
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: {
+      body: JSON.stringify({
         companyEmail,
         companyUserName,
         companyPassword,
         companyLogo,
-        coinName: data.coinName,
-        wklyAllow: data.wklyAllow,
-      },
+        coinName: this.state.coinName,
+        wklyAllow: this.state.wklyAllow,
+      }),
     })
+      .then(response => {
+        if (response.status === 200) window.location = '/panel';
+      });
   }
-
-  handleCompanyCurrency = (e) => {
-    this.setState({
-      coinName: e.target.value,
-      wklyAllow: e.target.value,
-    })}
 
   render() {
     return (
       <div className="MaxWidth">
         <div className="coin-info-container">
           <div className="company-coin-logo">
-            <img src='https://www.bitcoin.com/wp-content/uploads/2017/06/index_question.svg' alt='bicoin logo'/>
+            <img className='coin-upload' src='https://www.bitcoin.com/wp-content/uploads/2017/06/index_question.svg' alt='bicoin logo'/>
           </div>
           <div className="company-coin-info">
             <div className="coin-name-allow-cont">
@@ -69,14 +66,12 @@ class CompanyRegistry2 extends Component {
                 value={this.state.wklyAllow}
                 onChange={(e) => this.setState({wklyAllow: e.target.value,})}
               />
-              <Link to={{pathname: '/panel',}}>
-                <input
-                  className="button-primary nxt-btn"
-                  type="submit"
-                  value="Next"
-                  onClick={this.handleCompanyCurrency}
-                />
-              </Link>
+              <input
+                className="button-primary nxt-btn"
+                type="submit"
+                value="Next"
+                onClick={this.getCompanySignIn}
+              />
             </div>
           </div>
         </div>
@@ -87,6 +82,7 @@ class CompanyRegistry2 extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state) => ({
   saveInfo: state.saveCompanyInfo,

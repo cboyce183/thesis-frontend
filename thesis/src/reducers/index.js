@@ -1,6 +1,8 @@
 import * as types from '../actions/types';
 
 const defaultState = {
+  saveCompanyInfo: null,
+
   UserInfo: {
     password1: null,
     password2: null,
@@ -12,6 +14,11 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
+  case types.SAVE_COMPANY_INFO:
+    return {
+      ...state,
+      saveCompanyInfo: action.data,
+    }
   case types.CROPPED_USER_IMAGE:
     return {
       ...state,

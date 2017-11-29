@@ -8,10 +8,8 @@
 
 .company-reg-container{
   display: flex;
-  padding-top: 50px;
   padding: 50px;
   text-align: center;
-  margin-top: 200px;
 }
 .company-siginup-info{
   height: 450px;
@@ -19,13 +17,12 @@
   padding: 40px;
 }
 
-input {
+.cp-reg-1 {
   font-size: 15px;
   font-family: 'Raleway', sans-serif;
   padding-left: 100px;
 
 }
-
 
 .company-logo{
   height: 450px;
@@ -42,6 +39,7 @@ input {
   position: relative;
   left:6px;
   margin-top: 0px;
+  padding-right: 120px;
 }
 
 .powered-by {
@@ -49,14 +47,28 @@ input {
   text-align: center;
 }
 
+.img-company-reg-logo{
+  height: 150px;
+  width: 150px;
+}
+
 .btn-upload{
   margin: 30px;
 }
 
 .img-input{
-  padding: 30px;
+  padding: 10px;
 }
 
 .add-logo{
   display: flex;
+}
+
+.cmpy-reg-1-label{
+  text-align: center;
+  margin-top: 200px;
+}
+
+.company-logo-img{
+  margin-right: 110px;
 }
