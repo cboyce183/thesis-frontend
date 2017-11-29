@@ -19,6 +19,7 @@ class TipOrPay extends Component {
       remaning: 0,
       received: 0,
       userList: [],
+      selected: '',
     }
     // if (window.localStorage.getItem('token')) {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
@@ -44,9 +45,14 @@ class TipOrPay extends Component {
     // }
   }
 
+  handleUserSelection = (value) => {
+    this.setState({selected: value,})
+  }
+
   //======================= RENDERING
 
   render() {
+    console.log(this.state);
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="Centering">
@@ -60,6 +66,7 @@ class TipOrPay extends Component {
                 <div className="TipInput">
                   <h5>who?</h5>
                   <DropDown
+                    func={this.handleUserSelection.bind(this)}
                     placeh="the person you want to give zen to"
                     arr={this.state.userList}
                   />
