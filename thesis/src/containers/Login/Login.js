@@ -3,35 +3,37 @@ import { NavLink, } from 'react-router-dom';
 import './Login.css';
 import  base64  from 'base-64';
 
-
 class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
       password: '',
       email: '',
-      noAccess: false,
+      noAccess: true,
     }
   }
 
   saveAccessToken(token){
-    localStorage.setItem('token', token)
+    window.localStorage.setItem('token', token)
   }
 
   loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/login', {
+    fetch('http://192.168.0.37:3000/login', {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {
-        this.setState({noAccess: true,})
+        this.setState({noAccess: true,});
       }
       if (response.status === 200){
-        this.saveAccessToken(response.json().token);
-        window.location = '/panel'
+        return (response.json())
       }
     })
+      .then(r => {
+        this.saveAccessToken(r.token)
+        window.location = '/panel';
+      })
   }
 
   accessNotification(bool){
@@ -50,15 +52,13 @@ class Login extends Component {
             <div className="UserInputBox">
               <div className="LoginDetails">
                 <div className="UserInput">
-                  {/* <label className="emailLable" >email:</label> */}
                   <input className="EmailText"
-                    type="text"
+                    type="email"
                     value={this.state.email}
                     placeholder="Email"
                     onFocus={() => this.setState({noAccess: false, email: '',})}
                     onChange={(e) => this.setState({email: e.target.value,})}
                   />
-                  {/* <label className="PasswordLable" >Password:</label> */}
                   <input type="password" className="PasswordText"
                     value={this.state.password}
                     placeholder="Password"
@@ -70,7 +70,11 @@ class Login extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={() => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input
+                    onClick={() => {this.loginRequest(this.state)}}
+                    className="LoginButton"
+                    type="submit" value="Log in"
+                  />
                   {this.accessNotification(this.state.noAccess)}
                 </div>
               </div>
@@ -78,7 +82,6 @@ class Login extends Component {
           </div>
           <div className="AboutContainer">
             <div className="AboutBox">
-              {/* <img className="UserImage" src='./../../../assets/userImage.svg'/> */}
             </div>
             <div className="AboutTitle">
               <div className="Information">
@@ -107,8 +110,5 @@ class Login extends Component {
     )
   }
 }
-
-
-
 
 export default (Login);

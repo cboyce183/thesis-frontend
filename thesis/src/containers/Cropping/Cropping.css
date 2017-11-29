@@ -22,11 +22,11 @@
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
-  /*overflow-y: scroll;*/
+  overflow-y: scroll;
 }
 
-.LoadedImage{
-  background-size: cover;
+.LoadedImageCrop{
+  background-size: contain;
 }
 
 .AboutContainerCrop{

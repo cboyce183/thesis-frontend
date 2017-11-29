@@ -1,8 +1,9 @@
 import React, { Component, } from 'react';
 import { Cropper, } from 'react-image-cropper';
+import { connect, } from 'react-redux';
+import { doneCroppedImage, } from './../../actions'
+import { NavLink, } from 'react-router-dom';
 import './Cropping.css'
-
-
 
 class Cropping extends Component {
   constructor(props){
@@ -38,14 +39,15 @@ class Cropping extends Component {
       }
     }
     if (!this.state.base64Image) {
-      return (<img src={require('../../assets/userImage.svg')} className="ImageCropper"/> )
+      return (<img alt="" src={require('../../assets/userImage.svg')} className="LoadedImageCrop"/> )
     } else {
-      return <Cropper className="LoadedImage" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
+      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
     }
   }
 
 
   render() {
+    console.log("the props", this.props)
     return (
       <div>
         <div className="ContainerCrop">
@@ -68,9 +70,13 @@ class Cropping extends Component {
                 <input className="CropperButton" type="submit" value="Crop image"
                   onClick={() => this.handleClick('image')}
                 />
-                <input className="DoneBox" type="submit" value="done"
-                  onClick={() => window.location = '/usersignup'}
-                />
+                <NavLink to='/usersignup'>
+                  <input className="DoneBox" type="submit" value="done"
+                    onClick={() => {
+                      this.props.addCroppedImage(this.state.image)
+                    }}
+                  />
+                </NavLink>
               </div>
               <div className="CroppedImageBox">
                 <div className="CroppedImageContainer">
@@ -85,4 +91,12 @@ class Cropping extends Component {
   }
 }
 
-export default (Cropping);
+const mapStateToProps = (state) => ({
+  userInfo: state.UserInfo,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  addCroppedImage: (Image) => dispatch(doneCroppedImage(Image)),
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cropping);
