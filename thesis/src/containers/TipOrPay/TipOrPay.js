@@ -188,6 +188,7 @@ class TipOrPay extends Component {
           <div className="Header">
           </div>
           <Loader/>
+          <h6>powered by Zendama</h6>
         </div>
       </div>
     );
