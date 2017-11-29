@@ -1,0 +1,32 @@
+.ProductCatalog {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.ProductCategory {
+  height: 50%;
+  width: 90%;
+}
+
+.ProductList {
+  height: 80%;
+  width: 100%;
+  display: flex;
+  overflow-x: scroll;
+}
+
+.ProductList::-webkit-scrollbar {
+  display: none;
+}
+
+.ProductItem {
+  margin: 5px;
+  flex-shrink: 0;
+  height: 90%;
+  width: 20%;
+  border: 1px solid black;
+}
