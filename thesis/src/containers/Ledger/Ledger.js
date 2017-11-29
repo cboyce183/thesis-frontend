@@ -2,8 +2,6 @@ import React, { Component, } from 'react';
 // import { NavLink, } from 'react-router-dom';
 // import './Login.css';
 
-
-
 class Ledger extends Component {
   constructor(props){
     super(props)

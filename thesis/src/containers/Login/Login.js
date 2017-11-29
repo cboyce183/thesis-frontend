@@ -3,14 +3,13 @@ import { NavLink, } from 'react-router-dom';
 import './Login.css';
 import  base64  from 'base-64';
 
-
 class Login extends Component {
   constructor(props){
     super(props)
     this.state = {
       password: '',
       email: '',
-      noAccess: false,
+      noAccess: true,
     }
   }
 
@@ -25,16 +24,16 @@ class Login extends Component {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {
-        console.log(" error 401")
-        // this.setState({noAccess: true,})
+        this.setState({noAccess: true,});
       }
       if (response.status === 200){
         return (response.json())
-        // this.saveAccessToken(response.json().token);
-        // window.location = '/panel'
       }
     })
-    .then(r => this.saveAccessToken(r.token))
+      .then(r => {
+        this.saveAccessToken(r.token)
+        window.location = '/panel';
+      })
   }
 
   accessNotification(bool){
@@ -53,15 +52,13 @@ class Login extends Component {
             <div className="UserInputBox">
               <div className="LoginDetails">
                 <div className="UserInput">
-                  {/* <label className="emailLable" >email:</label> */}
                   <input className="EmailText"
-                    type="text"
+                    type="email"
                     value={this.state.email}
                     placeholder="Email"
                     onFocus={() => this.setState({noAccess: false, email: '',})}
                     onChange={(e) => this.setState({email: e.target.value,})}
                   />
-                  {/* <label className="PasswordLable" >Password:</label> */}
                   <input type="password" className="PasswordText"
                     value={this.state.password}
                     placeholder="Password"
@@ -73,7 +70,11 @@ class Login extends Component {
               <div className="LoginSend">
                 <div className="sendlogo"></div>
                 <div className="sendBox">
-                  <input onClick={() => {this.loginRequest(this.state)}} className="LoginButton" type="submit" value="Log in"/>
+                  <input
+                    onClick={() => {this.loginRequest(this.state)}}
+                    className="LoginButton"
+                    type="submit" value="Log in"
+                  />
                   {this.accessNotification(this.state.noAccess)}
                 </div>
               </div>
@@ -81,7 +82,6 @@ class Login extends Component {
           </div>
           <div className="AboutContainer">
             <div className="AboutBox">
-              {/* <img className="UserImage" src='./../../../assets/userImage.svg'/> */}
             </div>
             <div className="AboutTitle">
               <div className="Information">
@@ -110,8 +110,5 @@ class Login extends Component {
     )
   }
 }
-
-
-
 
 export default (Login);

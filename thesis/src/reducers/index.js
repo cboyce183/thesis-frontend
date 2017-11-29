@@ -8,22 +8,15 @@ const defaultState = {
     email: null,
   },
   UserImage: null,
-  saveCompanyInfo: null,
 }
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-  case types.SAVE_COMPANY_INFO:
-    return {
-      ...state,
-      saveCompanyInfo: action.data,
-    }
   case types.CROPPED_USER_IMAGE:
     return {
       ...state,
       UserImage: action.image,
     }
-
   case types.SET_USER_EMAIL:
     return {
       ...state, UserInfo: {
