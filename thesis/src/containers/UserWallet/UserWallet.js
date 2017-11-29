@@ -13,7 +13,7 @@ class UserWallet extends Component {
       ZenFlowStats: {ZenIn: '-', ZenOut: '-', DZen: '-',},
       CompGavePer: {ZenOut: 100, CompGave: 400, UserPercentage: '0%',},
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
-      transactionPage: 1,
+      transactionPage: [0, 14,],
     }
   }
 
@@ -39,10 +39,22 @@ class UserWallet extends Component {
     this.getInit();
   }
 
-  transactionList(list){
+  async incrementThePage(){
+    // for(let i = 0; i < el.length; i++) {await el[0].remove()}
+    this.setState({transactionPage: [14, 29,],})
+  }
+
+  async decrementThePage(){
+    var el = document.getElementsByClassName('TransactionItem');
+
+    for(let i = 0; i < el.length+10; i++) {await el[0].remove()}
+    await this.setState({transactionPage: [0, 14,],})
+  }
+
+  transactionList(){
     if(this.state.accountInfo) {
       return this.state.accountInfo.recentTransactions.map((el, i) => {
-        if (i < 14) {
+        if (i >= this.state.transactionPage[0] & i < this.state.transactionPage[1]) {
           return (
             <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
               <div className="TransactionCol">
@@ -177,7 +189,7 @@ class UserWallet extends Component {
             </div>
             <div className="SheetContainer">
               <div className="BalenceHeader"> filter functions </div>
-              <div className="TransactionItem">
+              <div className="TransactionItemHeader">
                 <div className="TransactionTitle">User</div>
                 <div className="TransactionTitle">ID</div>
                 <div className="TransactionTitle">Date</div>
@@ -191,9 +203,17 @@ class UserWallet extends Component {
               <div className="TransactionSummaryStats"></div>
               <div className="TransactionOverflowBox">
                 <div className="TransactionNavigation">
-                  <div className="SheetBack"> x</div>
-                  <div className="SheetNumber"> 1 2 3</div>
-                  <div className="SheetForward"> y </div>
+                  <div className="SheetBack"
+                    onClick={() => {
+                      this.decrementThePage()
+                    }}
+                  > &lt; </div>
+                  <div className="SheetNumber"> 1 - 2</div>
+                  <div onClick={()=> {
+                    this.incrementThePage()
+                  }}
+                  className="SheetForward"
+                  > &gt; </div>
                 </div>
               </div>
             </div>

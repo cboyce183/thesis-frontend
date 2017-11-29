@@ -236,6 +236,14 @@
  background-color: red;
 }
 
+.TransactionItemHeader{
+  flex: 0.5;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2px;
+}
 .TransactionItem{
   flex: 0.5;
   background-color: blue;
@@ -266,10 +274,13 @@
 .TransactionNavigation{
   background-color: blue;
   display: flex;
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .SheetBack{
-  font-size: 20px;
+  font-size: 30px;
   background-color: yellow;
 }
 .SheetNumber{
@@ -277,6 +288,6 @@
   background-color: orange;
 }
 .SheetForward{
-  font-size: 20px;
+  font-size: 30px;
   background-color: red;
 }
