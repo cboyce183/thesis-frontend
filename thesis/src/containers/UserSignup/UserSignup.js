@@ -65,9 +65,11 @@ class UserSignup extends Component {
     if(bool) return (<div> Passwords are not equal. </div>)
   }
 
+
   warningEmailInvalid(bool){
     if(bool) return (<div> Email is invalid. </div>)
   }
+
 
   imageProfileOrNot(bool){
     if (!bool) {
@@ -100,7 +102,6 @@ class UserSignup extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="Container">
         <div className="MainPannel">
@@ -210,6 +211,7 @@ class UserSignup extends Component {
     )
   }
 }
+
 
 const mapStateToProps = (state) => ({
   UserImage: state.UserImage,
