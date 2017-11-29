@@ -20,6 +20,9 @@ class TipOrPay extends Component {
       received: 0,
       userList: [],
       selected: '',
+      max: false,
+      attempted: false,
+      success: true,
     }
     // if (window.localStorage.getItem('token')) {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
@@ -49,9 +52,66 @@ class TipOrPay extends Component {
     this.setState({selected: value,})
   }
 
+  handleMaxZen = (event) => {
+    if (event.target.value > this.state.available) this.setState({max: true,});
+    else this.setState({max: false,});
+  }
+
+  handleResetZen = (event) => {
+    if (event.target.value > this.state.available) event.target.value = this.state.available;
+    this.setState({max: false,})
+  }
+
+  handleTip = (quantity, motive) => {
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/tips', {
+      method: 'PUT',
+      body: JSON.stringify({
+        user: this.state.selected,
+        amount: quantity,
+        reason: motive,
+      }),
+    }).then(res => {
+      console.log(res);
+      if (res.status === 200) this.setState({success: true, attempted: true,})
+      else this.setState({success: false, attempted: true,})
+    });
+  }
+
   //======================= RENDERING
 
+  renderButtonMessage = () => {
+    if (this.state.attempted) {
+      setTimeout(() => {
+        this.setState({attempted: false,})
+      }, 2000);
+      if (this.state.success) {
+        return 'SUCCESS!';
+      } else {
+        return 'SOMETHING WENT WRONG :(';
+      }
+    } else {
+      return 'TIP';
+    }
+  }
+
+  renderButtonClass(text) {
+    if (text !== 'TIP') {
+      if (text === 'SUCCESS!') {
+        return 'Success';
+      } else {
+        return 'Failure';
+      }
+    } else {
+      return 'Standard';
+    }
+  }
+
   render() {
+    const message = this.renderButtonMessage();
+    const buttonClass = this.renderButtonClass(message);
+    const highlight = this.state.max
+      ? 'Highlight'
+      : '';
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="Centering">
@@ -71,17 +131,25 @@ class TipOrPay extends Component {
                   />
                   <h5>how much?</h5>
                   <input
+                    ref={el => this.quantity = el}
+                    className={highlight}
                     type="number"
+                    max={this.state.available}
                     placeholder="the amount of zen you want to give"
+                    onChange={this.handleMaxZen}
+                    onBlur={this.handleResetZen}
                   />
                   <h5>why?</h5>
                   <input
+                    ref={el => this.reason = el}
                     type="text"
                     placeholder="the person you're tiping will see this so be nice :-)"
                   />
                   <input
+                    className={buttonClass}
                     type="submit"
-                    value="tip"
+                    value={message}
+                    onClick={() => this.handleTip(this.quantity.value, this.reason.value)}
                   />
                 </div>
                 <div className="TipRemaining">
