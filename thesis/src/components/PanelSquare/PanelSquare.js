@@ -27,7 +27,7 @@ class PanelSquare extends Component {
       : ''
     const summary = this.renderCurrency(this.props.zen);
     return this.props.isSummary ? (
-      <Link style={{textDecoration:'none',}} to={this.props.link}>
+      <Link className="Hovering" style={{textDecoration:'none',}} to={this.props.link}>
         <div className="PanelSquare">
           <div className="Wrapper">
             <h5>{this.props.title}</h5>
@@ -36,7 +36,7 @@ class PanelSquare extends Component {
         </div>
       </Link>
     ) : (
-      <Link className={settings} style={{textDecoration:'none',}} to={this.props.link}>
+      <Link className={'Hovering' + settings} style={{textDecoration:'none',}} to={this.props.link}>
         <div className={'PanelSquare' + settings}>
           <img
             className="PanelImg"
