@@ -105,8 +105,7 @@
 .ProfilePic{
   max-width: 200px;
   max-height: 200px;
-  background-size: cover;
-  overflow: hidden;
+  background-size: contain;
 }
 
 .myLabel {
@@ -235,4 +234,3 @@
   height: 20px;
 }
 
-/*//*/

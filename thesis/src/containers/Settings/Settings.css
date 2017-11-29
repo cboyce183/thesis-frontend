@@ -1,0 +1,43 @@
+.settings-container{
+  display: flex;
+  height: 85vh;
+  padding-top: 60px;
+}
+
+.settings-img{
+    flex-grow: 1;
+    margin-top: 100px;
+    padding: 50px;
+    padding-left: 100px;
+}
+
+.settings-info{
+  flex-grow: 1;
+  margin-top: 100px;
+  padding: 80px;
+  padding-left: 0px;
+  padding-right: 175px;
+}
+
+.set-pic{
+ margin-left: 60px;
+}
+
+.edit-btn-settings{
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pwr-by-settings{
+  text-align: center;
+}
+
+.settings-label{
+  margin-bottom: 11px;
+  padding: 10px;
+}
+
+.edit-btn-settings {
+  width: 162px;
+}
