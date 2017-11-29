@@ -88,3 +88,7 @@
   font-size: 200px;
   line-height: 200px;
 }
+
+.Highlight:focus {
+  border: 1px solid red !important;
+}

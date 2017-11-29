@@ -20,6 +20,7 @@ class TipOrPay extends Component {
       received: 0,
       userList: [],
       selected: '',
+      max: false,
     }
     // if (window.localStorage.getItem('token')) {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
@@ -49,9 +50,23 @@ class TipOrPay extends Component {
     this.setState({selected: value,})
   }
 
+  handleMaxZen = (event) => {
+    if (event.target.value > this.state.available) this.setState({max: true,});
+    else this.setState({max: false,});
+  }
+
+  handleResetZen = (event) => {
+    if (event.target.value > this.state.available) event.target.value = this.state.available;
+    this.setState({max: false,})
+  }
+
   //======================= RENDERING
 
   render() {
+    console.log(this.state.max);
+    const highlight = this.state.max
+      ? 'Highlight'
+      : '';
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="Centering">
@@ -71,8 +86,12 @@ class TipOrPay extends Component {
                   />
                   <h5>how much?</h5>
                   <input
+                    className={highlight}
                     type="number"
+                    max={this.state.available}
                     placeholder="the amount of zen you want to give"
+                    onChange={this.handleMaxZen}
+                    onBlur={this.handleResetZen}
                   />
                   <h5>why?</h5>
                   <input
