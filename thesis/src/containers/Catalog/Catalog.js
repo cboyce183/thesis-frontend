@@ -44,6 +44,10 @@ class Catalog extends Component {
     // }
   }
 
+  handleFilterProducts(arr, bool) {
+    return arr.filter(el => el.isService === bool)
+  }
+
   //======================= RENDERING
 
   render() {
@@ -56,8 +60,8 @@ class Catalog extends Component {
             <Close link="/panel"/>
           </div>
           <div className="ProductCatalog">
-            <ProductList title="Products"/>
-            <ProductList title="Products"/>
+            <ProductList title="Products" arr={this.handleFilterProducts(this.state.catalog, false)}/>
+            <ProductList title="Services" arr={this.handleFilterProducts(this.state.catalog, true)}/>
           </div>
           <h6>powered by Zendama</h6>
         </div>

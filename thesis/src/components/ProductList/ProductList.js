@@ -7,59 +7,29 @@ import ProductItem from '../ProductItem/ProductItem';
 
 class ProductList extends Component {
 
+  renderProductList(arr) {
+    return arr.map((el,i) =>{
+      return (
+        <ProductItem
+          key={i}
+          isService={el.isService}
+          schedule={el.schedule}
+          description={el.description}
+          price={el.value}
+          image={el.img}
+          title={el.name}
+        />
+      )
+    })
+  }
+
   render() {
+    const products = this.renderProductList(this.props.arr);
     return (
       <div className="ProductCategory">
         <h5>{this.props.title}</h5>
         <div className="ProductList">
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
-          <ProductItem
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam maximus, est ac volutpat bibendum, risus lorem aliquet, bla bla bla bla bla bla."
-            price="200"
-            image="https://lh3.googleusercontent.com/dB3Dvgf3VIglusoGJAfpNUAANhTXW8K9mvIsiIPkhJUAbAKGKJcEMPTf0mkSexzLM5o=w300"
-            title="Smiley Face"
-          />
+          {products}
         </div>
         <div className="ArrowContainer">
           <img

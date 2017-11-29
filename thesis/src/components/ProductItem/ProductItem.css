@@ -41,12 +41,13 @@
   margin-top: 5%;
   height: 67.38%;
   width: 90%;
+  overflow: hidden;
   background-color: red;
 }
 
 .ProductItemImg {
-  width: 100%;
-  /* height: 100%; */
+  /* width: 100%; */
+  height: 100%;
 }
 
 .ProductItem > h6 {

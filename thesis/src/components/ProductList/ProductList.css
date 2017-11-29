@@ -1,10 +1,11 @@
 .ProductCategory {
   height: 50%;
-  width: 90%;
+  width: 100%;
   position: relative;
 }
 
 .ProductList {
+  margin: auto;
   height: 80%;
   width: 100%;
   /* position: relative; */
