@@ -17,11 +17,10 @@
   margin: 50px;
 }
 
-input {
+.coin-info{
   font-size: 15px;
   font-family: 'Raleway', sans-serif;
   padding-left: 100px;
-
 }
 
 .nxt-btn{
@@ -49,4 +48,9 @@ input {
 
 .label-currency{
   margin-bottom: 35px;
+}
+
+.coin-upload{
+  height: 200px;
+  width: 200px;
 }

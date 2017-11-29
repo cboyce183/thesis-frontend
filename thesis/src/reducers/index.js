@@ -1,12 +1,16 @@
 import * as types from '../actions/types';
 
-export default (state = [], action) => {
+const defaultState = {
+  saveCompanyInfo: null,
+}
+
+export default (state = defaultState, action) => {
   switch (action.type) {
   case types.SAVE_COMPANY_INFO:
-    return [
+    return {
       ...state,
-      action.data,
-    ]
+      saveCompanyInfo: action.data,
+    }
   default:
     return state;
   }
