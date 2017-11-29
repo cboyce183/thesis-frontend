@@ -13,14 +13,14 @@
 
 .DashContainer{
  flex: 3;
- background-color: red;
+ background-color: transparent;
  display: flex;
  flex-direction: column;
 }
 
 .HeaderContainer{
   flex: 1;
-  background-color: red;
+  background-color: transparent;
 
 }
 
@@ -31,25 +31,46 @@
 }
 
 .SummaryDividerPie{
-  flex: 1.5;
-  background-color: orange;
+  background-color: white;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+}
+
+.SummaryDivider{
+  flex: 1.5;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.pie4you{
+  text-align: center;
+  font-size: 25px;
 }
 
 .PercentGiven{
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+
+
 .PerGivenText{
   position: absolute;
   font-size: 30px;
 }
+
+.GaveTitle{
+  font-size: 10px;
+  text-align: center;
+}
+.GavePer{
+  font-size: 30px;
+}
+
 .PerRecivedText{
   position: absolute;
   font-size: 30px;
@@ -57,10 +78,119 @@
 
 .SummaryDividerTot{
   flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-left: solid;
+  border-width: thin;
+}
+
+.TotSumTitle{
+  flex: 0.5;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.ZenFlowLabel{
+  font-size: 15px;
+}
+
+.TotSumIn{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.ZenInLab{
+  font-size: 20px;
+}
+
+.ZenInNum{
+    font-size: 25px;
+}
+
+#UnderLineElement{
+  border-bottom: solid;
+  border-width: thin;
+}
+
+#ZenLargeDelta{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.TotSumOut{
+  flex: 1;
   background-color: green;
+}
+.TotSumDelta{
+  flex: 1;
+  background-color: azure;
 }
 
 .SheetContainer{
   flex: 9;
-  background-color: blue;
+  background-color: white;
+  margin-top: 10px;
+  border-top: solid;
+  border-width: thin;
+  display: flex;
+  flex-direction: column;
+}
+
+.BalenceHeader{
+ flex: 1;
+ background-color: red;
+}
+.BalenceContainer{
+ flex: 9;
+ background-color: white;
+ margin: 20px;
+}
+
+.TransactionItem{
+  flex: 1;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  margin: 2px;
+}
+.TransactionCol{
+  flex: 1;
+  background-color:  transparent;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: grey;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TransactionPic{
+  width: 45px;
+  height: 45px;
+  border: solid;
+  border-width: thin;
+  border-color: grey;
+}
+
+.TransactionTitle{
+  flex: 1;
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: solid;
+  border-width: thin;
 }
