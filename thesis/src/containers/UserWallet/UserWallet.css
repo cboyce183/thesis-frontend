@@ -1,0 +1,66 @@
+.WalletContainer{
+  max-width: 960px;
+  height: 100vh;
+  margin: auto;
+  background-color: lightblue;
+  display: flex;
+}
+
+.PannelContainer{
+ flex: 1;
+ background-color: green;
+}
+
+.DashContainer{
+ flex: 3;
+ background-color: red;
+ display: flex;
+ flex-direction: column;
+}
+
+.HeaderContainer{
+  flex: 1;
+  background-color: red;
+
+}
+
+.SummaryContainer{
+  flex: 3;
+  background-color: lightgreen;
+  display: flex;
+}
+
+.SummaryDividerPie{
+  flex: 1.5;
+  background-color: orange;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.PercentGiven{
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PerGivenText{
+  position: absolute;
+  font-size: 30px;
+}
+.PerRecivedText{
+  position: absolute;
+  font-size: 30px;
+}
+
+.SummaryDividerTot{
+  flex: 1;
+  background-color: green;
+}
+
+.SheetContainer{
+  flex: 9;
+  background-color: blue;
+}
