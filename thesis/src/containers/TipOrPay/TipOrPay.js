@@ -13,7 +13,6 @@ class TipOrPay extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pending: [],
       isAdmin: false,
       loaded: false,
       remaning: 0,
@@ -29,8 +28,6 @@ class TipOrPay extends Component {
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
-          if (!res.catalog.length) this.setState({pending: ['catalog',],});
-          if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
           this.setState({isAdmin:res.isAdmin,});
         } else {
           this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
@@ -71,7 +68,6 @@ class TipOrPay extends Component {
         reason: motive,
       }),
     }).then(res => {
-      console.log(res);
       if (res.status === 200) this.setState({success: true, attempted: true,})
       else this.setState({success: false, attempted: true,})
     });
