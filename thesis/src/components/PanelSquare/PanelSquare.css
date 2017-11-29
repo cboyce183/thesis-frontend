@@ -37,7 +37,7 @@
 }
 
 p, h1, h2, h5, img {
-  background-color: white;
+  background-color: none;
 }
 
 .Zen {
@@ -64,4 +64,13 @@ p, h1, h2, h5, img {
   height: 110px;
   margin-right: 197px;
   margin-bottom: 197px;
+}
+
+.Hovering {
+  opacity: 0.6;
+  transition: opacity 0.35s ease-in;
+}
+
+.Hovering:hover {
+  opacity: 1;
 }
