@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 
-import { Link, } from 'react-router-dom';
+// import { Link, } from 'react-router-dom';
 
 import PanelSquare from '../../components/PanelSquare/PanelSquare';
 import NextSteps from '../../components/NextSteps/NextSteps';
