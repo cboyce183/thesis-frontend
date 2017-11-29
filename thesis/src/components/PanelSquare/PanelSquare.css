@@ -28,6 +28,7 @@
 }
 
 .Currency {
+  max-height: 72px;
   width: 80%;
   margin:auto;
   background-color: white;
@@ -73,4 +74,8 @@ p, h1, h2, h5, img {
 
 .Hovering:hover {
   opacity: 1;
+}
+
+.PanelInfinity {
+  height: 200%;
 }
