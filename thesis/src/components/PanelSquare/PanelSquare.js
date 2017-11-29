@@ -8,10 +8,15 @@ import { Link, } from 'react-router-dom';
 class PanelSquare extends Component {
 
   renderCurrency(zen) {
-    return zen === '∞'
+    console.log('zen: ', typeof zen, zen)
+    return zen && zen.match(/.+\.svg/gi)
       ? (
         <div className="Currency">
-          <h1 className={'Zen Infinity'}>∞</h1>
+          <img
+            className="PanelInfinity"
+            src={require('../../assets/infinity.svg')}
+            alt="infinity"
+          />
         </div>
       ) : (
         <div className="Currency">
