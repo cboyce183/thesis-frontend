@@ -1,8 +1,6 @@
 import React, { Component, } from 'react';
-// import { NavLink, } from 'react-router-dom';
-// import './Login.css';
-// please feel free to delete roerto was just playing with tokens...
-class Ledger extends Component {
+
+class UserWallet extends Component {
   constructor(props){
     super(props)
     this.state = {
@@ -41,4 +39,4 @@ class Ledger extends Component {
 
 
 
-export default (Ledger);
+export default (UserWallet);
