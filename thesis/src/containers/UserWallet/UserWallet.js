@@ -1,8 +1,8 @@
 import React, { Component, } from 'react';
 import PieChart from 'react-minimal-pie-chart';
 import './UserWallet.css'
-// import PanelSquare from './../../componets/Loader/Loader'
-
+import Loader from './../../components/Loader/Loader'
+import Close from '../../components/Close/Close';
 
 class UserWallet extends Component {
   constructor(props){
@@ -45,7 +45,7 @@ class UserWallet extends Component {
           <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
             <div className="TransactionCol">
               <div className="TransactionPic">
-                <img alt="" src={{url: el.profilePic,}}/>
+                <img className="TranscationPicImg" alt="" src={el.profilePic}/>
               </div>
             </div>
             <div className="TransactionCol">
@@ -73,13 +73,13 @@ class UserWallet extends Component {
     const res = this.state.accountInfo.recentTransactions.reduce((acc, el) => {
       return el.given ? ([acc[0] + el.given, acc[1],]) : ([acc[0], el.received + acc[1],])
     }, [0,0,])
-    this.setState({ZenFlowStats: {ZenIn: res[0], ZenOut: res[1], DZen: res[1] - res[0],},})
+    this.setState({ZenFlowStats: {ZenOut: res[0], ZenIn: res[1], DZen: res[1] - res[0],},})
   }
 
   companyGaveStats(){
     const user = this.state.ZenFlowStats.ZenOut;
     const comp = this.state.accountInfo.compTotalGave;
-    const prec = (Math.round((user/comp*100)*10)/10).toString() + '%';
+    const prec = (Math.round((user/(user+comp)*100)*10)/10).toString() + '%';
     this.setState({CompGavePer: {
       ZenOut: user,
       CompGave: comp,
@@ -89,7 +89,7 @@ class UserWallet extends Component {
   companyRecStats(){
     const user = this.state.ZenFlowStats.ZenIn;
     const comp = this.state.accountInfo.compTotalRecived;
-    const prec = (Math.round((user/comp*100)*10)/10).toString() + '%';
+    const prec = (Math.round((user/(comp+user)*100)*10)/10).toString() + '%';
     this.setState({CompRecPer: {
       ZenIn: user,
       CompRec: comp,
@@ -98,88 +98,102 @@ class UserWallet extends Component {
 
   render() {
     console.log('this', this.state)
-    return (
-      <div className="WalletContainer">
-        <div className="PannelContainer"></div>
-        <div className="DashContainer">
-          <div className="HeaderContainer">
-
+    if (!!this.state.accountInfo) {
+      return (
+        <div className="WalletContainer">
+          <div className="PannelContainer">
+            <div className="PannelProfileInfo">
+              <div className="UserProfilePicture">
+                <img className="UserProfileImage" alt="" src={this.state.accountInfo.userInformation.profilePic}/>
+              </div>
+              <div className="UserProfileName">{this.state.accountInfo.userInformation.username}</div>
+            </div>
+            <div className="PannelToolBar"></div>
           </div>
-          <div className="SummaryContainer">
-            <div className="SummaryDivider">
-              <div className="pie4you">Overview within comp4any</div>
-              <div className="SummaryDividerPie">
-                <PieChart className="PercentGiven"
-                  startAngle={270}
-                  radius={50}
-                  lineWidth={20}
-                  paddingAngle={3}
-                  animationDuration={3000}
-                  // rounded={true}
-                  animate={true}
-                  data={[
-                    { value: this.state.CompGavePer.ZenOut, key: 1, color: 'black',},
-                    { value: this.state.CompGavePer.CompGave, key: 2, color: '#CDCDCD',},]}
-                >
-                  <div className="PerGivenText">
-                    <div className="GaveTitle">GAVE</div>
-                    <div className="GavePer">{this.state.CompGavePer.UserPercentage}</div>
-                  </div>
-                </PieChart>
-                <PieChart className="PercentGiven"
-                  startAngle={0}
-                  radius={50}
-                  lineWidth={20}
-                  paddingAngle={3}
-                  animationDuration={3000}
-                  // rounded={true}
-                  animate={true}
-                  data={[
-                    { value: this.state.CompRecPer.ZenIn, key: 1, color: 'black',},
-                    { value: this.state.CompRecPer.CompRec, key: 2, color: '#CDCDCD',},]}
-                >
-                  <div className="PerRecivedText">
-                    <div className="GaveTitle">RECEIVED</div>
-                    <div className="GavePer">{this.state.CompRecPer.UserPercentage}</div>
-                  </div>
-                </PieChart>
+          <div className="DashContainer">
+            <div className="HeaderContainer">
+              <Close link="/panel"/>
+            </div>
+            <div className="SummaryContainer">
+              <div className="SummaryDivider">
+                <div className="pie4you">Overview within comp4any</div>
+                <div className="SummaryDividerPie">
+                  <PieChart className="PercentGiven"
+                    startAngle={270}
+                    radius={50}
+                    lineWidth={20}
+                    paddingAngle={3}
+                    animationDuration={3000}
+                    // rounded={true}
+                    animate={true}
+                    data={[
+                      { value: this.state.CompGavePer.ZenOut, key: 1, color: 'black',},
+                      { value: this.state.CompGavePer.CompGave, key: 2, color: '#CDCDCD',},]}
+                  >
+                    <div className="PerGivenText">
+                      <div className="GaveTitle">GIVEN</div>
+                      <div className="GavePer">{this.state.CompGavePer.UserPercentage}</div>
+                    </div>
+                  </PieChart>
+                  <PieChart className="PercentGiven"
+                    startAngle={0}
+                    radius={50}
+                    lineWidth={20}
+                    paddingAngle={3}
+                    animationDuration={3000}
+                    // rounded={true}
+                    animate={true}
+                    data={[
+                      { value: this.state.CompRecPer.ZenIn, key: 1, color: 'black',},
+                      { value: this.state.CompRecPer.CompRec, key: 2, color: '#CDCDCD',},]}
+                  >
+                    <div className="PerRecivedText">
+                      <div className="GaveTitle">RECEIVED</div>
+                      <div className="GavePer">{this.state.CompRecPer.UserPercentage}</div>
+                    </div>
+                  </PieChart>
+                </div>
+              </div>
+              <div className="SummaryDividerTot">
+                <div className="TotSumTitle">
+                  <div className="ZenFlowLabel">manage-zen-flow</div>
+                </div>
+                <div className="TotSumIn">
+                  <div className="ZenInLab">Zen Recieved</div>
+                  <div className="ZenInNum">{this.state.ZenFlowStats.ZenIn}</div>
+                </div>
+                <div className="TotSumIn" id="UnderLineElement">
+                  <div className="ZenInLab">Zen Given</div>
+                  <div className="ZenInNum">{this.state.ZenFlowStats.ZenOut}</div>
+                </div>
+                <div className="TotSumIn">
+                  <div className="ZenInLab">Δ Zen</div>
+                  <div className="ZenInNum" id="ZenLargeDelta">{this.state.ZenFlowStats.DZen}</div>
+                </div>
               </div>
             </div>
-            <div className="SummaryDividerTot">
-              <div className="TotSumTitle">
-                <div className="ZenFlowLabel">manage-zen-flow</div>
+            <div className="SheetContainer">
+              <div className="BalenceHeader"></div>
+              <div className="BalenceContainer">
+                <div className="TransactionItem">
+                  <div className="TransactionTitle">User</div>
+                  <div className="TransactionTitle">ID</div>
+                  <div className="TransactionTitle">Date</div>
+                  <div className="TransactionTitle">Gave</div>
+                  <div className="TransactionTitle">Recieved</div>
+                  <div className="TransactionTitle">Amount</div>
+                </div>
+                {this.transactionList()}
               </div>
-              <div className="TotSumIn">
-                <div className="ZenInLab">Zen in</div>
-                <div className="ZenInNum">{this.state.ZenFlowStats.ZenIn}</div>
-              </div>
-              <div className="TotSumIn" id="UnderLineElement">
-                <div className="ZenInLab">Zen out</div>
-                <div className="ZenInNum">{this.state.ZenFlowStats.ZenOut}</div>
-              </div>
-              <div className="TotSumIn">
-                <div className="ZenInLab">Δ Zen</div>
-                <div className="ZenInNum" id="ZenLargeDelta">{this.state.ZenFlowStats.DZen}</div>
-              </div>
-            </div>
-          </div>
-          <div className="SheetContainer">
-            <div className="BalenceHeader"></div>
-            <div className="BalenceContainer">
-              <div className="TransactionItem">
-                <div className="TransactionTitle">user</div>
-                <div className="TransactionTitle">id</div>
-                <div className="TransactionTitle">Date</div>
-                <div className="TransactionTitle">Gave</div>
-                <div className="TransactionTitle">Recieved</div>
-                <div className="TransactionTitle">Amount</div>
-              </div>
-              {this.transactionList()}
             </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return (
+        <Loader/>
+      )
+    }
   }
 }
 

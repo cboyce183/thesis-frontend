@@ -2,13 +2,47 @@
   max-width: 960px;
   height: 100vh;
   margin: auto;
-  background-color: lightblue;
+  background-color: white;
   display: flex;
 }
 
 .PannelContainer{
- flex: 1;
+ flex: .75;
  background-color: green;
+ display: flex;
+ flex-direction: column;
+}
+
+.PannelProfileInfo{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.UserProfilePicture{
+  height: 150px;
+  width: 150px;
+  border: solid;
+  border-width: thin;
+  border-color: grey;
+}
+
+.UserProfileImage{
+  height: 150px;
+  width: 150px;
+  background-color: white;
+}
+.UserProfileName{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.PannelToolBar{
+  flex: 3;
+  background-color: purple;
 }
 
 .DashContainer{
@@ -21,7 +55,9 @@
 .HeaderContainer{
   flex: 1;
   background-color: transparent;
-
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .SummaryContainer{
@@ -154,6 +190,8 @@
  flex: 9;
  background-color: white;
  margin: 20px;
+ border-bottom: solid;
+ border-width: thin;
 }
 
 .TransactionItem{
@@ -183,6 +221,11 @@
   border: solid;
   border-width: thin;
   border-color: grey;
+}
+
+.TranscationPicImg{
+  width: 45px;
+  height: 45px;
 }
 
 .TransactionTitle{
