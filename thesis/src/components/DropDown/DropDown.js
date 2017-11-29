@@ -3,7 +3,6 @@ import React, { Component, } from 'react';
 import '../../App.css';
 import './DropDown.css';
 
-//takes array as props, displays a list of users and a search bar. If you type a name it will filter out the users and when you click add it
 class DropDown extends Component {
 
   state = {
@@ -12,10 +11,11 @@ class DropDown extends Component {
     list: [],
   }
 
+  //a prop must be passed to the DropDown component that contains the function that handles the user selection.
+
   componentDidMount() {
     this.setState({list: this.props.arr,})
   }
-
 
   handleFilters(event) {
     const filtered = event.value
