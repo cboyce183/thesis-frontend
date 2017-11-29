@@ -182,25 +182,18 @@
   flex-direction: column;
 }
 
-.BalenceHeader{
- flex: 1;
- background-color: red;
-}
+
 .BalenceContainer{
  flex: 9;
  background-color: white;
  margin: 20px;
  border-bottom: solid;
  border-width: thin;
+ display: flex;
+ flex-direction: column;
 }
 
-.TransactionItem{
-  flex: 1;
-  background-color: red;
-  display: flex;
-  flex-direction: row;
-  margin: 2px;
-}
+
 .TransactionCol{
   flex: 1;
   background-color:  transparent;
@@ -209,23 +202,23 @@
   border-bottom: solid;
   border-width: thin;
   border-color: grey;
-  height: 50px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .TransactionPic{
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
   border: solid;
   border-width: thin;
   border-color: grey;
 }
 
 .TranscationPicImg{
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
 }
 
 .TransactionTitle{
@@ -236,4 +229,54 @@
   font-size: 18px;
   border-bottom: solid;
   border-width: thin;
+}
+
+.BalenceHeader{
+ flex: 0.5;
+ background-color: red;
+}
+
+.TransactionItem{
+  flex: 0.5;
+  background-color: blue;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2px;
+}
+
+.TransactionContainer{
+  flex: 8;
+  background-color: red;
+  overflow: scroll;
+}
+.TransactionSummaryStats{
+  flex: 1;
+  background-color: blue;
+
+}
+.TransactionOverflowBox{
+  flex: 1;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.TransactionNavigation{
+  background-color: blue;
+  display: flex;
+}
+
+.SheetBack{
+  font-size: 20px;
+  background-color: yellow;
+}
+.SheetNumber{
+  font-size: 20px;
+  background-color: orange;
+}
+.SheetForward{
+  font-size: 20px;
+  background-color: red;
 }

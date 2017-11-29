@@ -13,6 +13,7 @@ class UserWallet extends Component {
       ZenFlowStats: {ZenIn: '-', ZenOut: '-', DZen: '-',},
       CompGavePer: {ZenOut: 100, CompGave: 400, UserPercentage: '0%',},
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
+      transactionPage: 1,
     }
   }
 
@@ -40,31 +41,33 @@ class UserWallet extends Component {
 
   transactionList(list){
     if(this.state.accountInfo) {
-      return this.state.accountInfo.recentTransactions.map(el => {
-        return (
-          <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
-            <div className="TransactionCol">
-              <div className="TransactionPic">
-                <img className="TranscationPicImg" alt="" src={el.profilePic}/>
+      return this.state.accountInfo.recentTransactions.map((el, i) => {
+        if (i < 14) {
+          return (
+            <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
+              <div className="TransactionCol">
+                <div className="TransactionPic">
+                  <img className="TranscationPicImg" alt="" src={el.profilePic}/>
+                </div>
+              </div>
+              <div className="TransactionCol">
+                <div>{el.username}</div>
+              </div>
+              <div className="TransactionCol">
+                <div>{el.date}</div>
+              </div>
+              <div className="TransactionCol">
+                <div>{el.given ? el.given : '-'}</div>
+              </div>
+              <div className="TransactionCol">
+                <div>{el.received ? el.received : '-'}</div>
+              </div>
+              <div className="TransactionCol">
+                <div>{el.amount}</div>
               </div>
             </div>
-            <div className="TransactionCol">
-              <div>{el.username}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.date}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.given ? el.given : '-'}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.received ? el.received : '-'}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.amount}</div>
-            </div>
-          </div>
-        )
+          )
+        }
       })
     }
   }
@@ -156,7 +159,7 @@ class UserWallet extends Component {
               </div>
               <div className="SummaryDividerTot">
                 <div className="TotSumTitle">
-                  <div className="ZenFlowLabel">manage-zen-flow</div>
+                  <div className="ZenFlowLabel">month-zen-flow</div>
                 </div>
                 <div className="TotSumIn">
                   <div className="ZenInLab">Zen Recieved</div>
@@ -173,17 +176,25 @@ class UserWallet extends Component {
               </div>
             </div>
             <div className="SheetContainer">
-              <div className="BalenceHeader"></div>
-              <div className="BalenceContainer">
-                <div className="TransactionItem">
-                  <div className="TransactionTitle">User</div>
-                  <div className="TransactionTitle">ID</div>
-                  <div className="TransactionTitle">Date</div>
-                  <div className="TransactionTitle">Gave</div>
-                  <div className="TransactionTitle">Recieved</div>
-                  <div className="TransactionTitle">Amount</div>
-                </div>
+              <div className="BalenceHeader"> filter functions </div>
+              <div className="TransactionItem">
+                <div className="TransactionTitle">User</div>
+                <div className="TransactionTitle">ID</div>
+                <div className="TransactionTitle">Date</div>
+                <div className="TransactionTitle">Gave</div>
+                <div className="TransactionTitle">Recieved</div>
+                <div className="TransactionTitle">Amount</div>
+              </div>
+              <div className="TransactionContainer">
                 {this.transactionList()}
+              </div>
+              <div className="TransactionSummaryStats"></div>
+              <div className="TransactionOverflowBox">
+                <div className="TransactionNavigation">
+                  <div className="SheetBack"> x</div>
+                  <div className="SheetNumber"> 1 2 3</div>
+                  <div className="SheetForward"> y </div>
+                </div>
               </div>
             </div>
           </div>
