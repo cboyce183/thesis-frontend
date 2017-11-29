@@ -25,7 +25,7 @@ class TipOrPay extends Component {
       success: true,
     }
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -106,9 +106,32 @@ class TipOrPay extends Component {
     }
   }
 
+  renderRemainder(state) {
+    if (state.isAdmin) {
+      return (
+        <div className="TipRemaining">
+          <h5>available giving zen</h5>
+          <img
+            className="TipInfinite"
+            alt="infinity"
+            src={require('../../assets/infinity.svg')}
+          />
+        </div>
+      )
+    } else {
+      return (
+        <div className="TipRemaining">
+          <h5>available giving zen</h5>
+          <h1>{state.available}</h1>
+        </div>
+      )
+    }
+  }
+
   render() {
     const message = this.renderButtonMessage();
     const buttonClass = this.renderButtonClass(message);
+    const remaining = this.renderRemainder(this.state);
     const highlight = this.state.max
       ? 'Highlight'
       : '';
@@ -152,10 +175,7 @@ class TipOrPay extends Component {
                     onClick={() => this.handleTip(this.quantity.value, this.reason.value)}
                   />
                 </div>
-                <div className="TipRemaining">
-                  <h5>available giving zen</h5>
-                  <h1>{this.state.available}</h1>
-                </div>
+                {remaining}
               </div>
               <h6>powered by Zendama</h6>
             </div>
