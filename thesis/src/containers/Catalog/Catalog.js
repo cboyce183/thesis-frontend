@@ -7,7 +7,7 @@ import Close from '../../components/Close/Close';
 // import DropDown from '../../components/DropDown/DropDown';
 
 import ProductList from '../../components/ProductList/ProductList';
-import PopUp from '../../components/PopUp/PopUp';
+import ProductPopUp from '../../components/ProductPopUp/ProductPopUp';
 
 import '../../App.css';
 import './Catalog.css';
@@ -61,7 +61,7 @@ class Catalog extends Component {
 
   renderPopUp(product) {
     return (
-      <PopUp
+      <ProductPopUp
         isService={product.isService}
         title={product.title}
         image={product.image}
