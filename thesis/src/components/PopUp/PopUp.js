@@ -22,9 +22,10 @@ class PopUp extends Component {
 
   renderPopUp() {
     return (
-      <ProductPopUp
+      <PopUp
         unpop={this.handlePopUp.bind(this)}
-      />
+      >
+      </PopUp>
     )
   }
 

@@ -13,7 +13,8 @@ class ProductPopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: 1,
+      selectedDates: [],
+      availableSlots: this.props.schedule,
     }
   }
 
@@ -27,36 +28,54 @@ class ProductPopUp extends Component {
     this.setState({quantity: ref.value,})
   }
 
+  handleDateSelect(object) {
+    const day = Object.keys(object)[0];
+    const repeat = this.state.selectedDates.reduce((acc, el) => Object.keys(el)[0] === day && el[day] === object[day] ? true : acc, false);
+    if (!this.state.availableSlots[day] || !~this.state.availableSlots[day].indexOf(object[day])) console.log('invalid day')
+    else if (repeat) {
+      const newSelectedDates = this.state.selectedDates.filter(el => Object.keys(el)[0] !== day || el[day] !== object[day])
+      this.setState({selectedDates: newSelectedDates,});
+    }
+    else this.setState({selectedDates: [...this.state.selectedDates, object,],})
+  }
+
   handleUserType = (event) => {
-    console.log(event);
     if (event.target.value) this.setState({quantity: event.target.value,});
     else this.setState({quantity: 0,})
   }
 
   //==============================RENDERING
 
-  renderSchedule = (schedule) => {
+  renderSchedule = (schedule, selected) => {
     const days = Object.keys(schedule);
-    const res = week.map((el, i) => {
-      if (~days.indexOf(el)) {
-        return (
-          <tr key={i}>
-            <td className="ScheduleTime">{displayWeek[i]}</td>
-            {slots.map((slot,index) => ~schedule[el].indexOf(slot)
-              ? (<td key={index} className="ScheduleTime Available"></td>)
-              : (<td key={index} className="ScheduleTime Unavailable"></td>)
-            )}
-          </tr>
-        )
-      } else {
-        return (
-          <tr key={i}>
-            <td>{displayWeek[i]}</td>
-            {slots.map((slot, index) => (<td key={index} className="ScheduleTime Unavailable"></td>))}
-          </tr>
-        );
-      }
-    });
+    const res = week.map((day, i) => ~days.indexOf(day)
+      ? (
+        <tr key={i}>
+          <td
+            className="ScheduleTime"
+          >{displayWeek[i]}</td>
+          {slots.map((slot,index) => ~schedule[day].indexOf(slot)
+            ? (
+              <td
+                key={index}
+                onClick={() => this.handleDateSelect({[day] : slot,})}
+                className={`ScheduleTime ${selected.reduce((acc, el) => Object.keys(el)[0] === day && slot === el[day] ? true : acc, false) ? 'SelectedDate' : 'Available'}`}
+              ></td>
+            ) : (
+              <td
+                key={index}
+                className="ScheduleTime Unavailable"
+              ></td>
+            )
+          )}
+        </tr>
+      ) : (
+        <tr key={i}>
+          <td>{displayWeek[i]}</td>
+          {slots.map((slot, index) => (<td key={index} className="ScheduleTime Unavailable"></td>))}
+        </tr>
+      )
+    );
     return (
       <table className="Schedule">
         <thead>
@@ -73,19 +92,21 @@ class ProductPopUp extends Component {
   }
 
   render() {
+    console.log(this.state);
     const schedule = this.props.isService
-      ? this.renderSchedule(this.props.schedule)
+      ? this.renderSchedule(this.props.schedule, this.state.selectedDates)
       : '';
-    console.log(this.props);
     return this.props.isService ? (
       <PopUp
         unpop={this.props.unpop}
       >
-        {/* <div style={{backgroundImage: `url(${this.props.image})`,}}className="PopUpImgWrap"> */}
-        {/* </div> */}
+        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrap">
+        </div>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
-        <h5>Price: {this.props.value}</h5>
+        <h5>Price: {this.state.selectedDates.length
+          ? this.props.value * this.state.selectedDates.length
+          : this.props.value}</h5>
         {schedule}
         <input type="submit" />
       </PopUp>
@@ -93,7 +114,7 @@ class ProductPopUp extends Component {
       <PopUp
         unpop={this.props.unpop}
       >
-        <div style={{backgroundImage: `url(${this.props.image})`,}}className="PopUpImgWrap">
+        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrapService">
         </div>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
