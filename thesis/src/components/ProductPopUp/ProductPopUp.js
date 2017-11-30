@@ -3,6 +3,10 @@ import React, { Component, } from 'react';
 import '../../App.css';
 import './ProductPopUp.css';
 
+const week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',]
+const displayWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN',]
+const slots = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,]
+
 class ProductPopUp extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +25,10 @@ class ProductPopUp extends Component {
     this.setState({quantity: ref.value,})
   }
 
+  handleUnPop = () => {
+    this.props.unpop({})
+  }
+
   handleUserType = (event) => {
     console.log(event);
     if (event.target.value) this.setState({quantity: event.target.value,});
@@ -30,10 +38,7 @@ class ProductPopUp extends Component {
   //==============================RENDERING
 
   renderSchedule = (schedule) => {
-    const week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',]
-    const displayWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN',]
     const days = Object.keys(schedule);
-    const slots = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,]
     const res = week.map((el, i) => {
       if (~days.indexOf(el)) {
         return (
@@ -70,18 +75,7 @@ class ProductPopUp extends Component {
         <thead>
           <tr>
             <th>DAY</th>
-            <th>09</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-            <th>17</th>
-            <th>18</th>
-            <th>19</th>
-            <th>20</th>
+            {slots.map((slot, index) => (<th key={index}>{slot}</th>))}
           </tr>
         </thead>
         <tbody>
@@ -116,7 +110,7 @@ class ProductPopUp extends Component {
     ) : (
       <div className="PopUpDisplay">
         <div
-          onClick={() => this.props.unpop({})}
+          onClick={this.handleUnPop}
           className="PopUpOverlay"
         >
         </div>
