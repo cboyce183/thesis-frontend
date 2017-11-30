@@ -26,7 +26,7 @@ class UserWallet extends Component {
     const userNameArr = []
     const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
       if(userNameArr.indexOf(el.username) === -1) {
-        acc.push({img: el.profilePic, username: el.username, id: el._id,});
+        acc.push({img: el.profilePic, username: el.username, id: el.userid,});
         userNameArr.push(el.username);
         return acc
       } else {
@@ -37,6 +37,7 @@ class UserWallet extends Component {
   }
 
   handleUserSelection = (value) => {
+    this.filteringNamesForPanel(value)
     this.setState({selected: value,})
   }
 
@@ -54,8 +55,10 @@ class UserWallet extends Component {
 
   filteringNamesForPanel(name){
     const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      if(name === this.state.selected) {
+      console.log(name, "==========",el.userid)
+      if(name === el.userid) {
         acc.push(el);
+        console.log(acc)
         return acc
       } else {
         return acc
@@ -97,6 +100,15 @@ class UserWallet extends Component {
   decrementThePage(){
     this.filteringTransactionsForPanel(0,14)
   }
+
+  pageTotal(col){
+    if (this.state.transactionsToDisplay) {
+      return this.state.transactionsToDisplay.reduce((acc, el) => {
+        return acc + el[col]
+      }, 0)
+    }
+  }
+
 
   transactionList(){
     if(this.state.transactionsToDisplay) {
@@ -157,7 +169,7 @@ class UserWallet extends Component {
   }
 
   render() {
-    console.log('this', this.state.userList)
+    console.log('this', this.state)
     if (this.state.loaded) {
       return (
         <div className="WalletContainer">
@@ -234,11 +246,27 @@ class UserWallet extends Component {
             </div>
             <div className="SheetContainer">
               <div className="BalenceHeader">
-                <DropDown
-                  func={this.handleUserSelection.bind(this)}
-                  placeh="the person you want to give zen to"
-                  arr={this.state.userList}
-                />
+                <div className="DropDownDiv">
+                  <DropDown
+                    func={this.handleUserSelection.bind(this)}
+                    placeh="Filter people"
+                    arr={this.state.userList}
+                  />
+                </div>
+                <div className="spacedivATM">
+                  {/* <input type="date"/>
+                  <input type="date"/> */}
+                </div>
+                <div className="spacedivATM"></div>
+                <div className="spacedivATM"></div>
+                <div className="spacedivATM">
+                  <input onClick={async () => {
+                    this.filteringTransactionsForPanel(0,14)
+                  }}
+                  className="RemoveFilterButton" type="submit" value="All"
+                  />
+                </div>
+
               </div>
               <div className="TransactionItemHeader">
                 <div className="TransactionTitle">User</div>
@@ -251,7 +279,14 @@ class UserWallet extends Component {
               <div className="TransactionContainer">
                 {this.transactionList()}
               </div>
-              <div className="TransactionSummaryStats"></div>
+              <div className="TransactionSummaryStats">
+                <div className="TransactionTitle"></div>
+                <div className="TransactionTitle"></div>
+                <div className="TransactionTitle">page totals</div>
+                <div className="TransactionTitle">{this.pageTotal('given')}</div>
+                <div className="TransactionTitle">{this.pageTotal('received')}</div>
+                <div className="TransactionTitle"> Δ {this.pageTotal('received') - this.pageTotal('given')} </div>
+              </div>
               <div className="TransactionOverflowBox">
                 <div className="TransactionNavigation">
                   <div className="SheetBack"
@@ -264,7 +299,8 @@ class UserWallet extends Component {
                     this.incrementThePage()
                   }}
                   className="SheetForward"
-                  > &gt; </div>
+                  > &gt;
+                  </div>
                 </div>
               </div>
             </div>
