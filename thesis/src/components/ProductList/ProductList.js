@@ -11,6 +11,7 @@ class ProductList extends Component {
     return arr.map((el,i) =>{
       return (
         <ProductItem
+          pop={this.props.pop}
           key={i}
           isService={el.isService}
           schedule={el.schedule}

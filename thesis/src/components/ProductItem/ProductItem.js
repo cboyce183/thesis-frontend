@@ -24,6 +24,7 @@ class ProductItem extends Component {
           className="BuyButton"
           type="submit"
           value="buy"
+          onClick={() => this.props.pop()}
         />
       </div>
     );

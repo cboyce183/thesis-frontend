@@ -1,13 +1,28 @@
 import React, { Component, } from 'react';
 
 import '../../App.css';
-import './ProductItem.css';
+import './PopUp.css';
 
 class PopUp extends Component {
 
   render() {
-    return (
-      <div className="PopUp">
+    return this.props.isService ? (
+      <div
+        onClick={this.props.unpop}
+        className="PopUpOverlay"
+      >
+        <div className="PopUp">
+        </div>
+      </div>
+    ) : (
+      <div className="PopUpDisplay">
+        <div
+          onClick={this.props.unpop}
+          className="PopUpOverlay"
+        >
+        </div>
+        <div className="PopUp">
+        </div>
       </div>
     );
   }
