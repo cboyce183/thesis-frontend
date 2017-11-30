@@ -128,5 +128,10 @@
 
 .Available {
   border: 1px solid green !important;
-  background-color: green !important;
+  background-color: rgba(0, 128, 0, 0.400) !important;
+}
+
+.Unavailable {
+  border: 1px solid grey !important;
+  background: rgba(128, 128, 128, 0.150) !important;
 }

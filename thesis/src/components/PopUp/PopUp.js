@@ -41,7 +41,7 @@ class PopUp extends Component {
             <td className="ScheduleTime">{displayWeek[i]}</td>
             {slots.map((slot,index) => ~schedule[el].indexOf(slot)
               ? (<td key={index} className="ScheduleTime Available"></td>)
-              : (<td key={index} className="ScheduleTime"></td>)
+              : (<td key={index} className="ScheduleTime Unavailable"></td>)
             )}
           </tr>
         )
@@ -49,18 +49,18 @@ class PopUp extends Component {
         return (
           <tr key={i}>
             <td>{displayWeek[i]}</td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
-            <td className="ScheduleTime"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
+            <td className="ScheduleTime Unavailable"></td>
           </tr>
         );
       }
