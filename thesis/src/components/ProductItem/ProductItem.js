@@ -6,6 +6,7 @@ import './ProductItem.css';
 class ProductItem extends Component {
 
   render() {
+    const product = this.props;
     return (
       <div className="ProductItem">
         <div className="ProductDescription">
@@ -24,7 +25,7 @@ class ProductItem extends Component {
           className="BuyButton"
           type="submit"
           value="buy"
-          onClick={() => this.props.pop()}
+          onClick={() => this.props.pop(product)}
         />
       </div>
     );

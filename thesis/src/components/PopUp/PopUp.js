@@ -6,9 +6,10 @@ import './PopUp.css';
 class PopUp extends Component {
 
   render() {
+    console.log(this.props);
     return this.props.isService ? (
       <div
-        onClick={this.props.unpop}
+        onClick={() => this.props.unpop({})}
         className="PopUpOverlay"
       >
         <div className="PopUp">
@@ -17,7 +18,7 @@ class PopUp extends Component {
     ) : (
       <div className="PopUpDisplay">
         <div
-          onClick={this.props.unpop}
+          onClick={() => this.props.unpop({})}
           className="PopUpOverlay"
         >
         </div>

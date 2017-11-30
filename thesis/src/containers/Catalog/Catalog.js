@@ -21,6 +21,7 @@ class Catalog extends Component {
       remaning: 0,
       received: 0,
       catalog: [],
+      selectedProduct: {},
       popped: false,
     }
     // if (window.localStorage.getItem('token')) {
@@ -37,7 +38,6 @@ class Catalog extends Component {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/catalog')
       .then(res => res.json())
       .then(res => {
-        // console.log(res);
         this.setState({catalog: res.catalog, loaded: true,});
       })
       .catch(e => console.error(e));
@@ -50,25 +50,33 @@ class Catalog extends Component {
     return arr.filter(el => el.isService === bool)
   }
 
-  handleProductBuy = () => {
-    this.setState({popped: !this.state.popped,})
+  handlePopUp = (product) => {
+    this.setState({
+      selectedProduct: product,
+      popped: !this.state.popped,
+    })
   }
 
   //======================= RENDERING
 
-  renderPopUp() {
+  renderPopUp(product) {
     return (
       <PopUp
-        unpop={this.handleProductBuy.bind(this)}
+        isService={product.isService}
+        title={product.title}
+        image={product.image}
+        description={product.description}
+        value={product.value}
+        schedule={product.schedule}
+        unpop={this.handlePopUp.bind(this)}
       />
     )
   }
 
   render() {
     const popped = this.state.popped
-      ? this.renderPopUp()
+      ? this.renderPopUp(this.state.selectedProduct)
       : '';
-    console.log(this.state);
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="CatalogPosition">
@@ -79,12 +87,12 @@ class Catalog extends Component {
           </div>
           <div className="ProductCatalog">
             <ProductList
-              pop={this.handleProductBuy.bind(this)}
+              pop={this.handlePopUp.bind(this)}
               title="Products"
               arr={this.handleFilterProducts(this.state.catalog, false)}
             />
             <ProductList
-              pop={this.handleProductBuy.bind(this)}
+              pop={this.handlePopUp.bind(this)}
               title="Services"
               arr={this.handleFilterProducts(this.state.catalog, true)}
             />
