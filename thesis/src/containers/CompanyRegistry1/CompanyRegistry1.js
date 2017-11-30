@@ -7,7 +7,12 @@ import { saveCompanyInfo, } from '../../actions';
 import ReactFileReader from 'react-file-reader';
 
 
-
+const style = {
+  borderWidth:'1.5px',
+  borderStyle: 'solid',
+  borderColor: '#040223',
+  fontWeight: '650',
+}
 
 class CompanyRegistry1 extends Component {
 
@@ -15,11 +20,11 @@ class CompanyRegistry1 extends Component {
     super(props);
 
     this.state = {
-      companyEmail: '',
-      companyUserName: '',
-      companyPassword: '',
-      companyPassword2: '',
-      companyLogo:'',
+      email: '',
+      name: '',
+      password: '',
+      password2: '',
+      logo:'',
       displayImg:false,
       imagePath:'',
     }
@@ -41,15 +46,13 @@ class CompanyRegistry1 extends Component {
   }
 
   passwordMatch = () => {
-    return this.state.companyPassword === this.state.companyPassword2
+    return this.state.password === this.state.password2
       ? true
       : false;
   }
 
 
-
   render() {
-    console.log(this.state);
     return (
       <div className="MaxWidth">
         <div className='cmpy-reg-1-label'>
@@ -62,36 +65,32 @@ class CompanyRegistry1 extends Component {
               type="email"
               placeholder="Company-Email@mailbox.com"
               id="exampleEmailInput"
-              // ref={el => this.test = el}
-              onChange={(e) => this.setState({companyEmail: e.target.value,})}
+              onChange={(e) => this.setState({email: e.target.value,})}
             />
             <input
               className="u-full-width cp-reg-1"
               type="text"
               placeholder="Company Username"
               id="exampleEmailInput"
-              //value={this.state.companyUserName}
-              onChange={(e) => this.setState({companyUserName: e.target.value,})}
+              onChange={(e) => this.setState({name: e.target.value,})}
             />
             <input
               className="u-full-width cp-reg-1"
               type="password"
               placeholder="Password"
-              //value={this.state.companyPassword}
-              onChange={(e) => this.setState({companyPassword: e.target.value,})}
+              onChange={(e) => this.setState({password: e.target.value,})}
             />
             <input
               className="u-full-width cp-reg-1"
               type="password"
               placeholder="Repeat Password"
-              //value={this.state.companyPassword2}
-              onChange={(e) => this.setState({companyPassword2: e.target.value,})}
+              onChange={(e) => this.setState({password2: e.target.value,})}
             />
           </div>
           <div className='company-logo'>
             <div className='add-logo'>
               <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-                <button className='btn-upload'>Upload Your Company Logo</button>
+                <button style={style} className='btn-upload'>Upload Your Company Logo</button>
               </ReactFileReader>
             </div>
             <div className="img-input">
@@ -103,7 +102,6 @@ class CompanyRegistry1 extends Component {
                 }
               </div>
             </div>
-
             <Link to={'/companyregistry2'}>
               <div className='nxt-btn-cp'>
                 <input
