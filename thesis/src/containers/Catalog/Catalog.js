@@ -66,7 +66,7 @@ class Catalog extends Component {
         title={product.title}
         image={product.image}
         description={product.description}
-        value={product.value}
+        value={product.price}
         schedule={product.schedule}
         unpop={this.handlePopUp.bind(this)}
       />

@@ -22,4 +22,60 @@
   background-color: white;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.PopUpImgWrap {
+  width: 70%;
+  height: 50.9%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.PopUpImg {
+  width: 100%;
+}
+
+.QuantitySelector {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.QuantityModifier {
+  font-family: "Raleway" !important;
+  width: 42px !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  text-align: center !important;
+  font-size: 60px !important;
+  font-weight: 100 !important;
+  vertical-align: center !important;
+}
+
+.Minus {
+  padding-bottom: 7px !important;
+  line-height: 1px !important;
+}
+
+.QuantityInput {
+  font-family: "Raleway" !important;
+  font-size: 18px !important;
+  font-weight: 300 !important;
+  text-align: center !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-radius:0 !important;
+}
+
+.QuantityInput::-webkit-outer-spin-button,
+.QuantityInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
