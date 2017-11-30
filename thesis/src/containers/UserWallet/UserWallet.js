@@ -3,11 +3,13 @@ import PieChart from 'react-minimal-pie-chart';
 import './UserWallet.css'
 import Loader from './../../components/Loader/Loader'
 import Close from '../../components/Close/Close';
+import DropDown from '../../components/DropDown/DropDown';
 
 class UserWallet extends Component {
   constructor(props){
     super(props)
     this.state = {
+      loaded: false,
       token:  '',
       accountInfo: null,
       ZenFlowStats: {ZenIn: '-', ZenOut: '-', DZen: '-',},
@@ -15,12 +17,31 @@ class UserWallet extends Component {
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
       transactionPage: [0, 14,],
       transactionsToDisplay: null,
+      userList: [],
+      selected: '',
     }
+  }
+
+  filterUserNamesForSelection(){
+    const userNameArr = []
+    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+      if(userNameArr.indexOf(el.username) === -1) {
+        acc.push({img: el.profilePic, username: el.username, id: el._id,});
+        userNameArr.push(el.username);
+        return acc
+      } else {
+        return acc
+      }
+    }, [])
+    this.setState({userList: res,})
+  }
+
+  handleUserSelection = (value) => {
+    this.setState({selected: value,})
   }
 
   filteringTransactionsForPanel(start, end){
     const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      console.log(i)
       if(i >= start && i < end) {
         acc.push(el);
         return acc
@@ -31,16 +52,18 @@ class UserWallet extends Component {
     this.setState({transactionsToDisplay: res,})
   }
 
-  filteringTransactionsForName(name){
-    const res = this.state.accountInfo.recentTransactions.reduce((acc,el,i) => {
-      if(el.username === name) {
-        acc.push(el)
+  filteringNamesForPanel(name){
+    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+      if(name === this.state.selected) {
+        acc.push(el);
+        return acc
       } else {
         return acc
       }
-    }, []);
+    }, [])
     this.setState({transactionsToDisplay: res,})
   }
+
 
   getInit(){
     fetch('https://private-3a61ed-zendama.apiary-mock.com/user-wallet', {
@@ -57,6 +80,8 @@ class UserWallet extends Component {
         this.companyGaveStats();
         this.companyRecStats();
         this.filteringTransactionsForPanel(0, 14)
+        this.filterUserNamesForSelection()
+        this.setState({loaded: true,})
       })
   }
 
@@ -132,8 +157,8 @@ class UserWallet extends Component {
   }
 
   render() {
-    console.log('this', this.state)
-    if (!!this.state.accountInfo) {
+    console.log('this', this.state.userList)
+    if (this.state.loaded) {
       return (
         <div className="WalletContainer">
           <div className="PannelContainer">
@@ -208,7 +233,13 @@ class UserWallet extends Component {
               </div>
             </div>
             <div className="SheetContainer">
-              <div className="BalenceHeader"> filter functions </div>
+              <div className="BalenceHeader">
+                <DropDown
+                  func={this.handleUserSelection.bind(this)}
+                  placeh="the person you want to give zen to"
+                  arr={this.state.userList}
+                />
+              </div>
               <div className="TransactionItemHeader">
                 <div className="TransactionTitle">User</div>
                 <div className="TransactionTitle">ID</div>

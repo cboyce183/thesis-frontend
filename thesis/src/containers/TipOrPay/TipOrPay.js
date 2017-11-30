@@ -52,6 +52,7 @@ class TipOrPay extends Component {
   //======================= RENDERING
 
   render() {
+    console.log(this.state)
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="Centering">
