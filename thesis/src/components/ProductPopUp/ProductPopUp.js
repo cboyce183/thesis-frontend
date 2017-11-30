@@ -52,18 +52,7 @@ class ProductPopUp extends Component {
         return (
           <tr key={i}>
             <td>{displayWeek[i]}</td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
-            <td className="ScheduleTime Unavailable"></td>
+            {slots.map((slot, index) => (<td key={index} className="ScheduleTime Unavailable"></td>))}
           </tr>
         );
       }
