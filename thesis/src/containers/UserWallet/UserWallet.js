@@ -13,12 +13,14 @@ class UserWallet extends Component {
       token:  '',
       accountInfo: null,
       ZenFlowStats: {ZenIn: '-', ZenOut: '-', DZen: '-',},
-      CompGavePer: {ZenOut: 100, CompGave: 400, UserPercentage: '0%',},
+      CompSpentPer: {ZenOut: 100, CompSpent: 400, UserPercentage: '0%',},
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
       transactionPage: [0, 14,],
       transactionsToDisplay: null,
       userList: [],
       selected: '',
+      pageNumber: 1,
+      totalPages: 1,
     }
   }
 
@@ -55,7 +57,6 @@ class UserWallet extends Component {
 
   filteringNamesForPanel(name){
     const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      console.log(name, "==========",el.userid)
       if(name === el.userid) {
         acc.push(el);
         console.log(acc)
@@ -80,11 +81,12 @@ class UserWallet extends Component {
       .then(res => this.setState({accountInfo: res,}))
       .then(zenStat => this.manageZenFlowStats())
       .then(update => {
-        this.companyGaveStats();
+        this.companySpentStats();
         this.companyRecStats();
         this.filteringTransactionsForPanel(0, 14)
         this.filterUserNamesForSelection()
         this.setState({loaded: true,})
+        this.totalNumberOfPagesNeeded()
       })
   }
 
@@ -94,11 +96,17 @@ class UserWallet extends Component {
   }
 
   incrementThePage(){
-    this.filteringTransactionsForPanel(14,29)
+    if(this.state.pageNumber < this.state.pageTotal) {
+      this.filteringTransactionsForPanel(14,29)
+      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber + 1,}))
+    }
   }
 
   decrementThePage(){
-    this.filteringTransactionsForPanel(0,14)
+    if (this.state.pageNumber > 1){
+      this.filteringTransactionsForPanel(0,14)
+      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber - 1,}))
+    }
   }
 
   pageTotal(col){
@@ -109,12 +117,39 @@ class UserWallet extends Component {
     }
   }
 
+  totalNumberOfPagesNeeded(){
+    const recTranLength = this.state.accountInfo.recentTransactions.length
+    const nPagesRequired = Math.round(recTranLength/14)
+    this.setState({pageTotal: nPagesRequired,})
+  }
+
+  displayingNavigationPage(){
+    if(this.state.pageTotal  > 1) {
+      return (
+        <div className="TransactionNavigation">
+          <div className="SheetBack"
+            onClick={() => {
+              this.decrementThePage()
+            }}
+          > &lt; </div>
+          <div className="SheetNumber"> 1 - {this.state.pageTotal} </div>
+          <div onClick={()=> {
+            this.incrementThePage()
+          }}
+          className="SheetForward"
+          > &gt;
+          </div>
+        </div>
+      )
+    }
+  }
+
 
   transactionList(){
     if(this.state.transactionsToDisplay) {
       return this.state.transactionsToDisplay.map((el, i) => {
         return (
-          <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
+          <div key={el._id} style={{backgroundColor: !!el.spent ? '#ededed' : 'white',}} className="TransactionItem">
             <div className="TransactionCol">
               <div className="TransactionPic">
                 <img className="TranscationPicImg" alt="" src={el.profilePic}/>
@@ -127,7 +162,7 @@ class UserWallet extends Component {
               <div>{el.date}</div>
             </div>
             <div className="TransactionCol">
-              <div>{el.given ? el.given : '-'}</div>
+              <div>{el.spent ? el.spent : '-'}</div>
             </div>
             <div className="TransactionCol">
               <div>{el.received ? el.received : '-'}</div>
@@ -143,19 +178,24 @@ class UserWallet extends Component {
 
   manageZenFlowStats(){
     const res = this.state.accountInfo.recentTransactions.reduce((acc, el) => {
-      return el.given ? ([acc[0] + el.given, acc[1],]) : ([acc[0], el.received + acc[1],])
+      return el.spent ? ([acc[0] + el.spent, acc[1],]) : ([acc[0], el.received + acc[1],])
     }, [0,0,])
     this.setState({ZenFlowStats: {ZenOut: res[0], ZenIn: res[1], DZen: res[1] - res[0],},})
   }
 
-  companyGaveStats(){
+  companySpentStats(){
     const user = this.state.ZenFlowStats.ZenOut;
-    const comp = this.state.accountInfo.compTotalGave;
+    const comp = this.state.accountInfo.compTotalSpent;
     const prec = (Math.round((user/(user+comp)*100)*10)/10).toString() + '%';
-    this.setState({CompGavePer: {
+    this.setState({CompSpentPer: {
       ZenOut: user,
-      CompGave: comp,
+      CompSpent: comp,
       UserPercentage: prec,},})
+  }
+
+  handleUserErase = (user) => {
+    // this.props.func('')
+    this.setState({selected: [],})
   }
 
   companyRecStats(){
@@ -190,24 +230,26 @@ class UserWallet extends Component {
               <div className="SummaryDivider">
                 <div className="pie4you">Overview within comp4any</div>
                 <div className="SummaryDividerPie">
-                  <PieChart className="PercentGiven"
+                  <PieChart className="PercentSpent"
                     startAngle={270}
                     radius={50}
                     lineWidth={20}
                     paddingAngle={3}
                     animationDuration={3000}
-                    // rounded={true}
                     animate={true}
                     data={[
-                      { value: this.state.CompGavePer.ZenOut, key: 1, color: 'black',},
-                      { value: this.state.CompGavePer.CompGave, key: 2, color: '#CDCDCD',},]}
+                      { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'black',},
+                      { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#CDCDCD',},]}
                   >
-                    <div className="PerGivenText">
-                      <div className="GaveTitle">GIVEN</div>
-                      <div className="GavePer">{this.state.CompGavePer.UserPercentage}</div>
+                    <div className="PerSpentText">
+                      <div className="SpentTitle">GIVEN</div>
+                      <div className="SpentPer">{
+                        (Math.round(this.state.accountInfo.yourTotalGiven/
+                          this.state.accountInfo.compTotalGiven*1000)/10)
+                      }%</div>
                     </div>
                   </PieChart>
-                  <PieChart className="PercentGiven"
+                  <PieChart className="PercentSpent"
                     startAngle={0}
                     radius={50}
                     lineWidth={20}
@@ -220,8 +262,8 @@ class UserWallet extends Component {
                       { value: this.state.CompRecPer.CompRec, key: 2, color: '#CDCDCD',},]}
                   >
                     <div className="PerRecivedText">
-                      <div className="GaveTitle">RECEIVED</div>
-                      <div className="GavePer">{this.state.CompRecPer.UserPercentage}</div>
+                      <div className="SpentTitle">RECEIVED</div>
+                      <div className="SpentPer">{this.state.CompRecPer.UserPercentage}</div>
                     </div>
                   </PieChart>
                 </div>
@@ -235,7 +277,7 @@ class UserWallet extends Component {
                   <div className="ZenInNum">{this.state.ZenFlowStats.ZenIn}</div>
                 </div>
                 <div className="TotSumIn" id="UnderLineElement">
-                  <div className="ZenInLab">Zen Given</div>
+                  <div className="ZenInLab">Zen Spent</div>
                   <div className="ZenInNum">{this.state.ZenFlowStats.ZenOut}</div>
                 </div>
                 <div className="TotSumIn">
@@ -254,14 +296,13 @@ class UserWallet extends Component {
                   />
                 </div>
                 <div className="spacedivATM">
-                  {/* <input type="date"/>
-                  <input type="date"/> */}
                 </div>
                 <div className="spacedivATM"></div>
                 <div className="spacedivATM"></div>
                 <div className="spacedivATM">
                   <input onClick={async () => {
                     this.filteringTransactionsForPanel(0,14)
+                    this.handleUserErase()
                   }}
                   className="RemoveFilterButton" type="submit" value="All"
                   />
@@ -272,7 +313,7 @@ class UserWallet extends Component {
                 <div className="TransactionTitle">User</div>
                 <div className="TransactionTitle">ID</div>
                 <div className="TransactionTitle">Date</div>
-                <div className="TransactionTitle">Gave</div>
+                <div className="TransactionTitle">Spent</div>
                 <div className="TransactionTitle">Recieved</div>
                 <div className="TransactionTitle">Amount</div>
               </div>
@@ -283,25 +324,12 @@ class UserWallet extends Component {
                 <div className="TransactionTitle"></div>
                 <div className="TransactionTitle"></div>
                 <div className="TransactionTitle">page totals</div>
-                <div className="TransactionTitle">{this.pageTotal('given')}</div>
+                <div className="TransactionTitle">{this.pageTotal('spent')}</div>
                 <div className="TransactionTitle">{this.pageTotal('received')}</div>
-                <div className="TransactionTitle"> Δ {this.pageTotal('received') - this.pageTotal('given')} </div>
+                <div className="TransactionTitle"> Δ {this.pageTotal('received') - this.pageTotal('spent')} </div>
               </div>
               <div className="TransactionOverflowBox">
-                <div className="TransactionNavigation">
-                  <div className="SheetBack"
-                    onClick={() => {
-                      this.decrementThePage()
-                    }}
-                  > &lt; </div>
-                  <div className="SheetNumber"> 1 - 3 </div>
-                  <div onClick={()=> {
-                    this.incrementThePage()
-                  }}
-                  className="SheetForward"
-                  > &gt;
-                  </div>
-                </div>
+                {this.displayingNavigationPage()}
               </div>
             </div>
           </div>
