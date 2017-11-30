@@ -4,9 +4,24 @@ import '../../App.css';
 import './PopUp.css';
 
 class PopUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      quantity: 1,
+    }
+  }
+
+  handleQuantity (increment, ref) {
+    if (increment) {
+      ref.value++;
+    }
+    else {
+      ref.value--;
+    }
+    this.setState({quantity: ref.value,})
+  }
 
   render() {
-    console.log(this.props);
     return this.props.isService ? (
       <div className="PopUpDisplay">
         <div
@@ -15,7 +30,6 @@ class PopUp extends Component {
         >
         </div>
         <div className="PopUp">
-          <h3>{this.props.title}</h3>
           <div className="PopUpImgWrap">
             <img
               className="PopUpImg"
@@ -23,6 +37,7 @@ class PopUp extends Component {
               src={this.props.image}
             />
           </div>
+          <h3>{this.props.title}</h3>
           <p>{this.props.description}</p>
           <h4>{this.props.value}</h4>
           <input type="submit" />
@@ -36,7 +51,6 @@ class PopUp extends Component {
         >
         </div>
         <div className="PopUp">
-          <h3>{this.props.title}</h3>
           <div className="PopUpImgWrap">
             <img
               className="PopUpImg"
@@ -44,14 +58,30 @@ class PopUp extends Component {
               src={this.props.image}
             />
           </div>
+          <h3>{this.props.title}</h3>
           <p>{this.props.description}</p>
-          <h4>{this.props.value}</h4>
+          <h5>Price: {this.props.value * this.state.quantity}</h5>
           <div className="QuantitySelector">
-            <input className="QuantityModifier Minus" type="button" value="-"/>
-            <input className="QuantityInput" type="number" defaultValue="1"/>
-            <input className="QuantityModifier" type="button" value="+"/>
+            <input
+              onClick={() => this.handleQuantity(false, this.quantity)}
+              className="QuantityModifier Minus"
+              type="button"
+              value="-"
+            />
+            <input
+              className="QuantityInput"
+              type="number"
+              ref={el => this.quantity = el}
+              defaultValue="1"
+            />
+            <input
+              onClick={() => this.handleQuantity(true, this.quantity)}
+              className="QuantityModifier"
+              type="button"
+              value="+"
+            />
           </div>
-          <input type="submit" />
+          <input type="submit" value="buy"/>
         </div>
       </div>
     );

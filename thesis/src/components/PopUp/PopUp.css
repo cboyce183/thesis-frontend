@@ -17,8 +17,8 @@
 
 .PopUp {
   position: absolute;
-  height: 550px;
-  width: 400px;
+  height: 650px;
+  width: 450px;
   background-color: white;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   z-index: 2;
@@ -29,20 +29,39 @@
 }
 
 .PopUpImgWrap {
-  width: 70%;
-  height: 50.9%;
+  width: 85%;
+  height: 51.847%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
 
 .PopUpImg {
-  width: 100%;
+  /* width: 100%;
+  image- */
+}
+
+.PopUp > h3, .PopUp > h5 {
+  margin: 0;
+  padding: 0;
+}
+
+.PopUp > h3 {
+  font-size: 30px;
+}
+
+.PopUp > h5 {
+  font-size: 15px;
+}
+
+.PopUp > p {
+  width: 85%;
 }
 
 .QuantitySelector {
-  width: 70%;
+  width: 85%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,6 +76,7 @@
   font-size: 60px !important;
   font-weight: 100 !important;
   vertical-align: center !important;
+  margin-bottom: 0 !important;
 }
 
 .Minus {
@@ -72,6 +92,7 @@
   border-left: 0 !important;
   border-right: 0 !important;
   border-radius:0 !important;
+  margin-bottom: 0 !important;
 }
 
 .QuantityInput::-webkit-outer-spin-button,
