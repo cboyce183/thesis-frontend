@@ -14,7 +14,32 @@ class UserWallet extends Component {
       CompGavePer: {ZenOut: 100, CompGave: 400, UserPercentage: '0%',},
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
       transactionPage: [0, 14,],
+      transactionsToDisplay: null,
     }
+  }
+
+  filteringTransactionsForPanel(start, end){
+    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+      console.log(i)
+      if(i >= start && i < end) {
+        acc.push(el);
+        return acc
+      } else {
+        return acc
+      }
+    }, [])
+    this.setState({transactionsToDisplay: res,})
+  }
+
+  filteringTransactionsForName(name){
+    const res = this.state.accountInfo.recentTransactions.reduce((acc,el,i) => {
+      if(el.username === name) {
+        acc.push(el)
+      } else {
+        return acc
+      }
+    }, []);
+    this.setState({transactionsToDisplay: res,})
   }
 
   getInit(){
@@ -31,6 +56,7 @@ class UserWallet extends Component {
       .then(update => {
         this.companyGaveStats();
         this.companyRecStats();
+        this.filteringTransactionsForPanel(0, 14)
       })
   }
 
@@ -39,47 +65,41 @@ class UserWallet extends Component {
     this.getInit();
   }
 
-  async incrementThePage(){
-    // for(let i = 0; i < el.length; i++) {await el[0].remove()}
-    this.setState({transactionPage: [14, 29,],})
+  incrementThePage(){
+    this.filteringTransactionsForPanel(14,29)
   }
 
-  async decrementThePage(){
-    var el = document.getElementsByClassName('TransactionItem');
-
-    for(let i = 0; i < el.length+10; i++) {await el[0].remove()}
-    await this.setState({transactionPage: [0, 14,],})
+  decrementThePage(){
+    this.filteringTransactionsForPanel(0,14)
   }
 
   transactionList(){
-    if(this.state.accountInfo) {
-      return this.state.accountInfo.recentTransactions.map((el, i) => {
-        if (i >= this.state.transactionPage[0] & i < this.state.transactionPage[1]) {
-          return (
-            <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
-              <div className="TransactionCol">
-                <div className="TransactionPic">
-                  <img className="TranscationPicImg" alt="" src={el.profilePic}/>
-                </div>
-              </div>
-              <div className="TransactionCol">
-                <div>{el.username}</div>
-              </div>
-              <div className="TransactionCol">
-                <div>{el.date}</div>
-              </div>
-              <div className="TransactionCol">
-                <div>{el.given ? el.given : '-'}</div>
-              </div>
-              <div className="TransactionCol">
-                <div>{el.received ? el.received : '-'}</div>
-              </div>
-              <div className="TransactionCol">
-                <div>{el.amount}</div>
+    if(this.state.transactionsToDisplay) {
+      return this.state.transactionsToDisplay.map((el, i) => {
+        return (
+          <div key={el._id} style={{backgroundColor: !!el.given ? '#ededed' : 'white',}} className="TransactionItem">
+            <div className="TransactionCol">
+              <div className="TransactionPic">
+                <img className="TranscationPicImg" alt="" src={el.profilePic}/>
               </div>
             </div>
-          )
-        }
+            <div className="TransactionCol">
+              <div>{el.username}</div>
+            </div>
+            <div className="TransactionCol">
+              <div>{el.date}</div>
+            </div>
+            <div className="TransactionCol">
+              <div>{el.given ? el.given : '-'}</div>
+            </div>
+            <div className="TransactionCol">
+              <div>{el.received ? el.received : '-'}</div>
+            </div>
+            <div className="TransactionCol">
+              <div>{el.amount}</div>
+            </div>
+          </div>
+        )
       })
     }
   }
@@ -208,7 +228,7 @@ class UserWallet extends Component {
                       this.decrementThePage()
                     }}
                   > &lt; </div>
-                  <div className="SheetNumber"> 1 - 2</div>
+                  <div className="SheetNumber"> 1 - 3 </div>
                   <div onClick={()=> {
                     this.incrementThePage()
                   }}

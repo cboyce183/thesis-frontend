@@ -2,7 +2,6 @@ import * as types from '../actions/types';
 
 const defaultState = {
   saveCompanyInfo: null,
-
   UserInfo: {
     password1: null,
     password2: null,
@@ -10,6 +9,7 @@ const defaultState = {
     email: null,
   },
   UserImage: null,
+  TransactionList: [1,2,],
 }
 
 export default (state = defaultState, action) => {
