@@ -14,6 +14,7 @@ class ProductPopUp extends Component {
     super(props);
     this.state = {
       selectedDates: [],
+      quantity: 1,
       availableSlots: this.props.schedule,
     }
   }
@@ -22,8 +23,10 @@ class ProductPopUp extends Component {
     if (increment) {
       ref.value++;
     }
-    else {
+    else if (!increment && ref.value > 0) {
       ref.value--;
+    } else {
+      ref.value = 0;
     }
     this.setState({quantity: ref.value,})
   }
@@ -44,6 +47,11 @@ class ProductPopUp extends Component {
     else this.setState({quantity: 0,})
   }
 
+  handleResetValue = (event) => {
+    if (event.target.value < 0) event.target.value = 1;
+    this.setState({quantity: 1,})
+  }
+
   //==============================RENDERING
 
   renderSchedule = (schedule, selected) => {
@@ -52,7 +60,7 @@ class ProductPopUp extends Component {
       ? (
         <tr key={i}>
           <td
-            className="ScheduleTime"
+            className="ScheduleTime DayColumn"
           >{displayWeek[i]}</td>
           {slots.map((slot,index) => ~schedule[day].indexOf(slot)
             ? (
@@ -71,7 +79,9 @@ class ProductPopUp extends Component {
         </tr>
       ) : (
         <tr key={i}>
-          <td>{displayWeek[i]}</td>
+          <td
+            className="ScheduleTime DayColumn"
+          >{displayWeek[i]}</td>
           {slots.map((slot, index) => (<td key={index} className="ScheduleTime Unavailable"></td>))}
         </tr>
       )
@@ -92,7 +102,7 @@ class ProductPopUp extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     const schedule = this.props.isService
       ? this.renderSchedule(this.props.schedule, this.state.selectedDates)
       : '';
@@ -100,7 +110,7 @@ class ProductPopUp extends Component {
       <PopUp
         unpop={this.props.unpop}
       >
-        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrap">
+        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrapService">
         </div>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
@@ -114,7 +124,7 @@ class ProductPopUp extends Component {
       <PopUp
         unpop={this.props.unpop}
       >
-        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrapService">
+        <div style={{backgroundImage: `url(${this.props.image})`,}} className="PopUpImgWrap">
         </div>
         <h3>{this.props.title}</h3>
         <p>{this.props.description}</p>
@@ -132,6 +142,7 @@ class ProductPopUp extends Component {
             ref={el => this.quantity = el}
             defaultValue="1"
             onChange={this.handleUserType}
+            onBlur={this.handleResetValue}
           />
           <input
             onClick={() => this.handleQuantity(true, this.quantity)}

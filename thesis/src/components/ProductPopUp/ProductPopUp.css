@@ -9,9 +9,9 @@
   background-size: cover;
 }
 
-.PopUpImgWrap {
+.PopUpImgWrapService {
   width: 85%;
-  height: 51.847%;
+  height: 28%;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -91,6 +91,7 @@
   padding: 0 !important;
   font-weight: 400 !important;
   margin: 0 !important;
+  text-align: center;
 }
 
 .Schedule > tbody > tr > td {
@@ -98,6 +99,11 @@
   height: 26px !important;
   padding: 0 !important;
   margin: 0 !important;
+}
+
+.ScheduleTime.DayColumn {
+  text-align: right !important;
+  padding-right: 5px !important;
 }
 
 .Available {
