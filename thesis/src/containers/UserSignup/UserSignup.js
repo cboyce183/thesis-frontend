@@ -71,11 +71,9 @@ class UserSignup extends Component {
     if(bool) return (<div> Passwords are not equal. </div>)
   }
 
-
   warningEmailInvalid(bool){
     if(bool) return (<div> Email is invalid. </div>)
   }
-
 
   imageProfileOrNot(bool){
     if (!bool) {
@@ -88,9 +86,9 @@ class UserSignup extends Component {
   }
 
   checkEmailValid(email){
-    var re = /\S+@\S+\.\S+/;
+    // regex email expression, which should cover 99% of cases.
+    var re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     const bool = re.test(email)
-    console.log('email bool', bool)
     if (bool) {
       this.setState({emailValid: true,});
     }
@@ -107,16 +105,12 @@ class UserSignup extends Component {
     }
   }
 
-
   croppingPopUp(){
     if(this.state.croppingLoad) {
       return (
-        <div //onClick={() => this.setState({croppingLoad: false,})}
-          className="PopUpBackground"
-        >
+        <div className="PopUpBackground">
           <div className="CroppingBlock">
-            <Crop passImage={this.passImage.bind(this)}
-            />
+            <Crop passImage={this.passImage.bind(this)}/>
           </div>
         </div>
       )
@@ -125,7 +119,6 @@ class UserSignup extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div>
         {this.croppingPopUp()}
