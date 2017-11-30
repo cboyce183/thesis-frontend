@@ -103,3 +103,30 @@
     -webkit-appearance: none;
     margin: 0;
 }
+
+.Schedule {
+}
+
+.Schedule > tr {
+  line-height: 0;
+}
+
+.Schedule > thead > tr > th {
+  width: 26px !important;
+  height: 26px !important;
+  padding: 0 !important;
+  font-weight: 400 !important;
+  margin: 0 !important;
+}
+
+.Schedule > tbody > tr > td {
+  width: 26px !important;
+  height: 26px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.Available {
+  border: 1px solid green !important;
+  background-color: green !important;
+}
