@@ -46,9 +46,7 @@ class CompanyRegistry1 extends Component {
   }
 
   passwordMatch = () => {
-    return this.state.password === this.state.password2
-      ? true
-      : false;
+    return this.state.password === this.state.password2;
   }
 
   onFieldChange = (e) => {
