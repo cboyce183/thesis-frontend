@@ -5,6 +5,22 @@
   background-color: transparent;
 }
 
+.PopUpBackground{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CroppingBlock{
+  width: 666px;
+  height: 444px;
+  background-color: white;
+}
+
 .MainPannel{
   display: flex;
   flex-direction: row;
@@ -33,6 +49,8 @@
   width: 100%;
   background-color: transparent;
 }
+
+
 
 .TitleBox{
   font-size: 35px;
@@ -233,4 +251,3 @@
   width: 20px;
   height: 20px;
 }
-

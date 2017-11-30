@@ -5,7 +5,7 @@ import './UserSignup.css'
 // import { connect, } from 'react-redux'
 import { connect, } from 'react-redux';
 import { UserName, Password1, Password2, Email, ClearEmail, ClearPassword1, ClearPassword2,} from './../../actions/index.js'
-
+import Crop from './../Cropping/Cropping'
 
 class UserSignup extends Component {
   constructor(props){
@@ -15,7 +15,13 @@ class UserSignup extends Component {
       passwordWarning: false,
       emailValid: false,
       emailWarning: false,
+      croppingLoad: false,
+      UserImage: null,
     }
+  }
+
+  passImage(image){
+    this.setState({UserImage: image, croppingLoad: false,})
   }
 
   userSignupRequest(theProps){
@@ -101,111 +107,133 @@ class UserSignup extends Component {
     }
   }
 
-  render() {
-    return (
-      <div className="Container">
-        <div className="MainPannel">
-          <div className="UserInputContainer">
-            <div className="ZenNameBox">
-              <div className="TitleBox">Z e n d a m a</div>
-              <div className="LoginMessage"> sign up for your account</div>
-            </div>
-            <div className="UserInputBox">
-              <div className="LoginDetails">
-                <div className="UserInput">
-                  {/* <label className="UsernameLable" >Username:</label> */}
-                  <input className="EmailText"
-                    type="email"
-                    value={this.props.UserEmail}
-                    placeholder="email@address.com"
-                    onFocus={() => {
-                      this.props.clearEmail()
-                      this.removeEmailIsInvalid()
-                    }}
-                    onChange={(e) =>
-                      this.props.email(e.target.value)
-                    }
-                  />
-                  {/* <label className="PasswordLable" >Password:</label> */}
-                  <input type="text" className="UsernameText"
-                    value={this.props.UserName}
-                    placeholder="Username"
-                    onChange={(e) =>
-                      this.props.username(e.target.value)
-                    }
-                  />
-                  <input type="password" className="PasswordText"
-                    value={this.props.UserPasssword1}
-                    placeholder="Password"
-                    onFocus={() => {
-                      this.props.clearPassword1()
-                      this.removePasswordWarning()
-                    }}
-                    onChange={(e) => {
-                      this.props.password1(e.target.value)
-                    }}
-                  />
-                  <input type="password" className="PasswordText" id="pass2"
-                    value={this.props.UserPasssword2}
-                    placeholder="Password"
-                    onFocus={() => {
-                      this.props.clearPassword2()
-                      this.removePasswordWarning()
-                    }}
-                    onChange={(e) => {
-                      this.props.password2(e.target.value)
-                    }}
-                  />
-                  <NavLink to='/cropping'>
-                    <input type="submit" className="PasswordText" id="pass2"
-                      value="Choose profile image"
-                    />
-                  </NavLink>
-                </div>
-              </div>
-              <div className="LoginSend">
-                <div className="ProfilePicBox">
-                  {this.imageChange(this.props.UserImage)}
-                </div>
-                <div className="SignupBox">
-                  <input onClick={async () => {
-                    await this.arePasswordsTheSame(this.props)
-                    await this.checkEmailValid(this.props.UserEmail)
-                    await this.userSignupRequest(this.props)
-                  }}
-                  className="LoginButton" type="submit" value="Sign up"
-                  />
-                  {this.warningPassWordNotEqual(this.state.passwordWarning)}
-                  {this.warningEmailInvalid(this.state.emailWarning)}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="AboutContainer">
-            <div className="AboutBox">
-            </div>
-            <div className="AboutTitle">
-              <div className="Information">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac
-                metus non nunc scelerisque finibus. Duis auctor non tellus ut dignissim.
-                Integer scelerisque laoreet maximus. Vivamus sodales urna orci,
-                quis iaculis ipsum euismod et. Phasellus ultrices purus sed felis
-                fringilla, vitae elementum massa venenatis.
-              </div>
-              <div className="CompanyLoginRout">
-                <div className="ButtonToCompany"></div>
-                <div className="ButtonToFB"></div>
-                <div className="ButtonToTwit"></div>
-                <div className="ButtonToInsta"></div>
-              </div>
-            </div>
+
+  croppingPopUp(){
+    if(this.state.croppingLoad) {
+      return (
+        <div //onClick={() => this.setState({croppingLoad: false,})}
+          className="PopUpBackground"
+        >
+          <div className="CroppingBlock">
+            <Crop passImage={this.passImage.bind(this)}
+            />
           </div>
         </div>
-        <div className="NewCompanyRout">
-          <div className="CompanyQuestion">Want to create company account with us?</div>
-          <NavLink style={{color: 'black',}} className="CompSignPageRoute" to='/companyregistry1'>
-            <div className="CompSignPageRoute"> Sign up here.</div>
-          </NavLink>
+      )
+    }
+
+  }
+
+  render() {
+    console.log(this.state)
+    return (
+      <div>
+        {this.croppingPopUp()}
+        <div className="Container">
+          <div className="MainPannel">
+            <div className="UserInputContainer">
+              <div className="ZenNameBox">
+                <div className="TitleBox">Z e n d a m a</div>
+                <div className="LoginMessage"> sign up for your account</div>
+              </div>
+              <div className="UserInputBox">
+                <div className="LoginDetails">
+                  <div className="UserInput">
+                    {/* <label className="UsernameLable" >Username:</label> */}
+                    <input className="EmailText"
+                      type="email"
+                      value={this.props.UserEmail}
+                      placeholder="email@address.com"
+                      onFocus={() => {
+                        this.props.clearEmail()
+                        this.removeEmailIsInvalid()
+                      }}
+                      onChange={(e) =>
+                        this.props.email(e.target.value)
+                      }
+                    />
+                    {/* <label className="PasswordLable" >Password:</label> */}
+                    <input type="text" className="UsernameText"
+                      value={this.props.UserName}
+                      placeholder="Username"
+                      onChange={(e) =>
+                        this.props.username(e.target.value)
+                      }
+                    />
+                    <input type="password" className="PasswordText"
+                      value={this.props.UserPasssword1}
+                      placeholder="Password"
+                      onFocus={() => {
+                        this.props.clearPassword1()
+                        this.removePasswordWarning()
+                      }}
+                      onChange={(e) => {
+                        this.props.password1(e.target.value)
+                      }}
+                    />
+                    <input type="password" className="PasswordText" id="pass2"
+                      value={this.props.UserPasssword2}
+                      placeholder="Password"
+                      onFocus={() => {
+                        this.props.clearPassword2()
+                        this.removePasswordWarning()
+                      }}
+                      onChange={(e) => {
+                        this.props.password2(e.target.value)
+                      }}
+                    />
+                    {/* <NavLink to='/cropping'> */}
+                    <input type="submit" className="PasswordText" id="pass2"
+                      value="Choose profile image"
+                      onClick={() => this.setState({croppingLoad: true,})}
+                    />
+                    {/* </NavLink> */}
+                  </div>
+                </div>
+                <div className="LoginSend">
+                  <div className="ProfilePicBox">
+                    {this.imageChange(this.state.UserImage)}
+                  </div>
+                  <div className="SignupBox">
+                    <input onClick={async () => {
+                      await this.arePasswordsTheSame(this.props)
+                      await this.checkEmailValid(this.props.UserEmail)
+                      await this.userSignupRequest(this.props)
+                    }}
+                    className="LoginButton" type="submit" value="Sign up"
+                    />
+                    {this.warningPassWordNotEqual(this.state.passwordWarning)}
+                    {this.warningEmailInvalid(this.state.emailWarning)}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="AboutContainer">
+              <div className="AboutBox">
+              </div>
+              <div className="AboutTitle">
+                <div className="Information">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac
+                  metus non nunc scelerisque finibus. Duis auctor non tellus ut dignissim.
+                  Integer scelerisque laoreet maximus. Vivamus sodales urna orci,
+                  quis iaculis ipsum euismod et. Phasellus ultrices purus sed felis
+                  fringilla, vitae elementum massa venenatis.
+                </div>
+                <div className="CompanyLoginRout">
+                  <div className="ButtonToCompany"></div>
+                  <div className="ButtonToFB"></div>
+                  <div className="ButtonToTwit"></div>
+                  <div className="ButtonToInsta"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="NewCompanyRout">
+            <div className="CompanyQuestion">Want to create company account with us?</div>
+            <NavLink style={{color: 'black',}} className="CompSignPageRoute" to='/companyregistry1'>
+              <div className="CompSignPageRoute"> Sign up here.</div>
+            </NavLink>
+          </div>
         </div>
       </div>
     )

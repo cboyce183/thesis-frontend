@@ -1,22 +1,21 @@
 .ContainerCrop{
-  max-width: 960px;
-  height: 100vh;
-  margin: auto;
+  width: 100%;
+  height: 100%;
   background-color: transparent;
 }
 
 .MainPannelCrop{
   display: flex;
   flex-direction: row;
-  max-width: 960px;
-  height: 61.8vh;
-  margin: auto;
-  padding-top: 122.222px;
+  max-width: 100%;
+  height: 100%;
+  /*padding-top: 122.222px;*/
   background-color: transparent;
 }
 
 .UserInputContainerCrop{
-  flex: .618;
+  height: 100%;
+  width: 100%;
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -57,11 +56,11 @@
 }
 
 .CropperButton{
-  width: 200px;
+  width: 150px;
 }
 
 .DoneBox{
-  width: 200px;
+  width: 150px;
 }
 
 .CroppedImageBox{
@@ -76,20 +75,24 @@
   height: 150px;
   border: solid;
   border-width: thin;
+  background-color: transparent;
 }
 
 .CroppedImage{
   width: 150px;
   height: 150px;
+  background-color: transparent;
 }
 
 .ImageCropperCrop{
   background-size: cover;
   max-width: 150px;
+  background-color: transparent;
 }
 
 .TitlePicture{
   width: 350px;
   text-align: center;
   font-size: 30px;
+  background-color: transparent;
 }
