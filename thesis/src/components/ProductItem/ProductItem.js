@@ -13,12 +13,7 @@ class ProductItem extends Component {
           <p>{this.props.description}</p>
           <h6>Price: {this.props.price}</h6>
         </div>
-        <div className="ProductItemImgWrapper">
-          <img
-            className="ProductItemImg"
-            alt="product"
-            src={this.props.image}
-          />
+        <div style={{backgroundImage: `url(${this.props.image})`,}} className="ProductItemImgWrapper">
         </div>
         <h6>{this.props.title}</h6>
         <input

@@ -25,7 +25,7 @@ class Catalog extends Component {
       popped: false,
     }
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {

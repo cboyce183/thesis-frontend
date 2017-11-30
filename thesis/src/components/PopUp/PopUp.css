@@ -13,6 +13,7 @@
   height: 100%;
   background-color: rgba(0,0,0,0.4);
   z-index: 1;
+  animation: fade 0.35s ease-in-out;
 }
 
 .PopUp {
@@ -26,6 +27,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  animation: fade 0.35s ease-in-out;
+}
+
+@keyframes fade {
+  0% {opacity: 0}
+  100% {opacity: 1}
 }
 
 .PopUpImgWrap {
@@ -36,11 +43,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 30px;
-}
-
-.PopUpImg {
-  /* width: 100%;
-  image- */
+  background-size: cover;
 }
 
 .PopUp > h3, .PopUp > h5 {
