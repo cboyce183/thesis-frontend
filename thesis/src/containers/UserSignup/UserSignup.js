@@ -1,10 +1,6 @@
 import React, { Component, } from 'react';
 import { NavLink, } from 'react-router-dom'
 import './UserSignup.css'
-// import base64 from 'base-64'
-// import { connect, } from 'react-redux'
-import { connect, } from 'react-redux';
-import { UserName, Password1, Password2, Email, ClearEmail, ClearPassword1, ClearPassword2,} from './../../actions/index.js'
 import Crop from './../Cropping/Cropping'
 
 class UserSignup extends Component {
@@ -17,6 +13,10 @@ class UserSignup extends Component {
       emailWarning: false,
       croppingLoad: false,
       UserImage: null,
+      UserEmail: null,
+      UserPassword1: null,
+      UserPassword2: null,
+      UserName: null,
     }
   }
 
@@ -53,7 +53,7 @@ class UserSignup extends Component {
   }
 
   arePasswordsTheSame(theProps){
-    if (theProps.UserPasssword1 === theProps.UserPasssword2) {
+    if (theProps.UserPassword1 === theProps.UserPassword2) {
       this.setState({passwordsValid: true,})
     } else {
       this.setState({passwordWarning: true,})
@@ -139,55 +139,51 @@ class UserSignup extends Component {
               <div className="UserInputBox">
                 <div className="LoginDetails">
                   <div className="UserInput">
-                    {/* <label className="UsernameLable" >Username:</label> */}
                     <input className="EmailText"
                       type="email"
-                      value={this.props.UserEmail}
+                      value={this.state.UserEmail}
                       placeholder="email@address.com"
                       onFocus={() => {
-                        this.props.clearEmail()
+                        this.setState({UserEmail: '',})
                         this.removeEmailIsInvalid()
                       }}
                       onChange={(e) =>
-                        this.props.email(e.target.value)
+                        this.setState({UserEmail: e.target.value,})
                       }
                     />
-                    {/* <label className="PasswordLable" >Password:</label> */}
                     <input type="text" className="UsernameText"
-                      value={this.props.UserName}
+                      value={this.state.UserName}
                       placeholder="Username"
                       onChange={(e) =>
-                        this.props.username(e.target.value)
+                        this.setState({UserUsername: e.target.value,})
                       }
                     />
                     <input type="password" className="PasswordText"
-                      value={this.props.UserPasssword1}
+                      value={this.state.UserPassword1}
                       placeholder="Password"
                       onFocus={() => {
-                        this.props.clearPassword1()
+                        this.setState({UserPassword1: '',})
                         this.removePasswordWarning()
                       }}
                       onChange={(e) => {
-                        this.props.password1(e.target.value)
+                        this.setState({UserPassword1: e.target.value,})
                       }}
                     />
                     <input type="password" className="PasswordText" id="pass2"
-                      value={this.props.UserPasssword2}
+                      value={this.state.UserPassword2}
                       placeholder="Password"
                       onFocus={() => {
-                        this.props.clearPassword2()
+                        this.setState({UserPassword2: '',})
                         this.removePasswordWarning()
                       }}
                       onChange={(e) => {
-                        this.props.password2(e.target.value)
+                        this.setState({UserPassword2: e.target.value,})
                       }}
                     />
-                    {/* <NavLink to='/cropping'> */}
                     <input type="submit" className="PasswordText" id="pass2"
                       value="Choose profile image"
                       onClick={() => this.setState({croppingLoad: true,})}
                     />
-                    {/* </NavLink> */}
                   </div>
                 </div>
                 <div className="LoginSend">
@@ -196,9 +192,9 @@ class UserSignup extends Component {
                   </div>
                   <div className="SignupBox">
                     <input onClick={async () => {
-                      await this.arePasswordsTheSame(this.props)
-                      await this.checkEmailValid(this.props.UserEmail)
-                      await this.userSignupRequest(this.props)
+                      await this.arePasswordsTheSame(this.state)
+                      await this.checkEmailValid(this.state.UserEmail)
+                      await this.userSignupRequest(this.state)
                     }}
                     className="LoginButton" type="submit" value="Sign up"
                     />
@@ -240,24 +236,4 @@ class UserSignup extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => ({
-  UserImage: state.UserImage,
-  UserEmail: state.UserInfo.email,
-  UserPasssword1: state.UserInfo.password1,
-  UserPasssword2: state.UserInfo.password2,
-  UserName: state.UserInfo.username,
-})
-
-const mapDispatchToProps = (dispatch) => ({
-  // saveUserInfoToState: (info) => dispatch(saveUserInfoToState(info)),
-  username: (name) => dispatch(UserName(name)),
-  password1: (pass) => dispatch(Password1(pass)),
-  password2: (pass) => dispatch(Password2(pass)),
-  email: (email) => dispatch(Email(email)),
-  clearEmail: () => dispatch(ClearEmail()),
-  clearPassword1: () => dispatch(ClearPassword1()),
-  clearPassword2: () => dispatch(ClearPassword2()),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserSignup);
+export default (UserSignup);
