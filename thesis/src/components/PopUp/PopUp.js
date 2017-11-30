@@ -40,7 +40,7 @@ class PopUp extends Component {
           </div>
           <h3>{this.props.title}</h3>
           <p>{this.props.description}</p>
-          <h4>{this.props.value}</h4>
+          <h5>Price: {this.props.value}</h5>
           <input type="submit" />
         </div>
       </div>
