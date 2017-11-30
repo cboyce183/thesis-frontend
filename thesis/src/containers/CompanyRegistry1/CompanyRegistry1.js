@@ -34,7 +34,7 @@ class CompanyRegistry1 extends Component {
     if (this.passwordMatch()){
       this.props.saveCompanyInfo(this.state)
     } else {
-      alert('Passwords do not match')
+      alert('Passwords do not match.')
     }
   }
 
@@ -51,6 +51,11 @@ class CompanyRegistry1 extends Component {
       : false;
   }
 
+  onFieldChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
 
   render() {
     return (
@@ -63,28 +68,34 @@ class CompanyRegistry1 extends Component {
             <input
               className="u-full-width cp-reg-1"
               type="email"
-              placeholder="Company-Email@mailbox.com"
-              id="exampleEmailInput"
-              onChange={(e) => this.setState({email: e.target.value,})}
+              name="email"
+              placeholder="Company@email.com"
+              value={this.state.email}
+              onChange={this.onFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
               type="text"
-              placeholder="Company Username"
-              id="exampleEmailInput"
-              onChange={(e) => this.setState({name: e.target.value,})}
+              name="name"
+              placeholder="Company Name"
+              value={this.state.name}
+              onChange={this.onFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
               type="password"
-              placeholder="Password"
-              onChange={(e) => this.setState({password: e.target.value,})}
+              name="password"
+              placeholder="password"
+              value={this.state.password}
+              onChange={this.onFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
               type="password"
-              placeholder="Repeat Password"
-              onChange={(e) => this.setState({password2: e.target.value,})}
+              name="password2"
+              placeholder="repeat password"
+              value={this.state.password2}
+              onChange={this.onFieldChange}
             />
           </div>
           <div className='company-logo'>
@@ -95,11 +106,8 @@ class CompanyRegistry1 extends Component {
             </div>
             <div className="img-input">
               <div className="company-logo-img">
-                {
-                  this.state.displayImg && (
-                    <img className="img-company-reg-logo" src={this.state.imagePath} alt='company Logo'/>
-                  )
-                }
+                <img className="img-company-reg-logo" name="logo" onChange={this.onFieldChange} src={this.state.imagePath} alt='company Logo'/>
+
               </div>
             </div>
             <Link to={'/companyregistry2'}>
