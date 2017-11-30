@@ -11,34 +11,34 @@ class CompanyRegistry2 extends Component {
     super(props);
     this.state = {
       coinName:'',
-      wklyAllow:'',
+      weeklyAllow:'',
     }
   }
 
   getCompanySignIn = (data) => {
     const {
-      companyEmail,
-      companyUserName,
-      companyPassword,
-      companyLogo,
+      email,
+      name,
+      password,
+      logo,
     } = this.props.saveInfo
-    fetch ('https://private-b133c5-zendama.apiary-mock.com/company', {
+    fetch ('http://192.168.0.37:4200/add-company', {
       method: 'POST',
       headers:{
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        companyEmail,
-        companyUserName,
-        companyPassword,
-        companyLogo,
+        email,
+        name,
+        password,
+        logo,
         coinName: this.state.coinName,
-        wklyAllow: this.state.wklyAllow,
+        weeklyAllow: this.state.weeklyAllow,
       }),
     })
       .then(response => {
-        if (response.status === 200) window.location = '/panel';
+        if (response.status === 201) window.location = '/panel';
       });
   }
 
@@ -63,8 +63,8 @@ class CompanyRegistry2 extends Component {
                 className="u-full-width coin-info"
                 type="number"
                 placeholder="Weekly Allowance $"
-                value={this.state.wklyAllow}
-                onChange={(e) => this.setState({wklyAllow: e.target.value,})}
+                value={this.state.weeklyAllow}
+                onChange={(e) => this.setState({weeklyAllow: e.target.value,})}
               />
               <input
                 className="button-primary nxt-btn"
