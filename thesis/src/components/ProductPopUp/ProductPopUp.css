@@ -9,6 +9,17 @@
   background-size: cover;
 }
 
+.PopUpImgWrapService {
+  width: 85%;
+  height: 28%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  background-size: cover;
+}
+
 .PopUp > h3, .PopUp > h5 {
   margin: 0;
   padding: 0;
@@ -67,9 +78,6 @@
     margin: 0;
 }
 
-.Schedule {
-}
-
 .Schedule > tr {
   line-height: 0;
 }
@@ -80,6 +88,7 @@
   padding: 0 !important;
   font-weight: 400 !important;
   margin: 0 !important;
+  text-align: center;
 }
 
 .Schedule > tbody > tr > td {
@@ -89,12 +98,41 @@
   margin: 0 !important;
 }
 
+.ScheduleTime.DayColumn {
+  text-align: right !important;
+  padding-right: 5px !important;
+}
+
 .Available {
   border: 1px solid green !important;
   background-color: rgba(0, 128, 0, 0.400) !important;
+  cursor: pointer;
 }
 
 .Unavailable {
   border: 1px solid grey !important;
   background: rgba(128, 128, 128, 0.150) !important;
 }
+
+
+.SelectedDate {
+  border: 1px solid blue !important;
+  background-color: rgba(0, 0, 255, 0.400) !important;
+  cursor: pointer;
+}
+
+.PopUpBuyButton {
+  width: 64% !important;
+  transition: all 0.20s ease-in !important;
+}
+
+.PopUpBuyButton.Error {
+  border: 1px solid rgb(180, 0, 0) !important;
+  background-color: rgba(180, 0, 0, 0.35) !important;
+}
+
+.PopUpBuyButton.Success {
+  border: 1px solid green !important;
+  background-color: rgba(0, 128, 0, 0.400) !important;
+}
+

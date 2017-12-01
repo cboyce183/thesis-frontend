@@ -4,6 +4,10 @@
   position: relative;
 }
 
+.ProductCategory > h5{
+  text-align: left !important;
+}
+
 .ProductList {
   margin: auto;
   height: 80%;

@@ -15,32 +15,26 @@ class CompanyRegistry2 extends Component {
     }
   }
 
-  getCompanySignIn = (data) => {
-    const {
-      email,
-      name,
-      password,
-      logo,
-    } = this.props.saveInfo
-    fetch ('http://192.168.0.37:4200/add-company', {
-      method: 'POST',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        name,
-        password,
-        logo,
-        coinName: this.state.coinName,
-        weeklyAllow: this.state.weeklyAllow,
-      }),
-    })
-      .then(response => {
-        if (response.status === 201) window.location = '/panel';
-      });
-  }
+  // getCompanySignIn = async (data) => {
+  //   await fetch ('http://192.168.0.37:4200/add-company', {
+  //     method: 'POST',
+  //     headers:{
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       email,
+  //       name,
+  //       password,
+  //       logo,
+  //       coinName: this.state.coinName,
+  //       weeklyAllow: this.state.weeklyAllow,
+  //     }),
+  //   })
+  //     .then(response => {
+  //       if (response.status === 201) window.location = '/panel';
+  //     });
+  // }
 
   render() {
     return (

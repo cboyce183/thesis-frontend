@@ -15,6 +15,7 @@ class DropDown extends Component {
 
   componentDidMount() {
     this.setState({list: this.props.arr,})
+    console.log("dropdown", this.props.arr)
   }
 
   handleFilters(event) {
@@ -57,6 +58,7 @@ class DropDown extends Component {
 
   renderSelectedUser(user) {
     return user.map((el,i) => {
+
       return (
         <div className="SelectedUserItem" key={i}>
           <img

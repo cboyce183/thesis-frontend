@@ -1,5 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
-
+html {
+  overflow: hidden;
+}
 .coin-info-container {
   text-align: center;
   font-family: 'Raleway', sans-serif;
@@ -29,10 +31,17 @@
   margin-top: 100px;
 }
 
+@keyframes popin {
+  0% { top: 100vh; position: relative; }
+  100% { top: 0; position: relative; }
+}
 .coin-name-allow-cont{
-  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   text-align: center;
-  padding-left: 85px;
+  animation: popin 0.5s linear, fadin 1s linear;
 }
 
 

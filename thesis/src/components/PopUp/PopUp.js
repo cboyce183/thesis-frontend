@@ -6,6 +6,12 @@ import './PopUp.css';
 class PopUp extends Component {
 
   /*
+
+  this component is used as such:
+  <PopUp>
+    //your content goes here
+  </PopUp>
+
   parent component must have following functions:
   handlePopUp = (product) => {
     this.setState({
@@ -18,7 +24,8 @@ class PopUp extends Component {
     return (
       <PopUp
         unpop={this.handlePopUp.bind(this)}
-      />
+      >
+      </PopUp>
     )
   }
 
@@ -32,15 +39,20 @@ class PopUp extends Component {
   then just include a {popped} within your jsx and the popup will display.
   */
 
+  handleUnPop = () => {
+    this.props.unpop({})
+  }
+
   render() {
     return (
       <div className="PopUpDisplay">
         <div
-          onClick={() => this.props.unpop({})}
+          onClick={this.handleUnPop}
           className="PopUpOverlay"
         >
         </div>
         <div className="PopUp">
+          {this.props.children}
         </div>
       </div>
     );

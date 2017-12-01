@@ -1,10 +1,66 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
 
-/* .MaxWidth {
-  padding: 200px;
+@keyframes fadin {
+  0% { opacity: 0 }
+  100% {opacity: 1 }
+}
+
+.logo-upload-container {
+  background-color: #ddd;
+  border-radius: 25px;
+  padding: 15px;
+  border-style: dashed;
+  border-color: #bbb;
+  opacity: 0.5;
+  width:150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+}
+
+.logo-upload-container:hover {
+  opacity: 0.8;
+}
+
+.logo-upload-text {
+  display: flex;
+  flex-flow: nowrap row;
+  color: grey;  
+}
+
+.nxt-btn-cp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  border: solid 1px;
+  padding: 0 15px 0 15px;
+  background-color: white;
+  color: black;
+  transition: all 0.2s ease;
+  margin-top: 2.5vh;
+}
+.nxt-btn-cp:hover {
+  background-color: rgba(88, 51, 161, 0.685);
+  color: white;
+}
+
+.MaxWidth {
+  animation: fadin 0.5s ease;  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
   text-align: center;
   font-family: 'Raleway', sans-serif;
-} */
+}
 
 .company-reg-container{
   display: flex;
@@ -12,21 +68,22 @@
   text-align: center;
 }
 .company-siginup-info{
-  height: 450px;
-  width: 350px;
   padding: 40px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);      
 }
 
 .cp-reg-1 {
   font-size: 15px;
   font-family: 'Raleway', sans-serif;
   padding-left: 100px;
-
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);    
 }
 
 .company-logo{
-  height: 450px;
-  width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .company-logo p{
@@ -35,12 +92,6 @@
   text-align: center;
 }
 
-.nxt-btn-cp{
-  position: relative;
-  left:6px;
-  margin-top: 0px;
-  padding-right: 120px;
-}
 
 .powered-by {
   font-size: x-small;
@@ -57,6 +108,8 @@
 }
 
 .img-input{
+  display: flex;
+  align-items: center;
   padding: 10px;
 }
 
@@ -66,7 +119,6 @@
 
 .cmpy-reg-1-label{
   text-align: center;
-  margin-top: 200px;
 }
 
 .company-logo-img{
