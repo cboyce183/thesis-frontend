@@ -20,9 +20,6 @@ class UserSignup extends Component {
     }
   }
 
-  passImage(image){
-    this.setState({UserImage: image, croppingLoad: false,})
-  }
 
   userSignupRequest(theProps){
     if (this.state.passwordsValid && this.state.emailValid && theProps.UserPassword2 !== '') {
@@ -105,12 +102,27 @@ class UserSignup extends Component {
     }
   }
 
+  passImage = (image) => {
+    this.setState({UserImage: image, croppingLoad: false,})
+  }
+
+  removeEmail = () => {
+    this.setState({UserEmail: '',})
+    this.removeEmailIsInvalid()
+  }
+
+  removePassword = (itemVal) => {
+    this.setState({[itemVal]: '',})
+    this.removePasswordWarning()
+  }
+
+
   croppingPopUp(){
     if(this.state.croppingLoad) {
       return (
         <div className="PopUpBackground">
           <div className="CroppingBlock">
-            <Crop passImage={this.passImage.bind(this)}/>
+            <Crop passImage={this.passImage}/>
           </div>
         </div>
       )
@@ -136,10 +148,7 @@ class UserSignup extends Component {
                       type="email"
                       value={this.state.UserEmail}
                       placeholder="email@address.com"
-                      onFocus={() => {
-                        this.setState({UserEmail: '',})
-                        this.removeEmailIsInvalid()
-                      }}
+                      onFocus={this.removeEmail}
                       onChange={(e) =>
                         this.setState({UserEmail: e.target.value,})
                       }
@@ -154,10 +163,8 @@ class UserSignup extends Component {
                     <input type="password" className="PasswordText"
                       value={this.state.UserPassword1}
                       placeholder="Password"
-                      onFocus={() => {
-                        this.setState({UserPassword1: '',})
-                        this.removePasswordWarning()
-                      }}
+                      name="UserPassword1"
+                      onFocus={(e) => this.removePassword(e.target.name)}
                       onChange={(e) => {
                         this.setState({UserPassword1: e.target.value,})
                       }}
@@ -165,10 +172,8 @@ class UserSignup extends Component {
                     <input type="password" className="PasswordText" id="pass2"
                       value={this.state.UserPassword2}
                       placeholder="Password"
-                      onFocus={() => {
-                        this.setState({UserPassword2: '',})
-                        this.removePasswordWarning()
-                      }}
+                      name="UserPassword2"
+                      onFocus={(e) => this.removePassword(e.target.name)}
                       onChange={(e) => {
                         this.setState({UserPassword2: e.target.value,})
                       }}
