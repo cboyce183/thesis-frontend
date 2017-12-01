@@ -56,6 +56,7 @@ class TipOrPay extends Component {
 
   handleResetZen = (event) => {
     if (event.target.value > this.state.available) event.target.value = this.state.available;
+    else if (event.target.value < 0) event.target.value = 0;
     this.setState({max: false,})
   }
 

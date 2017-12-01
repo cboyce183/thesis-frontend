@@ -13,6 +13,7 @@ class ProductList extends Component {
         <ProductItem
           pop={this.props.pop}
           key={i}
+          id={el.id}
           isService={el.isService}
           schedule={el.schedule}
           description={el.description}
