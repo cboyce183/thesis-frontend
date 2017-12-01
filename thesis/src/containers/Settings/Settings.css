@@ -1,20 +1,21 @@
 .settings-container{
+  width: 100%;
+  height: 100%;
+  margin: auto;
   display: flex;
-  height: 85vh;
-  padding-top: 60px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .settings-img{
     flex-grow: 1;
     margin-top: 100px;
     padding: 50px;
-    padding-left: 100px;
 }
 
 .settings-info{
   flex-grow: 1;
   margin-top: 142px;
-  padding: 125px;
   padding-left: 0px;
 }
 
@@ -43,9 +44,8 @@
 
 .settings-btn{
   border-width:2px;
-  border-style: solid;!
-  border-color: #040223; 
-
+  border-style: solid;
+  
 }
 .settings-upload-pic{
   height: 150px;
@@ -55,4 +55,13 @@
 .close-btn{
   margin-right: 68px;
   margin-top: 20px;
+}
+
+.btn-upload{
+  margin-top: 53px;
+  margin-bottom: 20px;
+}
+
+.admin-header{
+  display:flex;
 }
