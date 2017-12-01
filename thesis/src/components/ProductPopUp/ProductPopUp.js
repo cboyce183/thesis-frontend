@@ -106,10 +106,10 @@ class ProductPopUp extends Component {
   }
 
   handleProductDelete = () => {
-    if (this.props.isAdmin) {
+    if (this.props.isAdmin && window.confirm('Are you sure you want to delete this product?')) {
       fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
         method: 'DELETE',
-      }).then(res => console.log(res));
+      }).then(res => window.location.reload());
     } else {
       console.log('stop trying to break my platform!')
     }
