@@ -130,6 +130,7 @@ class ProductPopUp extends Component {
           {slots.map((slot,index) => ~schedule[day].indexOf(slot)
             ? (
               <td
+                style={this.props.isAdmin ? {cursor:'default',} : null}
                 key={index}
                 onClick={() => this.handleDateSelect({[day] : slot,})}
                 className={`ScheduleTime ${selected.reduce((acc, el) => Object.keys(el)[0] === day && slot === el[day] ? true : acc, false) ? 'SelectedDate' : 'Available'}`}

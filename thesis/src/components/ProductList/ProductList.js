@@ -30,7 +30,13 @@ class ProductList extends Component {
     const products = this.renderProductList(this.props.arr);
     return (
       <div className="ProductCategory">
-        <h5>{this.props.title}</h5>
+        <div className="ProductCategoryTitle">
+          <h5>{this.props.title}</h5>
+          <input
+            type="submit"
+            value="+"
+          />
+        </div>
         <div className="ProductList">
           {products}
         </div>
