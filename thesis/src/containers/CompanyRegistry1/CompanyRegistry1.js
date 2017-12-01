@@ -6,6 +6,8 @@ import { connect, } from 'react-redux';
 import { saveCompanyInfo, } from '../../actions';
 import ReactFileReader from 'react-file-reader';
 
+const validator = require("email-validator");
+
 
 const style = {
   borderWidth:'1.5px',
@@ -25,14 +27,20 @@ class CompanyRegistry1 extends Component {
       password: '',
       password2: '',
       logo:'',
-      displayImg:false,
       imagePath:'',
     }
+
+    this.valid = false;
   }
 
   handleCompanySignIn = () => {
     if (this.passwordMatch()){
-      this.props.saveCompanyInfo(this.state)
+      if (this.emailValidator()) {
+        if (this.state.imagePath) {
+          this.props.saveCompanyInfo(this.state);
+          this.valid = true;  
+        } else alert('Please upload a logo.');
+      } else alert('Invalid email.');
     } else {
       alert('Passwords do not match.')
     }
@@ -40,14 +48,16 @@ class CompanyRegistry1 extends Component {
 
   handleFiles = files => {
     this.setState({
-      imagePath:files.base64,
-      displayImg: true,
+      imagePath: files.base64,
+      uploaded: true,
     })
   }
 
-  passwordMatch = () => {
-    return this.state.password === this.state.password2;
-  }
+  emailValidator = () => validator.validate(this.state.email);
+
+  passwordMatch = () => this.state.password === this.state.password2;
+
+  rerouter = () => this.valid ? '/companyregistry2' : '/companyregistry1';  
 
   onFieldChange = (e) => {
     this.setState({
@@ -55,11 +65,25 @@ class CompanyRegistry1 extends Component {
     });
   }
 
+  logoChanger = () => {
+    if (this.state.uploaded) return (
+      <img className="img-company-reg-logo" name="logo" onChange={this.onFieldChange} src={this.state.imagePath} alt='company Logo'/>      
+    )
+    return (
+      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+        <div className="logo-upload-container">
+          <p className="logo-upload-text">upload your logo</p>
+        </div>
+      </ReactFileReader>
+    )
+  }
+
+
   render() {
     return (
       <div className="MaxWidth">
         <div className='cmpy-reg-1-label'>
-          <h3>Company Registry</h3>
+          <h3>Sign up for Zendama</h3>
         </div>
         <div className='company-reg-container'>
           <div className='company-siginup-info'>
@@ -67,7 +91,7 @@ class CompanyRegistry1 extends Component {
               className="u-full-width cp-reg-1"
               type="email"
               name="email"
-              placeholder="Company@email.com"
+              placeholder="Business email"
               value={this.state.email}
               onChange={this.onFieldChange}
             />
@@ -75,7 +99,7 @@ class CompanyRegistry1 extends Component {
               className="u-full-width cp-reg-1"
               type="text"
               name="name"
-              placeholder="Company Name"
+              placeholder="Company name"
               value={this.state.name}
               onChange={this.onFieldChange}
             />
@@ -83,7 +107,7 @@ class CompanyRegistry1 extends Component {
               className="u-full-width cp-reg-1"
               type="password"
               name="password"
-              placeholder="password"
+              placeholder="Password"
               value={this.state.password}
               onChange={this.onFieldChange}
             />
@@ -91,31 +115,18 @@ class CompanyRegistry1 extends Component {
               className="u-full-width cp-reg-1"
               type="password"
               name="password2"
-              placeholder="repeat password"
+              placeholder="Confirm password"
               value={this.state.password2}
               onChange={this.onFieldChange}
             />
           </div>
           <div className='company-logo'>
             <div className='add-logo'>
-              <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-                <button style={style} className='btn-upload'>Upload Your Company Logo</button>
-              </ReactFileReader>
+              {this.logoChanger()}
             </div>
-            <div className="img-input">
-              <div className="company-logo-img">
-                <img className="img-company-reg-logo" name="logo" onChange={this.onFieldChange} src={this.state.imagePath} alt='company Logo'/>
-
-              </div>
-            </div>
-            <Link to={'/companyregistry2'}>
-              <div className='nxt-btn-cp'>
-                <input
-                  className="button-primary"
-                  type="submit"
-                  value="Next"
-                  onClick={this.handleCompanySignIn}
-                />
+            <Link to={this.rerouter()} style={{textDecoration:'none'}}>
+              <div className='nxt-btn-cp' onClick={this.handleCompanySignIn}>
+                next
               </div>
             </Link>
           </div>
