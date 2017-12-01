@@ -21,7 +21,7 @@ class Panel extends Component {
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -102,7 +102,7 @@ class Panel extends Component {
               isSummary={true}
               title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
               zen={this.state.isAdmin ? '64219' : this.state.received}
-              link="/ledger"
+              link={this.state.isAdmin ? '/ledger' : '/user-wallet'}
             />
             <PanelSquare
               alter="cart"
