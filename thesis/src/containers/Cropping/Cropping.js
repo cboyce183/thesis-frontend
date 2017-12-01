@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 import { Cropper, } from 'react-image-cropper';
-import { connect, } from 'react-redux';
-import { doneCroppedImage, } from './../../actions'
+// import { connect, } from 'react-redux';
+// import { doneCroppedImage, } from './../../actions'
 import { NavLink, } from 'react-router-dom';
 import './Cropping.css'
 
@@ -16,6 +16,7 @@ class Cropping extends Component {
       base64Image: null,
     }
   }
+
 
   handleImageLoaded(state){
     this.setState({
@@ -46,42 +47,39 @@ class Cropping extends Component {
   }
 
 
+
   render() {
-    console.log("the props", this.props)
+    // console.log("the props", this.props)
     return (
-      <div>
-        <div className="ContainerCrop">
-          <div className="MainPannelCrop">
-            <div className="UserInputContainerCrop">
-              {this.imageChange(this.state.profilePicLoad)}
+      <div className="ContainerCrop">
+        <div className="MainPannelCrop">
+          <div className="UserInputContainerCrop">
+            {this.imageChange(this.state.profilePicLoad)}
+          </div>
+          <div className="AboutContainerCrop">
+            <div className="ImageLoad">
+              <div className="TitlePicture">Add your profile picture</div>
+              <input className="FileLoad" type="file"
+                onChange={(e) => {
+                  this.setState({
+                    profilePic: e.target.files,
+                    profilePicLoad: true,})
+                }}
+              />
             </div>
-            <div className="AboutContainerCrop">
-              <div className="ImageLoad">
-                <div className="TitlePicture">Add your profile picture</div>
-                <input className="FileLoad" type="file"
-                  onChange={(e) => {
-                    this.setState({
-                      profilePic: e.target.files,
-                      profilePicLoad: true,})
-                  }}
+            <div className="CropButton">
+              <input className="CropperButton" type="submit" value="Crop image"
+                onClick={() => this.handleClick('image')}
+              />
+              <NavLink to='/usersignup'>
+                <input className="DoneBox" type="submit" value="done"
+                  onClick={() => this.props.passImage(this.state.image)}
                 />
-              </div>
-              <div className="CropButton">
-                <input className="CropperButton" type="submit" value="Crop image"
-                  onClick={() => this.handleClick('image')}
-                />
-                <NavLink to='/usersignup'>
-                  <input className="DoneBox" type="submit" value="done"
-                    onClick={() => {
-                      this.props.addCroppedImage(this.state.image)
-                    }}
-                  />
-                </NavLink>
-              </div>
-              <div className="CroppedImageBox">
-                <div className="CroppedImageContainer">
-                  <img className="CroppedImage" src={this.state.image} alt=""/>
-                </div>
+              </NavLink>
+            </div>
+            <div className="CroppedImageBox">
+              <div className="CroppedImageContainer">
+                <img className="CroppedImage" src={this.state.image} alt=""/>
               </div>
             </div>
           </div>
@@ -91,12 +89,13 @@ class Cropping extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  userInfo: state.UserInfo,
-})
+// const mapStateToProps = (state) => ({
+//   userInfo: state.UserInfo,
+// })
+//
+// const mapDispatchToProps = (dispatch) => ({
+//   addCroppedImage: (Image) => dispatch(doneCroppedImage(Image)),
+// })
 
-const mapDispatchToProps = (dispatch) => ({
-  addCroppedImage: (Image) => dispatch(doneCroppedImage(Image)),
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cropping);
+// export default connect(mapStateToProps, mapDispatchToProps)(Cropping);
+export default (Cropping);
