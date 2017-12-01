@@ -15,7 +15,7 @@ class ProductPopUp extends Component {
     this.state = {
       selectedDates: [],
       quantity: 1,
-      buttonText: 'buy',
+      buttonText: this.props.isAdmin ? 'delete' : 'buy',
       buttonClass: '',
       availableSlots: this.props.schedule,
     }
@@ -33,10 +33,10 @@ class ProductPopUp extends Component {
     this.setState({quantity: ref.value,})
   }
 
-  handleDateSelect(object) {
+  handleDateSelect = (object) => {
     const day = Object.keys(object)[0];
     const repeat = this.state.selectedDates.reduce((acc, el) => Object.keys(el)[0] === day && el[day] === object[day] ? true : acc, false);
-    if (!this.state.availableSlots[day] || !~this.state.availableSlots[day].indexOf(object[day])) console.log('invalid day')
+    if (!this.state.availableSlots[day] || !~this.state.availableSlots[day].indexOf(object[day])) console.log('how the heck did you do dat? please leave an issue on github if you\'re reading this')
     else if (repeat) {
       const newSelectedDates = this.state.selectedDates.filter(el => Object.keys(el)[0] !== day || el[day] !== object[day])
       this.setState({selectedDates: newSelectedDates,});
@@ -73,13 +73,13 @@ class ProductPopUp extends Component {
       setTimeout(() => this.handleButtonStates(), 3000);
       return;
     default:
-      this.setState({buttonText: 'buy', buttonClass: '',});
+      if (this.props.isAdmin) this.setState({buttonText: 'delete', buttonClass: '',});
+      else this.setState({buttonText: 'buy', buttonClass: '',});
       return;
     }
   }
 
   handleProductBuy = () => {
-    console.log('here!!!!!');
     const finalPrice = this.props.isService
       ? this.props.value * this.state.selectedDates.length
       : this.props.value * this.state.quantity;
@@ -102,6 +102,16 @@ class ProductPopUp extends Component {
           price: finalPrice,
         }),
       }).then(res => this.handleButtonStates(3));
+    }
+  }
+
+  handleProductDelete = () => {
+    if (this.props.isAdmin) {
+      fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
+        method: 'DELETE',
+      }).then(res => console.log(res));
+    } else {
+      console.log('stop trying to break my platform!')
     }
   }
 
@@ -135,7 +145,12 @@ class ProductPopUp extends Component {
           <td
             className="ScheduleTime DayColumn"
           >{displayWeek[i]}</td>
-          {slots.map((slot, index) => (<td key={index} className="ScheduleTime Unavailable"></td>))}
+          {slots.map((slot, index) => (
+            <td
+              key={index}
+              className="ScheduleTime Unavailable"
+            ></td>
+          ))}
         </tr>
       )
     );
@@ -157,7 +172,7 @@ class ProductPopUp extends Component {
   render() {
     const schedule = this.props.isService
       ? this.renderSchedule(this.props.schedule, this.state.selectedDates)
-      : '';
+      : null;
     return this.props.isService ? (
       <PopUp
         unpop={this.props.unpop}
@@ -174,7 +189,7 @@ class ProductPopUp extends Component {
           type="submit"
           className={`PopUpBuyButton ${this.state.buttonClass}`}
           value={this.state.buttonText}
-          onClick={this.handleProductBuy}
+          onClick={this.props.isAdmin ? this.handleProductDelete : this.handleProductBuy}
         />
       </PopUp>
     ) : (
@@ -212,7 +227,7 @@ class ProductPopUp extends Component {
           type="submit"
           className={`PopUpBuyButton ${this.state.buttonClass}`}
           value={this.state.buttonText}
-          onClick={this.handleProductBuy}
+          onClick={this.props.isAdmin ? this.handleProductDelete : this.handleProductBuy}
         />
       </PopUp>
     );

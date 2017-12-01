@@ -11,6 +11,7 @@ class ProductList extends Component {
     return arr.map((el,i) =>{
       return (
         <ProductItem
+          isAdmin={this.props.isAdmin}
           pop={this.props.pop}
           key={i}
           id={el.id}

@@ -109,7 +109,7 @@ class DropDown extends Component {
                 {dropdown}
               </div>
             ) : (
-              ''
+              null
             )
           }
         </div>

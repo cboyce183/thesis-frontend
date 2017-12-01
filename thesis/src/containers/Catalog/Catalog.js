@@ -62,6 +62,7 @@ class Catalog extends Component {
   renderPopUp(product) {
     return (
       <ProductPopUp
+        isAdmin={this.state.isAdmin}
         available={this.state.received}
         id={product.id}
         isService={product.isService}
@@ -78,7 +79,7 @@ class Catalog extends Component {
   render() {
     const popped = this.state.popped
       ? this.renderPopUp(this.state.selectedProduct)
-      : '';
+      : null;
     const availableZen = !this.state.isAdmin
       ? (<h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>)
       : null;
@@ -93,11 +94,13 @@ class Catalog extends Component {
           {availableZen}
           <div className="ProductCatalog">
             <ProductList
+              isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
               title="Products"
               arr={this.handleFilterProducts(this.state.catalog, false)}
             />
             <ProductList
+              isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
               title="Services"
               arr={this.handleFilterProducts(this.state.catalog, true)}
