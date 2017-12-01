@@ -19,7 +19,7 @@
 }
 
 .SubWidth {
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: auto;
   display: flex;
@@ -37,8 +37,8 @@
 }
 
 .Shadow {
-  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.5);
-  height: 900px;
+  /* box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.5); */
+  height: 100%;
   width: 100%;
 }
 
@@ -69,6 +69,7 @@
 }
 
 .TipRemaining {
+  height: 100%;
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -87,4 +88,26 @@
   font-weight: 100;
   font-size: 200px;
   line-height: 200px;
+}
+
+.Highlight:focus {
+  border: 1px solid rgb(180, 3, 3) !important;
+}
+
+.Standard {
+  transition: all 0.20s ease-in !important;
+}
+
+.Success {
+  background-color: rgba(0, 128, 0, 0.250) !important;
+  border: 1px solid green !important;
+}
+
+.Failure {
+  border: 1px solid rgb(180, 0, 0) !important;
+  background-color: rgba(180, 0, 0, 0.35) !important;
+}
+
+.TipInfinite {
+  height: 55%;
 }

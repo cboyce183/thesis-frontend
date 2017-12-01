@@ -32,7 +32,7 @@ class DropDown extends Component {
 
   handleUserErase = (user) => {
     this.props.func('')
-    this.setState({selected: [],users: !this.state.users,})
+    this.setState({selected: [],users: !this.state.users,list:this.props.arr,})
   }
 
   //=====================================RENDERING
