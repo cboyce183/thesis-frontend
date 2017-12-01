@@ -31,7 +31,7 @@ class Catalog extends Component {
         if (res.isAdmin) {
           this.setState({isAdmin:res.isAdmin,});
         } else {
-          this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+          this.setState({remaining: res.availableCurrency, received: res.receivedCurrency,});
         }
       })
       .catch(e => console.error(e));
@@ -62,6 +62,7 @@ class Catalog extends Component {
   renderPopUp(product) {
     return (
       <ProductPopUp
+        available={this.state.received}
         id={product.id}
         isService={product.isService}
         title={product.title}
@@ -86,6 +87,7 @@ class Catalog extends Component {
             <h1>Catalog</h1>
             <Close link="/panel"/>
           </div>
+          <h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>
           <div className="ProductCatalog">
             <ProductList
               pop={this.handlePopUp.bind(this)}

@@ -68,6 +68,10 @@ class ProductPopUp extends Component {
       this.setState({buttonText: 'success!', buttonClass: 'Success',});
       setTimeout(() => this.handleButtonStates(), 3000);
       return;
+    case 4:
+      this.setState({buttonText: 'not enough zen', buttonClass: 'Error',});
+      setTimeout(() => this.handleButtonStates(), 3000);
+      return;
     default:
       this.setState({buttonText: 'buy', buttonClass: '',});
       return;
@@ -75,7 +79,6 @@ class ProductPopUp extends Component {
   }
 
   handleProductBuy = () => {
-    //handle price is less than max available money
     console.log('here!!!!!');
     const finalPrice = this.props.isService
       ? this.props.value * this.state.selectedDates.length
@@ -88,6 +91,7 @@ class ProductPopUp extends Component {
       : this.props.quantity;
     if (finalPrice === 0 && this.props.isService) this.handleButtonStates(2);
     else if (finalPrice === 0 && !this.props.isService) this.handleButtonStates(1);
+    else if (finalPrice > this.props.available) this.handleButtonStates(4);
     else {
       fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
         method: 'POST',

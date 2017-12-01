@@ -16,3 +16,9 @@
   justify-content: space-between;
   align-items: center;
 }
+
+.AvailableZenCatalog {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0;
+}
