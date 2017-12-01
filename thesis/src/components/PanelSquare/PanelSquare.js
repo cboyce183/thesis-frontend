@@ -7,8 +7,8 @@ import { Link, } from 'react-router-dom';
 
 class PanelSquare extends Component {
 
-  renderCurrency(zen) {
-    return zen && zen.match(/.+\.svg/gi)
+  renderCurrency = (zen) => {
+    return zen && zen.toString().match(/.+\.svg/gi)
       ? (
         <div className="Currency">
           <img
