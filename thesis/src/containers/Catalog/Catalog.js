@@ -25,7 +25,7 @@ class Catalog extends Component {
       popped: false,
     }
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -79,6 +79,9 @@ class Catalog extends Component {
     const popped = this.state.popped
       ? this.renderPopUp(this.state.selectedProduct)
       : '';
+    const availableZen = !this.state.isAdmin
+      ? (<h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>)
+      : null;
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="CatalogPosition">
@@ -87,7 +90,7 @@ class Catalog extends Component {
             <h1>Catalog</h1>
             <Close link="/panel"/>
           </div>
-          <h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>
+          {availableZen}
           <div className="ProductCatalog">
             <ProductList
               pop={this.handlePopUp.bind(this)}

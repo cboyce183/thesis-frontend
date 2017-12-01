@@ -21,7 +21,7 @@ class Panel extends Component {
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
