@@ -114,6 +114,7 @@
   background: rgba(128, 128, 128, 0.150) !important;
 }
 
+
 .SelectedDate {
   border: 1px solid blue !important;
   background-color: rgba(0, 0, 255, 0.400) !important;
@@ -134,3 +135,4 @@
   border: 1px solid green !important;
   background-color: rgba(0, 128, 0, 0.400) !important;
 }
+
