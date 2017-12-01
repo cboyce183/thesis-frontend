@@ -1,0 +1,42 @@
+.AX-Admin-TransactionItem{
+  display: flex;
+  flex-direction: column;
+  background-color: #DFDFDF;
+}
+
+.AX-date{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.AX-TransData{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+
+.AX-Admin-TransactionCol{
+  font-size: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 200px;
+}
+
+#AX-digits{
+  justify-content: flex-end;
+  width: 100px;
+}
+
+.AX-Admin-TransactionUserName{
+  margin-left: 10px;
+}
+
+.AX-Admin-TransactionSummary{
+  border-top: solid;
+  border-bottom: solid;
+  border-width: thin;
+}

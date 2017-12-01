@@ -1,0 +1,463 @@
+.Admin-WalletContainer{
+  max-width: 960px;
+  height: 100vh;
+  margin: auto;
+  background-color: white;
+  display: flex;
+}
+
+.Admin-profileInfo{
+  width: 160px;
+  height: 200px;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.Admin-PannelContainer{
+ flex: .75;
+ background-color: green;
+ display: flex;
+ flex-direction: column;
+}
+
+.Admin-PannelProfileInfo{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Admin-UserProfilePicture{
+  height: 150px;
+  width: 150px;
+  border: solid;
+  border-width: thin;
+  border-color: grey;
+}
+
+.Admin-UserProfileImage{
+  height: 150px;
+  width: 150px;
+  background-color: white;
+}
+.Admin-UserProfileName{
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.Admin-PannelToolBar{
+  flex: 3;
+  background-color: white;
+}
+
+.Admin-DashContainer{
+ flex: 3;
+ background-color: transparent;
+ display: flex;
+ flex-direction: column;
+}
+
+.Admin-HeaderContainer{
+  flex: 1;
+  background-color: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Admin-TitleOfPage{
+  font-size: 30px;
+}
+
+.Admin-SummaryContainer{
+  flex: 2.5;
+  background-color: lightgreen;
+  display: flex;
+}
+
+.Admin-SummaryDividerPie{
+  background-color: white;
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+}
+
+.Admin-SummaryDivider{
+  flex: 1.5;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Admin-pie4you{
+  text-align: center;
+  font-size: 25px;
+}
+
+.Admin-PercentSpent{
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.Admin-PerSpentText{
+  position: absolute;
+  font-size: 30px;
+}
+
+.Admin-SpentTitle{
+  font-size: 10px;
+  text-align: center;
+}
+.Admin-SpentPer{
+  font-size: 30px;
+}
+
+.Admin-PerRecivedText{
+  position: absolute;
+  font-size: 30px;
+}
+
+.Admin-SummaryDividerTot{
+  flex: 0.666;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-left: solid;
+  border-width: thin;
+}
+
+.Admin-TotSumTitle{
+  flex: 0.5;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+}
+
+.Admin-ZenFlowLabel{
+  font-size: 15px;
+}
+
+.Admin-TotSumIn{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.Admin-ZenInLab{
+  font-size: 20px;
+}
+
+.Admin-ZenInNum{
+    font-size: 25px;
+}
+
+#UnderLineElement{
+  border-bottom: solid;
+  border-width: thin;
+}
+
+#ZenLargeDelta{
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.Admin-TotSumOut{
+  flex: 1;
+  background-color: green;
+}
+.Admin-TotSumDelta{
+  flex: 1;
+  background-color: white;
+}
+
+.Admin-SheetContainer{
+  flex: 9;
+  background-color: white;
+  margin-top: 10px;
+  border-top: solid;
+  border-width: thin;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.Admin-BalenceContainer{
+ flex: 9;
+ background-color: white;
+ margin: 20px;
+ border-bottom: solid;
+ border-width: thin;
+ display: flex;
+ flex-direction: column;
+}
+
+
+.Admin-TransactionCol{
+  flex: 1;
+  background-color:  transparent;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: grey;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Admin-TransactionPic{
+  width: 30px;
+  height: 30px;
+  border: solid;
+  border-width: thin;
+  border-color: grey;
+}
+
+.Admin-TranscationPicImg{
+  width: 30px;
+  height: 30px;
+}
+
+.Admin-TransactionTitle{
+  flex: 1;
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  border-bottom: solid;
+  border-width: thin;
+}
+
+
+.Admin-popUp{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Admin-PopUpBlock{
+  width: 400px;
+  height: 300px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-width: thin;
+}
+
+.Admin-FilterPopupHeader{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Admin-FilterTitle{
+  font-size: 30px;
+  border-bottom: solid;
+  border-width: thin;
+}
+.Admin-FilterPopupBody{
+  flex: 3;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.Admin-FilterLabs{
+  font-size: 20px;
+  margin-right: 30px;
+  width: 75px;
+}
+
+.Admin-FilterVal{
+  display: flex;
+  justify-content: center;
+}
+
+.Admin-InputFilter{
+  font-size: 20px;
+  width: 100px;
+}
+
+.Admin-FilterPopupTail{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Admin-PopupFilter{
+  width: 150px;
+}
+
+
+.Admin-BalenceHeader{
+ flex: 1;
+ background-color: white;
+ display: flex;
+ align-items: center;
+ border-bottom: solid;
+ border-width: thin;
+}
+
+.Admin-spacedivATM{
+  flex: 1;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+
+.Admin-RemoveFilterButton{
+  flex: 1;
+}
+
+.AX-Admin-TransactionItem{
+  display: flex;
+  flex-direction: column;
+  background-color: #DFDFDF;
+}
+
+.AX-date{
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.AX-TransData{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+
+.AX-Admin-TransactionCol{
+  font-size: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 0px;
+}
+
+#AX-digits{
+  justify-content: flex-end;
+  width: 100px;
+}
+
+.AX-Admin-TransactionUserName{
+  margin-right: 30px;
+}
+
+
+.Admin-Dashboard{
+  height: 200px;
+  width: 200px;
+  background-color: purple;
+  display: flex;
+  flex-wrap: wrap;
+    flex-direction: row;
+
+}
+
+.Transaction-Type{
+  background-color: blue;
+  display: flex;
+  flex-basis: calc(50%);
+}
+
+.Admin-DropDownDiv{
+  flex: 2;
+  background-color: white;
+  padding-left: 5px;
+  padding-right: 2.5px;
+}
+
+.Admin-TransactionItemHeader{
+  flex: 0.5;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2px;
+}
+.Admin-TransactionItem{
+  flex: 0.5;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2px;
+}
+
+.Admin-TransactionContainer{
+  flex: 8;
+  background-color: yellow;
+  overflow: scroll;
+}
+.Admin-TransactionSummaryStats{
+  flex: 0.5;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  border-top: solid;
+  border-width: thin;
+}
+.Admin-TransactionOverflowBox{
+  flex: 0.75;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.Admin-TransactionNavigation{
+  background-color: white;
+  display: flex;
+  width: 100px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Admin-SheetBack{
+  font-size: 30px;
+  background-color: white;
+}
+.Admin-SheetNumber{
+  font-size: 20px;
+  background-color: white;
+}
+.Admin-SheetForward{
+  font-size: 30px;
+  background-color: white;
+}
