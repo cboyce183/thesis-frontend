@@ -1,0 +1,60 @@
+.ProductItem {
+  margin: 5px;
+  flex-shrink: 0;
+  height: 90%;
+  width: 20%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ProductDescription {
+  opacity: 0;
+  height: 84%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  transition: all 0.20s ease-in-out;
+}
+
+.ProductDescription:hover {
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+.ProductDescription > p {
+  margin: 6%;
+  margin-bottom: 3.5%;
+}
+
+.ProductDescription > h6 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 1%;
+  font-weight: 500;
+}
+
+.ProductItemImgWrapper {
+  /* margin: auto; */
+  margin-top: 5%;
+  height: 67.38%;
+  width: 90%;
+  overflow: hidden;
+  background-size: cover;
+}
+
+.ProductItem > h6 {
+  margin-bottom: 0;
+}
+
+.BuyButton {
+  width: 100%;
+  margin-bottom: 0 !important;
+  border-radius: 0 !important;
+}

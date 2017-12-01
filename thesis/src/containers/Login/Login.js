@@ -20,7 +20,7 @@ class Login extends Component {
   loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('http://192.168.0.37:3000/login', {
+    fetch('http://192.168.0.37:4200/login', {
       headers: headers,
     }).then(response => {
       if (response.status === 401) {

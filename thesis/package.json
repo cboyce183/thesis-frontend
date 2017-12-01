@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "base-64": "^0.1.0",
+    "email-validator": "^1.1.1",
     "react": "^16.1.1",
     "react-captcha": "^2.0.9",
     "react-dom": "^16.1.1",
