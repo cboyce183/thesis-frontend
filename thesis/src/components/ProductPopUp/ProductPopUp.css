@@ -140,3 +140,11 @@
   border: 1px solid green !important;
   background-color: rgba(0, 128, 0, 0.400) !important;
 }
+
+.Grey {
+  background-color: rgba(128, 128, 128, 0.150) !important;
+}
+
+.Grey:hover {
+  cursor: default;
+}

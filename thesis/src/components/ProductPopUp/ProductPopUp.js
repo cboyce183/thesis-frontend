@@ -36,12 +36,14 @@ class ProductPopUp extends Component {
   handleDateSelect = (object) => {
     const day = Object.keys(object)[0];
     const repeat = this.state.selectedDates.reduce((acc, el) => Object.keys(el)[0] === day && el[day] === object[day] ? true : acc, false);
-    if (!this.state.availableSlots[day] || !~this.state.availableSlots[day].indexOf(object[day])) console.log('how the heck did you do dat? please leave an issue on github if you\'re reading this')
-    else if (repeat) {
-      const newSelectedDates = this.state.selectedDates.filter(el => Object.keys(el)[0] !== day || el[day] !== object[day])
-      this.setState({selectedDates: newSelectedDates,});
+    if (!this.props.isAdmin) {
+      if (!this.state.availableSlots[day] || !~this.state.availableSlots[day].indexOf(object[day])) console.log('how the heck did you do dat? please leave an issue on github if you\'re reading this')
+      else if (repeat) {
+        const newSelectedDates = this.state.selectedDates.filter(el => Object.keys(el)[0] !== day || el[day] !== object[day])
+        this.setState({selectedDates: newSelectedDates,});
+      }
+      else this.setState({selectedDates: [...this.state.selectedDates, object,],})
     }
-    else this.setState({selectedDates: [...this.state.selectedDates, object,],})
   }
 
   handleUserType = (event) => {
@@ -203,22 +205,23 @@ class ProductPopUp extends Component {
         <h5>Price: {this.props.value * this.state.quantity}</h5>
         <div className="QuantitySelector">
           <input
-            onClick={() => this.handleQuantity(false, this.quantity)}
-            className="QuantityModifier Minus"
+            onClick={this.props.isAdmin ? null : () => this.handleQuantity(false, this.quantity)}
+            className={`QuantityModifier Minus ${this.props.isAdmin ? 'Grey' : ''}`}
             type="button"
             value="-"
           />
           <input
-            className="QuantityInput"
+            className={`QuantityInput ${this.props.isAdmin ? 'Grey' : ''}`}
             type="number"
             ref={el => this.quantity = el}
             defaultValue="1"
+            disabled={this.props.isAdmin ? true : false}
             onChange={this.handleUserType}
             onBlur={this.handleResetValue}
           />
           <input
-            onClick={() => this.handleQuantity(true, this.quantity)}
-            className="QuantityModifier"
+            onClick={this.props.isAdmin ? null : () => this.handleQuantity(true, this.quantity)}
+            className={`QuantityModifier ${this.props.isAdmin ? 'Grey' : ''}`}
             type="button"
             value="+"
           />
