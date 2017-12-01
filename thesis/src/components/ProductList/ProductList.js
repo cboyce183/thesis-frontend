@@ -32,10 +32,10 @@ class ProductList extends Component {
       <div className="ProductCategory">
         <div className="ProductCategoryTitle">
           <h5>{this.props.title}</h5>
-          <input
+          {this.props.isAdmin ? <input
             type="submit"
             value="+"
-          />
+          /> : null}
         </div>
         <div className="ProductList">
           {products}
