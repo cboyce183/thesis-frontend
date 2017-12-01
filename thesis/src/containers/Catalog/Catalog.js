@@ -62,6 +62,7 @@ class Catalog extends Component {
   renderPopUp(product) {
     return (
       <ProductPopUp
+        id={product.id}
         isService={product.isService}
         title={product.title}
         image={product.image}

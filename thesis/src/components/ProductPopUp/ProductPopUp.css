@@ -78,9 +78,6 @@
     margin: 0;
 }
 
-.Schedule {
-}
-
 .Schedule > tr {
   line-height: 0;
 }
@@ -109,6 +106,7 @@
 .Available {
   border: 1px solid green !important;
   background-color: rgba(0, 128, 0, 0.400) !important;
+  cursor: pointer;
 }
 
 .Unavailable {
@@ -119,4 +117,20 @@
 .SelectedDate {
   border: 1px solid blue !important;
   background-color: rgba(0, 0, 255, 0.400) !important;
+  cursor: pointer;
+}
+
+.PopUpBuyButton {
+  width: 64% !important;
+  transition: all 0.20s ease-in !important;
+}
+
+.PopUpBuyButton.Error {
+  border: 1px solid rgb(180, 0, 0) !important;
+  background-color: rgba(180, 0, 0, 0.35) !important;
+}
+
+.PopUpBuyButton.Success {
+  border: 1px solid green !important;
+  background-color: rgba(0, 128, 0, 0.400) !important;
 }

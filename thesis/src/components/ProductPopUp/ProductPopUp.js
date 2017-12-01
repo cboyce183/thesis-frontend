@@ -15,6 +15,8 @@ class ProductPopUp extends Component {
     this.state = {
       selectedDates: [],
       quantity: 1,
+      buttonText: 'buy',
+      buttonClass: '',
       availableSlots: this.props.schedule,
     }
   }
@@ -50,6 +52,53 @@ class ProductPopUp extends Component {
   handleResetValue = (event) => {
     if (event.target.value < 0) event.target.value = 1;
     this.setState({quantity: 1,})
+  }
+
+  handleButtonStates = (state) => {
+    switch (state) {
+    case 1:
+      this.setState({buttonText: 'please select an amount', buttonClass: 'Error',});
+      setTimeout(() => this.handleButtonStates(), 3000);
+      return;
+    case 2:
+      this.setState({buttonText: 'please select a date', buttonClass: 'Error',});
+      setTimeout(() => this.handleButtonStates(), 3000);
+      return;
+    case 3:
+      this.setState({buttonText: 'success!', buttonClass: 'Success',});
+      setTimeout(() => this.handleButtonStates(), 3000);
+      return;
+    default:
+      this.setState({buttonText: 'buy', buttonClass: '',});
+      return;
+    }
+  }
+
+  handleProductBuy = () => {
+    //handle price is less than max available money
+    console.log('here!!!!!');
+    const finalPrice = this.props.isService
+      ? this.props.value * this.state.selectedDates.length
+      : this.props.value * this.state.quantity;
+    const finalDates = this.props.isService
+      ? this.props.selectedDates
+      : null;
+    const finalQuantity = this.props.isService
+      ? null
+      : this.props.quantity;
+    if (finalPrice === 0 && this.props.isService) this.handleButtonStates(2);
+    else if (finalPrice === 0 && !this.props.isService) this.handleButtonStates(1);
+    else {
+      fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          isService: this.props.isService,
+          quantity: finalQuantity,
+          dates: finalDates,
+          price: finalPrice,
+        }),
+      }).then(res => this.handleButtonStates(3));
+    }
   }
 
   //==============================RENDERING
@@ -102,7 +151,6 @@ class ProductPopUp extends Component {
   }
 
   render() {
-    console.log(this.props);
     const schedule = this.props.isService
       ? this.renderSchedule(this.props.schedule, this.state.selectedDates)
       : '';
@@ -118,7 +166,12 @@ class ProductPopUp extends Component {
           ? this.props.value * this.state.selectedDates.length
           : this.props.value}</h5>
         {schedule}
-        <input type="submit" />
+        <input
+          type="submit"
+          className={`PopUpBuyButton ${this.state.buttonClass}`}
+          value={this.state.buttonText}
+          onClick={this.handleProductBuy}
+        />
       </PopUp>
     ) : (
       <PopUp
@@ -151,7 +204,12 @@ class ProductPopUp extends Component {
             value="+"
           />
         </div>
-        <input type="submit" value="buy"/>
+        <input
+          type="submit"
+          className={`PopUpBuyButton ${this.state.buttonClass}`}
+          value={this.state.buttonText}
+          onClick={this.handleProductBuy}
+        />
       </PopUp>
     );
   }
