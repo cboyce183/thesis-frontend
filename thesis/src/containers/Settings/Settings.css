@@ -1,6 +1,4 @@
 .settings-container{
-  justify-content: space-between;
-  align-items: center;
   margin-right: 300px;
 }
 
@@ -71,11 +69,20 @@
  text-align: center;
 }
 
+
+
 .settings-label{
-  margin-bottom: 1rem;
+  margin-bottom: 0px;
 }
 
 .settings-info-admin{
-  flex-grow: 1;
+  width:50vh;
+}
 
+.mng-users-btn{
+  display: flex;
+}
+
+.admin-input-labels{
+  text-align: left;
 }
