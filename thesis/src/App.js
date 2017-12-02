@@ -12,8 +12,10 @@ import Catalog from './containers/Catalog/Catalog';
 import Settings from './containers/Settings/Settings';
 import Logout from './containers/Logout/Logout';
 import UserSignup from './containers/UserSignup/UserSignup';
-import Cropping from './containers/Cropping/Cropping'
-import UserWallet from './containers/UserWallet/UserWallet'
+import Cropping from './containers/Cropping/Cropping';
+import UserWallet from './containers/UserWallet/UserWallet';
+import AboutCorporate from './containers/Landing/AboutCorporate.js';
+import AboutPersonal from './containers/Landing/AboutPersonal.js';
 
 class App extends Component {
   render() {
@@ -32,6 +34,8 @@ class App extends Component {
         <Route path="/usersignup" component={UserSignup}/>
         <Route path="/cropping" component={Cropping}/>
         <Route path="/user-wallet" component={UserWallet}/>
+        <Route path="/about_corporate" component={AboutCorporate}/>
+        <Route path="/about_personal" component={AboutPersonal}/>
       </div>
     );
   }

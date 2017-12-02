@@ -3,7 +3,7 @@ import './Landing.css';
 import { Route, } from 'react-router-dom';
 
 
-class Landing extends Component {
+class AboutPersonal extends Component {
   loginRedir = () => window.location = '/login';
   corporateRedir = () => window.location = '/about_corporate';
   personalRedir = () => window.location = '/about_personal';  
@@ -17,16 +17,9 @@ class Landing extends Component {
                 <h1 className="landing-title-text" style={{color:'#aaa'}}>zendama</h1>
             </div>
             <div className='landing-desc'>
-                <p className='landing-desc-txt'>Help your colleagues, receive rewards, share the love!</p>
-                <p className='landing-desc-alt-txt spacer'>spacer</p>
-                <p className='landing-desc-alt-txt'>Zendama is a catalyst for harmony and friendship in the buisness place.</p>
-                <p className='landing-desc-alt-txt'>Get rewards from your place of work for being a good employee and helping out.</p>
-                <p className='landing-desc-alt-txt'>Reward those who help you with something that will really make a difference.</p>
-                <p className='landing-desc-alt-txt spacer'>spacer</p>
-                <p className='landing-desc-alt-txt'>Sounds good right?</p>
-                <p className='landing-desc-alt-txt spacer'>spacer</p>
-                <p className='landing-desc-alt-txt spacer'>spacer</p>
-                <div className='landing-button'style={{transform:'scale(1.2)'}} onClick={this.loginRedir}>Login</div>
+                
+
+
                 <p className='landing-desc-alt-txt spacer'>spacer</p>
             </div>
             <div className='landing-business'>
@@ -49,4 +42,4 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+export default AboutPersonal;
