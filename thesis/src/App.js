@@ -3,8 +3,7 @@ import './App.css';
 import { Route, } from 'react-router-dom';
 import Landing from './containers/Landing/Landing';
 import Panel from './containers/Panel/Panel';
-import CompanyRegistry from './containers/CompanyRegistry1/CompanyRegistry1';
-import CompanyRegistry2 from './containers/CompanyRegistry2/CompanyRegistry2';
+import CompanyRegistry from './containers/CompanyRegistry/CompanyRegistry';
 import Login from './containers/Login/Login';
 import TipOrPay from './containers/TipOrPay/TipOrPay';
 import Ledger from './containers/Ledger/Ledger';
@@ -24,7 +23,6 @@ class App extends Component {
         <Route exact path="/" component={Landing}/>
         <Route path="/panel" component={Panel}/>
         <Route path="/companyregistry" component={CompanyRegistry}/>
-        <Route path="/companyregistry2" component={CompanyRegistry2}/>
         <Route path="/login" component={Login}/>
         <Route path="/tiporpay" component={TipOrPay}/>
         <Route path="/ledger" component={Ledger}/>
