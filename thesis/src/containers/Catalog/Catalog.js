@@ -8,6 +8,7 @@ import Close from '../../components/Close/Close';
 
 import ProductList from '../../components/ProductList/ProductList';
 import ProductPopUp from '../../components/ProductPopUp/ProductPopUp';
+import ProductAdd from '../../components/ProductAdd/ProductAdd';
 
 import '../../App.css';
 import './Catalog.css';
@@ -23,6 +24,8 @@ class Catalog extends Component {
       catalog: [],
       selectedProduct: {},
       popped: false,
+      add: false,
+      serviceAdd: null,
     }
     // if (window.localStorage.getItem('token')) {
     fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
@@ -57,7 +60,23 @@ class Catalog extends Component {
     })
   }
 
+  handleProductAdd = (category) => {
+    this.setState({
+      serviceAdd: category,
+      add: !this.state.add,
+    })
+  }
+
   //======================= RENDERING
+
+  renderProductAdd() {
+    return (
+      <ProductAdd
+        service={this.state.serviceAdd}
+        unpop={this.handleProductAdd.bind(this)}
+      />
+    )
+  }
 
   renderPopUp(product) {
     return (
@@ -80,6 +99,9 @@ class Catalog extends Component {
     const popped = this.state.popped
       ? this.renderPopUp(this.state.selectedProduct)
       : null;
+    const add = this.state.add
+      ? this.renderProductAdd()
+      : null;
     const availableZen = !this.state.isAdmin
       ? (<h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>)
       : null;
@@ -87,6 +109,7 @@ class Catalog extends Component {
       <div className="MaxWidth">
         <div className="CatalogPosition">
           {popped}
+          {add}
           <div className="TipHeader">
             <h1>Catalog</h1>
             <Close link="/panel"/>
@@ -96,12 +119,14 @@ class Catalog extends Component {
             <ProductList
               isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
+              add={this.handleProductAdd.bind(this)}
               title="Products"
               arr={this.handleFilterProducts(this.state.catalog, false)}
             />
             <ProductList
               isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
+              add={this.handleProductAdd.bind(this)}
               title="Services"
               arr={this.handleFilterProducts(this.state.catalog, true)}
             />
