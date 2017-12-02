@@ -3,7 +3,17 @@
   height: 100%;
   background-color: transparent;
 }
-
+.cropping-placeholder {
+  border: dashed;
+  border-color: grey;
+  border-radius: 2.5vw;
+  opacity: 0.5;
+  height:100%;
+  margin: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .MainPannelCrop{
   display: flex;
   flex-direction: row;

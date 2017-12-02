@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,200,300,300i,400,400i,500,600,700&subset=latin-ext');
 
+/* -----------Templates: use them------------- */
+.purple {
+  background-color: rgba(88, 51, 161, 0.685);
+  color: white;
+}
+.white {
+  color: rgba(88, 51, 161, 0.685);
+  border-color: rgba(88, 51, 161, 0.685);  
+  background-color: white;
+}
+
 .MaxWidth {
   max-width: 960px;
   margin: auto;
