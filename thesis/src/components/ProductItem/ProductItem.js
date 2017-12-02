@@ -19,7 +19,7 @@ class ProductItem extends Component {
         <input
           className="BuyButton"
           type="submit"
-          value="buy"
+          value={this.props.isAdmin ? 'edit' : 'buy'}
           onClick={() => this.props.pop(product)}
         />
       </div>

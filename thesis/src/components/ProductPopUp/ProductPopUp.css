@@ -116,8 +116,14 @@
 
 
 .SelectedDate {
-  border: 1px solid blue !important;
-  background-color: rgba(0, 0, 255, 0.400) !important;
+  border: 1px solid rgb(88, 51, 161) !important;
+  background-color: rgba(88, 51, 161, 0.400) !important;
+  cursor: pointer;
+}
+
+.DeletedDate {
+  border: 1px solid rgb(180, 0, 0) !important;
+  background-color: rgba(180, 0, 0, 0.35) !important;
   cursor: pointer;
 }
 
@@ -136,3 +142,10 @@
   background-color: rgba(0, 128, 0, 0.400) !important;
 }
 
+.Grey {
+  background-color: rgba(128, 128, 128, 0.150) !important;
+}
+
+.Grey:hover {
+  cursor: default;
+}
