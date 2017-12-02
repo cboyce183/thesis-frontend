@@ -383,17 +383,43 @@
 .Admin-Dashboard{
   height: 200px;
   width: 200px;
-  background-color: purple;
+  background-color: transparent;
   display: flex;
   flex-wrap: wrap;
-    flex-direction: row;
+  flex-direction: row;
 
 }
 
+.FloatBox:hover{
+  box-shadow: 2px 2px 2px #DFDFDF;
+}
+
+.FloatBoxPic{
+  width: 75px;
+  height: 75px;
+  background-size: contain;
+}
+
+.FloatBox{
+  width: 96px;
+  height: 96px;
+  background-color: white;
+  border: solid;
+  border-width: thin;
+  border-color: #DFDFDF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .Transaction-Type{
-  background-color: blue;
+  background-color: transparent;
   display: flex;
   flex-basis: calc(50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .Admin-DropDownDiv{

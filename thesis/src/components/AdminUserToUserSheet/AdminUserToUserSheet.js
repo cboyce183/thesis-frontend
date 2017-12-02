@@ -7,31 +7,31 @@ class AdminUserToUserSheet extends Component {
   UserToUserTransactionList(data){
     return data.map((el, i) => {
       return (
-        <div key={el._id} className="Admin-TransactionItem">
-          <div className="Admin-TransactionCol">
-            <div className="Admin-TransactionPic">
-              <img className="Admin-TranscationPicImg" alt="" src={el.from.profilePic}/>
+        <div key={el._id} className="AX-Admin-TransactionItem">
+          <div className="AX-date">{el.date}</div>
+          <div className="AX-TransData">
+            <div className="AX-Admin-TransactionCol">
+              <div>{el.reason}</div>
             </div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div>{el.from.username}</div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div>{'--------'}</div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div>{el.amount}</div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div>{'--------'}</div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div>{el.to.username}</div>
-          </div>
-          <div className="Admin-TransactionCol">
-            <div className="Admin-TransactionPic">
-              <img className="Admin-TranscationPicImg" alt="" src={el.to.profilePic}/>
+            <div className="AX-Admin-TransactionCol">
+              <div className="Admin-TransactionPic">
+                <img className="Admin-TranscationPicImg" alt="" src={el.from.profilePic}/>
+              </div>
+              <div className="AX-Admin-TransactionUserName">{el.from.username}</div>
             </div>
+            <div className="AX-Admin-TransactionCol" id="AX-digits">
+              <div>→</div>
+            </div>
+            <div className="AX-Admin-TransactionCol">
+              <div className="Admin-TransactionPic">
+                <img className="Admin-TranscationPicImg" alt="" src={el.to.profilePic}/>
+              </div>
+              <div className="AX-Admin-TransactionUserName">{el.to.username}</div>
+            </div>
+            <div className="AX-Admin-TransactionCol" id="AX-digits">
+              <div>{el.amount}</div>
+            </div>
+            <div></div>
           </div>
         </div>
       )
@@ -42,11 +42,6 @@ class AdminUserToUserSheet extends Component {
       <div className="Admin-SheetContainer">
         <div className="Admin-BalenceHeader">
           <div className="Admin-DropDownDiv">
-            {/* <DropDown
-              func={this.handleUserSelection.bind(this)}
-              placeh="Filter giver"
-              arr={this.state.userList}
-            /> */}
           </div>
           <div className="Admin-spacedivATM">
             <input onClick={ () => {
@@ -78,14 +73,31 @@ class AdminUserToUserSheet extends Component {
             /> */}
           </div>
         </div>
-        <div className="Admin-TransactionItemHeader">
-          <div className="Admin-TransactionTitle">Date</div>
-          <div className="Admin-TransactionTitle">Reason</div>
-          <div className="Admin-TransactionTitle">">>>>>"</div>
-          <div className="Admin-TransactionTitle">ID</div>
-          <div className="Admin-TransactionTitle">">>>>>"</div>
-          <div className="Admin-TransactionTitle">----</div>
-          <div className="Admin-TransactionTitle">Amount</div>
+        <div className="AX-Admin-TransactionItem">
+          <div className="AX-TransData">
+            <div className="AX-Admin-TransactionCol">
+              <div></div>
+            </div>
+            <div className="AX-Admin-TransactionCol">
+              {/* <div className="Admin-TransactionPic"> */}
+                {/* <img className="Admin-TranscationPicImg" alt="" src={el.from.profilePic}/> */}
+              {/* </div> */}
+              <div className="AX-Admin-TransactionUserName">Giver</div>
+            </div>
+            <div className="AX-Admin-TransactionCol" id="AX-digits">
+              <div></div>
+            </div>
+            <div className="AX-Admin-TransactionCol">
+              {/* <div className="Admin-TransactionPic"> */}
+                {/* <img className="Admin-TranscationPicImg" alt="" src={}/> */}
+              {/* </div> */}
+              <div className="AX-Admin-TransactionUserName">Reciever</div>
+            </div>
+            <div className="AX-Admin-TransactionCol" id="AX-digits">
+              <div>amount</div>
+            </div>
+            <div></div>
+          </div>
         </div>
         <div className="Admin-TransactionContainer">
           {this.UserToUserTransactionList(this.props.UserToUser)}
