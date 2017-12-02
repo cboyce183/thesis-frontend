@@ -1,29 +1,26 @@
 .settings-container{
-  display: flex;
-  height: 85vh;
-  padding-top: 60px;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 300px;
+}
+
+.settings-container-user{
+  display:flex;
 }
 
 .settings-img{
     flex-grow: 1;
-    margin-top: 100px;
-    padding: 50px;
-    padding-left: 100px;
+    padding: 0px;
 }
 
 .settings-info{
   flex-grow: 1;
-  margin-top: 142px;
-  padding: 125px;
+  margin-top: 90px;
   padding-left: 0px;
 }
 
-.set-pic{
- margin-left: 60px;
-}
-
 .edit-btn-settings{
-  margin-top: 10px;
+  margin-top: 40px;
   display: flex;
   justify-content: flex-start;
 }
@@ -37,22 +34,48 @@
   padding: 10px;
 }
 
-.edit-btn-settings {
-  width: 162px;
-}
-
 .settings-btn{
   border-width:2px;
-  border-style: solid;!
-  border-color: #040223; 
-
+  border-style: solid;
 }
 .settings-upload-pic{
-  height: 150px;
-  width: 150px;
+  height: 300px;
+  width: 300px;
+  border-radius:5px;
 }
 
-.close-btn{
-  margin-right: 68px;
-  margin-top: 20px;
+.btn-upload-settings{
+  margin-top: 53px;
+  margin-bottom: 20px;
+}
+
+.header-settings{
+  display: flex;
+  justify-content: space-between;
+}
+
+.container-settings {
+  display: flex
+}
+
+.manage-users{
+  display: flex;
+}
+
+.footer-pwr-by{
+ position: absolute;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ padding: 1rem;
+ text-align: center;
+}
+
+.settings-label{
+  margin-bottom: 1rem;
+}
+
+.settings-info-admin{
+  flex-grow: 1;
+
 }

@@ -8,19 +8,9 @@ import ReactFileReader from 'react-file-reader';
 
 const validator = require("email-validator");
 
-
-const style = {
-  borderWidth:'1.5px',
-  borderStyle: 'solid',
-  borderColor: '#040223',
-  fontWeight: '650',
-}
-
 class CompanyRegistry1 extends Component {
-
   constructor(props) {
     super(props);
-
     this.state = {
       email: '',
       name: '',
@@ -28,9 +18,8 @@ class CompanyRegistry1 extends Component {
       password2: '',
       logo:'',
       imagePath:'',
+      valid: false,
     }
-
-    this.valid = false;
   }
 
   handleCompanySignIn = () => {
@@ -38,7 +27,7 @@ class CompanyRegistry1 extends Component {
       if (this.emailValidator()) {
         if (this.state.imagePath) {
           this.props.saveCompanyInfo(this.state);
-          this.valid = true;  
+          this.setState({ valid: true });  
         } else alert('Please upload a logo.');
       } else alert('Invalid email.');
     } else {
@@ -56,8 +45,6 @@ class CompanyRegistry1 extends Component {
   emailValidator = () => validator.validate(this.state.email);
 
   passwordMatch = () => this.state.password === this.state.password2;
-
-  rerouter = () => this.valid ? '/companyregistry2' : '/companyregistry1';  
 
   onFieldChange = (e) => {
     this.setState({
@@ -77,7 +64,55 @@ class CompanyRegistry1 extends Component {
       </ReactFileReader>
     )
   }
+  
+  getCompanySignIn = async (data) => {
+    if (this.state.coinName && this.state.weeklyAllow)
+      await fetch ('http://192.168.0.37:4200/add-company', {
+        method: 'POST',
+        headers:{
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          name: this.state.name,
+          password: this.state.password,
+          logo: this.state.imagePath,
+          coinName: this.state.coinName,
+          weeklyAllow: this.state.weeklyAllow,
+        }),
+      })
+      .then(response => {
+        if (response.status === 201) window.location = '/landing';
+      });
+  }
 
+  coinRender = () => {
+    if (this.state.valid) return (
+      <div className="coin-name-allow-cont">
+        <input
+          className="u-full-width coin-info"
+          type="text"
+          placeholder="Currency Name"
+          value={this.state.coinName}
+          onChange={(e) => this.setState({coinName: e.target.value,})}
+        />
+        <input
+          className="u-full-width coin-info"
+          type="number"
+          placeholder="Weekly Allowance $"
+          value={this.state.weeklyAllow}
+          onChange={(e) => this.setState({weeklyAllow: e.target.value,})}
+        />
+        <div className="nxt-btn-cp" onClick={this.getCompanySignIn}>create</div>
+      </div>
+    );
+  }
+
+  hideNextButton = () => {
+    if (this.state.valid) return {opacity: '0'};
+    return {opacity: '1'};
+  }
 
   render() {
     return (
@@ -119,16 +154,15 @@ class CompanyRegistry1 extends Component {
               value={this.state.password2}
               onChange={this.onFieldChange}
             />
+            {this.coinRender()}
           </div>
           <div className='company-logo'>
             <div className='add-logo'>
               {this.logoChanger()}
             </div>
-            <Link to={this.rerouter()} style={{textDecoration:'none'}}>
-              <div className='nxt-btn-cp' onClick={this.handleCompanySignIn}>
-                next
-              </div>
-            </Link>
+            <div className='nxt-btn-cp' onClick={this.handleCompanySignIn} style={this.hideNextButton()}>
+              next
+            </div>
           </div>
         </div>
         <p className="powered-by">Powered by Zendama</p>
