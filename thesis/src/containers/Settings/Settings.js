@@ -4,9 +4,11 @@ import './Settings.css';
 import ReactFileReader from 'react-file-reader';
 import Close from '../../components/Close/Close';
 import PopUp from '../../components/PopUp/PopUp';
+import ManageUsers from '../../components/MangageUsers/ManageUsers';
 import '../../components/PopUp/PopUp.css';
 import SketchPicker from 'react-color';
-import reactCSS from 'reactcss'
+import reactCSS from 'reactcss';
+
 
 const style = {
   borderWidth:'1.5px',
@@ -163,18 +165,18 @@ class Settings extends Component {
     });
   }
 
-  handlePopUp = (user) => {
+  handlePopUp = () => {
     this.setState({
-      user:user,
       popped: !this.state.popped,
     })
   }
 
-  renderPopUp(user) {
+  renderPopUp() {
     return (
       <PopUp
-        unpop={this.handlePopUp.bind(this)}
-      />
+        unpop={this.handlePopUp.bind(this)}>
+        <ManageUsers />
+      </PopUp>
     )
   }
 
@@ -214,6 +216,7 @@ class Settings extends Component {
     });
 
     const popup = this.state.popped ? this.renderPopUp() : null;
+
     return  !this.state.isAdmin ? (
       <div className='MaxWidth'>
         <div className="header-settings">

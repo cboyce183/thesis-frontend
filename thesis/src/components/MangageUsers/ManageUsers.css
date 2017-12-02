@@ -1,0 +1,17 @@
+.manage-users-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.trash{
+  height: 30px;
+  width: 30px;
+}
+
+ul li {
+  list-style: none;
+}
+
+.manage-user-label{
+  margin: 30px !important;
+}

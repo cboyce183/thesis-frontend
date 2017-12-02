@@ -52,8 +52,6 @@
 .header-settings{
   display: flex;
   justify-content: space-between;
-  margin-top: 200px;
-  margin-bottom: 200px;
 }
 
 .container-settings {
@@ -79,5 +77,5 @@
 
 .settings-info-admin{
   flex-grow: 1;
-  
+
 }
