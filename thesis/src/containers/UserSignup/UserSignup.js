@@ -17,6 +17,8 @@ class UserSignup extends Component {
       UserPassword1: null,
       UserPassword2: null,
       UserName: null,
+      firstName: null,
+      lastName: null
     }
   }
 
@@ -28,12 +30,18 @@ class UserSignup extends Component {
         email:  theProps.UserEmail,
         password:  theProps.UserPasssword2,
         username: theProps.UserName,
+        firstName: theProps.firstName,
+        lastName: theProps.lastName
       }
-      console.log('User data object post request.', UserDataObject)
-      fetch('http://192.168.0.37:4200/signup-user', {
+      const query = window.location.href.match(/user-id=(.*)$/)[1];
+      fetch(`http://localhost:4200/signup-user?user-id=${query}`, {
         method: 'POST',
-        headers: {'Content-Type' : 'application/json',},
+        headers: {
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Origin':'*',
+        },
         body: JSON.stringify(UserDataObject),
+        mode: 'cors',
       })
         .then(response => {
           if (response.status === 401) {
@@ -44,9 +52,8 @@ class UserSignup extends Component {
           }
         })
     } else {
-      console.log('error cannot send!!!')
+      console.error('error cannot send!!!')
     }
-
   }
 
   arePasswordsTheSame(theProps){
@@ -96,9 +103,9 @@ class UserSignup extends Component {
 
   imageChange(image){
     if (!image) {
-      return <img alt="" src={require('./../../assets/userImage.svg')} className="ProfilePic"/>
+      return <div className="ProfilePicBox"><p>Upload profile picture</p></div>
     } else {
-      return <img alt="" src={image} className="ProfilePic"/>
+      return <img alt="" src={image} className="ProfilePic"style={{maxHeight:'200px'}}/>
     }
   }
 
@@ -137,30 +144,42 @@ class UserSignup extends Component {
         <div className="Container">
           <div className="MainPannel">
             <div className="UserInputContainer">
-              <div className="ZenNameBox">
-                <div className="TitleBox">Z e n d a m a</div>
-                <div className="LoginMessage"> sign up for your account</div>
-              </div>
+            <h4 style={{alignSelf:'center', paddingBottom:'5vh'}}>User Sign-up</h4>
               <div className="UserInputBox">
                 <div className="LoginDetails">
-                  <div className="UserInput">
-                    <input className="EmailText"
+                    <input className="u-full-width"
+                      type="email"
+                      value={this.state.firstName}
+                      placeholder="First name"
+                      onChange={(e) =>
+                        this.setState({firstName: e.target.value,})
+                      }
+                    />
+                    <input className="u-full-width"
+                      type="email"
+                      value={this.state.LastName}
+                      placeholder="Last name"
+                      onChange={(e) =>
+                        this.setState({lastName: e.target.value,})
+                      }
+                    />
+                    <input className="u-full-width"
                       type="email"
                       value={this.state.UserEmail}
-                      placeholder="email@address.com"
+                      placeholder="E-mail"
                       onFocus={this.removeEmail}
                       onChange={(e) =>
                         this.setState({UserEmail: e.target.value,})
                       }
                     />
-                    <input type="text" className="UsernameText"
+                    <input type="text" className="u-full-width"
                       value={this.state.UserName}
                       placeholder="Username"
                       onChange={(e) =>
                         this.setState({UserUsername: e.target.value,})
                       }
                     />
-                    <input type="password" className="PasswordText"
+                    <input type="password" className="u-full-width"
                       value={this.state.UserPassword1}
                       placeholder="Password"
                       name="UserPassword1"
@@ -169,55 +188,30 @@ class UserSignup extends Component {
                         this.setState({UserPassword1: e.target.value,})
                       }}
                     />
-                    <input type="password" className="PasswordText" id="pass2"
+                    <input type="password" className="u-full-width" id="pass2"
                       value={this.state.UserPassword2}
-                      placeholder="Password"
+                      placeholder="Confirm password"
                       name="UserPassword2"
                       onFocus={(e) => this.removePassword(e.target.name)}
                       onChange={(e) => {
                         this.setState({UserPassword2: e.target.value,})
                       }}
                     />
-                    <input type="submit" className="PasswordText" id="pass2"
-                      value="Choose profile image"
-                      onClick={() => this.setState({croppingLoad: true,})}
-                    />
-                  </div>
                 </div>
                 <div className="LoginSend">
-                  <div className="ProfilePicBox">
+                  <div style={{zIndex:1}} className="ProfilePicBoxWrapper" onClick={() => this.setState({croppingLoad: true,})}>
                     {this.imageChange(this.state.UserImage)}
                   </div>
                   <div className="SignupBox">
-                    <input onClick={async () => {
+                    <div onClick={async () => {
                       await this.arePasswordsTheSame(this.state)
                       await this.checkEmailValid(this.state.UserEmail)
                       await this.userSignupRequest(this.state)
                     }}
-                    className="LoginButton" type="submit" value="Sign up"
-                    />
+                    className="nxt-btn-cp" style={{fontSize:'15px'}}>Sign-up</div>
                     {this.warningPassWordNotEqual(this.state.passwordWarning)}
                     {this.warningEmailInvalid(this.state.emailWarning)}
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="AboutContainer">
-              <div className="AboutBox">
-              </div>
-              <div className="AboutTitle">
-                <div className="Information">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac
-                  metus non nunc scelerisque finibus. Duis auctor non tellus ut dignissim.
-                  Integer scelerisque laoreet maximus. Vivamus sodales urna orci,
-                  quis iaculis ipsum euismod et. Phasellus ultrices purus sed felis
-                  fringilla, vitae elementum massa venenatis.
-                </div>
-                <div className="CompanyLoginRout">
-                  <div className="ButtonToCompany"></div>
-                  <div className="ButtonToFB"></div>
-                  <div className="ButtonToTwit"></div>
-                  <div className="ButtonToInsta"></div>
                 </div>
               </div>
             </div>
