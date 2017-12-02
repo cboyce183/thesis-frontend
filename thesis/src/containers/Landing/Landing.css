@@ -30,7 +30,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top:10vh;
+    padding-top:5vh;
     padding-bottom:10vh;    
 }
 .landing-desc-txt {
