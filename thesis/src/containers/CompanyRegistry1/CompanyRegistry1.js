@@ -105,28 +105,25 @@ class CompanyRegistry extends Component {
   }
 
   renderLogoPicker = () => {
-    if (this.state.uploaded) return (
-      <img
-        className="img-company-reg-logo"
-        name="logo"
-        onChange={this.handleFieldChange}
-        src={this.state.imagePath}
-        alt='company Logo'
-      />
-    )
-    return (
-      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-        <div className="logo-upload-container">
-          <p className="logo-upload-text">upload your logo</p>
-        </div>
-      </ReactFileReader>
-    )
+    return this.state.uploaded
+      ? (
+        <img
+          className="img-company-reg-logo"
+          name="logo"
+          onChange={this.handleFieldChange}
+          src={this.state.imagePath}
+          alt='company Logo'
+        />
+      ) : (
+        <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+          <div className="logo-upload-container">
+            <p className="logo-upload-text">upload your logo</p>
+          </div>
+        </ReactFileReader>
+      )
   }
 
-  styleNextButton = () => {
-    if (this.state.valid) return {opacity: '0',};
-    return {opacity: '1',};
-  }
+  styleNextButton = () => this.state.valid ? {opacity: '0',} : {opacity: '1',};
 
   render() {
     return (
