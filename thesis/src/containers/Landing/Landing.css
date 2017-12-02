@@ -112,3 +112,8 @@
     overflow-y: scroll;
     margin: 20px;
 }
+.landing-desc-personal {
+    max-width: 80vw;
+    padding: 15px;
+    overflow-y: scroll;
+}

@@ -1,7 +1,6 @@
 import React, { Component, } from 'react';
 import './Landing.css';
 import { Route, } from 'react-router-dom';
-import Collapsible from 'react-collapsible';
 
 
 class AboutCorporate extends Component {

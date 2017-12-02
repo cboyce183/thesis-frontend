@@ -67,7 +67,7 @@ class CompanyRegistry1 extends Component {
   
   getCompanySignIn = async (data) => {
     if (this.state.coinName && this.state.weeklyAllow)
-      await fetch ('http://192.168.0.37:4200/add-company', {
+      await fetch ('http://192.168.0.37:4200/company', {
         method: 'POST',
         headers:{
           'Accept': 'application/json',

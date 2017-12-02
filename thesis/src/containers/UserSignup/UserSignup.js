@@ -30,7 +30,7 @@ class UserSignup extends Component {
         username: theProps.UserName,
       }
       console.log('User data object post request.', UserDataObject)
-      fetch('http://192.168.0.37:3000/signup-user', {
+      fetch('http://192.168.0.37:4200/signup-user', {
         method: 'POST',
         headers: {'Content-Type' : 'application/json',},
         body: JSON.stringify(UserDataObject),
