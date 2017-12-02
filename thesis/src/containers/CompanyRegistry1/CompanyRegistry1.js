@@ -1,14 +1,14 @@
 import React, { Component, } from 'react';
-import '../../App.css';
-import './CompanyRegistry1.css';
-import { Link, } from 'react-router-dom';
+import ReactFileReader from 'react-file-reader';
+import validator from 'email-validator';
+
 import { connect, } from 'react-redux';
 import { saveCompanyInfo, } from '../../actions';
-import ReactFileReader from 'react-file-reader';
 
-const validator = require("email-validator");
+import '../../App.css';
+import './CompanyRegistry1.css';
 
-class CompanyRegistry1 extends Component {
+class CompanyRegistry extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,15 +19,17 @@ class CompanyRegistry1 extends Component {
       logo:'',
       imagePath:'',
       valid: false,
+      // weeklyAllow: 0,
+      // coinName: '',
     }
   }
 
   handleCompanySignIn = () => {
-    if (this.passwordMatch()){
-      if (this.emailValidator()) {
+    if (this.handlePasswordMatch()){
+      if (this.handleEmailValidation()) {
         if (this.state.imagePath) {
           this.props.saveCompanyInfo(this.state);
-          this.setState({ valid: true });  
+          this.setState({ valid: true, });
         } else alert('Please upload a logo.');
       } else alert('Invalid email.');
     } else {
@@ -42,19 +44,19 @@ class CompanyRegistry1 extends Component {
     })
   }
 
-  emailValidator = () => validator.validate(this.state.email);
+  handleEmailValidation = () => validator.validate(this.state.email);
 
-  passwordMatch = () => this.state.password === this.state.password2;
+  handlePasswordMatch = () => this.state.password === this.state.password2;
 
-  onFieldChange = (e) => {
+  handleFieldChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
   }
 
-  logoChanger = () => {
+  renderLogoPicker = () => {
     if (this.state.uploaded) return (
-      <img className="img-company-reg-logo" name="logo" onChange={this.onFieldChange} src={this.state.imagePath} alt='company Logo'/>      
+      <img className="img-company-reg-logo" name="logo" onChange={this.handleFieldChange} src={this.state.imagePath} alt='company Logo'/>
     )
     return (
       <ReactFileReader base64={true} handleFiles={this.handleFiles}>
@@ -64,10 +66,10 @@ class CompanyRegistry1 extends Component {
       </ReactFileReader>
     )
   }
-  
-  getCompanySignIn = async (data) => {
+
+  handleCompanyRegistry = async (data) => {
     if (this.state.coinName && this.state.weeklyAllow)
-      await fetch ('http://192.168.0.37:4200/company', {
+      fetch ('http://192.168.0.37:4200/company', {
         method: 'POST',
         headers:{
           'Accept': 'application/json',
@@ -82,36 +84,40 @@ class CompanyRegistry1 extends Component {
           weeklyAllow: this.state.weeklyAllow,
         }),
       })
-      .then(response => {
-        if (response.status === 201) window.location = '/landing';
-      });
+        .then(response => {
+          if (response.status === 409) alert('chosen e-mail already exists')
+          if (response.status === 201) window.location = '/panel';
+        })
+        .catch(e => console.error(e));
   }
 
-  coinRender = () => {
+  renderCoinForm = () => {
     if (this.state.valid) return (
       <div className="coin-name-allow-cont">
         <input
           className="u-full-width coin-info"
           type="text"
+          name="coinName"
           placeholder="Currency Name"
           value={this.state.coinName}
-          onChange={(e) => this.setState({coinName: e.target.value,})}
+          onChange={this.handleFieldChange}
         />
         <input
           className="u-full-width coin-info"
           type="number"
+          name="weeklyAllow"
           placeholder="Weekly Allowance $"
           value={this.state.weeklyAllow}
-          onChange={(e) => this.setState({weeklyAllow: e.target.value,})}
+          onChange={this.handleFieldChange}
         />
-        <div className="nxt-btn-cp" onClick={this.getCompanySignIn}>create</div>
+        <div className="nxt-btn-cp" onClick={this.handleCompanyRegistry}>create</div>
       </div>
     );
   }
 
   hideNextButton = () => {
-    if (this.state.valid) return {opacity: '0'};
-    return {opacity: '1'};
+    if (this.state.valid) return {opacity: '0',};
+    return {opacity: '1',};
   }
 
   render() {
@@ -128,7 +134,7 @@ class CompanyRegistry1 extends Component {
               name="email"
               placeholder="Business email"
               value={this.state.email}
-              onChange={this.onFieldChange}
+              onChange={this.handleFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
@@ -136,7 +142,7 @@ class CompanyRegistry1 extends Component {
               name="name"
               placeholder="Company name"
               value={this.state.name}
-              onChange={this.onFieldChange}
+              onChange={this.handleFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
@@ -144,7 +150,7 @@ class CompanyRegistry1 extends Component {
               name="password"
               placeholder="Password"
               value={this.state.password}
-              onChange={this.onFieldChange}
+              onChange={this.handleFieldChange}
             />
             <input
               className="u-full-width cp-reg-1"
@@ -152,13 +158,13 @@ class CompanyRegistry1 extends Component {
               name="password2"
               placeholder="Confirm password"
               value={this.state.password2}
-              onChange={this.onFieldChange}
+              onChange={this.handleFieldChange}
             />
-            {this.coinRender()}
+            {this.renderCoinForm()}
           </div>
           <div className='company-logo'>
             <div className='add-logo'>
-              {this.logoChanger()}
+              {this.renderLogoPicker()}
             </div>
             <div className='nxt-btn-cp' onClick={this.handleCompanySignIn} style={this.hideNextButton()}>
               next
@@ -176,4 +182,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 
-export default connect(null, mapDispatchToProps)(CompanyRegistry1);
+export default connect(null, mapDispatchToProps)(CompanyRegistry);
