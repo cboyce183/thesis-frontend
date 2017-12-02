@@ -4,6 +4,7 @@ import '../../App.css';
 import './ProductAdd.css';
 
 import PopUp from '../PopUp/PopUp';
+import ReactFileReader from 'react-file-reader';
 
 const week = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday',]
 const displayWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN',]
@@ -14,79 +15,70 @@ class ProductAdd extends Component {
     super(props);
     this.state = {
       selectedDates: [],
-      quantity: 1,
-      buttonText: this.props.isAdmin ? 'delete' : 'buy',
-      buttonClass: '',
-      availableSlots: this.props.schedule,
     }
   }
 
-  handleProductBuy = () => {
-    const finalPrice = this.props.isService
-      ? this.props.value * this.state.selectedDates.length
-      : this.props.value * this.state.quantity;
-    const finalDates = this.props.isService
-      ? this.props.selectedDates
-      : null;
-    const finalQuantity = this.props.isService
-      ? null
-      : this.props.quantity;
-    if (finalPrice === 0 && this.props.isService) this.handleButtonStates(2);
-    else if (finalPrice === 0 && !this.props.isService) this.handleButtonStates(1);
-    else if (finalPrice > this.props.available) this.handleButtonStates(4);
-    else {
-      fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
-        method: 'POST',
-        body: JSON.stringify({
-          isService: this.props.isService,
-          quantity: finalQuantity,
-          dates: finalDates,
-          price: finalPrice,
-        }),
-      }).then(res => this.handleButtonStates(3));
-    }
+  handleDateSelect = (object) => {
+    const day = Object.keys(object)[0];
+    const repeat = this.state.selectedDates.reduce((acc, el) => Object.keys(el)[0] === day && el[day] === object[day] ? true : acc, false);
+    if (repeat) {
+      const newSelectedDates = this.state.selectedDates.filter(el => Object.keys(el)[0] !== day || el[day] !== object[day])
+      this.setState({selectedDates: newSelectedDates,});
+    } else this.setState({selectedDates: [...this.state.selectedDates, object,],})
   }
 
-  //==============================RENDERING
+  handleFiles = files => {
+    this.setState({
+      imagePath: files.base64,
+      uploaded: true,
+    })
+  }
 
-  renderSchedule = (schedule, selected) => {
-    const days = Object.keys(schedule);
-    const res = week.map((day, i) => ~days.indexOf(day)
-      ? (
-        <tr key={i}>
+  handleImage = (image) => {
+    this.setState({UserImage: image, croppingLoad: false,})
+  }
+
+  handleSelectedDateFormat() {
+    if (this.state.selectedDates.length) {
+      return this.state.selectedDates.reduce((acc,el) => {
+        if (acc[Object.keys(el)[0]]) acc[Object.keys(el)[0]].push(el[Object.keys(el)[0]]);
+        else acc[Object.keys(el)[0]] = [el[Object.keys(el)[0]],];
+        return acc;
+      },{})
+    } else return null
+  }
+
+  handleCreate = ({title, price, info,}) => {
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/product', {
+      method: 'POST',
+      body: JSON.stringify({
+        img: this.state.imagePath,
+        description: info,
+        name: title,
+        value: price,
+        isService: this.props.service === 'Services',
+        schedule: this.handleSelectedDateFormat(),
+      }),
+    }).then(res => console.log(res));
+  }
+
+  //===========================================RENDERING
+
+  renderSchedule = (selected) => {
+    const res = week.map((day, i) => (
+      <tr key={i}>
+        <td
+          className="ScheduleTime DayColumn"
+        >{displayWeek[i]}</td>
+        {slots.map((slot, index) => (
           <td
-            className="ScheduleTime DayColumn"
-          >{displayWeek[i]}</td>
-          {slots.map((slot,index) => ~schedule[day].indexOf(slot)
-            ? (
-              <td
-                style={this.props.isAdmin ? {cursor:'default',} : null}
-                key={index}
-                onClick={() => this.handleDateSelect({[day] : slot,})}
-                className={`ScheduleTime ${selected.reduce((acc, el) => Object.keys(el)[0] === day && slot === el[day] ? true : acc, false) ? 'SelectedDate' : 'Available'}`}
-              ></td>
-            ) : (
-              <td
-                key={index}
-                className="ScheduleTime Unavailable"
-              ></td>
-            )
-          )}
-        </tr>
-      ) : (
-        <tr key={i}>
-          <td
-            className="ScheduleTime DayColumn"
-          >{displayWeek[i]}</td>
-          {slots.map((slot, index) => (
-            <td
-              key={index}
-              className="ScheduleTime Unavailable"
-            ></td>
-          ))}
-        </tr>
-      )
-    );
+            key={index}
+            onClick={() => this.handleDateSelect({[day] : slot,})}
+            className={`ScheduleTime ${selected.reduce((acc, el) => Object.keys(el)[0] === day && slot === el[day] ? true : acc, false) ? 'SelectedDate' : 'Unavailable Clickable'}`}
+          ></td>
+        ))}
+      </tr>
+    ));
     return (
       <table className="Schedule">
         <thead>
@@ -102,20 +94,53 @@ class ProductAdd extends Component {
     )
   }
 
+  renderImagePicker = () => {
+    if (this.state.uploaded) return (
+      <img className="img-company-reg-logo" name="logo" onChange={this.onFieldChange} src={this.state.imagePath} alt='company Logo'/>
+    )
+    return (
+      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+        <div className="logo-upload-container">
+          <p className="logo-upload-text">upload image</p>
+        </div>
+      </ReactFileReader>
+    )
+  }
+
   render() {
-    const schedule = this.props.isService
-      ? this.renderSchedule(this.props.schedule, this.state.selectedDates)
-      : null;
+    const image = this.renderImagePicker();
     return this.props.service === 'Services' ? (
       <PopUp
         unpop={this.props.unpop}
       >
+        <div>
+          {image}
+        </div>
+        <input ref={el => this.title = el} type="text" placeholder="Title"/>
+        <input ref={el => this.description = el} type="textarea" placeholder="Description"/>
+        <input ref={el => this.price = el} type="number" placeholder="Price"/>
+        {this.renderSchedule(this.state.selectedDates)}
+        <input
+          onClick={() => this.handleCreate({title: this.title.value, price: this.price.value, info: this.description.value,})}
+          type="submit"
+          value="create"
+        />
       </PopUp>
     ) : (
       <PopUp
         unpop={this.props.unpop}
       >
-      hello
+        <div>
+          {image}
+        </div>
+        <input ref={el => this.title = el} type="text" placeholder="Title"/>
+        <input ref={el => this.description = el} type="textarea" placeholder="Description"/>
+        <input ref={el => this.price = el} type="number" placeholder="Price"/>
+        <input
+          onClick={() => this.handleCreate({title: this.title.value, price: this.price.value, info: this.description.value,})}
+          type="submit"
+          value="create"
+        />
       </PopUp>
     );
   }
