@@ -6,7 +6,7 @@ import { connect, } from 'react-redux';
 import { saveCompanyInfo, } from '../../actions';
 
 import '../../App.css';
-import './CompanyRegistry1.css';
+import './CompanyRegistry.css';
 
 class CompanyRegistry extends Component {
   constructor(props) {
