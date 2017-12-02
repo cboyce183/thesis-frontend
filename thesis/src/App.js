@@ -3,7 +3,7 @@ import './App.css';
 import { Route, } from 'react-router-dom';
 import Landing from './containers/Landing/Landing';
 import Panel from './containers/Panel/Panel';
-import CompanyRegistry1 from './containers/CompanyRegistry1/CompanyRegistry1';
+import CompanyRegistry from './containers/CompanyRegistry1/CompanyRegistry1';
 import CompanyRegistry2 from './containers/CompanyRegistry2/CompanyRegistry2';
 import Login from './containers/Login/Login';
 import TipOrPay from './containers/TipOrPay/TipOrPay';
@@ -21,9 +21,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/landing" component={Landing}/>
+        <Route exact path="/" component={Landing}/>
         <Route path="/panel" component={Panel}/>
-        <Route path="/companyregistry1" component={CompanyRegistry1}/>
+        <Route path="/companyregistry" component={CompanyRegistry}/>
         <Route path="/companyregistry2" component={CompanyRegistry2}/>
         <Route path="/login" component={Login}/>
         <Route path="/tiporpay" component={TipOrPay}/>

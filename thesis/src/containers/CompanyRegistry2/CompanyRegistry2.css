@@ -1,7 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Raleway';
-html {
+/* html {
   overflow: hidden;
-}
+} */
 .coin-info-container {
   text-align: center;
   font-family: 'Raleway', sans-serif;

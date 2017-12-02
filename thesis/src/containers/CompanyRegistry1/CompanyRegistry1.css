@@ -1,8 +1,11 @@
-@import 'https://fonts.googleapis.com/css?family=Raleway';
-
 @keyframes fadin {
   0% { opacity: 0 }
   100% {opacity: 1 }
+}
+
+@keyframes popin {
+  0% { top: 100vh; position: relative; }
+  100% { top: 0; position: relative; }
 }
 
 .logo-upload-container {
@@ -27,7 +30,7 @@
 .logo-upload-text {
   display: flex;
   flex-flow: nowrap row;
-  color: grey;  
+  color: grey;
 }
 
 .nxt-btn-cp {
@@ -51,7 +54,7 @@
 }
 
 .MaxWidth {
-  animation: fadin 0.5s ease;  
+  animation: fadin 0.5s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -67,16 +70,17 @@
   padding: 50px;
   text-align: center;
 }
-.company-siginup-info{
+
+.company-signup-info{
   padding: 40px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);      
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cp-reg-1 {
   font-size: 15px;
   font-family: 'Raleway', sans-serif;
   padding-left: 100px;
-  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);    
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .company-logo{
@@ -92,7 +96,6 @@
   text-align: center;
 }
 
-
 .powered-by {
   font-size: x-small;
   text-align: center;
@@ -103,16 +106,6 @@
   width: 150px;
 }
 
-.btn-upload{
-  margin: 30px;
-}
-
-.img-input{
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
 .add-logo{
   display: flex;
 }
@@ -121,6 +114,23 @@
   text-align: center;
 }
 
-.company-logo-img{
-  margin-right: 110px;
+.coin-info{
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  padding-left: 100px;
+}
+
+.nxt-btn{
+  position: relative;
+  left:6px;
+  margin-top: 100px;
+}
+
+.coin-name-allow-cont{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  animation: popin 0.5s linear, fadin 1s linear;
 }
