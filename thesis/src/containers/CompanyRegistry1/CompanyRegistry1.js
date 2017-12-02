@@ -19,9 +19,26 @@ class CompanyRegistry extends Component {
       logo:'',
       imagePath:'',
       valid: false,
-      // weeklyAllow: 0,
-      // coinName: '',
+      weeklyAllow: 0,
+      coinName: '',
     }
+  }
+
+  handleEmailValidation = () => validator.validate(this.state.email);
+
+  handlePasswordMatch = () => this.state.password === this.state.password2;
+
+  handleFiles = files => {
+    this.setState({
+      imagePath: files.base64,
+      uploaded: true,
+    })
+  }
+
+  handleFieldChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
   }
 
   handleCompanySignIn = () => {
@@ -37,37 +54,7 @@ class CompanyRegistry extends Component {
     }
   }
 
-  handleFiles = files => {
-    this.setState({
-      imagePath: files.base64,
-      uploaded: true,
-    })
-  }
-
-  handleEmailValidation = () => validator.validate(this.state.email);
-
-  handlePasswordMatch = () => this.state.password === this.state.password2;
-
-  handleFieldChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  renderLogoPicker = () => {
-    if (this.state.uploaded) return (
-      <img className="img-company-reg-logo" name="logo" onChange={this.handleFieldChange} src={this.state.imagePath} alt='company Logo'/>
-    )
-    return (
-      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-        <div className="logo-upload-container">
-          <p className="logo-upload-text">upload your logo</p>
-        </div>
-      </ReactFileReader>
-    )
-  }
-
-  handleCompanyRegistry = async (data) => {
+  handleCompanyRegistry = async data => {
     if (this.state.coinName && this.state.weeklyAllow)
       fetch ('http://192.168.0.37:4200/company', {
         method: 'POST',
@@ -90,6 +77,8 @@ class CompanyRegistry extends Component {
         })
         .catch(e => console.error(e));
   }
+
+  //============================================RENDERING
 
   renderCoinForm = () => {
     if (this.state.valid) return (
@@ -115,7 +104,26 @@ class CompanyRegistry extends Component {
     );
   }
 
-  hideNextButton = () => {
+  renderLogoPicker = () => {
+    if (this.state.uploaded) return (
+      <img
+        className="img-company-reg-logo"
+        name="logo"
+        onChange={this.handleFieldChange}
+        src={this.state.imagePath}
+        alt='company Logo'
+      />
+    )
+    return (
+      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+        <div className="logo-upload-container">
+          <p className="logo-upload-text">upload your logo</p>
+        </div>
+      </ReactFileReader>
+    )
+  }
+
+  styleNextButton = () => {
     if (this.state.valid) return {opacity: '0',};
     return {opacity: '1',};
   }
@@ -166,7 +174,7 @@ class CompanyRegistry extends Component {
             <div className='add-logo'>
               {this.renderLogoPicker()}
             </div>
-            <div className='nxt-btn-cp' onClick={this.handleCompanySignIn} style={this.hideNextButton()}>
+            <div className='nxt-btn-cp' onClick={this.handleCompanySignIn} style={this.styleNextButton()}>
               next
             </div>
           </div>
