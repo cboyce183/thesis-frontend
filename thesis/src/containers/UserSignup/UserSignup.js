@@ -103,9 +103,9 @@ class UserSignup extends Component {
 
   imageChange(image){
     if (!image) {
-      return <img alt="" src={require('./../../assets/userImage.svg')} className="ProfilePic"/>
+      return <div className="ProfilePicBox"><p>Upload profile picture</p></div>
     } else {
-      return <img alt="" src={image} className="ProfilePic"/>
+      return <img alt="" src={image} className="ProfilePic"style={{maxHeight:'200px'}}/>
     }
   }
 
@@ -144,13 +144,13 @@ class UserSignup extends Component {
         <div className="Container">
           <div className="MainPannel">
             <div className="UserInputContainer">
+            <h4 style={{alignSelf:'center', paddingBottom:'5vh'}}>User Sign-up</h4>
               <div className="UserInputBox">
                 <div className="LoginDetails">
                     <input className="u-full-width"
                       type="email"
                       value={this.state.firstName}
                       placeholder="First name"
-                      // onFocus={this.removeEmail}
                       onChange={(e) =>
                         this.setState({firstName: e.target.value,})
                       }
@@ -159,7 +159,6 @@ class UserSignup extends Component {
                       type="email"
                       value={this.state.LastName}
                       placeholder="Last name"
-                      // onFocus={this.removeEmail}
                       onChange={(e) =>
                         this.setState({lastName: e.target.value,})
                       }
@@ -200,17 +199,16 @@ class UserSignup extends Component {
                     />
                 </div>
                 <div className="LoginSend">
-                  <div className="ProfilePicBox" onClick={() => this.setState({croppingLoad: true,})}>
+                  <div style={{zIndex:1}} className="ProfilePicBoxWrapper" onClick={() => this.setState({croppingLoad: true,})}>
                     {this.imageChange(this.state.UserImage)}
                   </div>
                   <div className="SignupBox">
-                    <input onClick={async () => {
+                    <div onClick={async () => {
                       await this.arePasswordsTheSame(this.state)
                       await this.checkEmailValid(this.state.UserEmail)
                       await this.userSignupRequest(this.state)
                     }}
-                    className="LoginButton" type="submit" value="Sign up"
-                    />
+                    className="nxt-btn-cp" style={{fontSize:'15px'}}>Sign-up</div>
                     {this.warningPassWordNotEqual(this.state.passwordWarning)}
                     {this.warningEmailInvalid(this.state.emailWarning)}
                   </div>
