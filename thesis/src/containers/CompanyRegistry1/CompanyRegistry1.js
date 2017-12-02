@@ -132,7 +132,7 @@ class CompanyRegistry extends Component {
           <h3>Sign up for Zendama</h3>
         </div>
         <div className='company-reg-container'>
-          <div className='company-siginup-info'>
+          <div className='company-signup-info'>
             <input
               className="u-full-width cp-reg-1"
               type="email"

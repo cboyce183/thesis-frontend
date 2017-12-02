@@ -70,7 +70,8 @@
   padding: 50px;
   text-align: center;
 }
-.company-siginup-info{
+
+.company-signup-info{
   padding: 40px;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -95,7 +96,6 @@
   text-align: center;
 }
 
-
 .powered-by {
   font-size: x-small;
   text-align: center;
@@ -106,42 +106,12 @@
   width: 150px;
 }
 
-.btn-upload{
-  margin: 30px;
-}
-
-.img-input{
-  display: flex;
-  align-items: center;
-  padding: 10px;
-}
-
 .add-logo{
   display: flex;
 }
 
 .cmpy-reg-1-label{
   text-align: center;
-}
-
-.company-logo-img{
-  margin-right: 110px;
-}
-.coin-info-container {
-  text-align: center;
-  font-family: 'Raleway', sans-serif;
-  display: flex;
-  margin-top: 150px;
-}
-
-.company-reg2-container{
-  display: flex;
-  padding-top: 50px;
-  padding: 50px;
-  text-align: center;
-}
-.company-coin-info{
-  margin: 50px;
 }
 
 .coin-info{
@@ -163,23 +133,4 @@
   align-items: center;
   text-align: center;
   animation: popin 0.5s linear, fadin 1s linear;
-}
-
-.powered-by-coin {
-  font-size: x-small;
-  margin-top: 150px;
-  text-align: center;
-}
-
-.company-coin-logo{
-  margin-left: 150px;
-}
-
-.label-currency{
-  margin-bottom: 35px;
-}
-
-.coin-upload{
-  height: 200px;
-  width: 200px;
 }
