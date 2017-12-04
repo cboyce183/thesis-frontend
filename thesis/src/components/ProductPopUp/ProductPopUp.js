@@ -95,8 +95,12 @@ class ProductPopUp extends Component {
     else if (finalPrice === 0 && !this.props.isService) this.handleButtonStates(1);
     else if (finalPrice > this.props.available) this.handleButtonStates(4);
     else {
-      fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
+      fetch(`http://192.168.0.37:4200/catalog/product/${this.props.id}`, {
         method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
         body: JSON.stringify({
           isService: this.props.isService,
           quantity: finalQuantity,
@@ -109,9 +113,16 @@ class ProductPopUp extends Component {
 
   handleProductDelete = () => {
     if (this.props.isAdmin && window.confirm('Are you sure you want to delete this product?')) {
-      fetch(`https://private-3a61ed-zendama.apiary-mock.com/product/${this.props.id}`, {
+      console.log(this.props.id)
+      fetch(`http://192.168.0.37:4200/catalog/${this.props.id}`, {
         method: 'DELETE',
-      }).then(res => window.location.reload());
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+      }).then(res => {
+        window.location.reload()
+      });
     } else {
       console.log('stop trying to break my platform!')
     }
