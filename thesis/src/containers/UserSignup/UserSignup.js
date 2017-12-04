@@ -109,9 +109,6 @@ class UserSignup extends Component {
     }
   }
 
-  passImage = (image) => {
-    this.setState({UserImage: image, croppingLoad: false,})
-  }
 
   removeEmail = () => {
     this.setState({UserEmail: '',})
@@ -124,6 +121,9 @@ class UserSignup extends Component {
   }
 
 
+  passImage = (image) => {
+    this.setState({UserImage: image, croppingLoad: false,})
+  }
   croppingPopUp(){
     if(this.state.croppingLoad) {
       return (
