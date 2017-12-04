@@ -11,6 +11,7 @@ class ProductList extends Component {
     return arr.map((el,i) =>{
       return (
         <ProductItem
+          isAdmin={this.props.isAdmin}
           pop={this.props.pop}
           key={i}
           id={el.id}
@@ -29,7 +30,17 @@ class ProductList extends Component {
     const products = this.renderProductList(this.props.arr);
     return (
       <div className="ProductCategory">
-        <h5>{this.props.title}</h5>
+        <div className="ProductCategoryTitle">
+          <h5>{this.props.title}</h5>
+          {this.props.isAdmin
+            ? (
+              <input
+                type="submit"
+                value="+"
+                onClick={() => this.props.add(this.props.title)}
+              />
+            ) : null}
+        </div>
         <div className="ProductList">
           {products}
         </div>

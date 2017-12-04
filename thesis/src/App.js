@@ -1,10 +1,11 @@
 import React, { Component, } from 'react';
-import './App.css';
 import { Route, } from 'react-router-dom';
+
+import './App.css';
+
 import Landing from './containers/Landing/Landing';
 import Panel from './containers/Panel/Panel';
-import CompanyRegistry1 from './containers/CompanyRegistry1/CompanyRegistry1';
-import CompanyRegistry2 from './containers/CompanyRegistry2/CompanyRegistry2';
+import CompanyRegistry from './containers/CompanyRegistry/CompanyRegistry';
 import Login from './containers/Login/Login';
 import TipOrPay from './containers/TipOrPay/TipOrPay';
 import Ledger from './containers/Ledger/Ledger';
@@ -12,16 +13,18 @@ import Catalog from './containers/Catalog/Catalog';
 import Settings from './containers/Settings/Settings';
 import Logout from './containers/Logout/Logout';
 import UserSignup from './containers/UserSignup/UserSignup';
-import UserWallet from './containers/UserWallet/UserWallet'
+import Cropping from './containers/Cropping/Cropping';
+import UserWallet from './containers/UserWallet/UserWallet';
+import AboutCorporate from './containers/Landing/AboutCorporate.js';
+import AboutPersonal from './containers/Landing/AboutPersonal.js';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route path="/landing" component={Landing}/>
+        <Route exact path="/" component={Landing}/>
         <Route path="/panel" component={Panel}/>
-        <Route path="/companyregistry1" component={CompanyRegistry1}/>
-        <Route path="/companyregistry2" component={CompanyRegistry2}/>
+        <Route path="/companyregistry" component={CompanyRegistry}/>
         <Route path="/login" component={Login}/>
         <Route path="/tiporpay" component={TipOrPay}/>
         <Route path="/ledger" component={Ledger}/>
@@ -30,6 +33,8 @@ class App extends Component {
         <Route path="/logout" component={Logout}/>
         <Route path="/usersignup" component={UserSignup}/>
         <Route path="/user-wallet" component={UserWallet}/>
+        <Route path="/about_corporate" component={AboutCorporate}/>
+        <Route path="/about_personal" component={AboutPersonal}/>
       </div>
     );
   }

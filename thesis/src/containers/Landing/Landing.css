@@ -1,0 +1,135 @@
+
+@keyframes fader {
+    0% {
+        opacity: 0
+    }
+    100% {
+        opacity: 1
+    }
+}
+
+.landing-wrapper {
+    animation: fader 0.5s ease;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-business {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 20vh;
+    background: linear-gradient(rgb(217,217,252), rgba(217, 217, 252, 0.65), rgb(217,217,252));
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.landing-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:5vh;
+    padding-bottom:10vh;
+}
+
+.landing-desc-txt {
+    padding-bottom: 2vh;
+    font-size: 30px;
+    text-align: center;
+}
+
+.landing-desc-alt-txt {
+    text-align: center;
+}
+
+.landing-button {
+    height: 5px;
+    width: 70px;
+    padding: 15px;
+    background-color: white;
+    color: rgba(88, 51, 161, 0.685);
+    border: solid 1px;
+    border-color: rgba(88, 51, 161, 0.685);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1vw;
+    margin-left: 1vw;
+    transition: all 0.2s ease;
+}
+
+.landing-button:hover {
+    background-color: rgba(88, 51, 161, 0.685);
+    color: white;
+}
+
+.landing-title {
+    padding-top: 5vh;
+    display: flex;
+    flex-basis: row;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+}
+
+.landing-title-text {
+    font-size: 70px;
+    font-weight: 300;
+    letter-spacing: 1vw;
+}
+
+.landing-top-bar {
+    position: absolute;
+    width: 100vw;
+    height: 7vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.landing-bottom-bar {
+    background-color: rgb(217,217,252);
+    width: 100vw;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 1vh;
+}
+
+.spacer {
+    opacity:0;
+}
+
+.smallspacer {
+    opacity:0;
+}
+
+.corp-container {
+    width: 70vw;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+.landing-desc-corp {
+    border-width: 20px;
+    border-style: solid;
+    border-color: white;
+    overflow-y: scroll;
+    margin: 20px;
+}
+
+.landing-desc-personal {
+    max-width: 80vw;
+    padding: 15px;
+    overflow-y: scroll;
+}

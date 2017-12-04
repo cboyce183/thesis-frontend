@@ -8,6 +8,7 @@ import Close from '../../components/Close/Close';
 
 import ProductList from '../../components/ProductList/ProductList';
 import ProductPopUp from '../../components/ProductPopUp/ProductPopUp';
+import ProductAdd from '../../components/ProductAdd/ProductAdd';
 
 import '../../App.css';
 import './Catalog.css';
@@ -23,9 +24,11 @@ class Catalog extends Component {
       catalog: [],
       selectedProduct: {},
       popped: false,
+      add: false,
+      serviceAdd: null,
     }
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -57,11 +60,28 @@ class Catalog extends Component {
     })
   }
 
+  handleProductAdd = (category) => {
+    this.setState({
+      serviceAdd: category,
+      add: !this.state.add,
+    })
+  }
+
   //======================= RENDERING
+
+  renderProductAdd() {
+    return (
+      <ProductAdd
+        service={this.state.serviceAdd}
+        unpop={this.handleProductAdd.bind(this)}
+      />
+    )
+  }
 
   renderPopUp(product) {
     return (
       <ProductPopUp
+        isAdmin={this.state.isAdmin}
         available={this.state.received}
         id={product.id}
         isService={product.isService}
@@ -78,24 +98,35 @@ class Catalog extends Component {
   render() {
     const popped = this.state.popped
       ? this.renderPopUp(this.state.selectedProduct)
-      : '';
+      : null;
+    const add = this.state.add
+      ? this.renderProductAdd()
+      : null;
+    const availableZen = !this.state.isAdmin
+      ? (<h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>)
+      : null;
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="CatalogPosition">
           {popped}
+          {add}
           <div className="TipHeader">
             <h1>Catalog</h1>
             <Close link="/panel"/>
           </div>
-          <h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>
+          {availableZen}
           <div className="ProductCatalog">
             <ProductList
+              isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
+              add={this.handleProductAdd.bind(this)}
               title="Products"
               arr={this.handleFilterProducts(this.state.catalog, false)}
             />
             <ProductList
+              isAdmin={this.state.isAdmin}
               pop={this.handlePopUp.bind(this)}
+              add={this.handleProductAdd.bind(this)}
               title="Services"
               arr={this.handleFilterProducts(this.state.catalog, true)}
             />

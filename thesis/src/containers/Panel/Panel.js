@@ -1,7 +1,5 @@
 import React, { Component, } from 'react';
 
-// import { Link, } from 'react-router-dom';
-
 import PanelSquare from '../../components/PanelSquare/PanelSquare';
 import NextSteps from '../../components/NextSteps/NextSteps';
 import Loader from '../../components/Loader/Loader';
@@ -39,18 +37,17 @@ class Panel extends Component {
     // }
   }
 
-  handleLogout() {
+  handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/logout'
+    window.location = '/logout';
   }
 
   //======================= RENDERING
 
-  renderNextSteps(arr) {
-    const steps = arr.map((el,i) => {
-      let res;
+  renderNextSteps = () => {
+    const steps = this.state.pending.map((el,i) => {
       if (el === 'users') {
-        res = (
+        return (
           <NextSteps
             key={i}
             text="add employees to Zendama"
@@ -59,7 +56,7 @@ class Panel extends Component {
           />
         )
       } else if (el === 'catalog') {
-        res = (
+        return (
           <NextSteps
             key={i}
             text="add rewards to your Zendama Catalog"
@@ -68,7 +65,6 @@ class Panel extends Component {
           />
         )
       }
-      return res;
     });
     return (
       <div className="NextSteps">
@@ -80,7 +76,7 @@ class Panel extends Component {
 
   render() {
     const nextSteps = this.state.isAdmin && this.state.pending.length
-      ? this.renderNextSteps(this.state.pending)
+      ? this.renderNextSteps()
       : '';
     return this.state.loaded ? (
       <div className="MaxWidth">

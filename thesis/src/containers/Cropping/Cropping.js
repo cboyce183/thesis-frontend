@@ -40,7 +40,11 @@ class Cropping extends Component {
       }
     }
     if (!this.state.base64Image) {
-      return (<img alt="" src={require('../../assets/userImage.svg')} className="LoadedImageCrop"/> )
+      return (
+        <div className='cropping-placeholder'>
+           <p>Choose a file</p>
+        </div>
+      );
     } else {
       return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
     }

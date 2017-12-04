@@ -4,8 +4,36 @@
   position: relative;
 }
 
-.ProductCategory > h5{
+.ProductCategoryTitle {
+  height: 20%;
+  width: 14.5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProductCategoryTitle > h5 {
   text-align: left !important;
+  margin: 0;
+  padding: 0;
+}
+
+.ProductCategoryTitle > input[type="submit"] {
+  margin: 0;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  font-size: 45px;
+  line-height: 32px;
+  font-family: 'Raleway';
+  font-weight: 100;
+  transition: all 0.09s ease-in;
+}
+
+.ProductCategoryTitle > input[type="submit"]:hover {
+  border: 1px solid green !important;
+  background-color: rgba(0, 128, 0, 0.400) !important;
 }
 
 .ProductList {
