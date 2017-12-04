@@ -261,8 +261,8 @@
 }
 
 .Admin-PopUpBlock{
-  width: 400px;
-  height: 300px;
+  width: 800px;
+  height: 600px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -321,7 +321,7 @@
 
 
 .Admin-BalenceHeader{
- flex: 1;
+ flex: 0.75;
  background-color: white;
  display: flex;
  align-items: center;
@@ -354,6 +354,7 @@
 }
 
 .AX-TransData{
+  flex: 0.1;
   display: flex;
   flex-direction: row;
   background-color: white;
@@ -367,6 +368,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 0px;
 }
 
@@ -422,6 +424,14 @@
   align-items: center;
 }
 
+#removeButtonMarginBottom{
+  margin-bottom: 0 !important;
+}
+
+.Admin_DropDown{
+  width: 300px;
+}
+
 .Admin-DropDownDiv{
   flex: 2;
   background-color: white;
@@ -448,7 +458,7 @@
 
 .Admin-TransactionContainer{
   flex: 8;
-  background-color: yellow;
+  background-color: white;
   overflow: scroll;
 }
 .Admin-TransactionSummaryStats{
@@ -478,12 +488,39 @@
 .Admin-SheetBack{
   font-size: 30px;
   background-color: white;
+  font-weight: bold;
 }
+
+.Admin-SheetBack:hover{
+  text-shadow:  2px 2px 2px #DFDFDF;
+}
+
 .Admin-SheetNumber{
-  font-size: 20px;
   background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100px;
 }
+
+.Admin-PageNumber{
+  font-size: 12px;
+  margin-left: 5px;
+  margin-right: 5px;
+  color: black;
+  text-shadow:  1px 1px 1px #DFDFDF;
+}
+.Admin-PagePossNumber{
+  font-size: 20px;
+}
+
+
 .Admin-SheetForward{
   font-size: 30px;
   background-color: white;
+  font-weight: bold;
+}
+
+.Admin-SheetForward:hover{
+  text-shadow:  2px 2px 2px #DFDFDF;
 }

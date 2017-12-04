@@ -1,6 +1,9 @@
 import React, { Component, } from 'react';
 import './AdminExpenseSheet.css'
 import DropDown from '../DropDown/DropDown';
+const popperType = 'popperSpent'
+
+
 
 class AdminExpenseSheet extends Component {
 
@@ -13,8 +16,11 @@ class AdminExpenseSheet extends Component {
       pageNumber: 1,
       userList: [],
       selected: '',
+      popperSpent: false,
     }
   }
+
+
 
   addDataToState(data){
     this.setState({'data': data,})
@@ -36,7 +42,11 @@ class AdminExpenseSheet extends Component {
               this.decrementThePage()
             }}
           > &lt; </div>
-          <div className="Admin-SheetNumber"> 1 - {this.state.pageTotal} </div>
+          <div className="Admin-SheetNumber">
+            <div className="Admin-PageNumber">1 </div>
+            <div className="Admin-PagePossNumber"> {this.state.pageNumber} </div>
+            <div className="Admin-PageNumber"> {this.state.pageTotal} </div>
+          </div>
           <div onClick={()=> {
             this.incrementThePage()
           }}
@@ -63,7 +73,6 @@ class AdminExpenseSheet extends Component {
 
   filteringNamesForPanel(name){
     const res = this.state.data.reduce((acc,el, i) => {
-      console.log(el.to.username, "=======", name)
       if(el.to.username === name) {
         acc.push(el);
         return acc
@@ -101,6 +110,11 @@ class AdminExpenseSheet extends Component {
       }
     }, [])
     this.setState({userList: res,})
+  }
+
+
+  handleUserErase = (user) => {
+    this.setState({selected: [],})
   }
 
   renderingTheDropDown(){
@@ -165,30 +179,57 @@ class AdminExpenseSheet extends Component {
     }
   }
 
+  filteringSpentForPanel(min, max, popperType){
+    let res;
+    if(popperType === 'popperDate') {
+      const whichCol = 'date'
+      res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+        if(new Date(el[whichCol]) > new Date(min) && new Date(el[whichCol]) < new Date (max)) {
+          acc.push(el);
+          return acc
+        } else {
+          return acc
+        }
+      }, [])
+    }
+    this.setState({transactionsToDisplay: res,})
+  }
+
+
   render() {
-    console.log(this.state)
     return (
       <div className="Admin-SheetContainer">
         <div className="Admin-BalenceHeader">
           <div className="Admin-DropDownDiv">
-            <div className="AX-date">{"el.date"}</div>
+            {/* <div className="AX-date">{"el.date"}</div> */}
             <div className="AX-TransData">
               <div className="AX-Admin-TransactionCol">
-                <div>{"el.reason"}</div>
+                <div></div>
               </div>
               <div className="AX-Admin-TransactionCol">
-                <div className="Admin-TransactionPic">
-                  <img className="Admin-TranscationPicImg" alt="" src={"el.to.profilePic"}/>
-                </div>
-                <div className="AX-Admin-TransactionUserName">
+                <div className="AX-Admin-TransactionCol">
                   {this.renderingTheDropDown()}
                 </div>
               </div>
               <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{"el[col1]"}</div>
+                <div>
+                  <input onClick={ () => {
+                    this.filteringSpentForPanel(this.SpendMin.value, this.SpendMax.value, popperType)
+                    this.setState({[popperType]: false,})
+                  }}
+                  className="RemoveFilterButton" id='removeButtonMarginBottom' type="submit" value="Filter amount"
+                  />
+                </div>
               </div>
               <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{"el[col2]"}</div>
+                <div>
+                  <input onClick={ () => {
+                    this.filteringTransactionsForPanel(0,9)
+                    this.handleUserErase()
+                  }}
+                  className="RemoveFilterButton" id='removeButtonMarginBottom' type="submit" value="All"
+                  />
+                </div>
               </div>
             </div>
           </div>

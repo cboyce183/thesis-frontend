@@ -224,7 +224,6 @@ class UserWallet extends Component {
   }
 
   handleUserErase = (user) => {
-    // this.props.func('')
     this.setState({selected: [],})
   }
 
