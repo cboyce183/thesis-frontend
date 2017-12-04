@@ -6,12 +6,16 @@ import Close from '../../components/Close/Close';
 import AdminExpenseSheet from '../../components/AdminExpenseSheet/AdminExpenseSheet';
 import AdminUserToUserSheet from '../../components/AdminUserToUserSheet/AdminUserToUserSheet';
 import {ForceGraph, ForceGraphNode, ForceGraphLink, } from 'react-vis-force';
+import DropDown from '../../components/DropDown/DropDown';
+import viridis from './../../assets/verdis.json'
+
 
 class Ledger extends Component {
   constructor(props){
     super(props)
     this.state = {
       loaded: false,
+      popperFilter: false,
       token:  '',
       popperStat: false,
       adminDetails: null,
@@ -21,6 +25,12 @@ class Ledger extends Component {
       DisplayAdminExpense: false,
       UserSpent: [],
       DisplayUserSpent: false,
+      parametersForFiltering: {
+        date: {from: null, to: null,},
+        amount: {min: null, max: null,},
+        userGiver: null,
+        userReciever: null,
+      },
     }
   }
 
@@ -60,10 +70,18 @@ class Ledger extends Component {
     this.getInit();
   }
 
+
+  passingThePopper = () => {
+    this.setState({popperFilter: true,})
+  }
+
   UserToUserTransactionList(BallenceType){
     if(this.state.DisplayUserToUser) {
       return (
         <AdminUserToUserSheet
+          ref={(el) => this.AdminUserToUserSheet = el}
+          parametersForFiltering={this.state.parametersForFiltering}
+          popperFilter={this.passingThePopper}
           UserToUser={this.state.UserToUser}
         />
       )
@@ -77,6 +95,8 @@ class Ledger extends Component {
           ref={el => this.child = el}
           col2={col2}
           col1={col1}
+          trans={'to'}
+          popperFilter={this.passingThePopper}
           AdminExpense={this.state.AdminExpense}
         />
       )
@@ -87,6 +107,8 @@ class Ledger extends Component {
           ref={el => this.child = el}
           col2={col1}
           col1={col2}
+          trans={'from'}
+          popperFilter={this.passingThePopper}
           AdminExpense={this.state.UserSpent}
         />
       )
@@ -95,33 +117,45 @@ class Ledger extends Component {
 
   popUp(){
     if(this.state.popperStat) {
+
+      const result = this.state.UserToUser.reduce((acc, el) => {
+        acc.push({
+          userA: el.from.username,
+          userB: el.to.username,
+          dptA: el.from.department,
+          dptB: el.to.department,
+          amount: el.amount,})
+        return acc;
+      }, [])
+      //
+      //
       return (
         <div className="Admin-popUp">
-          <div className="Admin-PopUpBlock">
+          <div className="Admin-PopUpBlock" onClick={()=> this.setState({popperStat: false,})}>
             <ForceGraph simulationOptions={{ animate: true, height: 700, width: 700,}}
               xmlnsXlink="http://www.w3.org/1999/xlink"
             >
-              {this.state.UserToUser.map((el, i) => {
+              {result.map((el, i) => {
                 return  (
                   <ForceGraphNode
                     key={i}
-                    node={{id: el.from.username, radius: el.amount/20,}}
-                    fill='#FDE725FF' size={20}
+                    node={{id: el.userA, radius: 10,}}
+                    fill={el.dptA === 'seniour' ? '#FDE725FF' : '#481B6DFF'}
                   />)
               })}
-              {this.state.UserToUser.map((el, i) => {
+              {result.map((el, i) => {
                 return  (
                   <ForceGraphNode
                     key={i+100}
-                    node={{id: el.to.username, radius: el.amount/20,}}
-                    fill='#481B6DFF'
+                    node={{id: el.userB, radius: 10,}}
+                    fill={el.dptB === 'seniour' ? '#FDE725FF' : '#481B6DFF'}
                   />)
               })}
-              {this.state.UserToUser.map((el, i) => {
+              {result.map((el, i) => {
                 return  (
                   <ForceGraphLink
                     key={i+1000}
-                    link={{ source: el.to.username, value: 10, target: el.from.username,}}
+                    link={{ source: el.userA, value: el.amount, target: el.userB,}}
                   />)
               })}
             </ForceGraph>
@@ -131,12 +165,158 @@ class Ledger extends Component {
     }
   }
 
+  // popUp(){
+  //   if(this.state.popperStat) {
+  //     return (
+  //       <div className="Admin-popUp">
+  //         <div className="Admin-PopUpBlock">
+  //           <ForceGraph simulationOptions={{ animate: true, height: 700, width: 700,}}
+  //             xmlnsXlink="http://www.w3.org/1999/xlink"
+  //           >
+  //             {this.state.UserToUser.map((el, i) => {
+  //               return  (
+  //                 <ForceGraphNode
+  //                   key={i}
+  //                   node={{id: el.from.username, radius: el.amount/2,}}
+  //                   fill='#FDE725FF' size={20}
+  //                 />)
+  //             })}
+  //             {this.state.UserToUser.map((el, i) => {
+  //               return  (
+  //                 <ForceGraphNode
+  //                   key={i+100}
+  //                   node={{id: el.to.username, radius: el.amount/2,}}
+  //                   fill='#481B6DFF'
+  //                 />)
+  //             })}
+  //             {this.state.UserToUser.map((el, i) => {
+  //               return  (
+  //                 <ForceGraphLink
+  //                   key={i+1000}
+  //                   link={{ source: el.to.username, value: 10, target: el.from.username,}}
+  //                 />)
+  //             })}
+  //           </ForceGraph>
+  //         </div>
+  //       </div>
+  //     )
+  //   }
+  // }
+
+  handleUserSelection = (value) => {
+    this.setState({selectedFrom: value,})
+  }
+
+  waitDropDownGiver(){
+    if(this.AdminUserToUserSheet){
+      return (
+        <div className="DropDownName" style={{zIndex: 99,}}>
+          <DropDown
+            ref={(el) => this.userGive = el}
+            func={this.handleUserSelection.bind(this)}
+            placeh= {'Filter givers'}
+            arr={this.AdminUserToUserSheet.state.userfromList
+            }
+          />
+        </div>
+      )
+    }
+  }
+
+  waitDropDownReciever(bool){
+    if(this.AdminUserToUserSheet){
+      return (
+        <div className="DropDownName" style={{zIndex: 1,}}>
+          <DropDown
+            ref={(el) => this.userRec = el}
+            func={this.handleUserSelection.bind(this)}
+            placeh= {'Filter reciever'}
+            arr={this.AdminUserToUserSheet.state.usertoList}
+          />
+        </div>
+      )
+    }
+  }
+
+  filterPopUp(){
+    if(this.state.popperFilter) {
+      return (
+        <div className="Admin-popUp">
+          <div className="Admin-PopUpBlock">
+            <div className="AdminFiltercontain">
+              <h3> Filter </h3>
+            </div>
+            <div className="AdminFiltercontain">
+              <h5> Date </h5>
+              <label>From:</label>
+              <input ref={((el) => this.fromDate = el)} type='date'/>
+              <label>To:</label>
+              <input ref={((el) => this.toDate = el)} type='date'/>
+            </div>
+            <div className="AdminFiltercontain">
+              <h5> Amount </h5>
+              <label>min:</label>
+              <input
+                ref={(el) => this.minAmount = el}
+                type="number"
+                placeholder={0}
+                className="InputFilter"
+                step={50}
+              />
+              <label>max:</label>
+              <input
+                ref={(el) => this.maxAmount = el}
+                type="number"
+                placeholder={500}
+                className="InputFilter"
+                step={50}
+              />
+            </div>
+            <div className="AdminFiltercontain">
+              <h5>Givers</h5>
+              {this.waitDropDownGiver()}
+            </div>
+            <div className="AdminFiltercontain">
+              <h5>Recievers</h5>
+              {this.waitDropDownReciever()}
+            </div>
+            <div className="AdminFiltercontain">
+              <input onClick={ () => {
+                this.setState({popperFilter: false,})
+              }}
+              type="submit" value="back"
+              />
+              <input onClick={async () => {
+                await this.setState({parametersForFiltering: {
+                  date: {
+                    from: this.fromDate.value === '' ? '1-1-1970' : this.fromDate.value,
+                    to: this.toDate.value === '' ?  '1-1-2999' : this.toDate.value,
+                  },
+                  amount: {
+                    min: this.minAmount.value === '' ? 0 : this.minAmount.value,
+                    max: this.maxAmount.value === '' ? 99999 : this.maxAmount.value,
+                  },
+                  userRec: this.userRec.state.selected[0],
+                  userGiv: this.userGive.state.selected[0],
+                },})
+                await this.AdminUserToUserSheet.passingFilteringValues()
+                this.setState({popperFilter: false,})
+              }}
+              type="submit" value="filter"
+              />
+            </div>
+          </div>
+        </div>
+      )
+    }
+  }
+
   giveDistribution(){
-    const colours = ['#440154FF', '#481B6DFF', '#46337EFF', '#3F4889FF', '#365C8DFF',
-      '#2E6E8EFF', '#277F8EFF', '#21908CFF', '#1FA187FF', '#2DB27DFF', '#4AC16DFF',
-      '#71CF57FF', '#9FDA3AFF', '#CFE11CFF', '#FDE725FF',]
+    const colours = viridis;
+    const larr = this.state.UserToUser.length;
+    const n = colours.length/larr;
     return this.state.UserToUser.reduce((acc, el, i) => {
-      acc.push({ value: el.amount, key: el._id, color: colours[Math.round(i*1.5)],})
+      acc.push({ value: el.amount, key: el._id, color: colours[Math.round(i*n)],})
       return acc;
     }, [])
   }
@@ -150,11 +330,12 @@ class Ledger extends Component {
   }
 
   render() {
-    console.log('this', this.state)
+    console.log('this ledger state', )
     if (this.state.loaded) {
       return (
         <div>
           {this.popUp()}
+          {this.filterPopUp()}
           <div className="Admin-WalletContainer">
             <div className="Admin-DashContainer">
               <div className="Admin-HeaderContainer">

@@ -139,15 +139,15 @@ class AdminExpenseSheet extends Component {
               </div>
               <div className="AX-Admin-TransactionCol">
                 <div className="Admin-TransactionPic">
-                  <img className="Admin-TranscationPicImg" alt="" src={el.to.profilePic}/>
+                  <img className="Admin-TranscationPicImg" alt="" src={el[this.props.trans].profilePic}/>
                 </div>
-                <div className="AX-Admin-TransactionUserName">{el.to.username}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{el[col1]}</div>
+                <div className="AX-Admin-TransactionUserName">{el[this.props.trans].username}</div>
               </div>
               <div className="AX-Admin-TransactionCol" id="AX-digits">
                 <div>{el[col2]}</div>
+              </div>
+              <div className="AX-Admin-TransactionCol" id="AX-digits">
+                <div>{el[col1]}</div>
               </div>
             </div>
           </div>
@@ -200,38 +200,27 @@ class AdminExpenseSheet extends Component {
     return (
       <div className="Admin-SheetContainer">
         <div className="Admin-BalenceHeader">
-          <div className="Admin-DropDownDiv">
-            {/* <div className="AX-date">{"el.date"}</div> */}
-            <div className="AX-TransData">
-              <div className="AX-Admin-TransactionCol">
-                <div></div>
-              </div>
-              <div className="AX-Admin-TransactionCol">
-                <div className="AX-Admin-TransactionCol">
-                  {this.renderingTheDropDown()}
-                </div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>
-                  <input onClick={ () => {
-                    this.filteringSpentForPanel(this.SpendMin.value, this.SpendMax.value, popperType)
-                    this.setState({[popperType]: false,})
-                  }}
-                  className="RemoveFilterButton" id='removeButtonMarginBottom' type="submit" value="Filter amount"
-                  />
-                </div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>
-                  <input onClick={ () => {
-                    this.filteringTransactionsForPanel(0,9)
-                    this.handleUserErase()
-                  }}
-                  className="RemoveFilterButton" id='removeButtonMarginBottom' type="submit" value="All"
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="Admin-spacedivATM">
+            <input onClick={() => {
+              this.props.popperFilter()
+            }}
+            className="Admin-RemoveFilterButton"
+            id='removeButtonMarginBottom'
+            type="submit" value="filter"
+            />
+          </div>
+          <div className="Admin-spacedivATM">
+            <input onClick={ () => {
+              // this.filteringTransactionsForPanel(this.state.data,0, 9)
+              // this.setState({pageNumber: 1,
+              //   transIncrement: [0,9,],})
+              // this.totalNumberOfPagesNeeded(this.state.data)
+              // this.setState({filteredTransactions: null,})
+            }}
+            className="Admin-RemoveFilterButton"
+            id='removeButtonMarginBottom'
+            type="submit" value="All"
+            />
           </div>
         </div>
         <div className="AX-Admin-TransactionItem">

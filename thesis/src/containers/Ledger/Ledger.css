@@ -331,6 +331,7 @@
 
 .Admin-spacedivATM{
   flex: 1;
+  max-width: 150px;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -482,6 +483,24 @@
   display: flex;
   width: 100px;
   justify-content: space-between;
+  align-items: center;
+}
+
+.DropDownName{
+  width: 200px;
+}
+
+.Admin-PopUpBlock{
+  display: flex;
+  flex-direction: column;
+  width: 555px;
+}
+
+.AdminFiltercontain{
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 
