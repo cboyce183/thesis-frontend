@@ -7,14 +7,11 @@
 }
 
 .settings-img{
-    flex-grow: 1;
-    padding: 0px;
+    margin: 100px;
 }
 
 .settings-info{
-  flex-grow: 1;
-  margin-top: 90px;
-  padding-left: 0px;
+  margin: 100px;
 }
 
 .edit-btn-settings{
@@ -69,7 +66,9 @@
  text-align: center;
 }
 
-
+.settings-color{
+  display: flex;
+}
 
 .settings-label{
   margin-bottom: 0px;
@@ -85,4 +84,12 @@
 
 .admin-input-labels{
   text-align: left;
+}
+
+.react-file-reader-button{
+  display: flex;
+}
+
+.set-pic{
+  margin-bottom: 30px;
 }
