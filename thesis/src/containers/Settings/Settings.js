@@ -32,7 +32,6 @@ class Settings extends Component {
       address:'',
       editing:false,
       position:'',
-      displayName:'',
       firstName:'',
       username:'',
       profilePic:'',
@@ -237,7 +236,7 @@ class Settings extends Component {
                 }
               </div>
               <div className='settings-pic'>
-                <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+                <ReactFileReader className="settings-pic" base64={true} handleFiles={this.handleFiles}>
                   <button className='btn-upload' style={style}>Upload Your Photo</button>
                 </ReactFileReader>
               </div>
@@ -335,7 +334,7 @@ class Settings extends Component {
                   </div>
                 </div>
                 <div className='settings-info-admin'>
-                  <div>
+                  <div className="admin-input-labels">
                     <h4>Name</h4>
                     <input
                       className="u-full-width"
@@ -346,7 +345,7 @@ class Settings extends Component {
                       onChange={this.onFieldChange}
                     />
                   </div>
-                  <div>
+                  <div className="admin-input-labels">
                     <h4 >Address</h4>
                     <input
                       className="u-full-width"
@@ -357,7 +356,7 @@ class Settings extends Component {
                       onChange={this.onFieldChange}
                     />
                   </div>
-                  <div>
+                  <div className="admin-input-labels">
                     <h4 className="settings-label">Allowance</h4>
                     <input
                       className="u-full-width"
@@ -377,7 +376,7 @@ class Settings extends Component {
                       value={this.state.editing ? 'SAVE' : 'EDIT'}
                     />
                   </div>
-                  <div>
+                  <div className="mng-users-btn">
                     <input
                       style={style}
                       type="submit"
