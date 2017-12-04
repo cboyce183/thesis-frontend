@@ -26,7 +26,6 @@ class Settings extends Component {
       pending: [],
       isAdmin: false,
       loaded: false,
-      remaning: 0,
       received: 0,
       adminName:'',
       address:'',
@@ -39,7 +38,6 @@ class Settings extends Component {
       weeklyAllow:'',
       allowance:'',
       name:'',
-      saveSettingEdits:{},
       popped: false,
       displayColorPicker: false,
       color: {
@@ -49,12 +47,11 @@ class Settings extends Component {
         a: '1',
       },
       userList:[],
-      selectedUser:{},
     }
 
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -133,7 +130,7 @@ class Settings extends Component {
   handleFiles = files => {
     this.setState({
       imagePath:files.base64,
-      displayImg: true,
+      uploaded: true,
     })
   }
 
@@ -158,7 +155,7 @@ class Settings extends Component {
     this.setState({ color: color.rgb,})
   };
 
-  onFieldChange = (e) => {
+  handleFieldChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -178,6 +175,46 @@ class Settings extends Component {
       </PopUp>
     )
   }
+
+  renderLogoPicker = () => {
+    return this.state.uploaded
+      ? (
+        <img
+          className="img-company-reg-logo"
+          name="logo"
+          onChange={this.handleFieldChange}
+          src={this.state.imagePath}
+          alt='company Logo'
+        />
+      ) : (
+        <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+          <div className="logo-upload-container">
+            <p className="logo-upload-text">upload your logo</p>
+          </div>
+        </ReactFileReader>
+      )
+  }
+
+
+  renderProfilePic = () => {
+    return this.state.uploaded
+      ? (
+        <img
+          className="img-company-reg-logo"
+          name="logo"
+          onChange={this.handleFieldChange}
+          src={this.state.imagePath}
+          alt='company Logo'
+        />
+      ) : (
+        <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+          <div className="logo-upload-container">
+            <p className="logo-upload-text">upload your profile pic</p>
+          </div>
+        </ReactFileReader>
+      )
+  }
+
 
   render () {
 
@@ -227,53 +264,43 @@ class Settings extends Component {
         <div className='settings-container-user'>
           <div className='settings-img'>
             <div className="img-input-settings">
-              <div className='set-pic'>
-                <img className='settings-upload-pic' name='profilePic' onChange={this.onFieldChange} src={this.state.profilePic} alt='settings pic'/>
-                {
-                  this.state.displayImg && (
-                    <img className='settings-upload-pic' src={this.state.imagePath} alt='settings pic'/>
-                  )
-                }
-              </div>
               <div className='settings-pic'>
-                <ReactFileReader className="settings-pic" base64={true} handleFiles={this.handleFiles}>
-                  <button className='btn-upload' style={style}>Upload Your Photo</button>
-                </ReactFileReader>
+                {this.renderProfilePic()}
               </div>
             </div>
           </div>
           <div className='settings-info'>
             <div>
-              <h4 className="settings-label">Name</h4>
+              <h4 className="admin-input-labels">Name</h4>
               <input
                 className="u-full-width"
                 type="text"
                 name="firstName"
                 placeholder={this.state.firstName}
                 disabled={!this.state.editing}
-                onChange={this.onFieldChange}
+                onChange={this.handleFieldChange}
               />
             </div>
             <div>
-              <h4 className="settings-label">Position</h4>
+              <h4 className="admin-input-labels">Position</h4>
               <input
                 className="u-full-width"
                 type="text"
                 name="position"
                 disabled={!this.state.editing}
                 placeholder={this.state.position}
-                onChange={this.onFieldChange}
+                onChange={this.handleFieldChange}
               />
             </div>
             <div>
-              <h4 className="settings-label">Display Name</h4>
+              <h4 className="admin-input-labels">Display Name</h4>
               <input
                 className="u-full-width"
                 type="text"
                 name="username"
                 placeholder={this.state.username}
                 disabled={!this.state.editing}
-                onChange={this.onFieldChange}
+                onChange={this.handleFieldChange}
               />
             </div>
             <div className='edit-btn-settings'>
@@ -305,32 +332,23 @@ class Settings extends Component {
             <div>
               <div className="container-settings">
                 <div className='settings-container'>
-                  <div className='settings-img'>
+                  <div className='set-pic'>
+                    {this.renderLogoPicker()}
                   </div>
-                  <div className="img-input-settings">
-                    <div className='set-pic'>
-                      <img className='settings-upload-pic' name='logo' onChange={this.onFieldChange} src={this.state.logo} alt='settings pic'/>
-                    </div>
-                    <div className='settings-pic'>
-                      <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-                        <button className='btn-upload-settings' style={style}>Upload Your Logo</button>
-                      </ReactFileReader>
-                      <div className='settings-color'>
-                        <input
-                          style={styles.swatch}
-                          onClick={ this.handleClick}
-                          onChange={this.onFieldChange}
-                          name="color"
-                          className="settings-btn"
-                          type="submit"
-                          value="Choose a theme color"
-                        />
-                        { this.state.displayColorPicker ? <div style={ styles.popover }>
-                          <div style={ styles.cover } onClick={ this.handleClose }/>
-                          <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
-                        </div> : null }
-                      </div>
-                    </div>
+                  <div className='settings-color'>
+                    <input
+                      style={styles.swatch}
+                      onClick={ this.handleClick}
+                      onChange={this.handleFieldChange}
+                      name="color"
+                      className="settings-btn"
+                      type="submit"
+                      value="Choose a theme color"
+                    />
+                    { this.state.displayColorPicker ? <div style={ styles.popover }>
+                      <div style={ styles.cover } onClick={ this.handleClose }/>
+                      <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+                    </div> : null }
                   </div>
                 </div>
                 <div className='settings-info-admin'>
@@ -342,7 +360,7 @@ class Settings extends Component {
                       name="name"
                       placeholder={this.state.name}
                       disabled={!this.state.editing}
-                      onChange={this.onFieldChange}
+                      onChange={this.handleFieldChange}
                     />
                   </div>
                   <div className="admin-input-labels">
@@ -353,7 +371,7 @@ class Settings extends Component {
                       name="address"
                       placeholder={this.state.address}
                       disabled={!this.state.editing}
-                      onChange={this.onFieldChange}
+                      onChange={this.handleFieldChange}
                     />
                   </div>
                   <div className="admin-input-labels">
@@ -364,7 +382,7 @@ class Settings extends Component {
                       name="weeklyAllow"
                       placeholder={this.state.weeklyAllow}
                       disabled={!this.state.editing}
-                      onChange={this.onFieldChange}
+                      onChange={this.handleFieldChange}
                     />
                   </div>
                   <div className='edit-btn-settings'>
