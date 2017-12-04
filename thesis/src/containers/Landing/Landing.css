@@ -203,12 +203,13 @@
 }
 
 .MainSectionText {
-  width: 70%;
+  width: 65%;
 }
 
 .MainSection > .MainSectionText > p {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   text-align: left !important;
+  font-weight: 200;
   margin: 0;
   margin-top: 20px;
   width: 100%;
@@ -235,6 +236,7 @@
   text-align: left !important;
   display: inline-block !important;
   font-size: 30px;
+  font-weight: 300;
 }
 
 .MainSectionText > .landing-button {

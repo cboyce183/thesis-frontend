@@ -118,7 +118,7 @@ class Landing extends Component {
             </div>
           </div>
           <div className="MainSection">
-            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '40px', backgroundPosition: 'center',}}></div>
+            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}}></div>
             <div className="MainSectionText">
               <p className='landing-desc-txt'>How does it work?</p>
               <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
