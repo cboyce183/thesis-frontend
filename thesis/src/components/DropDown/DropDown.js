@@ -15,7 +15,6 @@ class DropDown extends Component {
 
   componentDidMount() {
     this.setState({list: this.props.arr,})
-    console.log("dropdown", this.props.arr)
   }
 
   handleFilters(event) {
