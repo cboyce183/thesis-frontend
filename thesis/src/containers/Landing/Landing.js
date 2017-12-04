@@ -100,12 +100,8 @@ class Landing extends Component {
           <div className="Section">
             <div className="SectionText">
               <p className='landing-desc-txt'>Share The Love!</p>
-              {/* <p className='landing-desc-alt-txt spacer'>spacer</p> */}
               <p className='landing-desc-alt-txt'>Zendama is a catalyst for harmony and friendship in the work-place: get rewards for being a good employee and helping out your co-workers or reward those that help you with something that will really make a difference. Sounds awesome right?</p>
-              {/* <p className='landing-desc-alt-txt'>Get rewards for being a good employee and helping out your co-workers.</p>
-              <p className='landing-desc-alt-txt'>Reward those that help you with something that will really make a difference.</p> */}
-              {/* <p className='landing-desc-alt-txt spacer'>spacer</p> */}
-              <p className='landing-desc-alt-txt' style={{paddingBottom:'3vh',}}></p>
+              {/* <p className='landing-desc-alt-txt' style={{paddingBottom:'3vh',}}></p> */}
             </div>
             <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
           </div>
@@ -113,9 +109,21 @@ class Landing extends Component {
         <div className="PersonalSection">
           <div className="Purple">
             <div className="MainSection">
+              <div className="MainSectionText">
+                <p className='landing-desc-txt'>What can Zendama do for your company?</p>
+                <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
+                <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+              </div>
+              <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}}></div>
             </div>
           </div>
           <div className="MainSection">
+            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '40px', backgroundPosition: 'center',}}></div>
+            <div className="MainSectionText">
+              <p className='landing-desc-txt'>How does it work?</p>
+              <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
+              <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+            </div>
           </div>
         </div>
         <div className="CorporateSection">

@@ -169,13 +169,19 @@
 .Purple {
   width: 100%;
   height: 60vh;
-  background-color: rgb(146, 126, 178) !important;
+  background-image: linear-gradient(rgb(146, 126, 178), rgb(146, 126, 178)) !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .MainSection {
   height: 60vh;
   width: 75%;
   margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .SectionDividerButton {
@@ -194,6 +200,55 @@
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
+}
+
+.MainSectionText {
+  width: 70%;
+}
+
+.MainSection > .MainSectionText > p {
+  font-size: 1.7rem;
+  text-align: left !important;
+  margin: 0;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Purple > .MainSection > .MainSectionText > p {
+  text-align: left;
+  margin: 0;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MainSection > .MainSectionText > .landing-desc-txt {
+  text-align: left !important;
+  display: inline-block !important;
+  font-size: 30px;
+}
+
+.MainSectionText > .landing-button {
+  width: 210px !important;
+  margin-top: 30px !important;
+}
+
+.SectionImage {
+  height: 100%;
+  width: 25%;
+  /* background-image: url('../../assets/solidarity.svg'); */
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
 }
 
 
