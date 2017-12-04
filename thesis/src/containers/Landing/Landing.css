@@ -1,9 +1,33 @@
 .LandingHeader {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.HeaderWrapper {
+  width: 75%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.landing-title-text {
+  font-size: 2.7rem;
+  font-weight: 300;
+  letter-spacing: 0.15vw;
+  margin: 0;
+  color: white;
+}
+
+.LandingBanner {
   width: 100vw;
-  height: 80vh;
-  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)), url('../../assets/banner.jpg');
-  background-position: left, bottom;
-  background-size: 100% 100%, cover;
+  height: 100vh;
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-position: center, bottom;
+  background-size: cover, cover;
   background-repeat: no-repeat;
 }
 
@@ -11,8 +35,6 @@
   height: 100%;
   width: 50%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -33,7 +55,7 @@
 
 .InputLogin {
   border-radius: 0 !important;
-  background-color: transparent !important;
+  background-color: rgba(0,0,0,0.55) !important;
   color: white !important;
   height: 23% !important;
   font-family: 'Raleway';
@@ -45,7 +67,7 @@
 }
 
 .InputLogin:focus{
-  background-color: rgba(255,255,255,0.1) !important;
+  background-color: rgba(0,0,0,0.6) !important;
 }
 
 .InputLogin::-webkit-input-placeholder {
@@ -55,7 +77,7 @@
 .LandingForm {
   margin: auto;
   width: 45%;
-  height: 65%;
+  height: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,8 +111,55 @@
   color: white !important;
 }
 
+.DividerSection {
+  height: 45vh;
+  width: 100%;
+  background-color: rgb(255,255,255);
+}
 
+.Section {
+  height: 100%;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.PersonalSection {
+  height: 120vh;
+}
+
+.Purple {
+  width: 100%;
+  height: 60vh;
+  background-color: rgb(146, 126, 178) !important;
+}
+
+.MainSection {
+  height: 60vh;
+  width: 75%;
+  margin: auto;
+}
+
+.SectionDividerButton {
+  height: 15% !important;
+  width: 210px !important;
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  line-height: 3px !important;
+  margin-top: 20px;
+}
+
+.SectionDividerButton:hover {
+  background-color: white !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px rgb(146, 126, 178) !important;
+}
 
 
 @keyframes fader {
@@ -139,7 +208,9 @@
 }
 
 .landing-desc-alt-txt {
+  margin: auto;
   text-align: center;
+  width: 70%;
 }
 
 .landing-title {
@@ -149,12 +220,6 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
-}
-
-.landing-title-text {
-  font-size: 70px;
-  font-weight: 300;
-  letter-spacing: 1vw;
 }
 
 .landing-top-bar {

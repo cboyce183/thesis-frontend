@@ -46,34 +46,66 @@ class Landing extends Component {
 
   render() {
     return (
-      <div className="LandingHeader">
-        <div className="LandingTitle">
-          <div className="LandingForm">
-            <div className="LandingLogo">
-              {/* <img alt="ZendamaLogo" className="LandingLogoImg" src={require('../../assets/zendomologo.png')} style={{maxHeight:'80px',}}/> */}
-              {/* <h1 className="landing-title-text" style={{color:'#aaa',}}>Zendama</h1> */}
+      <div className="LandingWrapper">
+        <div className="LandingHeader">
+          <div className="HeaderWrapper">
+            <div>
+              <h1 className="landing-title-text">Zendama</h1>
             </div>
-            <div className="LogoTextWrap">
-              <h1>Go together if you want to go far</h1>
-            </div>
-            <div className="LoginForm">
-              <p>Already have an account?</p>
-              <input className="InputLogin"
-                type="email"
-                value={this.state.email}
-                placeholder="Email"
-                onFocus={() => this.setState({noAccess: false, email: '',})}
-                onChange={(e) => this.setState({email: e.target.value,})}
-              />
-              <input type="password" className="InputLogin"
-                value={this.state.password}
-                placeholder="Password"
-                onFocus={() => this.setState({noAccess: false, password: '',})}
-                onChange={(e) => this.setState({password: e.target.value,})}
-              />
-              <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="login" />
+            <div className="HeaderMenu">
             </div>
           </div>
+        </div>
+        <div className="LandingBanner">
+          <div className="LandingTitle">
+            <div className="LandingForm">
+              <div className="LandingLogo"></div>
+              <div className="LogoTextWrap">
+                <h1>Go together if you want to go far</h1>
+              </div>
+              <div className="LoginForm">
+                <p>Already have an account?</p>
+                <input className="InputLogin"
+                  type="email"
+                  value={this.state.email}
+                  placeholder="Email"
+                  onFocus={() => this.setState({noAccess: false, email: '',})}
+                  onChange={(e) => this.setState({email: e.target.value,})}
+                />
+                <input type="password" className="InputLogin"
+                  value={this.state.password}
+                  placeholder="Password"
+                  onFocus={() => this.setState({noAccess: false, password: '',})}
+                  onChange={(e) => this.setState({password: e.target.value,})}
+                />
+                <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="login" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="DividerSection">
+          <div className="Section">
+            <div className="SectionText">
+              <p className='landing-desc-txt'>Share The Love!</p>
+              {/* <p className='landing-desc-alt-txt spacer'>spacer</p> */}
+              <p className='landing-desc-alt-txt'>Zendama is a catalyst for harmony and friendship in the work-place: get rewards for being a good employee and helping out your co-workers or reward those that help you with something that will really make a difference. Sounds awesome right?</p>
+              {/* <p className='landing-desc-alt-txt'>Get rewards for being a good employee and helping out your co-workers.</p>
+              <p className='landing-desc-alt-txt'>Reward those that help you with something that will really make a difference.</p> */}
+              {/* <p className='landing-desc-alt-txt spacer'>spacer</p> */}
+              <p className='landing-desc-alt-txt' style={{paddingBottom:'3vh',}}></p>
+            </div>
+            <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+          </div>
+        </div>
+        <div className="PersonalSection">
+          <div className="Purple">
+            <div className="MainSection">
+            </div>
+          </div>
+          <div className="MainSection">
+          </div>
+        </div>
+        <div className="CorporateSection">
         </div>
       </div>
       // <div className="landing-wrapper">
