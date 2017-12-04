@@ -32,7 +32,6 @@ class App extends Component {
         <Route path="/settings" component={Settings}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/usersignup" component={UserSignup}/>
-        <Route path="/cropping" component={Cropping}/>
         <Route path="/user-wallet" component={UserWallet}/>
         <Route path="/about_corporate" component={AboutCorporate}/>
         <Route path="/about_personal" component={AboutPersonal}/>
