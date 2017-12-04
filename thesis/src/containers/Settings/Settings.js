@@ -26,7 +26,6 @@ class Settings extends Component {
       pending: [],
       isAdmin: false,
       loaded: false,
-      remaning: 0,
       received: 0,
       adminName:'',
       address:'',
@@ -39,7 +38,6 @@ class Settings extends Component {
       weeklyAllow:'',
       allowance:'',
       name:'',
-      saveSettingEdits:{},
       popped: false,
       displayColorPicker: false,
       color: {
@@ -49,12 +47,11 @@ class Settings extends Component {
         a: '0.77',
       },
       userList:[],
-      selectedUser:{},
     }
 
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -192,6 +189,7 @@ class Settings extends Component {
       ) : (
         <ReactFileReader base64={true} handleFiles={this.handleFiles}>
           <div className="logo-upload-container">
+
             { this.state.isAdmin ? (<p className="logo-upload-text">upload your logo</p>) : (<p className="logo-upload-text">upload your picture</p>)  }
           </div>
         </ReactFileReader>
@@ -356,7 +354,6 @@ class Settings extends Component {
                   </div>
                 </div>
               </div>
-
             </div>
             <p className='pwr-by-settings'>Powered by Zendama</p>
           </div>

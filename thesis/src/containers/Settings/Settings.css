@@ -29,6 +29,7 @@
 }
 
 .settings-info{
+  margin: 100px;
   padding: 40px;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -46,6 +47,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.1s linear;
+    margin: 100px;
 }
 
 .logo-upload-container:hover {
@@ -105,9 +107,22 @@
   flex-direction: column;
 }
 
-/*.settings-info-admin{
-  width:50vh;
-}*/
+.footer-pwr-by{
+ position: absolute;
+ right: 0;
+ bottom: 0;
+ left: 0;
+ padding: 1rem;
+ text-align: center;
+}
+
+.settings-color{
+  display: flex;
+}
+
+.settings-label{
+  margin-bottom: 0px;
+}
 
 .mng-users-btn{
   display: flex;
@@ -122,4 +137,12 @@
 .up-theme{
   display: flex;
   flex-direction: column;
+}
+
+.react-file-reader-button{
+  display: flex;
+}
+
+.set-pic{
+  margin-bottom: 30px;
 }
