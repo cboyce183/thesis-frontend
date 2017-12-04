@@ -8,12 +8,17 @@ class Landing extends Component {
     super();
     this.state = {
       email: null,
+      logo: false,
       password: null,
     }
   }
   loginRedir = () => window.location = '/login';
   corporateRedir = () => window.location = '/about_corporate';
   personalRedir = () => window.location = '/about_personal';
+
+  componentDidMount = () => {
+    window.addEventListener('scroll',this.renderLogo);
+  }
 
   saveAccessToken(token){
     window.localStorage.setItem('token', token)
@@ -44,13 +49,21 @@ class Landing extends Component {
     })
   }
 
+  renderLogo = () => {
+    let {logo,} = this.state
+    window.scrollY > 350
+      ? !logo && this.setState({logo:true,})
+      : logo && this.setState({logo:false,})
+  }
+
   render() {
     return (
       <div className="LandingWrapper">
         <div className="LandingHeader">
           <div className="HeaderWrapper">
-            <div>
-              <h1 className="landing-title-text">Zendama</h1>
+            <div className="HeaderLogoWrapper">
+              <img className="HeaderLogo" alt="logo" src={require('../../assets/zendomologo.png')} />
+              <h1 className={`landing-title-text${this.state.logo ? ' HideIt' : ''}`}>Zendama</h1>
             </div>
             <div className="HeaderMenu">
             </div>
