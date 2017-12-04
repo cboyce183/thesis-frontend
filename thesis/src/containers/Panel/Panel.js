@@ -19,7 +19,7 @@ class Panel extends Component {
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
     // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
+    fetch('https://private-3a61ed-zendama.apiary-mock.com/user')
       .then(res => res.json())
       .then(res => {
         if (res.isAdmin) {
@@ -39,7 +39,7 @@ class Panel extends Component {
 
   handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/logout'
+    window.location = '/logout';
   }
 
   //======================= RENDERING
