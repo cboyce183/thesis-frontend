@@ -313,7 +313,7 @@ class Settings extends Component {
                     </div>
                     <div className='settings-pic'>
                       <ReactFileReader base64={true} handleFiles={this.handleFiles}>
-                        <button className='btn-upload-settings' style={style}>Upload Your Logo</button>
+                        <button className='btn-upload-settings' style={style}>Update Your Logo</button>
                       </ReactFileReader>
                       <div className='settings-color'>
                         <input
