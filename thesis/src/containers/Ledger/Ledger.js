@@ -127,8 +127,6 @@ class Ledger extends Component {
           amount: el.amount,})
         return acc;
       }, [])
-      //
-      //
       return (
         <div className="Admin-popUp">
           <div className="Admin-PopUpBlock" onClick={()=> this.setState({popperStat: false,})}>
@@ -164,44 +162,6 @@ class Ledger extends Component {
       )
     }
   }
-
-  // popUp(){
-  //   if(this.state.popperStat) {
-  //     return (
-  //       <div className="Admin-popUp">
-  //         <div className="Admin-PopUpBlock">
-  //           <ForceGraph simulationOptions={{ animate: true, height: 700, width: 700,}}
-  //             xmlnsXlink="http://www.w3.org/1999/xlink"
-  //           >
-  //             {this.state.UserToUser.map((el, i) => {
-  //               return  (
-  //                 <ForceGraphNode
-  //                   key={i}
-  //                   node={{id: el.from.username, radius: el.amount/2,}}
-  //                   fill='#FDE725FF' size={20}
-  //                 />)
-  //             })}
-  //             {this.state.UserToUser.map((el, i) => {
-  //               return  (
-  //                 <ForceGraphNode
-  //                   key={i+100}
-  //                   node={{id: el.to.username, radius: el.amount/2,}}
-  //                   fill='#481B6DFF'
-  //                 />)
-  //             })}
-  //             {this.state.UserToUser.map((el, i) => {
-  //               return  (
-  //                 <ForceGraphLink
-  //                   key={i+1000}
-  //                   link={{ source: el.to.username, value: 10, target: el.from.username,}}
-  //                 />)
-  //             })}
-  //           </ForceGraph>
-  //         </div>
-  //       </div>
-  //     )
-  //   }
-  // }
 
   handleUserSelection = (value) => {
     this.setState({selectedFrom: value,})
@@ -330,122 +290,102 @@ class Ledger extends Component {
   }
 
   render() {
-    console.log('this ledger state', )
     if (this.state.loaded) {
       return (
-        <div>
+        <div style={{display:'flex'}}>
           {this.popUp()}
           {this.filterPopUp()}
+          <div style={{width:'auto', height:'100vh'}} className="nav-full-h">
+              <div
+                onClick={() => {
+                  this.setState({
+                    DisplayUserToUser: true,
+                    DisplayAdminExpense: false,
+                    DisplayUserSpent: false,
+                  })
+                }}
+                className="Transaction-Type"
+                style={{marginTop:'50px'}}
+              >
+              User Transactions
+              </div>
+              <div
+                onClick={async () => {
+                  await this.setState({
+                    DisplayUserToUser: false,
+                    DisplayAdminExpense: false,
+                    DisplayUserSpent: true,
+                  })
+                  this.child.getMounted()
+                }}
+                className="Transaction-Type"
+              >
+              Purchase Requests
+              </div>
+              <div
+                onClick={async () => {
+                  await this.setState({
+                    DisplayUserToUser: false,
+                    DisplayAdminExpense: true,
+                    DisplayUserSpent: false,
+                  })
+                  this.child.getMounted()
+                }}
+                className="Transaction-Type"
+              >
+              Admin Transactions
+              </div>
+              <div className="Transaction-Type"
+                onClick={async () => {
+                  await this.setState({
+                    popperStat: true,
+                  })
+                }}
+              >
+              Economy
+              </div>
+          </div>
+
           <div className="Admin-WalletContainer">
             <div className="Admin-DashContainer">
-              <div className="Admin-HeaderContainer">
-                <div className="Admin-TitleOfPage">Zen flow</div>
+              <div className="Admin-HeaderContainer" style={{display:'flex', flexFlow:'row',justifyContent:'space-between', marginBottom:'20px'}}>
+                <div style={{display:'flex'}}>
+                <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic} style={{height:'40px',width:'40px', borderRadius:'50%', marginRight:'50px'}}/>
+                <div className="Admin-TitleOfPage">Admin Dashboard</div>
+                </div>
                 <Close link="/panel"/>
               </div>
               <div className="Admin-SummaryContainer">
-                <div className="Admin-SummaryDivider">
-                  <div className="Admin-SummaryDividerPie">
-                    <div className="Admin-profileInfo">
-                      <div className="Admin-UserProfilePicture">
-                        <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic}/>
-                      </div>
-                      <div className="Admin-UserProfileName">{this.state.adminDetails.username}</div>
-                    </div>
-                    <div className="Admin-Dashboard">
-                      <div
-                        onClick={() => {
-                          this.setState({
-                            DisplayUserToUser: true,
-                            DisplayAdminExpense: false,
-                            DisplayUserSpent: false,
-                          })
-                        }}
-                        className="Transaction-Type"
-                      >
-                        <div className="FloatBox">
-                          <div> user flow</div>
-                          <img alt="" className="FloatBoxPic" src={require('./../../assets/userFlow.svg')}/>
-                        </div>
-                      </div>
-                      <div
-                        onClick={async () => {
-                          await this.setState({
-                            DisplayUserToUser: false,
-                            DisplayAdminExpense: false,
-                            DisplayUserSpent: true,
-                          })
-                          this.child.getMounted()
-                        }}
-                        className="Transaction-Type"
-                      >
-                        <div className="FloatBox">
-                          <div> spent box</div>
-                          <img alt="" className="FloatBoxPic" src={require('./../../assets/userSpent.svg')}/>
-                        </div>
-                      </div>
-                      <div
-                        onClick={async () => {
-                          await this.setState({
-                            DisplayUserToUser: false,
-                            DisplayAdminExpense: true,
-                            DisplayUserSpent: false,
-                          })
-                          this.child.getMounted()
-                        }}
-                        className="Transaction-Type"
-                      >
-                        <div className="FloatBox">
-                          <div> Admin </div>
-                          <img alt="" className="FloatBoxPic" src={require('./../../assets/adminBallence.svg')}/>
-                        </div>
-                      </div>
-                      <div className="Transaction-Type"
-                        onClick={async () => {
-                          await this.setState({
-                            popperStat: true,
-                          })
-                        }}
-                      >
-                        <div className="FloatBox">
-                          <div> network</div>
-                          <img alt="" className="FloatBoxPic" src={require('./../../assets/networkAdmin.svg')}/>
-                        </div>
-                      </div>
-                    </div>
                     <PieChart className="Admin-PercentSpent"
                       startAngle={0}
                       radius={50}
-                      lineWidth={20}
-                      paddingAngle={3}
+                      lineWidth={30}
+                      paddingAngle={2}
                       animationDuration={1000}
                       animate={true}
                       data={this.giveDistribution()}
                     >
                       <div className="Admin-PerRecivedText">
-                        <div className="Admin-SpentTitle">GIVENS</div>
+                        <div className="Admin-SpentTitle">User Activity</div>
                         <div className="Admin-SpentPer">%</div>
                       </div>
                     </PieChart>
-                  </div>
-                </div>
                 <div className="Admin-SummaryDividerTot">
-                  <div className="Admin-TotSumTitle">
-                    <div className="Admin-ZenFlowLabel">month-zen-flow</div>
-                  </div>
                   <div className="Admin-TotSumIn">
-                    <div className="Admin-ZenInLab">User Zen Flow</div>
+                    <div className="Admin-ZenInLab">User Net Flow</div>
                     <div className="Admin-ZenInNum">{this.sumAdminExpense(this.state.UserToUser)}</div>
                   </div>
                   <div className="Admin-TotSumIn">
-                    <div className="Admin-ZenInLab">User Zen Spent</div>
+                    <div className="Admin-ZenInLab">User Expenses</div>
                     <div className="Admin-ZenInNum">{this.sumAdminExpense(this.state.UserSpent)}</div>
                   </div>
                   <div className="Admin-TotSumIn">
-                    <div className="Admin-ZenInLab">Admin Zen Spent</div>
+                    <div className="Admin-ZenInLab">Admin Expenses</div>
                     <div className="Admin-ZenInNum">{this.sumAdminExpense(this.state.AdminExpense)}</div>
                   </div>
                 </div>
               </div>
+              
               {this.AdminExpenseTransactionList('toBallence', 'amount', 'fromBalence')}
               {this.UserToUserTransactionList()}
             </div>

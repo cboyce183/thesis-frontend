@@ -84,15 +84,15 @@ class TipOrPay extends Component {
       if (this.state.success) {
         return 'SUCCESS!';
       } else {
-        return 'SOMETHING WENT WRONG :(';
+        return 'SOMETHING WENT WRONG';
       }
     } else {
-      return 'TIP';
+      return 'Submit';
     }
   }
 
   renderButtonClass(text) {
-    if (text !== 'TIP') {
+    if (text !== 'Submit') {
       if (text === 'SUCCESS!') {
         return 'Success';
       } else {
@@ -138,35 +138,32 @@ class TipOrPay extends Component {
           <div className="Shadow">
             <div className="SubWidth">
               <div className="TipHeader">
-                <h1>Tip</h1>
+                <h2>Tip</h2>
                 <Close link="/panel"/>
               </div>
               <div className="TipForm">
                 <div className="TipInput">
-                  <h5>who?</h5>
                   <DropDown
                     func={this.handleUserSelection.bind(this)}
-                    placeh="the person you want to give zen to"
+                    placeh="The person you want to give to *"
                     arr={this.state.userList}
                   />
-                  <h5>how much?</h5>
                   <input
                     ref={el => this.quantity = el}
                     className={highlight}
                     type="number"
                     max={this.state.available}
-                    placeholder="the amount of zen you want to give"
+                    placeholder="The amount you want to give *"
                     onChange={this.handleMaxZen}
                     onBlur={this.handleResetZen}
                   />
-                  <h5>why?</h5>
                   <input
                     ref={el => this.reason = el}
                     type="text"
-                    placeholder="the person you're tiping will see this so be nice :-)"
+                    placeholder="Message *"
                   />
                   <input
-                    className={buttonClass}
+                    className="extra-css ${buttonClass}"
                     type="submit"
                     value={message}
                     onClick={() => this.handleTip(this.quantity.value, this.reason.value)}

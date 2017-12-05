@@ -314,6 +314,7 @@ table {
   flex-flow: column;
   height: 100%;
   width: 100%;
+  border-collapse: collapse;
 }
 table thead , table tfoot{
   flex: 0 0 auto;
