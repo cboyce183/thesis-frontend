@@ -38,6 +38,7 @@ class UserSignup extends Component {
       if(!window.location.href.match(/user-id=(.*)$/)){
         // window.location.replace('/about_personal')
       }
+      console.log(query);
 
       fetch(`http://192.168.0.37:4200/signup-user?user-id=${query}`, {
         method: 'POST',
@@ -206,12 +207,14 @@ class UserSignup extends Component {
                     {this.imageChange(this.state.UserImage)}
                   </div>
                   <div className="SignupBox">
-                    <div onClick={async () => {
-                      await this.arePasswordsTheSame(this.state)
-                      await this.checkEmailValid(this.state.UserEmail)
-                      await this.userSignupRequest(this.state)
-                    }}
-                    className="nxt-btn-cp" style={{fontSize:'15px'}}>Sign-up</div>
+                    <div
+                      onClick={async () => {
+                        await this.arePasswordsTheSame(this.state)
+                        await this.checkEmailValid(this.state.UserEmail)
+                        await this.userSignupRequest(this.state)
+                      }}
+                      className="nxt-btn-cp" style={{fontSize:'15px',}}
+                    >Sign-up</div>
                     {this.warningPassWordNotEqual(this.state.passwordWarning)}
                     {this.warningEmailInvalid(this.state.emailWarning)}
                   </div>

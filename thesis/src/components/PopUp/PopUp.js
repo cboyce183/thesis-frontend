@@ -51,7 +51,7 @@ class PopUp extends Component {
           className="PopUpOverlay"
         >
         </div>
-        <div className="PopUp" style={this.props.width ? {width: `${this.props.width}`,} : ''}>
+        <div className="PopUp" style={this.props.width ? {width: `${this.props.width}`,} : {width: '450px',}}>
           {this.props.children}
         </div>
       </div>
