@@ -24,6 +24,8 @@ class UserWallet extends Component {
       popperSpent: false,
       popperRec: false,
       popperDate: false,
+      filter: null,
+      filterpop: false,
     }
   }
 
@@ -179,28 +181,14 @@ class UserWallet extends Component {
     if(this.state.transactionsToDisplay) {
       return this.state.transactionsToDisplay.map((el, i) => {
         return (
-          <div key={el._id} style={{backgroundColor: !!el.spent ? '#ededed' : 'white',}} className="TransactionItem">
-            <div className="TransactionCol">
-              <div className="TransactionPic">
-                <img className="TranscationPicImg" alt="" src={el.profilePic}/>
-              </div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.username}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.date}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.spent ? el.spent : '-'}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.received ? el.received : '-'}</div>
-            </div>
-            <div className="TransactionCol">
-              <div>{el.amount}</div>
-            </div>
-          </div>
+          <tr key={el._id}>
+              <td><img className="TranscationPicImg" alt="" src={el.profilePic}/></td>
+              <td>{el.username}</td>
+              <td>{el.date}</td>
+              <td>{el.spent ? el.spent : '-'}</td>
+              <td>{el.received ? el.received : '-'}</td>
+              <td>{el.amount}</td>
+          </tr>
         )
       })
     }
@@ -224,7 +212,6 @@ class UserWallet extends Component {
   }
 
   handleUserErase = (user) => {
-    // this.props.func('')
     this.setState({selected: [],})
   }
 
@@ -310,93 +297,125 @@ class UserWallet extends Component {
       }
     }
   }
-
+  applyFilter = () => {
+    switch (this.state.filter) {
+      case 'date':
+        return (
+          <input onClick={ () => {
+            this.setState({popperDate: true,})
+          }}
+          className="RemoveFilterButton" type="submit" value="by date"
+          />
+        );
+        break;
+      case 'received':
+        return (
+          <input onClick={ () => {
+            this.setState({popperRec: true,})
+          }}
+          className="RemoveFilterButton" type="submit" value="by received"
+          />
+        );
+        break;
+      case 'spent':
+        return (
+          <input onClick={ () => {
+            this.setState({popperSpent: true,})
+          }}
+          className="RemoveFilterButton" type="submit" value="by spent"
+          />
+        );
+        break;
+      default:
+        return (
+          <div onClick={this.toggleFilter}>
+            {this.renderFilter()}
+          </div>
+        );
+        break;
+    }
+  }
+  toggleFilter = () => {
+    this.setState({ filterpop: !this.state.filterpop })
+  }
+  renderFilter = () => {
+    if (!this.state.filterpop) return ( <div className="popdownsr">filter</div> );    
+    return (
+      <div className="popdown">
+            <div className="popdownjr" onClick={() => this.setState({popperDate:true})}>Date</div>
+            <div className="popdownjr" onClick={() => this.setState({popperRec:true})}>Zen received</div>
+            <div className="popdownjr" onClick={() => this.setState({popperSpent:true})}>Zen given</div>
+            <div className="popdownjr" onClick={() => this.filteringTransactionsForPanel(0,14)}>Reset</div>
+      </div>
+    );
+  }
   render() {
     console.log('this', this.state)
     if (this.state.loaded) {
       return (
-        <div>
+        <div className="WalletWrapper">
           {this.popUp('Filter spent', 'popperSpent')}
           {this.popUp('Filter Rec', 'popperRec')}
           {this.popUp('Filter Date', 'popperDate')}
           <div className="WalletContainer">
-
-            {/* <div className="PannelContainer">
-              <div className="PannelProfileInfo">
-                <div className="UserProfilePicture">
-                  <img className="UserProfileImage" alt="" src={this.state.accountInfo.userInformation.profilePic}/>
-                </div>
-                <div className="UserProfileName">{this.state.accountInfo.userInformation.username}</div>
-              </div>
-              <div className="PannelToolBar"></div>
-            </div> */}
             <div className="DashContainer">
               <div className="HeaderContainer">
-                <div className="TitleOfPage">Zen Transaction Statement</div>
+                <div className="TitleOfPage">History</div>
                 <Close link="/panel"/>
               </div>
               <div className="SummaryContainer">
                 <div className="SummaryDivider">
-                  {/* <div className="pie4you">your overview within company</div> */}
                   <div className="SummaryDividerPie">
-                    <div className="profileInfo">
-                      <div className="UserProfilePicture">
-                        <img className="UserProfileImage" alt="" src={this.state.accountInfo.userInformation.profilePic}/>
-                      </div>
-                      <div className="UserProfileName">{this.state.accountInfo.userInformation.username}</div>
-                    </div>
-                    <PieChart className="PercentSpent"
-                      startAngle={270}
+                    <div style={{display:'flex'}}>
+                    <PieChart className="PercentSpent pie1"
+                      startAngle={0}
                       radius={50}
-                      lineWidth={20}
+                      lineWidth={30}
                       paddingAngle={3}
-                      animationDuration={3000}
+                      animationDuration={2000}
                       animate={true}
                       data={[
-                        { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'black',},
-                        { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#CDCDCD',},]}
+                        { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
+                        { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#ddd',},]}
                     >
                       <div className="PerSpentText">
-                        <div className="SpentTitle">YOUR GIVEN</div>
+                        <div className="SpentTitle">GIVEN</div>
                         <div className="SpentPer">{
                           (Math.round(this.state.accountInfo.yourTotalGiven/
                             this.state.accountInfo.compTotalGiven*1000)/10)
                         }%</div>
                       </div>
                     </PieChart>
-                    <PieChart className="PercentSpent"
+                    <PieChart className="PercentSpent pie2"
                       startAngle={0}
                       radius={50}
-                      lineWidth={20}
+                      lineWidth={30}
                       paddingAngle={3}
-                      animationDuration={3000}
-                      // rounded={true}
+                      animationDuration={2000}
                       animate={true}
                       data={[
-                        { value: this.state.CompRecPer.ZenIn, key: 1, color: 'black',},
-                        { value: this.state.CompRecPer.CompRec, key: 2, color: '#CDCDCD',},]}
+                        { value: this.state.CompRecPer.ZenIn, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
+                        { value: this.state.CompRecPer.CompRec, key: 2, color: '#ddd',},]}
                     >
                       <div className="PerRecivedText">
-                        <div className="SpentTitle">YOUR RECEIVED</div>
+                        <div className="SpentTitle">RECEIVED</div>
                         <div className="SpentPer">{this.state.CompRecPer.UserPercentage}</div>
                       </div>
                     </PieChart>
+                    </div>
                   </div>
                 </div>
                 <div className="SummaryDividerTot">
-                  <div className="TotSumTitle">
-                    <div className="ZenFlowLabel">month-zen-flow</div>
-                  </div>
                   <div className="TotSumIn">
-                    <div className="ZenInLab">Zen Recieved</div>
+                    <div className="ZenInLab">Income</div>
                     <div className="ZenInNum">{this.state.ZenFlowStats.ZenIn}</div>
                   </div>
                   <div className="TotSumIn" id="UnderLineElement">
-                    <div className="ZenInLab">Zen Spent</div>
+                    <div className="ZenInLab">Outgoing</div>
                     <div className="ZenInNum">{this.state.ZenFlowStats.ZenOut}</div>
                   </div>
                   <div className="TotSumIn">
-                    <div className="ZenInLab">Δ Zen</div>
+                    <div className="ZenInLab">Total</div>
                     <div className="ZenInNum" id="ZenLargeDelta">{this.state.ZenFlowStats.DZen}</div>
                   </div>
                 </div>
@@ -411,55 +430,17 @@ class UserWallet extends Component {
                     />
                   </div>
                   <div className="spacedivATM">
-                    <input onClick={ () => {
-                      this.setState({popperDate: true,})
-                    }}
-                    className="RemoveFilterButton" type="submit" value="filter date"
-                    />
+                  {this.applyFilter()}
                   </div>
-                  <div className="spacedivATM">
-                    <input onClick={() => {
-                      this.setState({popperSpent: true,})
-                    }}
-                    className="RemoveFilterButton" type="submit" value="filter spent"
-                    />
-                  </div>
-                  <div className="spacedivATM">
-                    <input onClick={ () => {
-                      this.setState({popperRec: true,})
-                    }}
-                    className="RemoveFilterButton" type="submit" value="filter rec"
-                    />
-                  </div>
-                  <div className="spacedivATM">
-                    <input onClick={ () => {
-                      this.filteringTransactionsForPanel(0,14)
-                      this.handleUserErase()
-                    }}
-                    className="RemoveFilterButton" type="submit" value="All"
-                    />
-                  </div>
+                </div>
 
-                </div>
-                <div className="TransactionItemHeader">
-                  <div className="TransactionTitle">User</div>
-                  <div className="TransactionTitle">ID</div>
-                  <div className="TransactionTitle">Date</div>
-                  <div className="TransactionTitle">Spent</div>
-                  <div className="TransactionTitle">Recieved</div>
-                  <div className="TransactionTitle">Amount</div>
-                </div>
-                <div className="TransactionContainer">
-                  {this.transactionList()}
-                </div>
-                <div className="TransactionSummaryStats">
-                  <div className="TransactionTitle"></div>
-                  <div className="TransactionTitle"></div>
-                  <div className="TransactionTitle">page totals</div>
-                  <div className="TransactionTitle">{this.pageTotal('spent')}</div>
-                  <div className="TransactionTitle">{this.pageTotal('received')}</div>
-                  <div className="TransactionTitle"> Δ {this.pageTotal('received') - this.pageTotal('spent')} </div>
-                </div>
+                <table className="main-table">
+                    <thead><tr><th>user</th><th>id</th><th>date</th><th>given</th><th>received</th><th>net</th></tr></thead>
+                    <tbody>
+                     {this.transactionList()}
+                    </tbody>
+                    <tfoot><tr><th></th><th></th><th></th><th>{this.pageTotal('spent')}</th><th>{this.pageTotal('received')}</th><th>{this.pageTotal('received') - this.pageTotal('spent')}</th></tr></tfoot>
+                </table>
                 <div className="TransactionOverflowBox">
                   {this.displayingNavigationPage()}
                 </div>

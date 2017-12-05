@@ -3,7 +3,7 @@ import './Landing.css';
 // import { Route, } from 'react-router-dom';
 
 class AboutCorporate extends Component {
-  loginRedir = () => window.location = '/login';
+  loginRedir = () => window.location = '/companyregistry';
   corporateRedir = () => window.location = '/about_corporate';
   personalRedir = () => window.location = '/about_personal';
 
