@@ -318,7 +318,7 @@ class Settings extends Component {
                   />
                   <input
                     className="u-full-width settings-input"
-                    type="text"
+                    type="number"
                     name="weeklyAllow"
                     placeholder={this.state.weeklyAllow}
                     disabled={!this.state.editing}
