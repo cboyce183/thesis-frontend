@@ -186,9 +186,9 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton {
+.SectionDividerButton-b {
   height: 15% !important;
-  width: 210px !important;
+  width: 117px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
   transition: all 0.2s ease !important;
@@ -198,7 +198,7 @@
   margin-top: 20px;
 }
 
-.SectionDividerButton:hover {
+.SectionDividerButton-b:hover {
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
@@ -292,7 +292,7 @@
   padding-bottom: 5vh;
 }
 
-.landing-desc {
+.landing-desc-h {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -300,8 +300,8 @@
   padding-bottom:10vh;
   background:
   linear-gradient(
-    rgba(60, 31, 108, 0.45),
-    rgba(89, 76, 114, 0.685)
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
   ),
   url("../../../assets/howitworks.jpg");
   background-size: cover;
@@ -380,7 +380,7 @@
 }
 
 .landing-desc-how {
-  height: fill;
+  height: stretch;
   max-width: 80vw;
   padding: 50px;
   overflow-y: scroll;

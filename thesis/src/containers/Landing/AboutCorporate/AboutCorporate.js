@@ -39,7 +39,7 @@ class AboutCorporate extends Component {
                 <li> We don't give user information away to anyone - not for marketing reasons, not for research, nor for anything.</li>
               </ul>
               <Link to="/">
-                <input type="submit" className='SectionDividerButton' value="Back" />
+                <input type="submit" className='SectionDividerButton-b' value="Back" />
               </Link>
             </div>
           </div>

@@ -185,9 +185,9 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton {
+.SectionDividerButton-b {
   height: 15% !important;
-  width: 210px !important;
+  width: 117px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
   transition: all 0.2s ease !important;
@@ -198,7 +198,7 @@
   margin-left: 15px;
 }
 
-.SectionDividerButton:hover {
+.SectionDividerButton-b:hover {
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
@@ -364,8 +364,8 @@
   margin: 20px;
   background:
   linear-gradient(
-    rgba(27, 11, 54, 0.45),
-    rgba(61, 39, 102, 0.685)
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
   ),
   url("../../../assets/security.jpg");
   background-size: cover;
@@ -374,7 +374,7 @@
 }
 
 .landing-desc-personal {
-  height: fill;
+  height: stretch;
   max-width: 80vw;
   padding: 15px;
   overflow-y: scroll;
@@ -385,7 +385,7 @@
 }
 
 .corp-hover{
-  margin-top: 30px;
+  margin-top: 5%;
   color: white;
 }
 

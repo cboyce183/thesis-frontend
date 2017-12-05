@@ -18,7 +18,7 @@ class HowitWorks extends Component {
           <p className='landing-desc-alt-txt spacer'>spacer</p>
           <h1 className="landing-title-text" style={{color:'#aaa',}}>zendama</h1>
         </div>
-        <div className='landing-desc overlay'>
+        <div className='landing-desc-h overlay'>
           <div className='landing-desc-how'>
             <h3 className='corp-hover'>So how does it work?</h3>
             <ul className='corp-toggle'>
@@ -28,7 +28,7 @@ class HowitWorks extends Component {
               <li> It's really that simple - a happier workplace with less micromanagement, almost overnight.</li>
             </ul>
             <Link to="/">
-              <input type="submit" className='SectionDividerButton' value="Back" />
+              <input type="submit" className='SectionDividerButton-b' value="Back" />
             </Link>
           </div>
         </div>
