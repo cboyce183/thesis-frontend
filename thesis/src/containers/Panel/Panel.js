@@ -18,7 +18,7 @@ class Panel extends Component {
       received: 0,
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
-    console.log((window.localStorage.getItem('token')))
+    // console.log((window.localStorage.getItem('token')))
     if (window.localStorage.getItem('token')) {
       fetch('http://192.168.0.37:4200/company',
         {
@@ -55,8 +55,9 @@ class Panel extends Component {
 
   renderNextSteps = () => {
     const steps = this.state.pending.map((el,i) => {
+      let res;
       if (el === 'users') {
-        return (
+        res = (
           <NextSteps
             key={i}
             text="add employees to Zendama"
@@ -65,7 +66,7 @@ class Panel extends Component {
           />
         )
       } else if (el === 'catalog') {
-        return (
+        res = (
           <NextSteps
             key={i}
             text="add rewards to your Zendama Catalog"
@@ -74,6 +75,7 @@ class Panel extends Component {
           />
         )
       }
+      return res;
     });
     return (
       <div className="NextSteps">

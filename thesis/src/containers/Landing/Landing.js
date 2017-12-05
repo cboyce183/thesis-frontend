@@ -29,12 +29,10 @@ class Landing extends Component {
 
   loginRequest(loginData){
     let headers = new Headers();
-    console.log(loginData);
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
     fetch('http://192.168.0.37:4200/login', {
       headers: headers,
     }).then(response => {
-      console.log(response)
       if (response.status === 401) {
         this.setState({noAccess: true,});
         return 401;
@@ -44,11 +42,13 @@ class Landing extends Component {
       }
     }).then(r => {
       if (r !== 401) {
-        console.log(r);
         this.saveAccessToken(r.token);
         window.location = '/panel';
       }
-      else throw 'ERROR: 401 ACCESS DENIED';
+      else {
+        const err = new Error('ERROR: 401 ACCESS DENIED')
+        throw err;
+      }
     })
   }
 

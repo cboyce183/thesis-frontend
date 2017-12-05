@@ -364,7 +364,7 @@ html {
 }
 
 .landing-desc-personal {
-    height: fill;
+    height: stretch;
     max-width: 80vw;
     padding: 15px;
     overflow-y: scroll;

@@ -1,9 +1,6 @@
 import React, { Component, } from 'react';
 import './AdminExpenseSheet.css'
 import DropDown from '../DropDown/DropDown';
-const popperType = 'popperSpent'
-
-
 
 class AdminExpenseSheet extends Component {
 

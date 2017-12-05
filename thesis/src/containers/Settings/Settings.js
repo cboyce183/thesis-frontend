@@ -9,15 +9,6 @@ import '../../components/PopUp/PopUp.css';
 import SketchPicker from 'react-color';
 import reactCSS from 'reactcss';
 
-
-const style = {
-  borderWidth:'1.5px',
-  borderStyle: 'solid',
-  borderColor: '#040223',
-  fontWeight: '650',
-}
-
-
 class Settings extends Component {
   constructor(props){
     super(props);
