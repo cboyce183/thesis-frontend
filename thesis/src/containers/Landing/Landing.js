@@ -46,8 +46,7 @@ class Landing extends Component {
         window.location = '/panel';
       }
       else {
-        const err = new Error('ERROR: 401 ACCESS DENIED')
-        throw err;
+        alert('Zendama: Invalid credentials, please try again');
       }
     })
   }
