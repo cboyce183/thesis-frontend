@@ -130,7 +130,7 @@ class Landing extends Component {
             </div>
           </div>
           <div className="MainSection">
-            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}}><div style={{backgroundImage:`url(${require('../../assets/rotator.png')})`, backgroundPosition:'center'}}></div></div>
+            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}}></div>
             <div className="MainSectionText">
               <p className='landing-desc-txt'>How does it work?</p>
               <p className='landing-desc-alt-txt'>So you're a tech nerd! Zendama uses blockchain technology to safely handle all Zen transactions within your company; our tech stack in general is pretty cool, so feel free to check it out below.</p>
