@@ -50,20 +50,24 @@ class Ledger extends Component {
   }
 
   getInit(){
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/admin-transactions', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
-    })
-      .then(r => r.json())
-      .then(res => {
-        this.setState({adminDetails: res.adminDetails,})
-        this.setState({loaded: true,})
-        this.filteringTypesOfTransactions(res)
-        this.setState({DisplayUserToUser: true,})
-      })
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/admin-transactions', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},})
+        .then(r => r.json())
+        .then(res => {
+          console.log(res)
+          this.setState({adminDetails: res.adminDetails,})
+          this.setState({loaded: true,})
+          this.filteringTypesOfTransactions(res)
+          this.setState({DisplayUserToUser: true,})
+        })
+    } else {
+      window.location = '/login';
+    }
   }
 
   componentDidMount(){
@@ -385,7 +389,7 @@ class Ledger extends Component {
                   </div>
                 </div>
               </div>
-              
+
               {this.AdminExpenseTransactionList('toBallence', 'amount', 'fromBalence')}
               {this.UserToUserTransactionList()}
             </div>

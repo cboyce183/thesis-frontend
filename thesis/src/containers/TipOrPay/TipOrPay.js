@@ -38,7 +38,7 @@ class TipOrPay extends Component {
           if (res.isAdmin) {
             this.setState({isAdmin:res.isAdmin,});
           } else {
-
+            console.log("company response", res)
             this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
           }
         })
