@@ -1,7 +1,8 @@
 import React, { Component, } from 'react';
 import './Landing.css';
 // import { Route, } from 'react-router-dom';
-import 'gsap';
+import {TweenMax, Elastic} from 'gsap';
+import ReactDOM from 'react-dom';
 import { Link, } from 'react-router-dom';
 import  base64  from 'base-64';
 class Landing extends Component {
@@ -13,12 +14,21 @@ class Landing extends Component {
       password: null,
     }
   }
+  animateTitle = (target) => {
+    return TweenMax.to(ReactDOM.findDOMNode(target), 5, {color:'purple', yoyo:true, repeat:Infinity});
+  }
+  animateHands = (target) => {
+    return TweenMax.to(ReactDOM.findDOMNode(target), 1, {marginBottom:'-60px', yoyo:true, repeat:Infinity});
+  }
+
   loginRedir = () => window.location = '/login';
   corporateRedir = () => window.location = '/about_corporate';
   personalRedir = () => window.location = '/about_personal';
 
   componentDidMount = () => {
     window.addEventListener('scroll',this.renderLogo);
+    this.animateTitle(this.title);
+    this.animateHands(this.hands);
   }
 
   saveAccessToken(token){
@@ -63,7 +73,7 @@ class Landing extends Component {
           <div className="HeaderWrapper">
             <div className="HeaderLogoWrapper">
               <img className={`HeaderLogo${!this.state.logo ? ' HideIt' : ''}`} alt="logo" src={require('../../assets/zendamalogo-purple.png')} />
-              <h1 className="landing-title-text">Zendama</h1>
+              <h1 className="landing-title-text" ref={e => {this.title = e;}}>Zendama</h1>
             </div>
             <div className="HeaderMenu">
             </div>
@@ -110,7 +120,7 @@ class Landing extends Component {
         </div>
         <div className="PersonalSection">
           <div className="Purple">
-            <div className="MainSection">
+            <div className="MainSection" style={{overflow:'hidden'}}>
               <div className="MainSectionText">
                 <p className='landing-desc-txt'>What can Zendama do for your company?</p>
                 <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
@@ -118,7 +128,7 @@ class Landing extends Component {
                   <input type="submit" className='landing-button' value="i wanna know more" />
                 </Link>
               </div>
-              <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}}></div>
+              <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}} ref={e => {this.hands = e;}}></div>
             </div>
           </div>
           <div className="MainSection">

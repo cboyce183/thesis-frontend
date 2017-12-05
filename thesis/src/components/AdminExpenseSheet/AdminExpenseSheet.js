@@ -126,7 +126,7 @@ class AdminExpenseSheet extends Component {
     if(data){
       return data.map((el, i) => {
         return (
-          <tr key={el._id} className="rowow"><td>{el.date}</td><td>{el.reason}</td><td>{el[this.props.trans].username}</td>
+          <tr key={el._id}  className="main-tr"><td>{el.date}</td><td>{el.reason}</td><td>{el[this.props.trans].username}</td>
           <td>{el[col2]}</td><td>{el[col1]}</td></tr>
         )
       })
@@ -176,11 +176,11 @@ class AdminExpenseSheet extends Component {
     return (
       <div className="Admin-SheetContainer">
         <table className="main-table">
-          <thead><tr><th>Date</th><th>Reason</th><th>User</th><th>Ammount</th><th>Balance</th></tr></thead>
-        <tbody>
+          <thead className="main-thead"><tr className="main-tr"><th className="main-th">Date</th><th className="main-th">Reason</th><th className="main-th">User</th><th className="main-th">Ammount</th><th className="main-th">Balance</th></tr></thead>
+        <tbody className="main-tbody">
           {this.AdminExpenseTransactionList(this.state.transactionsToDisplay, this.props.col1, this.props.col2)}
         </tbody>
-        <tfoot><tr><td className="da-button" onClick={() => {this.props.popperFilter()}}>Apply filter</td><td></td><td></td><td>{this.pageTotal(this.state.data, 'amount')}</td><td>{this.pageTotal(this.state.data, 'tobalance')}</td></tr></tfoot>
+        <tfoot className="main-tfoot"><tr className="main-tr"><td className="da-button" onClick={() => {this.props.popperFilter()}}>Apply filter</td><td></td><td></td><td>{this.pageTotal(this.state.data, 'amount')}</td><td>{this.pageTotal(this.state.data, 'tobalance')}</td></tr></tfoot>
         </table>
         <div>{this.displayingNavigationPage()}</div>
       </div>
