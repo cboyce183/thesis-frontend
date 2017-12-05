@@ -122,6 +122,11 @@
 
 .LoginForm {
   height: 37%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .LoginForm > p {
@@ -143,6 +148,30 @@
 }
 
 .landing-button:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+}
+
+.LoginForm > a {
+  align-self: center;
+}
+
+.TakeMeToPanel {
+  height: 23% !important;
+  width: 210px !important;
+  align-self: center;
+  margin-bottom: 150px;
+  background-color: rgba(255,255,255,0.9) !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px !important;
+  border-color: white !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  transition: all 0.2s ease !important;
+  line-height: 3px !important;
+}
+
+.TakeMeToPanel:hover {
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
 }
