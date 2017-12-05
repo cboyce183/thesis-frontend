@@ -313,6 +313,7 @@ table {
   flex-flow: column;
   height: 100%;
   width: 100%;
+  border-collapse: collapse;
 }
 table thead , table tfoot{
   flex: 0 0 auto;
@@ -322,6 +323,7 @@ table tbody {
   flex: 1 1 auto;
   display: block;
   overflow-y: scroll;
+  max-height: 30vh;
 }
 table tbody tr, table tfoot tr{
   width: 100%;

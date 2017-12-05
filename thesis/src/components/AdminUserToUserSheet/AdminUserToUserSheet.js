@@ -162,9 +162,7 @@ class AdminUserToUserSheet extends Component {
             }}
           > &lt; </div>
           <div className="Admin-SheetNumber">
-            <div className="Admin-PageNumber">1 </div>
             <div className="Admin-PagePossNumber"> {this.state.pageNumber} </div>
-            <div className="Admin-PageNumber"> {this.state.pageTotal} </div>
           </div>
           <div onClick={()=> {
             this.incrementThePage()
@@ -189,33 +187,7 @@ class AdminUserToUserSheet extends Component {
     if(data){
       return data.map((el, i) => {
         return (
-          <div key={el._id} className="AX-Admin-TransactionItem">
-            <div className="AX-date">{el.date}</div>
-            <div className="AX-TransData">
-              <div className="AX-Admin-TransactionCol">
-                <div>{el.reason}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol">
-                <div className="Admin-TransactionPic">
-                  <img className="Admin-TranscationPicImg" alt="" src={el.from.profilePic}/>
-                </div>
-                <div className="AX-Admin-TransactionUserName">{el.from.username}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>→</div>
-              </div>
-              <div className="AX-Admin-TransactionCol">
-                <div className="Admin-TransactionPic">
-                  <img className="Admin-TranscationPicImg" alt="" src={el.to.profilePic}/>
-                </div>
-                <div className="AX-Admin-TransactionUserName">{el.to.username}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{el.amount}</div>
-              </div>
-              <div></div>
-            </div>
-          </div>
+           <tr key={el._id}><td>{el.date}</td><td>{el.reason}</td><td>{el.from.username}</td><td>{el.to.username}</td><td>{el.amount}</td></tr>
         )
       })
     }
@@ -229,72 +201,34 @@ class AdminUserToUserSheet extends Component {
     }
   }
 
+  applyFilter = () => {
+    this.props.popperFilter();
+  }
+  resetFilter = () => {
+    this.filteringTransactionsForPanel(this.state.data,0, 9);
+    this.setState({pageNumber: 1,
+      transIncrement: [0,9,],});
+    this.totalNumberOfPagesNeeded(this.state.data);
+    this.setState({filteredTransactions: null,});
+  }
   render() {
-    console.log("the admin child:", this.state)
     return (
       <div className="Admin-SheetContainer">
-        <div className="Admin-BalenceHeader">
-          <div className="Admin-spacedivATM">
-            <input onClick={() => {
-              this.props.popperFilter()
-            }}
-            className="Admin-RemoveFilterButton"
-            id='removeButtonMarginBottom'
-            type="submit" value="filter"
-            />
-          </div>
-          <div className="Admin-spacedivATM">
-            <input onClick={ () => {
-              this.filteringTransactionsForPanel(this.state.data,0, 9)
-              this.setState({pageNumber: 1,
-                transIncrement: [0,9,],})
-              this.totalNumberOfPagesNeeded(this.state.data)
-              this.setState({filteredTransactions: null,})
-            }}
-            className="Admin-RemoveFilterButton"
-            id='removeButtonMarginBottom'
-            type="submit" value="All"
-            />
-          </div>
-        </div>
-        <div className="AX-Admin-TransactionItem">
-          <div className="AX-TransData">
-            <div className="AX-Admin-TransactionCol">
-              <div></div>
-            </div>
-            <div className="AX-Admin-TransactionCol">
-              <div className="AX-Admin-TransactionUserName">Giver</div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div></div>
-            </div>
-            <div className="AX-Admin-TransactionCol">
-              <div className="AX-Admin-TransactionUserName">Reciever</div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>amount</div>
-            </div>
-            <div></div>
-          </div>
-        </div>
-        <div className="Admin-TransactionContainer">
-          {this.UserToUserTransactionList(this.state.transactionsToDisplay)}
-        </div>
-        <div className="AX-Admin-TransactionSummary">
-          <div className="AX-TransData">
-            <div className="AX-Admin-TransactionCol">
-            </div>
-            <div className="AX-Admin-TransactionCol">
-              <div className="AX-Admin-TransactionUserName"></div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              {/* <div>{this.pageTotal(this.state.data, 'amount')}</div> */}
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>{this.pageTotal(this.state.data, 'amount')}</div>
-            </div>
-          </div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+            <th>Date</th><th>Reason</th> <th>Giver</th> <th>Recipient</th> <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+             {this.UserToUserTransactionList(this.state.transactionsToDisplay)}
+          </tbody>
+          <tfoot>
+            <tr>
+            <td className="da-button" onClick={this.applyFilter}>Filter</td> <td className="da-button" onClick={this.resetFilter}>Reset</td> <td></td> <td></td> <td>Total: {this.pageTotal(this.state.data, 'amount')}</td>
+            </tr>
+          </tfoot>
+        </table>
         <div className="Admin-TransactionOverflowBox">
           {this.displayingNavigationPage()}
         </div>

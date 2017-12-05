@@ -27,6 +27,8 @@
 
 .Admin-SummaryContainer{
   display: flex;
+  justify-content: space-around;
+  margin-bottom: 5vh;
 }
 
 .Admin-SummaryDividerPie{
@@ -60,10 +62,11 @@
 }
 
 .Admin-SpentTitle{
-  font-size: 10px;
+  font-size: 20px;
   text-align: center;
 }
 .Admin-SpentPer{
+  text-align: center;
   font-size: 30px;
 }
 
@@ -73,12 +76,14 @@
 }
 
 .Admin-SummaryDividerTot{
+  max-width: 300px;
   flex: 0.666;
   display: flex;
   flex-direction: column;
 }
 
 .Admin-TotSumIn{
+  max-width: 300px;
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -206,6 +211,7 @@
 .Admin-Dashboard{
   display: flex;
   flex-direction: row;
+  margin: 10px 0 10px 0;
 }
 
 .FloatBoxPic{
@@ -224,16 +230,18 @@
 }
 
 .Transaction-Type{
+  font-size: 15px;  
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px;
-  margin-right:5px;
-  height: 30px;
-  padding: 0 20px 0 20px;
+  height: 7.5vh;
+  min-width: 170px;
+  width: 12vw;
   transition: all 0.3s ease;
+  background-color: white
 }
 .Transaction-Type:hover {
+  font-size: 17px;
   background-color: rgba(88, 51, 161, 0.685);
   border-color: rgba(88, 51, 161, 0.685);
   color: white;
@@ -250,4 +258,9 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+.nav-full-h{
+  /* background-color: rgba(88, 51, 161, 0.7); */
+  border-right: 1px solid rgba(0,0,0,0.2);
 }

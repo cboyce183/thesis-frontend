@@ -290,87 +290,86 @@ class Ledger extends Component {
   }
 
   render() {
-    console.log('this ledger state', )
     if (this.state.loaded) {
       return (
-        <div>
+        <div style={{display:'flex'}}>
           {this.popUp()}
           {this.filterPopUp()}
+          <div style={{width:'auto', height:'100vh'}} className="nav-full-h">
+              <div
+                onClick={() => {
+                  this.setState({
+                    DisplayUserToUser: true,
+                    DisplayAdminExpense: false,
+                    DisplayUserSpent: false,
+                  })
+                }}
+                className="Transaction-Type"
+                style={{marginTop:'50px'}}
+              >
+              User Transactions
+              </div>
+              <div
+                onClick={async () => {
+                  await this.setState({
+                    DisplayUserToUser: false,
+                    DisplayAdminExpense: false,
+                    DisplayUserSpent: true,
+                  })
+                  this.child.getMounted()
+                }}
+                className="Transaction-Type"
+              >
+              Purchase Requests
+              </div>
+              <div
+                onClick={async () => {
+                  await this.setState({
+                    DisplayUserToUser: false,
+                    DisplayAdminExpense: true,
+                    DisplayUserSpent: false,
+                  })
+                  this.child.getMounted()
+                }}
+                className="Transaction-Type"
+              >
+              Admin Transactions
+              </div>
+              <div className="Transaction-Type"
+                onClick={async () => {
+                  await this.setState({
+                    popperStat: true,
+                  })
+                }}
+              >
+              Economy
+              </div>
+          </div>
+
           <div className="Admin-WalletContainer">
             <div className="Admin-DashContainer">
               <div className="Admin-HeaderContainer" style={{display:'flex', flexFlow:'row',justifyContent:'space-between', marginBottom:'20px'}}>
-                <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic} style={{height:'40px',width:'40px', borderRadius:'50%'}}/>
+                <div style={{display:'flex'}}>
+                <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic} style={{height:'40px',width:'40px', borderRadius:'50%', marginRight:'50px'}}/>
                 <div className="Admin-TitleOfPage">Admin Dashboard</div>
+                </div>
                 <Close link="/panel"/>
               </div>
               <div className="Admin-SummaryContainer">
-                <div className="Admin-SummaryDivider">
-                  <div className="Admin-SummaryDividerPie">
-                    <div className="Admin-Dashboard">
-                      <div
-                        onClick={() => {
-                          this.setState({
-                            DisplayUserToUser: true,
-                            DisplayAdminExpense: false,
-                            DisplayUserSpent: false,
-                          })
-                        }}
-                        className="Transaction-Type"
-                      >
-                      user flow
-                      </div>
-                      <div
-                        onClick={async () => {
-                          await this.setState({
-                            DisplayUserToUser: false,
-                            DisplayAdminExpense: false,
-                            DisplayUserSpent: true,
-                          })
-                          this.child.getMounted()
-                        }}
-                        className="Transaction-Type"
-                      >
-                      spent box
-                      </div>
-                      <div
-                        onClick={async () => {
-                          await this.setState({
-                            DisplayUserToUser: false,
-                            DisplayAdminExpense: true,
-                            DisplayUserSpent: false,
-                          })
-                          this.child.getMounted()
-                        }}
-                        className="Transaction-Type"
-                      >
-                      admin
-                      </div>
-                      <div className="Transaction-Type"
-                        onClick={async () => {
-                          await this.setState({
-                            popperStat: true,
-                          })
-                        }}
-                      >
-                      network
-                      </div>
-                    </div>
                     <PieChart className="Admin-PercentSpent"
                       startAngle={0}
                       radius={50}
-                      lineWidth={20}
-                      paddingAngle={3}
+                      lineWidth={30}
+                      paddingAngle={2}
                       animationDuration={1000}
                       animate={true}
                       data={this.giveDistribution()}
                     >
                       <div className="Admin-PerRecivedText">
-                        <div className="Admin-SpentTitle">GIVENS</div>
+                        <div className="Admin-SpentTitle">User Activity</div>
                         <div className="Admin-SpentPer">%</div>
                       </div>
                     </PieChart>
-                  </div>
-                </div>
                 <div className="Admin-SummaryDividerTot">
                   <div className="Admin-TotSumIn">
                     <div className="Admin-ZenInLab">User Net Flow</div>
@@ -386,6 +385,7 @@ class Ledger extends Component {
                   </div>
                 </div>
               </div>
+              
               {this.AdminExpenseTransactionList('toBallence', 'amount', 'fromBalence')}
               {this.UserToUserTransactionList()}
             </div>
