@@ -145,6 +145,7 @@ class UserSignup extends Component {
   }
 
   render() {
+    console.log("window....", window.location)
     return (
       <div>
         {this.croppingPopUp()}

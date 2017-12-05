@@ -17,10 +17,6 @@ class Login extends Component {
     window.localStorage.setItem('token', token)
   }
 
-
-
-
-
   async loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
