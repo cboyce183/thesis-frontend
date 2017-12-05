@@ -1,6 +1,9 @@
 import React, { Component, } from 'react';
 import './Landing.css';
 // import { Route, } from 'react-router-dom';
+
+import { Link, } from 'react-router-dom';
+
 import  base64  from 'base-64';
 
 class Landing extends Component {
@@ -62,8 +65,8 @@ class Landing extends Component {
         <div className="LandingHeader">
           <div className="HeaderWrapper">
             <div className="HeaderLogoWrapper">
-              <img className="HeaderLogo" alt="logo" src={require('../../assets/zendomologo.png')} />
-              <h1 className={`landing-title-text${this.state.logo ? ' HideIt' : ''}`}>Zendama</h1>
+              <img className={`HeaderLogo${!this.state.logo ? ' HideIt' : ''}`} alt="logo" src={require('../../assets/zendamalogo-purple.png')} />
+              <h1 className="landing-title-text">Zendama</h1>
             </div>
             <div className="HeaderMenu">
             </div>
@@ -112,7 +115,9 @@ class Landing extends Component {
               <div className="MainSectionText">
                 <p className='landing-desc-txt'>What can Zendama do for your company?</p>
                 <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
-                <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+                <Link className="LinkTunnel" to="/companyregistry">
+                  <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+                </Link>
               </div>
               <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}}></div>
             </div>
@@ -121,7 +126,7 @@ class Landing extends Component {
             <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}}></div>
             <div className="MainSectionText">
               <p className='landing-desc-txt'>How does it work?</p>
-              <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
+              <p className='landing-desc-alt-txt'>So you're a tech nerd! Zendama uses blockchain technology to safely handle all Zen transactions within your company; our tech stach in general is pretty cool, so feel free to check it out below.</p>
               <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
             </div>
           </div>
