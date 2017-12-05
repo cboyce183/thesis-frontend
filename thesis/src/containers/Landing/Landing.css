@@ -1,3 +1,259 @@
+.LandingHeader {
+  width: 100%;
+  height: 60px;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 15px 0 rgb(0,0,0);
+}
+
+.HeaderWrapper {
+  width: 72.5%;
+  height: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.HeaderLogoWrapper {
+  height: 100%;
+  width: 10%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-title-text {
+  /* position: absolute; */
+  /* z-index: 2; */
+  background-color: white;
+  font-size: 2.7rem;
+  line-height: 4.2rem;
+  font-weight: 300;
+  letter-spacing: 0.15vw;
+  margin: 0;
+  color: black;
+}
+
+.HideIt {
+  opacity: 0;
+}
+
+.HeaderLogo {
+  /* position: absolute; */
+  /* z-index: 1; */
+  height: 75%;
+  margin-right: 10px;
+  transition: all 0.2s ease-in;
+}
+
+@keyframes fadein {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@keyframes fadeout {
+  from {opacity: 1}
+  to {opacity: 0}
+}
+
+.LandingBanner {
+  width: 100vw;
+  height: 100vh;
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-position: center, bottom;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
+}
+
+.LandingTitle {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.LandingLogo {
+  flex-shrink: 0.2;
+  width: 100%;
+  height: 20%;
+  margin-bottom: 2.4rem;
+  background-image: url('../../assets/zendamalogo-white.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.LogoTextWrap > h1 {
+  color: white !important;
+}
+
+.InputLogin {
+  border-radius: 0 !important;
+  background-color: rgba(0,0,0,0.55) !important;
+  color: white !important;
+  height: 23% !important;
+  font-family: 'Raleway';
+  font-size: 1.6rem;
+  border: 1px solid white !important;
+  width: 100% !important;
+  margin-bottom: 15px;
+  transition: all 0s ease-in;
+}
+
+.InputLogin:focus{
+  background-color: rgba(0,0,0,0.6) !important;
+}
+
+.InputLogin::-webkit-input-placeholder {
+  color: white;
+}
+
+.LandingForm {
+  margin: auto;
+  width: 45%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.LoginForm {
+  height: 37%;
+}
+
+.LoginForm > p {
+  color: white;
+}
+
+.landing-button {
+  height: 23% !important;
+  width: 140px !important;
+  background-color: rgba(255,255,255,0.9) !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px !important;
+  border-color: white !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  align-self: left !important;
+  transition: all 0.2s ease !important;
+  line-height: 3px !important;
+}
+
+.landing-button:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+}
+
+.DividerSection {
+  height: 45vh;
+  width: 100%;
+  background-color: rgb(255,255,255);
+}
+
+.Section {
+  height: 100%;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.PersonalSection {
+  height: 120vh;
+}
+
+.Purple {
+  width: 100%;
+  height: 60vh;
+  background-image: linear-gradient(rgb(146, 126, 178), rgb(146, 126, 178)) !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.MainSection {
+  height: 60vh;
+  width: 75%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.SectionDividerButton {
+  height: 15% !important;
+  width: 210px !important;
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  transition: all 0.2s ease !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  line-height: 3px !important;
+  margin-top: 20px;
+}
+
+.SectionDividerButton:hover {
+  background-color: white !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px rgb(146, 126, 178) !important;
+}
+
+.MainSectionText {
+  width: 65%;
+}
+
+.MainSection > .MainSectionText > p {
+  font-size: 1.8rem;
+  text-align: left !important;
+  font-weight: 200;
+  margin: 0;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Purple > .MainSection > .MainSectionText > p {
+  text-align: left;
+  margin: 0;
+  margin-top: 20px;
+  width: 100%;
+  padding: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MainSection > .MainSectionText > .landing-desc-txt {
+  text-align: left !important;
+  display: inline-block !important;
+  font-size: 30px;
+  font-weight: 300;
+}
+
+.MainSectionText > .LinkTunnel > .landing-button {
+  width: 210px !important;
+  margin-top: 30px !important;
+}
+
+.SectionImage {
+  height: 100%;
+  width: 25%;
+  /* background-image: url('../../assets/solidarity.svg'); */
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+}
+
 
 @keyframes fader {
     0% {
@@ -12,78 +268,54 @@ html {
 }
 
 .landing-wrapper {
-    animation: fader 0.5s ease;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  animation: fader 0.5s ease;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .landing-business {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 20vh;
-    background: linear-gradient(rgb(217,217,252), rgba(217, 217, 252, 0.65), rgb(217,217,252));
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 20vh;
+  background: linear-gradient(rgb(217,217,252), rgba(217, 217, 252, 0.65), rgb(217,217,252));
+  padding-top: 5vh;
+  padding-bottom: 5vh;
 }
 
 .landing-desc {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top:5vh;
-    padding-bottom:10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:5vh;
+  padding-bottom:10vh;
 }
 
 .landing-desc-txt {
-    padding-bottom: 2vh;
-    font-size: 30px;
-    text-align: center;
+  padding-bottom: 2vh;
+  font-size: 30px;
+  text-align: center;
 }
 
 .landing-desc-alt-txt {
-    text-align: center;
-}
-
-.landing-button {
-    height: 5px;
-    width: 70px;
-    padding: 15px;
-    background-color: white;
-    color: rgba(88, 51, 161, 0.685);
-    border: solid 1px;
-    border-color: rgba(88, 51, 161, 0.685);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 1vw;
-    margin-left: 1vw;
-    transition: all 0.2s ease;
-}
-
-.landing-button:hover {
-    background-color: rgba(88, 51, 161, 0.685);
-    color: white;
+  margin: auto;
+  text-align: center;
+  width: 70%;
 }
 
 .landing-title {
-    padding-top: 5vh;
-    display: flex;
-    flex-basis: row;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-}
-
-.landing-title-text {
-    font-size: 70px;
-    font-weight: 300;
-    letter-spacing: 1vw;
+  padding-top: 5vh;
+  display: flex;
+  flex-basis: row;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
 
 .landing-top-bar {
@@ -97,38 +329,38 @@ html {
 }
 
 .landing-bottom-bar {
-    background-color: rgb(217,217,252);
-    width: 100vw;
-    height: 5vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 1vh;
+  background-color: rgb(217,217,252);
+  width: 100vw;
+  height: 5vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1vh;
 }
 
 .spacer {
-    opacity:0;
+  opacity:0;
 }
 
 .smallspacer {
-    opacity:0;
+  opacity:0;
 }
 
 .corp-container {
-    width: 70vw;
+  width: 70vw;
 }
 
 ::-webkit-scrollbar {
-    width: 0px;
+  width: 0px;
 }
 
 .landing-desc-corp {
-    border-width: 20px;
-    border-style: solid;
-    border-color: white;
-    overflow-y: scroll;
-    margin: 20px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: white;
+  overflow-y: scroll;
+  margin: 20px;
 }
 
 .landing-desc-personal {
