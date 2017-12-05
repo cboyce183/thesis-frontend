@@ -71,7 +71,6 @@ class Catalog extends Component {
   }
 
   handlePopUp = (product) => {
-    console.log("handle product ", product)
     this.setState({
       selectedProduct: product,
       popped: !this.state.popped,

@@ -1,6 +1,7 @@
 import React, { Component, } from 'react';
 import ReactFileReader from 'react-file-reader';
 import validator from 'email-validator';
+import  base64  from 'base-64';
 
 import { connect, } from 'react-redux';
 import { saveCompanyInfo, } from '../../actions';
@@ -71,9 +72,22 @@ class CompanyRegistry extends Component {
           weeklyAllow: this.state.weeklyAllow,
         }),
       })
-        .then(response => {
-          if (response.status === 409) alert('chosen e-mail already exists')
-          if (response.status === 201) window.location = '/login';
+        .then(res => {
+          if (res.status === 409) alert('chosen e-mail already exists')
+          if (res.status === 201) {
+            let headers = new Headers();
+            headers.append('Authorization', `Basic ${base64.encode(`${this.state.email}:${this.state.password}`)}`);
+            fetch('http://192.168.0.37:4200/login', {
+              headers: headers,
+              mode: 'cors',
+            })
+              .then(res => res.json())
+              .then(res => {
+                window.localStorage.setItem('token', res.token)
+                window.location = '/panel';
+              })
+              .catch(e => console.error(e));
+          }
         })
         .catch(e => console.error(e));
   }

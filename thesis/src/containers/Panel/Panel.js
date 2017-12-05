@@ -31,8 +31,8 @@ class Panel extends Component {
         .then(res => res.json())
         .then(res => {
           if (res.isAdmin) {
-            if (!res.catalogN) this.setState({pending: ['catalogN',],});
-            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'usersN',],});
+            if (!res.catalogN) this.setState({pending: ['catalog',],});
+            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'users',],});
             this.setState({isAdmin:res.isAdmin,});
             this.setState({totalGiven:res.totalGiven,});
           } else {
@@ -48,7 +48,7 @@ class Panel extends Component {
 
   handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/login';
+    window.location = '/';
   }
 
   //======================= RENDERING
@@ -89,7 +89,6 @@ class Panel extends Component {
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps()
       : '';
-      console.log(this.state)
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="PanelPosition">
