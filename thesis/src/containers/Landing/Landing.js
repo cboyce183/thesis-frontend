@@ -106,7 +106,9 @@ class Landing extends Component {
               <p className='landing-desc-alt-txt'>Zendama is a catalyst for harmony and friendship in the work-place: get rewards for being a good employee and helping out your co-workers or reward those that help you with something that will really make a difference. Sounds awesome right?</p>
               {/* <p className='landing-desc-alt-txt' style={{paddingBottom:'3vh',}}></p> */}
             </div>
-            <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+            <Link to="/about_personal">
+              <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+            </Link>
           </div>
         </div>
         <div className="PersonalSection">
@@ -115,7 +117,7 @@ class Landing extends Component {
               <div className="MainSectionText">
                 <p className='landing-desc-txt'>What can Zendama do for your company?</p>
                 <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
-                <Link className="LinkTunnel" to="/companyregistry">
+                <Link className="LinkTunnel" to="/about_corporate">
                   <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
                 </Link>
               </div>
@@ -127,7 +129,9 @@ class Landing extends Component {
             <div className="MainSectionText">
               <p className='landing-desc-txt'>How does it work?</p>
               <p className='landing-desc-alt-txt'>So you're a tech nerd! Zendama uses blockchain technology to safely handle all Zen transactions within your company; our tech stach in general is pretty cool, so feel free to check it out below.</p>
-              <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+              <Link className="LinkTunnel" to="/HowitWorks">
+                <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+              </Link>
             </div>
           </div>
         </div>

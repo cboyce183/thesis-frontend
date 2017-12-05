@@ -34,6 +34,7 @@
   letter-spacing: 0.15vw;
   margin: 0;
   color: black;
+  margin-right: 50px;
 }
 
 .HideIt {
@@ -61,7 +62,7 @@
 .LandingBanner {
   width: 100vw;
   height: 100vh;
-  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../../assets/banner.jpg');
   background-position: center, bottom;
   background-size: cover, cover;
   background-repeat: no-repeat;
@@ -79,7 +80,7 @@
   width: 100%;
   height: 20%;
   margin-bottom: 2.4rem;
-  background-image: url('../../assets/zendamalogo-white.png');
+  background-image: url('../../../assets/zendamalogo-white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -275,6 +276,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .landing-business {
@@ -282,19 +285,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 105vw;
   height: 20vh;
   background: linear-gradient(rgb(217,217,252), rgba(217, 217, 252, 0.65), rgb(217,217,252));
   padding-top: 5vh;
   padding-bottom: 5vh;
 }
 
-.landing-desc {
+.landing-desc-per {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top:5vh;
   padding-bottom:10vh;
+  background:
+  linear-gradient(
+    rgba(60, 31, 108, 0.45),
+    rgba(89, 76, 114, 0.685)
+  ),
+  url("../../../assets/sharethelove.jpg");
+  background-size: cover;
+  padding-left: 40px;
+  padding-right: 15px;
+}
+
+.landing-desc-per p{
+  color: white;
 }
 
 .landing-desc-txt {
@@ -366,6 +382,40 @@
 .landing-desc-personal {
     height: fill;
     max-width: 80vw;
-    padding: 15px;
+    padding: 50px;
     overflow-y: scroll;
+    margin-left: 50%;
+    margin-top: 8%;
+}
+
+
+.twitter-icon{
+  margin-right: 50px;
+}
+
+.settings-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  border: solid 1px;
+  padding: 0 15px 0 15px;
+  background-color: #b494d0;
+  color: white;
+  transition: all 0.2s ease;
+  margin-top: 2.5vh;
+  text-decoration: none;
+}
+
+.settings-btn a{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.settings-btn:hover {
+  background-color: rgba(100, 69, 128, 1);
+  color: white;
 }

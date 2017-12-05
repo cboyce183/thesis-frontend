@@ -61,7 +61,7 @@
 .LandingBanner {
   width: 100vw;
   height: 100vh;
-  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../../assets/banner.jpg');
   background-position: center, bottom;
   background-size: cover, cover;
   background-repeat: no-repeat;
@@ -79,7 +79,7 @@
   width: 100%;
   height: 20%;
   margin-bottom: 2.4rem;
-  background-image: url('../../assets/zendamalogo-white.png');
+  background-image: url('../../../assets/zendamalogo-white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -195,6 +195,7 @@
   border-radius: 0 !important;
   line-height: 3px !important;
   margin-top: 20px;
+  margin-left: 15px;
 }
 
 .SectionDividerButton:hover {
@@ -361,11 +362,46 @@
   border-color: white;
   overflow-y: scroll;
   margin: 20px;
+  background:
+  linear-gradient(
+    rgba(27, 11, 54, 0.45),
+    rgba(61, 39, 102, 0.685)
+  ),
+  url("../../../assets/security.jpg");
+  background-size: cover;
+  padding-left: 40px;
+  padding-right: 50px;
 }
 
 .landing-desc-personal {
-    height: fill;
-    max-width: 80vw;
-    padding: 15px;
-    overflow-y: scroll;
+  height: fill;
+  max-width: 80vw;
+  padding: 15px;
+  overflow-y: scroll;
+}
+
+.corp-toggle{
+  color:white;
+}
+
+.corp-hover{
+  margin-top: 30px;
+  color: white;
+}
+
+.corp-hover-2{
+  margin-top: 30px;
+  color: white;
+  text-align: end;
+}
+
+.corp-p-l{
+  margin-right: 50%;
+}
+
+.corp-p-2{
+margin-left: 50%;
+}
+ul li{
+  color:white;
 }
