@@ -73,7 +73,7 @@ class CompanyRegistry extends Component {
       })
         .then(response => {
           if (response.status === 409) alert('chosen e-mail already exists')
-          if (response.status === 201) window.location = '/panel';
+          if (response.status === 201) window.location = '/login';
         })
         .catch(e => console.error(e));
   }

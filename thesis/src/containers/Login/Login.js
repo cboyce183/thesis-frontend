@@ -17,23 +17,34 @@ class Login extends Component {
     window.localStorage.setItem('token', token)
   }
 
-  loginRequest(loginData){
+
+
+
+
+  async loginRequest(loginData){
     let headers = new Headers();
     headers.append('Authorization', 'Basic ' + base64.encode(loginData.email + ':' + loginData.password));
-    fetch('http://192.168.0.37:4200/login', {
-      headers: headers,
-    }).then(response => {
-      if (response.status === 401) {
-        this.setState({noAccess: true,});
-      }
-      if (response.status === 200){
-        return (response.json())
-      }
-    })
-      .then(r => {
-        this.saveAccessToken(r.token)
-        window.location = '/panel';
+
+    const token = await window.localStorage.getItem('token')
+    console.log('token', token)
+    if (!token) {
+      fetch('http://192.168.0.37:4200/login', {
+        headers: headers,
+        mode: 'cors',
+      }).then(response => {
+        console.log(response)
+        return response.json()
       })
+        .then(r => {
+          console.log("response", r)
+          this.saveAccessToken(r.token)
+          window.location = '/panel';
+        })
+    }
+    else {
+      window.location = '/panel';
+    }
+
   }
 
   accessNotification(bool){

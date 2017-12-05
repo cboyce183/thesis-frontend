@@ -23,18 +23,25 @@ class UserSignup extends Component {
   }
 
 
-  userSignupRequest(theProps){
+  async userSignupRequest(theProps){
     if (this.state.passwordsValid && this.state.emailValid && theProps.UserPassword2 !== '') {
-      const UserDataObject = {
+      const UserDataObject = await {
         profilePic:  theProps.UserImage,
         email:  theProps.UserEmail,
-        password:  theProps.UserPasssword2,
+        password:  theProps.UserPassword2,
         username: theProps.UserName,
         firstName: theProps.firstName,
         lastName: theProps.lastName
       }
-      const query = window.location.href.match(/user-id=(.*)$/)[1];
-      fetch(`http://localhost:4200/signup-user?user-id=${query}`, {
+      console.log("userinfo", UserDataObject)
+      const query = await window.location.href.match(/user-id=(.*)$/)[1];
+      console.log("from window", window.location)
+      if(!window.location.href.match(/user-id=(.*)$/)){
+        console.log("redirect", query)
+        // window.location.replace('/about_personal')
+      }
+
+      fetch(`http://192.168.0.37:4200/signup-user?user-id=${query}`, {
         method: 'POST',
         headers: {
           'Content-Type' : 'application/json',
@@ -176,7 +183,7 @@ class UserSignup extends Component {
                       value={this.state.UserName}
                       placeholder="Username"
                       onChange={(e) =>
-                        this.setState({UserUsername: e.target.value,})
+                        this.setState({UserName: e.target.value,})
                       }
                     />
                     <input type="password" className="u-full-width"

@@ -18,28 +18,37 @@ class Panel extends Component {
       received: 0,
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
-    // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
-      .then(res => res.json())
-      .then(res => {
-        if (res.isAdmin) {
-          if (!res.catalog.length) this.setState({pending: ['catalog',],});
-          if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
-          this.setState({isAdmin:res.isAdmin,});
-        } else {
-          this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
-        }
-        this.setState({loaded: true,});
-      })
-      .catch(e => console.error(e));
-    // } else {
-    //   window.location = '/login';
-    // }
+    console.log((window.localStorage.getItem('token')))
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.isAdmin) {
+            if (!res.catalogN) this.setState({pending: ['catalogN',],});
+            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'usersN',],});
+            this.setState({isAdmin:res.isAdmin,});
+            this.setState({totalGiven:res.totalGiven,});
+          } else {
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+          }
+          this.setState({loaded: true,});
+        })
+        .catch(e => console.error(e));
+    } else {
+      window.location = '/login';
+    }
   }
 
   handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/logout';
+    window.location = '/login';
   }
 
   //======================= RENDERING
@@ -78,6 +87,7 @@ class Panel extends Component {
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps()
       : '';
+      console.log(this.state)
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="PanelPosition">
@@ -97,7 +107,7 @@ class Panel extends Component {
             <PanelSquare
               isSummary={true}
               title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
-              zen={this.state.isAdmin ? '64219' : this.state.received}
+              zen={this.state.isAdmin ? this.state.totalGiven : this.state.received}
               link={this.state.isAdmin ? '/ledger' : '/user-wallet'}
             />
             <PanelSquare

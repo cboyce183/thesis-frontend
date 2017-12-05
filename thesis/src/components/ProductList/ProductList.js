@@ -9,17 +9,18 @@ class ProductList extends Component {
 
   renderProductList(arr) {
     return arr.map((el,i) =>{
+      console.log(el)
       return (
         <ProductItem
           isAdmin={this.props.isAdmin}
           pop={this.props.pop}
           key={i}
-          id={el.id}
+          id={el._id}
           isService={el.isService}
           schedule={el.schedule}
           description={el.description}
-          price={el.value}
-          image={el.img}
+          price={el.price}
+          image={el.picture}
           title={el.name}
         />
       )

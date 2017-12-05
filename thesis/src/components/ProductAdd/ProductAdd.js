@@ -49,17 +49,24 @@ class ProductAdd extends Component {
   }
 
   handleCreate = ({title, price, info,}) => {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/product', {
+    console.log("image path", this.state.imagePath)
+    fetch('http://192.168.0.37:4200/catalog', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
       method: 'POST',
       body: JSON.stringify({
-        img: this.state.imagePath,
+        picture: this.state.imagePath,
         description: info,
         name: title,
-        value: price,
+        price: price,
         isService: this.props.service === 'Services',
         schedule: this.handleSelectedDateFormat(),
       }),
-    }).then(res => console.log(res));
+    }).then(res => {
+      window.location = '/catalog'; /// need to be more gentel!!!!
+      console.log(res)});
   }
 
   //===========================================RENDERING
