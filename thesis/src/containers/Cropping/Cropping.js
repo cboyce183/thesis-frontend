@@ -3,6 +3,8 @@ import { Cropper, } from 'react-image-cropper';
 // import { connect, } from 'react-redux';
 // import { doneCroppedImage, } from './../../actions'
 import { NavLink, } from 'react-router-dom';
+
+import PopUp from '../../components/PopUp/PopUp';
 import './Cropping.css'
 
 class Cropping extends Component {
@@ -16,7 +18,6 @@ class Cropping extends Component {
       base64Image: null,
     }
   }
-
 
   handleImageLoaded(state){
     this.setState({
@@ -42,53 +43,53 @@ class Cropping extends Component {
     if (!this.state.base64Image) {
       return (
         <div className='cropping-placeholder'>
-           <p>Choose a file</p>
+          <p>Choose a file</p>
         </div>
       );
     } else {
-      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
+      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref="image" onImgLoad={() => this.handleImageLoaded('image')}/>
     }
   }
 
-
-
   render() {
-    // console.log("the props", this.props)
     return (
-      <div className="ContainerCrop">
-        <div className="MainPannelCrop">
-          <div className="UserInputContainerCrop">
-            {this.imageChange(this.state.profilePicLoad)}
-          </div>
-          <div className="AboutContainerCrop">
-            <div className="ImageLoad">
-              <div className="TitlePicture">Add your profile picture</div>
-              <input className="FileLoad" type="file"
-                onChange={(e) => {
-                  this.setState({
-                    profilePic: e.target.files,
-                    profilePicLoad: true,})
-                }}
-              />
+      <PopUp
+        width="1000px"
+        unpop={() => this.props.unpop(null)}
+      >
+        <div className="ContainerCrop">
+          <div className="MainPannelCrop">
+            <div className="UserInputContainerCrop">
+              {this.imageChange(this.state.profilePicLoad)}
             </div>
-            <div className="CropButton">
-              <input className="CropperButton" type="submit" value="Crop image"
-                onClick={() => this.handleClick('image')}
-              />
-              <NavLink to='/usersignup'>
-                <input className="DoneBox" type="submit" value="done"
-                  onClick={() => this.props.passImage(this.state.image)}
+            <div className="AboutContainerCrop">
+              <div className="ImageLoad">
+                <div className="TitlePicture">Add your profile picture</div>
+                <input className="FileLoad" type="file"
+                  onChange={(e) => {
+                    this.setState({
+                      profilePic: e.target.files,
+                      profilePicLoad: true,})
+                  }}
                 />
-              </NavLink>
-            </div>
-            <div className="CroppedImageBox">
-              <div className="CroppedImageContainer">
-                <img className="CroppedImage" src={this.state.image} alt=""/>
+              </div>
+              <div className="CropButton">
+                <input className="CropperButton" type="submit" value="Crop image"
+                  onClick={() => this.handleClick('image')}
+                />
+                <input className="DoneBox" type="submit" value="done"
+                  onClick={() => this.props.unpop(this.state.image)}
+                />
+              </div>
+              <div className="CroppedImageBox">
+                <div className="CroppedImageContainer">
+                  <img className="CroppedImage" src={this.state.image} alt=""/>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </PopUp>
     )
   }
 }

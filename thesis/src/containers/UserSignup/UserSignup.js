@@ -12,32 +12,30 @@ class UserSignup extends Component {
       emailValid: false,
       emailWarning: false,
       croppingLoad: false,
+      popped: false,
       UserImage: null,
       UserEmail: null,
       UserPassword1: null,
       UserPassword2: null,
       UserName: null,
       firstName: null,
-      lastName: null
+      lastName: null,
     }
   }
 
 
   async userSignupRequest(theProps){
     if (this.state.passwordsValid && this.state.emailValid && theProps.UserPassword2 !== '') {
-      const UserDataObject = await {
+      const UserDataObject = {
         profilePic:  theProps.UserImage,
         email:  theProps.UserEmail,
         password:  theProps.UserPassword2,
         username: theProps.UserName,
         firstName: theProps.firstName,
-        lastName: theProps.lastName
+        lastName: theProps.lastName,
       }
-      console.log("userinfo", UserDataObject)
       const query = await window.location.href.match(/user-id=(.*)$/)[1];
-      console.log("from window", window.location)
       if(!window.location.href.match(/user-id=(.*)$/)){
-        console.log("redirect", query)
         // window.location.replace('/about_personal')
       }
 
@@ -127,87 +125,84 @@ class UserSignup extends Component {
     this.removePasswordWarning()
   }
 
-
-  passImage = (image) => {
-    this.setState({UserImage: image, croppingLoad: false,})
+  handlePopUp = (image) => {
+    this.setState({
+      UserImage: image,
+      popped: !this.state.popped,
+    })
   }
+
   croppingPopUp(){
-    if(this.state.croppingLoad) {
+    if (this.state.popped) {
       return (
-        <div className="PopUpBackground">
-          <div className="CroppingBlock">
-            <Crop passImage={this.passImage}/>
-          </div>
-        </div>
+        <Crop unpop={this.handlePopUp.bind(this)}/>
       )
     }
-
   }
 
   render() {
-    console.log("window....", window.location)
     return (
       <div>
         {this.croppingPopUp()}
         <div className="Container">
           <div className="MainPannel">
             <div className="UserInputContainer">
-            <h4 style={{alignSelf:'center', paddingBottom:'5vh'}}>User Sign-up</h4>
+              <h4 style={{alignSelf:'center', paddingBottom:'5vh'}}>User Sign-up</h4>
               <div className="UserInputBox">
                 <div className="LoginDetails">
-                    <input className="u-full-width"
-                      type="email"
-                      value={this.state.firstName}
-                      placeholder="First name"
-                      onChange={(e) =>
-                        this.setState({firstName: e.target.value,})
-                      }
-                    />
-                    <input className="u-full-width"
-                      type="email"
-                      value={this.state.LastName}
-                      placeholder="Last name"
-                      onChange={(e) =>
-                        this.setState({lastName: e.target.value,})
-                      }
-                    />
-                    <input className="u-full-width"
-                      type="email"
-                      value={this.state.UserEmail}
-                      placeholder="E-mail"
-                      onFocus={this.removeEmail}
-                      onChange={(e) =>
-                        this.setState({UserEmail: e.target.value,})
-                      }
-                    />
-                    <input type="text" className="u-full-width"
-                      value={this.state.UserName}
-                      placeholder="Username"
-                      onChange={(e) =>
-                        this.setState({UserName: e.target.value,})
-                      }
-                    />
-                    <input type="password" className="u-full-width"
-                      value={this.state.UserPassword1}
-                      placeholder="Password"
-                      name="UserPassword1"
-                      onFocus={(e) => this.removePassword(e.target.name)}
-                      onChange={(e) => {
-                        this.setState({UserPassword1: e.target.value,})
-                      }}
-                    />
-                    <input type="password" className="u-full-width" id="pass2"
-                      value={this.state.UserPassword2}
-                      placeholder="Confirm password"
-                      name="UserPassword2"
-                      onFocus={(e) => this.removePassword(e.target.name)}
-                      onChange={(e) => {
-                        this.setState({UserPassword2: e.target.value,})
-                      }}
-                    />
+                  <input className="u-full-width"
+                    type="email"
+                    value={this.state.firstName}
+                    placeholder="First name"
+                    onChange={(e) =>
+                      this.setState({firstName: e.target.value,})
+                    }
+                  />
+                  <input className="u-full-width"
+                    type="email"
+                    value={this.state.LastName}
+                    placeholder="Last name"
+                    onChange={(e) =>
+                      this.setState({lastName: e.target.value,})
+                    }
+                  />
+                  <input className="u-full-width"
+                    type="email"
+                    value={this.state.UserEmail}
+                    placeholder="E-mail"
+                    onFocus={this.removeEmail}
+                    onChange={(e) =>
+                      this.setState({UserEmail: e.target.value,})
+                    }
+                  />
+                  <input type="text" className="u-full-width"
+                    value={this.state.UserName}
+                    placeholder="Username"
+                    onChange={(e) =>
+                      this.setState({UserName: e.target.value,})
+                    }
+                  />
+                  <input type="password" className="u-full-width"
+                    value={this.state.UserPassword1}
+                    placeholder="Password"
+                    name="UserPassword1"
+                    onFocus={(e) => this.removePassword(e.target.name)}
+                    onChange={(e) => {
+                      this.setState({UserPassword1: e.target.value,})
+                    }}
+                  />
+                  <input type="password" className="u-full-width" id="pass2"
+                    value={this.state.UserPassword2}
+                    placeholder="Confirm password"
+                    name="UserPassword2"
+                    onFocus={(e) => this.removePassword(e.target.name)}
+                    onChange={(e) => {
+                      this.setState({UserPassword2: e.target.value,})
+                    }}
+                  />
                 </div>
                 <div className="LoginSend">
-                  <div style={{zIndex:1}} className="ProfilePicBoxWrapper" onClick={() => this.setState({croppingLoad: true,})}>
+                  <div style={{ zIndex:1, }} className="ProfilePicBoxWrapper" onClick={() => this.setState({popped: true,})}>
                     {this.imageChange(this.state.UserImage)}
                   </div>
                   <div className="SignupBox">

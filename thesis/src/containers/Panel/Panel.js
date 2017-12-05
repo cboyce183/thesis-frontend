@@ -89,7 +89,6 @@ class Panel extends Component {
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps()
       : '';
-      console.log(this.state)
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="PanelPosition">
