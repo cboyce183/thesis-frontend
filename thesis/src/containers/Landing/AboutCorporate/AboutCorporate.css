@@ -61,7 +61,7 @@
 .LandingBanner {
   width: 100vw;
   height: 100vh;
-  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../../assets/banner.jpg');
   background-position: center, bottom;
   background-size: cover, cover;
   background-repeat: no-repeat;
@@ -79,7 +79,7 @@
   width: 100%;
   height: 20%;
   margin-bottom: 2.4rem;
-  background-image: url('../../assets/zendamalogo-white.png');
+  background-image: url('../../../assets/zendamalogo-white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -185,9 +185,9 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton {
+.SectionDividerButton-b {
   height: 15% !important;
-  width: 210px !important;
+  width: 117px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
   transition: all 0.2s ease !important;
@@ -195,9 +195,10 @@
   border-radius: 0 !important;
   line-height: 3px !important;
   margin-top: 20px;
+  margin-left: 15px;
 }
 
-.SectionDividerButton:hover {
+.SectionDividerButton-b:hover {
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
@@ -263,6 +264,9 @@
         opacity: 1
     }
 }
+/*html {
+    overflow: hidden;
+}*/
 
 .landing-wrapper {
   animation: fader 0.5s ease;
@@ -358,11 +362,46 @@
   border-color: white;
   overflow-y: scroll;
   margin: 20px;
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/security.jpg");
+  background-size: cover;
+  padding-left: 40px;
+  padding-right: 50px;
 }
 
 .landing-desc-personal {
-    height: stretch;
-    max-width: 80vw;
-    padding: 15px;
-    overflow-y: scroll;
+  height: stretch;
+  max-width: 80vw;
+  padding: 15px;
+  overflow-y: scroll;
+}
+
+.corp-toggle{
+  color:white;
+}
+
+.corp-hover{
+  margin-top: 5%;
+  color: white;
+}
+
+.corp-hover-2{
+  margin-top: 30px;
+  color: white;
+  text-align: end;
+}
+
+.corp-p-l{
+  margin-right: 50%;
+}
+
+.corp-p-2{
+margin-left: 50%;
+}
+ul li{
+  color:white;
 }
