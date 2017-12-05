@@ -48,7 +48,7 @@ class Panel extends Component {
 
   handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/login';
+    window.location = '/';
   }
 
   //======================= RENDERING
