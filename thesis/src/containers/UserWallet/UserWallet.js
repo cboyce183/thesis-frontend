@@ -182,12 +182,12 @@ class UserWallet extends Component {
       return this.state.transactionsToDisplay.map((el, i) => {
         return (
           <tr key={el._id}>
-              <td><img className="TranscationPicImg" alt="" src={el.profilePic}/></td>
-              <td>{el.username}</td>
-              <td>{el.date}</td>
-              <td>{el.spent ? el.spent : '-'}</td>
-              <td>{el.received ? el.received : '-'}</td>
-              <td>{el.amount}</td>
+            <td><img className="TranscationPicImg" alt="" src={el.profilePic}/></td>
+            <td>{el.username}</td>
+            <td>{el.date}</td>
+            <td>{el.spent ? el.spent : '-'}</td>
+            <td>{el.received ? el.received : '-'}</td>
+            <td>{el.amount}</td>
           </tr>
         )
       })
@@ -299,47 +299,43 @@ class UserWallet extends Component {
   }
   applyFilter = () => {
     switch (this.state.filter) {
-      case 'date':
-        return (
-          <input onClick={ () => {
-            this.setState({popperDate: true,})
-          }}
-          className="RemoveFilterButton" type="submit" value="by date"
-          />
-        );
-        break;
-      case 'received':
-        return (
-          <input onClick={ () => {
-            this.setState({popperRec: true,})
-          }}
-          className="RemoveFilterButton" type="submit" value="by received"
-          />
-        );
-        break;
-      case 'spent':
-        return (
-          <input onClick={ () => {
-            this.setState({popperSpent: true,})
-          }}
-          className="RemoveFilterButton" type="submit" value="by spent"
-          />
-        );
-        break;
-      default:
-        return (
-          <div onClick={this.toggleFilter}>
-            {this.renderFilter()}
-          </div>
-        );
-        break;
+    case 'date':
+      return (
+        <input onClick={ () => {
+          this.setState({popperDate: true,})
+        }}
+        className="RemoveFilterButton" type="submit" value="by date"
+        />
+      );
+    case 'received':
+      return (
+        <input onClick={ () => {
+          this.setState({popperRec: true,})
+        }}
+        className="RemoveFilterButton" type="submit" value="by received"
+        />
+      );
+    case 'spent':
+      return (
+        <input onClick={ () => {
+          this.setState({popperSpent: true,})
+        }}
+        className="RemoveFilterButton" type="submit" value="by spent"
+        />
+      );
+    default:
+      return (
+        <div onClick={this.toggleFilter}>
+          {this.renderFilter()}
+        </div>
+      );
     }
   }
   toggleFilter = () => {
     this.setState({ filterpop: !this.state.filterpop })
   }
   renderFilter = () => {
-    if (!this.state.filterpop) return ( <div className="popdownsr">filter</div> );    
+    if (!this.state.filterpop) return ( <div className="popdownsr">filter</div> );
     return (
       <div className="popdown">
             <div className="popdownjr" onClick={() => this.setState({popperDate:true})}>Date</div>

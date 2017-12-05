@@ -174,7 +174,8 @@
 }
 .PopupFilter {
   transition: all 0.15s linear;
-}  
+}
+
 .PopupFilter:hover {
   color: #fff;
   background-color: rgba(88, 51, 161, 0.685);
@@ -272,7 +273,7 @@
 
 .TransactionContainer{
   margin-top: 10px;
-  max-height: fill;
+  max-height: stretch;
   overflow-y: scroll;
 }
 .TransactionSummaryStats{
@@ -313,6 +314,7 @@ table {
   flex-flow: column;
   height: 100%;
   width: 100%;
+  border-collapse: collapse;
 }
 table thead , table tfoot{
   flex: 0 0 auto;

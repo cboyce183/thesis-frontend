@@ -9,15 +9,6 @@ import '../../components/PopUp/PopUp.css';
 import SketchPicker from 'react-color';
 import reactCSS from 'reactcss';
 
-
-const style = {
-  borderWidth:'1.5px',
-  borderStyle: 'solid',
-  borderColor: '#040223',
-  fontWeight: '650',
-}
-
-
 class Settings extends Component {
   constructor(props){
     super(props);
@@ -52,24 +43,32 @@ class Settings extends Component {
       selectedUser:{},
     }
 
-    //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
-    // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
-      .then(res => res.json())
-      .then(res => {
-        if (res.isAdmin) {
-          if (!res.catalog.length) this.setState({pending: ['catalog',],});
-          if (!res.usersId.length) this.setState({pending: [...this.state.pending, 'users',],});
-          this.setState({isAdmin:res.isAdmin, logo:res.logo, weeklyAllow: res.weeklyAllow, name:res.name, address:res.address,});
-        } else {
-          this.setState({available: res.availableCurrency, received: res.receivedCurrency, firstName: res.firstName, username: res.username, profilePic: res.profilePic, position: res.position, });
-        }
-        this.setState({loaded: true,});
-      })
-      .catch(e => console.error(e));
-    // } else {
-    //   window.location = '/login';
-    // }
+    // following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.isAdmin) {
+            // console.log(res)
+            if (!res.catalogN) this.setState({pending: ['catalogN',],});
+            if (!res.usersIdN) this.setState({pending: [...this.state.pending, 'usersIdN',],});
+            this.setState({isAdmin:res.isAdmin, logo:res.logo, weeklyAllow: res.weeklyAllow, name:res.companyName, address:res.address,});
+          } else {
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency, firstName: res.firstName, username: res.username, profilePic: res.profilePic, position: res.position, });
+          }
+          this.setState({loaded: true,});
+        })
+        .catch(e => console.error(e));
+    } else {
+      window.location = '/login';
+    }
 
   }
 
@@ -200,7 +199,6 @@ class Settings extends Component {
 
 
   render () {
-
     const styles = reactCSS({
       'default': {
         color: {

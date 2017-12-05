@@ -23,26 +23,43 @@ class TipOrPay extends Component {
       attempted: false,
       success: true,
     }
-    // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
-      .then(res => res.json())
-      .then(res => {
-        if (res.isAdmin) {
-          this.setState({isAdmin:res.isAdmin,});
-        } else {
-          this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
-        }
-      })
-      .catch(e => console.error(e));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/tips')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({loaded: true, userList:res.users,});
-      })
-      .catch(e => console.error(e));
-    // } else {
-    //   window.location = '/login';
-    // }
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        // .then(r => console.log(r))
+        .then(res => {
+          if (res.isAdmin) {
+            this.setState({isAdmin:res.isAdmin,});
+          } else {
+
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+          }
+        })
+        .catch(e => console.error(e));
+      fetch('http://192.168.0.37:4200/tip',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        .then(res => {
+          console.log("res", res)
+          this.setState({loaded: true, userList:res.users,});
+        })
+        .catch(e => console.error(e));
+    } else {
+      window.location = '/login';
+    }
   }
 
   handleUserSelection = (value) => {
@@ -61,17 +78,22 @@ class TipOrPay extends Component {
   }
 
   handleTip = (quantity, motive) => {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/tips', {
+    console.log(quantity, motive, this.state.selected)
+    fetch('http://192.168.0.37:4200/tip', {
       method: 'PUT',
       body: JSON.stringify({
-        user: this.state.selected,
+        id: this.state.selected,
         amount: quantity,
         reason: motive,
       }),
-    }).then(res => {
-      if (res.status === 200) this.setState({success: true, attempted: true,})
-      else this.setState({success: false, attempted: true,})
-    });
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},})
+      .then(res => {
+        if (res.status === 200) this.setState({success: true, attempted: true,})
+        else this.setState({success: false, attempted: true,})
+      });
   }
 
   //======================= RENDERING
@@ -84,15 +106,15 @@ class TipOrPay extends Component {
       if (this.state.success) {
         return 'SUCCESS!';
       } else {
-        return 'SOMETHING WENT WRONG :(';
+        return 'SOMETHING WENT WRONG';
       }
     } else {
-      return 'TIP';
+      return 'Submit';
     }
   }
 
   renderButtonClass(text) {
-    if (text !== 'TIP') {
+    if (text !== 'Submit') {
       if (text === 'SUCCESS!') {
         return 'Success';
       } else {
@@ -126,6 +148,7 @@ class TipOrPay extends Component {
   }
 
   render() {
+    console.log("trhe state", this.state)
     const message = this.renderButtonMessage();
     const buttonClass = this.renderButtonClass(message);
     const remaining = this.renderRemainder(this.state);
@@ -138,35 +161,32 @@ class TipOrPay extends Component {
           <div className="Shadow">
             <div className="SubWidth">
               <div className="TipHeader">
-                <h1>Tip</h1>
+                <h2>Tip</h2>
                 <Close link="/panel"/>
               </div>
               <div className="TipForm">
                 <div className="TipInput">
-                  <h5>who?</h5>
                   <DropDown
                     func={this.handleUserSelection.bind(this)}
-                    placeh="the person you want to give zen to"
+                    placeh="The person you want to give to *"
                     arr={this.state.userList}
                   />
-                  <h5>how much?</h5>
                   <input
                     ref={el => this.quantity = el}
                     className={highlight}
                     type="number"
                     max={this.state.available}
-                    placeholder="the amount of zen you want to give"
+                    placeholder="The amount you want to give *"
                     onChange={this.handleMaxZen}
                     onBlur={this.handleResetZen}
                   />
-                  <h5>why?</h5>
                   <input
                     ref={el => this.reason = el}
                     type="text"
-                    placeholder="the person you're tiping will see this so be nice :-)"
+                    placeholder="Message *"
                   />
                   <input
-                    className={buttonClass}
+                    className="extra-css ${buttonClass}"
                     type="submit"
                     value={message}
                     onClick={() => this.handleTip(this.quantity.value, this.reason.value)}

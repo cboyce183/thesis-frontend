@@ -1,9 +1,6 @@
 import React, { Component, } from 'react';
 import './AdminExpenseSheet.css'
 import DropDown from '../DropDown/DropDown';
-const popperType = 'popperSpent'
-
-
 
 class AdminExpenseSheet extends Component {
 
@@ -43,9 +40,7 @@ class AdminExpenseSheet extends Component {
             }}
           > &lt; </div>
           <div className="Admin-SheetNumber">
-            <div className="Admin-PageNumber">1 </div>
             <div className="Admin-PagePossNumber"> {this.state.pageNumber} </div>
-            <div className="Admin-PageNumber"> {this.state.pageTotal} </div>
           </div>
           <div onClick={()=> {
             this.incrementThePage()
@@ -131,26 +126,8 @@ class AdminExpenseSheet extends Component {
     if(data){
       return data.map((el, i) => {
         return (
-          <div key={el._id} className="AX-Admin-TransactionItem">
-            <div className="AX-date">{el.date}</div>
-            <div className="AX-TransData">
-              <div className="AX-Admin-TransactionCol">
-                <div>{el.reason}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol">
-                <div className="Admin-TransactionPic">
-                  <img className="Admin-TranscationPicImg" alt="" src={el[this.props.trans].profilePic}/>
-                </div>
-                <div className="AX-Admin-TransactionUserName">{el[this.props.trans].username}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{el[col2]}</div>
-              </div>
-              <div className="AX-Admin-TransactionCol" id="AX-digits">
-                <div>{el[col1]}</div>
-              </div>
-            </div>
-          </div>
+          <tr key={el._id} className="rowow"><td>{el.date}</td><td>{el.reason}</td><td>{el[this.props.trans].username}</td>
+          <td>{el[col2]}</td><td>{el[col1]}</td></tr>
         )
       })
     }
@@ -195,70 +172,17 @@ class AdminExpenseSheet extends Component {
     this.setState({transactionsToDisplay: res,})
   }
 
-
   render() {
     return (
       <div className="Admin-SheetContainer">
-        <div className="Admin-BalenceHeader">
-          <div className="Admin-spacedivATM">
-            <input onClick={() => {
-              this.props.popperFilter()
-            }}
-            className="Admin-RemoveFilterButton"
-            id='removeButtonMarginBottom'
-            type="submit" value="filter"
-            />
-          </div>
-          <div className="Admin-spacedivATM">
-            <input onClick={ () => {
-              // this.filteringTransactionsForPanel(this.state.data,0, 9)
-              // this.setState({pageNumber: 1,
-              //   transIncrement: [0,9,],})
-              // this.totalNumberOfPagesNeeded(this.state.data)
-              // this.setState({filteredTransactions: null,})
-            }}
-            className="Admin-RemoveFilterButton"
-            id='removeButtonMarginBottom'
-            type="submit" value="All"
-            />
-          </div>
-        </div>
-        <div className="AX-Admin-TransactionItem">
-          <div className="AX-TransData">
-            <div className="AX-Admin-TransactionCol">
-            </div>
-            <div className="AX-Admin-TransactionCol">
-              <div className="AX-Admin-TransactionUserName">User</div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>amount</div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>ballence</div>
-            </div>
-          </div>
-        </div>
-        <div className="Admin-TransactionContainer">
+        <table className="main-table">
+          <thead><tr><th>Date</th><th>Reason</th><th>User</th><th>Ammount</th><th>Balance</th></tr></thead>
+        <tbody>
           {this.AdminExpenseTransactionList(this.state.transactionsToDisplay, this.props.col1, this.props.col2)}
-        </div>
-        <div className="AX-Admin-TransactionSummary">
-          <div className="AX-TransData">
-            <div className="AX-Admin-TransactionCol">
-            </div>
-            <div className="AX-Admin-TransactionCol">
-              <div className="AX-Admin-TransactionUserName"></div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>{this.pageTotal(this.state.data, 'amount')}</div>
-            </div>
-            <div className="AX-Admin-TransactionCol" id="AX-digits">
-              <div>{this.pageTotal(this.state.data, 'toBallence')}</div>
-            </div>
-          </div>
-        </div>
-        <div className="Admin-TransactionOverflowBox">
-          {this.displayingNavigationPage()}
-        </div>
+        </tbody>
+        <tfoot><tr><td className="da-button" onClick={() => {this.props.popperFilter()}}>Apply filter</td><td></td><td></td><td>{this.pageTotal(this.state.data, 'amount')}</td><td>{this.pageTotal(this.state.data, 'tobalance')}</td></tr></tfoot>
+        </table>
+        <div>{this.displayingNavigationPage()}</div>
       </div>
     )
   }

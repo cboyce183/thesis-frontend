@@ -40,3 +40,55 @@
   border-bottom: solid;
   border-width: thin;
 }
+.main-table{
+  width:100%;
+}
+
+table {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+}
+table thead , table tfoot{
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+}
+table tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+table tbody tr, table tfoot tr{
+  width: 100%;
+}
+table thead, table tbody tr , table tfoot{
+  display: table;
+  table-layout: fixed;
+}
+
+tfoot {
+  height: 20px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  margin-bottom:15px;
+}
+
+.da-button{
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+.da-button:hover{
+  color: rgba(88, 51, 161, 0.685);
+}
+.Admin-TransactionOverflowBox{
+  display: flex;
+  flex-flow: row nowrap;
+}
+.Admin-TransactionNavigation{
+  padding-left: 45%;
+  width: 100px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}

@@ -18,7 +18,7 @@ class Panel extends Component {
       received: 0,
     }
     //following fetch only has to activate if the localstorage contains the token, uncomment for functionality.
-    console.log((window.localStorage.getItem('token')))
+    // console.log((window.localStorage.getItem('token')))
     if (window.localStorage.getItem('token')) {
       fetch('http://192.168.0.37:4200/company',
         {
@@ -31,8 +31,8 @@ class Panel extends Component {
         .then(res => res.json())
         .then(res => {
           if (res.isAdmin) {
-            if (!res.catalogN) this.setState({pending: ['catalogN',],});
-            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'usersN',],});
+            if (!res.catalogN) this.setState({pending: ['catalog',],});
+            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'users',],});
             this.setState({isAdmin:res.isAdmin,});
             this.setState({totalGiven:res.totalGiven,});
           } else {
@@ -48,15 +48,16 @@ class Panel extends Component {
 
   handleLogout = () => {
     window.localStorage.removeItem('token');
-    window.location = '/login';
+    window.location = '/';
   }
 
   //======================= RENDERING
 
   renderNextSteps = () => {
     const steps = this.state.pending.map((el,i) => {
+      let res;
       if (el === 'users') {
-        return (
+        res = (
           <NextSteps
             key={i}
             text="add employees to Zendama"
@@ -65,7 +66,7 @@ class Panel extends Component {
           />
         )
       } else if (el === 'catalog') {
-        return (
+        res = (
           <NextSteps
             key={i}
             text="add rewards to your Zendama Catalog"
@@ -74,6 +75,7 @@ class Panel extends Component {
           />
         )
       }
+      return res;
     });
     return (
       <div className="NextSteps">
@@ -87,7 +89,6 @@ class Panel extends Component {
     const nextSteps = this.state.isAdmin && this.state.pending.length
       ? this.renderNextSteps()
       : '';
-      console.log(this.state)
     return this.state.loaded ? (
       <div className="MaxWidth">
         <div className="PanelPosition">
@@ -100,13 +101,13 @@ class Panel extends Component {
           <div className="PanelContainer">
             <PanelSquare
               isSummary={true}
-              title="Remaining Zen"
+              title={this.state.isAdmin ? 'Pay User' : 'Remaining Zen'}
               zen={this.state.isAdmin ? require('../../assets/infinity.svg') : this.state.available}
               link="/tiporpay"
             />
             <PanelSquare
               isSummary={true}
-              title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
+              title={this.state.isAdmin ? 'Admin Dashboard' : 'Available Zen'}
               zen={this.state.isAdmin ? this.state.totalGiven : this.state.received}
               link={this.state.isAdmin ? '/ledger' : '/user-wallet'}
             />
@@ -114,6 +115,7 @@ class Panel extends Component {
               alter="cart"
               image={require('../../assets/cart.svg')}
               link="/catalog"
+              imgScale={0.75}
             />
             <PanelSquare
               alter="settings"

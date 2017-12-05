@@ -13,7 +13,6 @@ import Catalog from './containers/Catalog/Catalog';
 import Settings from './containers/Settings/Settings';
 import Logout from './containers/Logout/Logout';
 import UserSignup from './containers/UserSignup/UserSignup';
-import Cropping from './containers/Cropping/Cropping';
 import UserWallet from './containers/UserWallet/UserWallet';
 import AboutCorporate from './containers/Landing/AboutCorporate/AboutCorporate.js';
 import AboutPersonal from './containers/Landing/AboutPersonal/AboutPersonal.js';
