@@ -331,6 +331,45 @@ class Settings extends Component {
             </div>
             <div>
               <div className="container-settings">
+
+                <div className='settings-info'>
+                  <input
+                    className="u-full-width settings-input"
+                    type="text"
+                    name="name"
+                    placeholder={this.state.name}
+                    disabled={!this.state.editing}
+                    onChange={this.handleFieldChange}
+                  />
+                  <input
+                    className="u-full-width settings-input"
+                    type="text"
+                    name="address"
+                    placeholder={this.state.address}
+                    disabled={!this.state.editing}
+                    onChange={this.handleFieldChange}
+                  />
+                  <input
+                    className="u-full-width settings-input"
+                    type="number"
+                    name="weeklyAllow"
+                    placeholder={this.state.weeklyAllow}
+                    disabled={!this.state.editing}
+                    onChange={this.handleFieldChange}
+                  />
+                  <div className="admin-set-btns">
+                    <div
+                      className="settings-btn"
+                      onClick={this.state.editing ? this.updateUserSettings : this.handleSettingsInfo}
+                    >{this.state.editing ? 'Save' : 'Edit'}</div>
+                    <div
+                      className="settings-btn"
+                      type="submit"
+                      onClick={this.handlePopUp}
+                    >Manage Users</div>
+                  </div>
+                </div>
+
                 <div className='settings-container'>
                   <div className='set-pic'>
                     {this.renderLogoPicker()}
