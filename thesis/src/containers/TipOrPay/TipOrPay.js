@@ -38,6 +38,7 @@ class TipOrPay extends Component {
           if (res.isAdmin) {
             this.setState({isAdmin:res.isAdmin,});
           } else {
+
             this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
           }
         })
@@ -52,7 +53,7 @@ class TipOrPay extends Component {
         })
         .then(res => res.json())
         .then(res => {
-          console.log(res)
+          console.log("res", res)
           this.setState({loaded: true, userList:res.users,});
         })
         .catch(e => console.error(e));
@@ -147,6 +148,7 @@ class TipOrPay extends Component {
   }
 
   render() {
+    console.log("trhe state", this.state)
     const message = this.renderButtonMessage();
     const buttonClass = this.renderButtonClass(message);
     const remaining = this.renderRemainder(this.state);
