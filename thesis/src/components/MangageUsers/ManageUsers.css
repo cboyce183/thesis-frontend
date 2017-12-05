@@ -8,6 +8,12 @@
   width: 30px;
 }
 
+.trash-d{
+  height: 20px;
+  width: 20px;
+  margin-top: 8px;
+}
+
 .plus{
   height: 10px;
   width: 10px;
@@ -18,10 +24,31 @@ ul li {
 }
 
 .manage-users-label{
-  margin: 30px;
   margin-top: 30px;
 }
 
 .rm-user-list{
   margin-top: 10px;
+}
+
+.u-cf{
+  margin-left: 40px;
+}
+
+.u-cf:hover{
+  background-color: rgba(88, 51, 161, 0.685);
+  color: white;
+}
+
+.u-cff{
+  margin-left: 40px;
+}
+
+.u-cff:hover{
+  background-color: rgba(88, 51, 161, 0.685);
+  color: white;
+}
+
+.search-bar {
+  width: 92%;
 }

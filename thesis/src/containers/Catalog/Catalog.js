@@ -27,26 +27,43 @@ class Catalog extends Component {
       add: false,
       serviceAdd: null,
     }
-    // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
-      .then(res => res.json())
-      .then(res => {
-        if (res.isAdmin) {
-          this.setState({isAdmin:res.isAdmin,});
-        } else {
-          this.setState({remaining: res.availableCurrency, received: res.receivedCurrency,});
-        }
-      })
-      .catch(e => console.error(e));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/catalog')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({catalog: res.catalog, loaded: true,});
-      })
-      .catch(e => console.error(e));
-    // } else {
-    //   window.location = '/login';
-    // }
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        // .then(r => console.log("user log in response ", r))
+        .then(res => {
+          if (res.isAdmin) {
+            this.setState({isAdmin:res.isAdmin,});
+          } else {
+            console.log(res)
+            this.setState({remaining: res.availableCurrency, received: res.receivedCurrency,});
+          }
+        })
+        .catch(e => console.error(e));
+      fetch('http://192.168.0.37:4200/catalog',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        // .then(r => console.log("this is the response", r))
+        .then(res => {
+          this.setState({catalog: res.catalog, loaded: true,});
+        })
+        .catch(e => console.error(e));
+    } else {
+      window.location = '/login';
+    }
   }
 
   handleFilterProducts(arr, bool) {
@@ -54,6 +71,7 @@ class Catalog extends Component {
   }
 
   handlePopUp = (product) => {
+    console.log("handle product ", product)
     this.setState({
       selectedProduct: product,
       popped: !this.state.popped,
@@ -79,6 +97,7 @@ class Catalog extends Component {
   }
 
   renderPopUp(product) {
+    console.log("product", product)
     return (
       <ProductPopUp
         isAdmin={this.state.isAdmin}
@@ -96,6 +115,7 @@ class Catalog extends Component {
   }
 
   render() {
+    console.log(this.state)
     const popped = this.state.popped
       ? this.renderPopUp(this.state.selectedProduct)
       : null;

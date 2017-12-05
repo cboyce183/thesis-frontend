@@ -1,55 +1,95 @@
-.settings-container{
-  margin-right: 300px;
+@keyframes fadin {
+  0% { opacity: 0 }
+  100% {opacity: 1 }
 }
 
-.settings-container-user{
-  display:flex;
+@keyframes popin {
+  0% { top: 100vh; position: relative; }
+  100% { top: 0; position: relative; }
+}
+
+.settings-container{
+  display: flex;
+  padding: 50px;
+  text-align: center;
+}
+
+.settings-input{
+  font-size: 15px;
+  font-family: 'Raleway', sans-serif;
+  padding-left: 100px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .settings-img{
-    flex-grow: 1;
-    padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
 }
 
 .settings-info{
-  flex-grow: 1;
-  margin-top: 90px;
-  padding-left: 0px;
+  padding: 40px;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.edit-btn-settings{
-  margin-top: 40px;
+.logo-upload-container {
+  background-color: #ddd;
+  border-radius: 25px;
+  padding: 15px;
+  border-style: dashed;
+  border-color: #bbb;
+  opacity: 0.5;
+  width:150px;
+  height: 150px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+}
+
+.logo-upload-container:hover {
+  opacity: 0.8;
+}
+
+.logo-upload-text {
+  display: flex;
+  flex-flow: nowrap row;
+  color: grey;
+}
+
+.add-logo{
+  display: flex;
 }
 
 .pwr-by-settings{
   text-align: center;
-}
-
-.settings-label{
-  margin-bottom: 11px;
-  padding: 10px;
+  font-size: x-small;
 }
 
 .settings-btn{
-  border-width:2px;
-  border-style: solid;
-}
-.settings-upload-pic{
-  height: 300px;
-  width: 300px;
-  border-radius:5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  border: solid 1px;
+  padding: 0 15px 0 15px;
+  background-color: white;
+  color: black;
+  transition: all 0.2s ease;
+  margin-top: 2.5vh;
 }
 
-.btn-upload-settings{
-  margin-top: 53px;
-  margin-bottom: 20px;
+.settings-btn:hover {
+  background-color: rgba(88, 51, 161, 0.685);
+  color: white;
 }
 
 .header-settings{
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
 }
 
 .container-settings {
@@ -60,29 +100,22 @@
   display: flex;
 }
 
-.footer-pwr-by{
- position: absolute;
- right: 0;
- bottom: 0;
- left: 0;
- padding: 1rem;
- text-align: center;
-}
-
-
-
-.settings-label{
-  margin-bottom: 0px;
-}
-
-.settings-info-admin{
-  width:50vh;
+.admin-set-btns{
+  display: flex;
+  flex-direction: column;
 }
 
 .mng-users-btn{
   display: flex;
 }
 
-.admin-input-labels{
-  text-align: left;
+.cls-btn{
+  position: absolute;
+  top: 30px;
+  right: 50px;
+}
+
+.up-theme{
+  display: flex;
+  flex-direction: column;
 }
