@@ -199,7 +199,6 @@ class Settings extends Component {
 
 
   render () {
-    console.log("the state ", this.state)
     const styles = reactCSS({
       'default': {
         color: {

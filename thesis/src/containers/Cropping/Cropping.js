@@ -1,8 +1,7 @@
 import React, { Component, } from 'react';
 import { Cropper, } from 'react-image-cropper';
-// import { connect, } from 'react-redux';
-// import { doneCroppedImage, } from './../../actions'
-import { NavLink, } from 'react-router-dom';
+
+import PopUp from '../../components/PopUp/PopUp';
 import './Cropping.css'
 
 class Cropping extends Component {
@@ -17,22 +16,31 @@ class Cropping extends Component {
     }
   }
 
-
-  handleImageLoaded(state){
-    this.setState({
-      [state + 'Loaded']: true,
-    });
+  handleImageLoaded = () => {
+    this.setState({'imageLoaded': true,});
   }
 
-  handleClick(state){
-    let node = this.refs[state];
-    this.setState({
-      [state]: node.crop(),
-    });
+  handleClick = () => {
+    if (this.image) this.setState({image: this.image.crop(),});
+    else alert('please select an image');
   }
 
-  imageChange(bool){
-    if (bool) {
+  handleUnPop = () => {
+    this.props.unpop(null);
+  }
+
+  handleDone = () => {
+    this.props.unpop(this.state.image)
+  }
+
+  handleFileUpload = (event) => {
+    this.setState({
+      profilePic: event.target.files,
+      profilePicLoad: true,})
+  }
+
+  renderImageChange = () => {
+    if (this.state.profilePicLoad) {
       var reader = new FileReader();
       reader.readAsDataURL(this.state.profilePic[0]);
       reader.onloadend = () => {
@@ -42,64 +50,51 @@ class Cropping extends Component {
     if (!this.state.base64Image) {
       return (
         <div className='cropping-placeholder'>
-           <p>Choose a file</p>
+          <p>Choose a file</p>
         </div>
       );
     } else {
-      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref='image' onImgLoad={() => this.handleImageLoaded('image')}/>
+      return <Cropper className="LoadedImageCrop" src={this.state.base64Image} ref={el => this.image = el} onImgLoad={this.handleImageLoaded}/>
     }
   }
 
-
-
   render() {
-    // console.log("the props", this.props)
     return (
-      <div className="ContainerCrop">
-        <div className="MainPannelCrop">
-          <div className="UserInputContainerCrop">
-            {this.imageChange(this.state.profilePicLoad)}
-          </div>
-          <div className="AboutContainerCrop">
-            <div className="ImageLoad">
-              <div className="TitlePicture">Add your profile picture</div>
-              <input className="FileLoad" type="file"
-                onChange={(e) => {
-                  this.setState({
-                    profilePic: e.target.files,
-                    profilePicLoad: true,})
-                }}
-              />
+      <PopUp
+        width="1000px"
+        unpop={this.handleUnPop}
+      >
+        <div className="ContainerCrop">
+          <div className="MainPannelCrop">
+            <div className="UserInputContainerCrop">
+              {this.renderImageChange()}
             </div>
-            <div className="CropButton">
-              <input className="CropperButton" type="submit" value="Crop image"
-                onClick={() => this.handleClick('image')}
-              />
-              <NavLink to='/usersignup'>
-                <input className="DoneBox" type="submit" value="done"
-                  onClick={() => this.props.passImage(this.state.image)}
+            <div className="AboutContainerCrop">
+              <div className="ImageLoad">
+                <div className="TitlePicture">Add your profile picture</div>
+                <input className="FileLoad" type="file"
+                  onChange={this.handleFileUpload}
                 />
-              </NavLink>
-            </div>
-            <div className="CroppedImageBox">
-              <div className="CroppedImageContainer">
-                <img className="CroppedImage" src={this.state.image} alt=""/>
+              </div>
+              <div className="CropButton">
+                <input className="CropperButton" type="submit" value="Crop image"
+                  onClick={this.handleClick}
+                />
+                <input className="DoneBox" type="submit" value="done"
+                  onClick={this.handleDone}
+                />
+              </div>
+              <div className="CroppedImageBox">
+                <div className="CroppedImageContainer">
+                  <img className="CroppedImage" src={this.state.image} alt=""/>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </PopUp>
     )
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   userInfo: state.UserInfo,
-// })
-//
-// const mapDispatchToProps = (dispatch) => ({
-//   addCroppedImage: (Image) => dispatch(doneCroppedImage(Image)),
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Cropping);
 export default (Cropping);
