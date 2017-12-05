@@ -23,26 +23,42 @@ class TipOrPay extends Component {
       attempted: false,
       success: true,
     }
-    // if (window.localStorage.getItem('token')) {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/company')
-      .then(res => res.json())
-      .then(res => {
-        if (res.isAdmin) {
-          this.setState({isAdmin:res.isAdmin,});
-        } else {
-          this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
-        }
-      })
-      .catch(e => console.error(e));
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/tips')
-      .then(res => res.json())
-      .then(res => {
-        this.setState({loaded: true, userList:res.users,});
-      })
-      .catch(e => console.error(e));
-    // } else {
-    //   window.location = '/login';
-    // }
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        // .then(r => console.log(r))
+        .then(res => {
+          if (res.isAdmin) {
+            this.setState({isAdmin:res.isAdmin,});
+          } else {
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+          }
+        })
+        .catch(e => console.error(e));
+      fetch('http://192.168.0.37:4200/tip',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        .then(res => {
+          console.log(res)
+          this.setState({loaded: true, userList:res.users,});
+        })
+        .catch(e => console.error(e));
+    } else {
+      window.location = '/login';
+    }
   }
 
   handleUserSelection = (value) => {
@@ -61,17 +77,22 @@ class TipOrPay extends Component {
   }
 
   handleTip = (quantity, motive) => {
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/tips', {
+    console.log(quantity, motive, this.state.selected)
+    fetch('http://192.168.0.37:4200/tip', {
       method: 'PUT',
       body: JSON.stringify({
-        user: this.state.selected,
+        id: this.state.selected,
         amount: quantity,
         reason: motive,
       }),
-    }).then(res => {
-      if (res.status === 200) this.setState({success: true, attempted: true,})
-      else this.setState({success: false, attempted: true,})
-    });
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},})
+      .then(res => {
+        if (res.status === 200) this.setState({success: true, attempted: true,})
+        else this.setState({success: false, attempted: true,})
+      });
   }
 
   //======================= RENDERING
