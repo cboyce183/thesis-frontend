@@ -26,13 +26,14 @@ class PanelSquare extends Component {
   }
 
   render() {
+    console.log(this.props.mainStyle)
     const settings = this.props.alter === 'settings'
       ? ' Settings'
       : ''
     const summary = this.renderCurrency(this.props.zen);
     return this.props.isSummary ? (
       <Link className="Hovering" style={{textDecoration:'none',}} to={this.props.link}>
-        <div className="PanelSquare">
+        <div className="PanelSquare" style={{backgroundColor:this.props.backgroundColor}}>
           <div className="Wrapper">
             <h5>{this.props.title}</h5>
             {summary}
@@ -41,11 +42,12 @@ class PanelSquare extends Component {
       </Link>
     ) : (
       <Link className={'Hovering' + settings} style={{textDecoration:'none',}} to={this.props.link}>
-        <div className={'PanelSquare' + settings}>
+        <div className={'PanelSquare' + settings} style={{backgroundColor:this.props.backgroundColor}}>
           <img
             className="PanelImg"
             alt={this.props.alter}
             src={this.props.image}
+            style={{transform: "scale(" + this.props.imgScale + ")"}}
           />
         </div>
       </Link>

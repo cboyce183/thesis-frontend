@@ -1,11 +1,9 @@
 import React, { Component, } from 'react';
 import './Landing.css';
 // import { Route, } from 'react-router-dom';
-
+import 'gsap';
 import { Link, } from 'react-router-dom';
-
 import  base64  from 'base-64';
-
 class Landing extends Component {
   constructor () {
     super();
@@ -113,7 +111,7 @@ class Landing extends Component {
             <div className="MainSection">
               <div className="MainSectionText">
                 <p className='landing-desc-txt'>What can Zendama do for your company?</p>
-                <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
+                <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding areas that your employees are struggling with, and improving morale. It has never been this simple!</p>
                 <Link className="LinkTunnel" to="/companyregistry">
                   <input type="submit" className='landing-button' value="i wanna know more" />
                 </Link>
