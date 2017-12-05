@@ -102,13 +102,13 @@ class Panel extends Component {
           <div className="PanelContainer">
             <PanelSquare
               isSummary={true}
-              title="Remaining Zen"
+              title={this.state.isAdmin ? 'Pay User' : 'Remaining Zen'}
               zen={this.state.isAdmin ? require('../../assets/infinity.svg') : this.state.available}
               link="/tiporpay"
             />
             <PanelSquare
               isSummary={true}
-              title={this.state.isAdmin ? 'Given Zen' : 'Available Zen'}
+              title={this.state.isAdmin ? 'Admin Dashboard' : 'Available Zen'}
               zen={this.state.isAdmin ? this.state.totalGiven : this.state.received}
               link={this.state.isAdmin ? '/ledger' : '/user-wallet'}
             />
@@ -116,6 +116,7 @@ class Panel extends Component {
               alter="cart"
               image={require('../../assets/cart.svg')}
               link="/catalog"
+              imgScale={0.75}
             />
             <PanelSquare
               alter="settings"
