@@ -128,20 +128,12 @@
   margin: auto;
   width: 45%;
   height: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .LoginForm {
   margin-top: 20px;
   height: 37%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .LoginForm > p {
