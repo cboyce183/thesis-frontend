@@ -8,7 +8,7 @@
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
 
-const isLocalhost = Boolean(
+const islocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
@@ -32,8 +32,8 @@ export default function register() {
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
-      if (isLocalhost) {
-        // This is running on localhost. Lets check if a service worker still exists or not.
+      if (islocalhost) {
+        // This is running on 192.168.0.37. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
       } else {
         // Is not local host. Just register service worker
