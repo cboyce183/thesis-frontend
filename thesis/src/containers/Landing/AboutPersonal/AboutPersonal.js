@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 //import './Landing.css';
 import './AboutPersonal.css';
-// import { Link, } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 // import { Route, } from 'react-router-dom';
 
 
