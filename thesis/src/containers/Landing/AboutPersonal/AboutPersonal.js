@@ -13,13 +13,11 @@ class AboutPersonal extends Component {
   render() {
     return (
       <div className="landing-wrapper">
-        <div className="landing-title">
-          <img alt="" src={require('../../../assets/zendomologo.png')} style={{maxHeight:'80px',}}/>
-          <p className='landing-desc-alt-txt spacer'>spacer</p>
-          <h1 className="landing-title-text" style={{color:'#aaa',}}>zendama</h1>
+        <div className='about-personal-banner'>
+          <h1 className='personal-label'>Share the love</h1>
         </div>
-        <div className='landing-desc-per overlay'>
-          <div className='landing-desc-personal'>
+        <div className='landing-desc-per'>
+          <div className="words-aboutper">
             <p>
               Zendama is easy! You receive an allocation of Zen to give to your colleagues every week. This is intended to be distributed by you as a reward for being awesome
               and helping you or others out. You can give it for any deserving reason - maybe Alice helped you with a difficult client,
@@ -31,26 +29,16 @@ class AboutPersonal extends Component {
               or even gift vouchers for a luxury spa (although you'll have to negotiate this with your boss!). Accumulate good karma from being
               a good employee, and get the rewards you deserve with your Zen. Everyones a winner!"
             </p>
-            <p className='landing-desc-alt-txt spacer'>spacer</p>
-            <p>
+            </div>
+            <div className='section2-personal'>
+            <div className='sec2-words'>
+            <p className='sign-up-works'>
               'To sign up, your company will need to have an account (from which they can invite you to create your own account). See the corporate page to get started using Zendama in your place of work.'
             </p>
-            <Link to="/">
-              <input type="submit" className='SectionDividerButton-b' value="Back" />
-            </Link>
-          </div>
-        </div>
-        <div className='landing-business' style={{padding:0,}}>
-          <div style={{display:'flex',flexDirection:'row',}}>
-            <div className='landing-button' onClick={this.corporateRedir}>Corporate</div>
-          </div>
-        </div>
-        <div className='landing-bottom-bar'>
-          <img alt="" src={require('../../../assets/github-white.svg')} style={{maxHeight:'25px',}}/>
-          <p className='landing-desc-alt-txt smallspacer'>spaaaaa</p>
-          <img alt="" src={require('../../../assets/facebook-black-icon.png')} style={{maxHeight:'35px',}}/>
-          <p className='landing-desc-alt-txt smallspacer'>spaaaaa</p>
-          <img alt="" src={require('../../../assets/twitter.svg')} className="twitter-icon"style={{maxHeight:'25px',}}/>
+            <div className='landing-button-works' onClick={this.corporateRedir}>Corporate</div>
+            </div>
+            </div>
+
         </div>
       </div>
     );

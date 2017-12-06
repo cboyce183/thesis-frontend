@@ -129,7 +129,7 @@
   color: white;
 }
 
-.landing-button {
+.landing-button-works {
   height: 23% !important;
   width: 140px !important;
   background-color: rgba(255,255,255,0.9) !important;
@@ -141,9 +141,10 @@
   align-self: left !important;
   transition: all 0.2s ease !important;
   line-height: 3px !important;
+  margin-top: 50px;
 }
 
-.landing-button:hover {
+.landing-button-works:hover {
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
 }
@@ -187,7 +188,7 @@
 }
 
 .SectionDividerButton-b {
-  height: 15% !important;
+  height: 9% !important;
   width: 117px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
@@ -281,8 +282,8 @@
 }
 
 .landing-business {
-  display: flex;
-  flex-direction: column;
+  /*display: flex;
+  flex-direction: column;*/
   align-items: center;
   justify-content: center;
   width: 105vw;
@@ -380,17 +381,19 @@
 }
 
 .landing-desc-how {
-  height: stretch;
-  max-width: 80vw;
-  padding: 50px;
-  overflow-y: scroll;
-  margin-top: 8%;
-  margin-right: 50%;
+  margin-top: 85px;
+  height: 400px;
 }
 
 
 .twitter-icon{
   margin-right: 50px;
+}
+
+.corp-toggle-works{
+  line-height: 23px;
+  padding: 40px;
+  margin-right: 45%;
 }
 
 .settings-btn{
@@ -418,4 +421,48 @@
 .settings-btn:hover {
   background-color: rgba(100, 69, 128, 1);
   color: white;
+}
+
+.how-works-banner{
+  width: 100vw;
+  height: 50vh;
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/howitworks.jpg");
+  background-size: cover, cover;
+  background-position: center, bottom;
+  background-repeat: no-repeat;
+
+}
+
+.how-label{
+  color:white;
+  line-height: 5;
+  padding-left: 50px;
+  margin-right: 50%;
+}
+
+.section2-works{
+background-color:#917EB3;
+}
+
+.works-section1-label{
+  font-size: 30px;
+  padding-left: 50px;
+}
+
+.section2-words{
+  padding: 40px;
+  margin-left: 50%;
+}
+
+.section2-words p{
+  color:white;
+}
+
+.para-1{
+  margin-top: 50px;
 }
