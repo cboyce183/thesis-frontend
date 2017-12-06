@@ -9,11 +9,13 @@
 .Spinner {
   width: 40px;
   height: 40px;
-  background-color: #333;
+  background-image: url('../../assets/zendamalogo-purple.png');
+  background-origin: center;
+  background-size: contain;
 
   margin: 100px auto;
-  -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
-  animation: sk-rotateplane 1.2s infinite ease-in-out;
+  -webkit-animation: sk-rotateplane 2.4s infinite ease-in-out;
+  animation: sk-rotateplane 2.4s infinite ease-in-out;
 }
 
 @-webkit-keyframes sk-rotateplane {
@@ -26,11 +28,17 @@
   0% {
     transform: perspective(120px) rotateX(0deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
-  } 50% {
+  } 25% {
     transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
     -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
-  } 100% {
+  } 50% {
     transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
     -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+  } 75% {
+    transform: perspective(120px) rotateX(-359.9deg) rotateY(-179.9deg);
+    -webkit-transform: perspective(120px) rotateX(-359.9deg) rotateY(-179.9deg);
+  } 100% {
+    transform: perspective(120px) rotateX(-359.9deg) rotateY(-359.9deg);
+    -webkit-transform: perspective(120px) rotateX(-359.9deg) rotateY(-359.9deg);
   }
 }
