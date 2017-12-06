@@ -11,10 +11,10 @@ class NextSteps extends Component {
       <Link style={{ textDecoration:'none', }} to={this.props.link}>
         <div className="Step">
           <div className="Number">
-            <p>{this.props.step}</p>
+            <p className="words">{this.props.step}</p>
           </div>
           <div className="Text">
-            <p>{this.props.text}</p>
+            <p className="words">{this.props.text}</p>
           </div>
         </div>
       </Link>

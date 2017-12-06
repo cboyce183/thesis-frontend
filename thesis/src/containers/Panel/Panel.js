@@ -60,7 +60,7 @@ class Panel extends Component {
         res = (
           <NextSteps
             key={i}
-            text="add employees to Zendama"
+            text="Add Employees"
             step={i+1}
             link="/settings"
           />
@@ -69,7 +69,7 @@ class Panel extends Component {
         res = (
           <NextSteps
             key={i}
-            text="add rewards to your Zendama Catalog"
+            text="Add Rewards"
             step={i+1}
             link="/catalog"
           />
@@ -79,7 +79,7 @@ class Panel extends Component {
     });
     return (
       <div className="NextSteps">
-        <p>Next Steps</p>
+        <img src={require('../../assets/right-arrow.svg')} className="arrow-left"/>
         {steps}
       </div>
     );
@@ -95,7 +95,7 @@ class Panel extends Component {
           <div className="Header">
             {nextSteps}
             <div className="Logout">
-              <h6 onClick={this.handleLogout}>logout</h6>
+              <h6 onClick={this.handleLogout} style={{marginRight:'5vw'}} className="Logout">logout</h6>
             </div>
           </div>
           <div className="PanelContainer">
@@ -123,7 +123,7 @@ class Panel extends Component {
               link="/settings"
             />
           </div>
-          <h6>powered by Zendama</h6>
+          {/* <h6>powered by Zendama</h6> */}
         </div>
       </div>
     ) : (
@@ -132,7 +132,7 @@ class Panel extends Component {
           <div className="Header">
           </div>
           <Loader/>
-          <h6>powered by Zendama</h6>
+          {/* <h6>powered by Zendama</h6> */}
         </div>
       </div>
     );

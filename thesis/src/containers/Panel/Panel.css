@@ -24,34 +24,52 @@
 
 .Logout {
   height: 60%;
-  width: 100%;
-  align-self: flex-start;
+  align-self: center;
   text-align: right;
   cursor: pointer;
 }
-
+.Logout:hover{
+  color:rgba(92, 42, 173, 0.6);
+}
 .LogoutIco {
   height: 100%;
 }
 
 .Header {
-  margin-top: 20px;
   height: 50px;
-  width: 100%;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: inline-block;
+  margin-bottom: 2vh;
+  padding: 0.5vh 0 0.5vh 0;
+  transition: all ease 0.2s;
 }
-
 .NextSteps {
-  height: 100%;
-  width: 440px;
   display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
 }
-
+.NextSteps > a{
+  opacity:0;
+  visibility: hidden;
+  transition: all 0.2s ease;  
+}
+.NextSteps:hover > a{
+  opacity: 1;
+  visibility: visible;
+}
+.NextSteps:hover > .arrow-left{
+  transform: rotate(0deg)  
+}
 .NextSteps > p {
   margin-bottom: 5px;
+}
+.arrow-left{
+  max-height: 30px;
+  margin-left: 1.5vw;
+  margin-right: 1.5vw;
+  transform: rotate(90deg);
+  transition: all 0.2s ease;
 }
