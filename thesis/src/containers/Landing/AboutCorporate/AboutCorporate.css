@@ -161,23 +161,43 @@ body{
   justify-content: space-between;
 }
 
-.SectionDividerButton-b {
+.SectionDividerButton-about-corp {
   height: 9% !important;
   width: 117px !important;
-  background-color: rgb(146, 126, 178) !important;
-  color: white !important;
+  background-color: white !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px rgb(146, 126, 178) !important;
   transition: all 0.2s ease !important;
   padding: 20px !important;
   border-radius: 0 !important;
   line-height: 3px !important;
-  margin-top: 20px;
-  margin-left: 15px;
 }
 
-.SectionDividerButton-b:hover {
+.SectionDividerButton-about-corp-to {
+  height: 9% !important;
+  width: 117px !important;
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
+  transition: all 0.2s ease !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  line-height: 3px !important;
+  margin-right: 15px;
+}
+
+.SectionDividerButton-about-corp-to:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  border: solid 1px rgb(146, 126, 178) !important;
+  border:white;
+}
+
+.SectionDividerButton-about-corp:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  border: solid 1px rgb(146, 126, 178) !important;
+  border:white;
 }
 
 .MainSectionText {
@@ -406,21 +426,23 @@ padding-left: 50px;
 .section2{
   display: flex;
   padding: 50px;
-/* background-color: blue; */
   width: 100vw;
   background-color: #917EB3;
 }
 
 .icon-corporate{
-  width: 40%;
+  width: 38%;
   background-image: url('../../../assets/keyhole (1).svg');
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: contain;
-  padding-left: 250px;
+  padding-left: 316px;
+  margin-right: 100px;
+  margin-bottom: 150px;
+  margin-top: 68px;
 }
 
 .security-words{
   padding-left: 50px;
-  padding-right: 200px;
+  padding-right: 90px;
 }

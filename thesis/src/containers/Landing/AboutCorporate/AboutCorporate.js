@@ -5,8 +5,6 @@ import { Link, } from 'react-router-dom';
 
 class AboutCorporate extends Component {
   loginRedir = () => window.location = '/companyregistry';
-  corporateRedir = () => window.location = '/about_corporate';
-  personalRedir = () => window.location = '/about_personal';
 
   render() {
     return (
@@ -34,9 +32,11 @@ class AboutCorporate extends Component {
                   <li> We collect only the bare minimum of user information to make the system work, and all information stored is protected by the industry standard protocols that are used by the biggest tech giants.</li>
                   <li> We don't give user information away to anyone - not for marketing reasons, not for research, nor for anything.</li>
                 </ul>
-                <div className='landing-button' onClick={this.loginRedir}>Sign-up</div>
+                <Link to='/companyregistry'>
+                  <input type="submit" className='SectionDividerButton-about-corp-to' value="Sign up" />
+                </Link>
                 <Link to='/'>
-                  <div className='landing-button'>Back</div>
+                  <input type="submit" className='SectionDividerButton-about-corp' value="Back" />
                 </Link>
               </div>
             </div>

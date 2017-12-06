@@ -38,7 +38,12 @@ class AboutPersonal extends Component {
               <p className='sign-up-works'>
                 'To sign up, your company will need to have an account (from which they can invite you to create your own account). See the corporate page to get started using Zendama in your place of work.'
               </p>
-              <div className='landing-button-works' onClick={this.corporateRedir}>Corporate</div>
+              <Link to='/about_corporate'>
+                <input type="submit" className='SectionDividerButton-about-personal-to' value="corporate" />
+              </Link>
+              <Link to='/'>
+                <input type="submit" className='SectionDividerButton-about-personal' value="Back" />
+              </Link>
             </div>
           </div>
         </div>
