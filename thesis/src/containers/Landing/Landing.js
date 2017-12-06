@@ -128,7 +128,6 @@ class Landing extends Component {
             <div className="SectionText">
               <p className='landing-desc-txt'>Share The Love!</p>
               <p className='landing-desc-alt-txt'>Zendama is a catalyst for harmony and friendship in the work-place: get rewards for being a good employee and helping out your co-workers or reward those that help you with something that will really make a difference. Sounds awesome right?</p>
-              {/* <p className='landing-desc-alt-txt' style={{paddingBottom:'3vh',}}></p> */}
             </div>
             <Link to="/about_personal">
               <input type="submit" className='SectionDividerButton' value="i wanna know more" />

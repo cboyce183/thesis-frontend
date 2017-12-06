@@ -1,3 +1,7 @@
+.body{
+  overflow: hidden;
+}
+
 .LandingHeader {
   width: 100%;
   height: 60px;
@@ -186,9 +190,9 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton-b {
-  height: 15% !important;
-  width: 117px !important;
+.SectionDividerButton-personal {
+  height: 9% !important;
+  width: 200px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
   transition: all 0.2s ease !important;
@@ -264,9 +268,6 @@
         opacity: 1
     }
 }
-/*html {
-    overflow: hidden;
-}*/
 
 .landing-wrapper {
   animation: fader 0.5s ease;
@@ -293,24 +294,13 @@
 }
 
 .landing-desc-per {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding-top:5vh;
   padding-bottom:10vh;
-  background:
-  linear-gradient(
-    rgba(57, 12, 132, 0.45),
-    rgba(67, 36, 95, 1)
-  ),
-  url("../../../assets/sharethelove.jpg");
-  background-size: cover;
-  padding-left: 40px;
-  padding-right: 15px;
+  background-color: white;
 }
 
 .landing-desc-per p{
-  color: white;
+  color: black;
 }
 
 .landing-desc-txt {
@@ -346,13 +336,12 @@
 
 .landing-bottom-bar {
   background-color: rgb(217,217,252);
-  width: 100vw;
-  height: 5vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 1vh;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
 }
 
 .spacer {
@@ -371,21 +360,13 @@
   width: 0px;
 }
 
-.landing-desc-corp {
-  border-width: 20px;
-  border-style: solid;
-  border-color: white;
-  overflow-y: scroll;
-  margin: 20px;
-}
 
 .landing-desc-personal {
     height: stretch;
     max-width: 80vw;
     padding: 50px;
-    overflow-y: scroll;
-    margin-left: 50%;
     margin-top: 8%;
+    display: flex;
 }
 
 
@@ -418,4 +399,62 @@
 .settings-btn:hover {
   background-color: rgba(100, 69, 128, 1);
   color: white;
+}
+
+.about-personal-img{
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/sharethelove.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  height: 550px;
+  width: 600px;
+  padding: 40px;
+}
+
+.words-aboutper{
+  height: 300px;
+  margin-left: 40%;
+  padding: 40px;
+}
+
+.about-personal-banner{
+  width: 100vw;
+  height: 50vh;
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/sharethelove.jpg");
+  background-size: cover, cover;
+  background-position: center, bottom;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.personal-label{
+  color:white;
+  line-height: 5;
+  padding-left: 50px;
+}
+
+
+.sec2-words{
+  margin-right: 50%;
+  padding: 40px;
+}
+
+.section2-personal{
+  background-color: #917EB3;
+}
+
+.sign-up-works{
+  color: white !important;
+  margin-top: 35px !important;
 }

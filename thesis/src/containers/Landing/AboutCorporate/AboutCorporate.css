@@ -1,3 +1,9 @@
+body{
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
 .LandingHeader {
   width: 100%;
   height: 60px;
@@ -140,6 +146,7 @@
   align-self: left !important;
   transition: all 0.2s ease !important;
   line-height: 3px !important;
+  margin-bottom: 15px;
 }
 
 .landing-button:hover {
@@ -186,7 +193,7 @@
 }
 
 .SectionDividerButton-b {
-  height: 15% !important;
+  height: 9% !important;
   width: 117px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
@@ -320,25 +327,15 @@
 }
 
 .landing-top-bar {
-    position: absolute;
-    width: 100vw;
-    height: 7vh;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.landing-bottom-bar {
-  background-color: rgb(217,217,252);
+  position: absolute;
   width: 100vw;
-  height: 5vh;
+  height: 7vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 1vh;
+  justify-content: flex-end;
 }
+
 
 .spacer {
   opacity:0;
@@ -348,36 +345,20 @@
   opacity:0;
 }
 
-.corp-container {
-  width: 70vw;
+.corp-contain {
+  padding: 40px;
+  text-align: center;
 }
 
 ::-webkit-scrollbar {
   width: 0px;
 }
 
-.landing-desc-corp {
+.landing-desc-corporate {
   border-width: 20px;
   border-style: solid;
   border-color: white;
-  overflow-y: scroll;
   margin: 20px;
-  background:
-  linear-gradient(
-    rgba(57, 12, 132, 0.45),
-    rgba(67, 36, 95, 1)
-  ),
-  url("../../../assets/security.jpg");
-  background-size: cover;
-  padding-left: 40px;
-  padding-right: 50px;
-}
-
-.landing-desc-personal {
-  height: stretch;
-  max-width: 80vw;
-  padding: 15px;
-  overflow-y: scroll;
 }
 
 .corp-toggle{
@@ -386,22 +367,88 @@
 
 .corp-hover{
   margin-top: 5%;
-  color: white;
 }
 
 .corp-hover-2{
   margin-top: 30px;
-  color: white;
-  text-align: end;
+  text-align: left;
 }
 
 .corp-p-l{
-  margin-right: 50%;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  background-color: red;
+  width: 400px;
+  height: 300px;
+  padding: 150px;
 }
 
-.corp-p-2{
-margin-left: 50%;
+.about-corp-banner{
+  width: 100vw;
+  height: 50vh;
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/security.jpg");
+  background-size: cover, cover;
+  background-position: center, bottom;
+  background-repeat: no-repeat;
+  color: white;
 }
-ul li{
-  color:white;
+
+.corp-banner-label{
+color:white;
+line-height: 5;
+padding-left: 50px;
+}
+
+.footer-corp{
+  display: flex;
+  width: 100vw;
+  height: 5vh;
+  padding: 1vh;
+  background-color: rgb(217,217,252);
+}
+
+.section1{
+  text-align: center;
+  padding: 50px;
+}
+
+.section1 p{
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.section1 ul li{
+  margin: auto;
+  text-align: center;
+  width: 70%;
+  line-height: 23px;
+}
+
+.section2 p{
+  font-size: 30px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: white;
+}
+
+.section2 ul li{
+  color: white;
+  line-height: 23px;
+}
+
+.section2{
+  padding: 50px;
+  padding-left: 200px;
+/* background-color: blue; */
+  width: 100vw;
+  background-color: #917EB3;
+}
+
+.words-sections2{
+  margin-right: 50%;
 }
