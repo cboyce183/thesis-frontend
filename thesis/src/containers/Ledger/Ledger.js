@@ -128,7 +128,7 @@ class Ledger extends Component {
           userB: el.to.username,
           dptA: el.from.department,
           dptB: el.to.department,
-          amount: el.amount,})
+          amount: Number(el.amount),})
         return acc;
       }, [])
       return (
@@ -157,7 +157,7 @@ class Ledger extends Component {
                 return  (
                   <ForceGraphLink
                     key={i+1000}
-                    link={{ source: el.userA, value: el.amount, target: el.userB,}}
+                    link={{ source: el.userA, value: Number(el.amount), target: el.userB,}}
                   />)
               })}
             </ForceGraph>
@@ -280,7 +280,7 @@ class Ledger extends Component {
     const larr = this.state.UserToUser.length;
     const n = colours.length/larr;
     return this.state.UserToUser.reduce((acc, el, i) => {
-      acc.push({ value: el.amount, key: el._id, color: colours[Math.round(i*n)],})
+      acc.push({ value: Number(el.amount), key: el._id, color: colours[Math.round(i*n)],})
       return acc;
     }, [])
   }
@@ -288,7 +288,7 @@ class Ledger extends Component {
   sumAdminExpense(typeOfTransaction){
     if(typeOfTransaction){
       return typeOfTransaction.reduce((acc, el) => {
-        return acc + el.amount
+        return acc + Number(el.amount)
       }, 0)
     }
   }
@@ -300,80 +300,80 @@ class Ledger extends Component {
           {this.popUp()}
           {this.filterPopUp()}
           <div style={{width:'auto', height:'100vh'}} className="nav-full-h">
-              <div
-                onClick={() => {
-                  this.setState({
-                    DisplayUserToUser: true,
-                    DisplayAdminExpense: false,
-                    DisplayUserSpent: false,
-                  })
-                }}
-                className="Transaction-Type"
-                style={{marginTop:'50px'}}
-              >
-              User Transactions
-              </div>
-              <div
-                onClick={async () => {
-                  await this.setState({
-                    DisplayUserToUser: false,
-                    DisplayAdminExpense: false,
-                    DisplayUserSpent: true,
-                  })
-                  this.child.getMounted()
-                }}
-                className="Transaction-Type"
-              >
-              Purchase Requests
-              </div>
-              <div
-                onClick={async () => {
-                  await this.setState({
-                    DisplayUserToUser: false,
-                    DisplayAdminExpense: true,
-                    DisplayUserSpent: false,
-                  })
-                  this.child.getMounted()
-                }}
-                className="Transaction-Type"
-              >
-              Admin Transactions
-              </div>
-              <div className="Transaction-Type"
-                onClick={async () => {
-                  await this.setState({
-                    popperStat: true,
-                  })
-                }}
-              >
-              Economy
-              </div>
+            <div
+              onClick={() => {
+                this.setState({
+                  DisplayUserToUser: true,
+                  DisplayAdminExpense: false,
+                  DisplayUserSpent: false,
+                })
+              }}
+              className="Transaction-Type"
+              style={{marginTop:'50px'}}
+            >
+            User Transactions
+            </div>
+            <div
+              onClick={async () => {
+                await this.setState({
+                  DisplayUserToUser: false,
+                  DisplayAdminExpense: false,
+                  DisplayUserSpent: true,
+                })
+                this.child.getMounted()
+              }}
+              className="Transaction-Type"
+            >
+            Purchase Requests
+            </div>
+            <div
+              onClick={async () => {
+                await this.setState({
+                  DisplayUserToUser: false,
+                  DisplayAdminExpense: true,
+                  DisplayUserSpent: false,
+                })
+                this.child.getMounted()
+              }}
+              className="Transaction-Type"
+            >
+            Admin Transactions
+            </div>
+            <div className="Transaction-Type"
+              onClick={async () => {
+                await this.setState({
+                  popperStat: true,
+                })
+              }}
+            >
+            Economy
+            </div>
           </div>
 
           <div className="Admin-WalletContainer">
             <div className="Admin-DashContainer">
               <div className="Admin-HeaderContainer" style={{display:'flex', flexFlow:'row',justifyContent:'space-between', marginBottom:'20px'}}>
                 <div style={{display:'flex'}}>
-                <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic} style={{height:'40px',width:'40px', borderRadius:'50%', marginRight:'50px'}}/>
-                <div className="Admin-TitleOfPage">Admin Dashboard</div>
+                  <img className="Admin-UserProfileImage" alt="" src={this.state.adminDetails.profilePic} style={{height:'40px',width:'40px', borderRadius:'50%', marginRight:'50px'}}/>
+                  <div className="Admin-TitleOfPage">Admin Dashboard</div>
                 </div>
                 <Close link="/panel"/>
               </div>
               <div className="Admin-SummaryContainer">
-                    <PieChart className="Admin-PercentSpent"
-                      startAngle={0}
-                      radius={50}
-                      lineWidth={30}
-                      paddingAngle={2}
-                      animationDuration={1000}
-                      animate={true}
-                      data={this.giveDistribution()}
-                    >
-                      <div className="Admin-PerRecivedText">
-                        <div className="Admin-SpentTitle">User Activity</div>
-                        <div className="Admin-SpentPer">%</div>
-                      </div>
-                    </PieChart>
+                <PieChart className="Admin-PercentSpent"
+                  startAngle={0}
+                  radius={50}
+                  lineWidth={30}
+                  paddingAngle={2}
+                  animationDuration={1000}
+                  animate={true}
+                  data={this.giveDistribution()}
+                >
+                  <div className="Admin-PerRecivedText">
+                    <div className="Admin-SpentTitle">User Activity</div>
+                    <div className="Admin-SpentPer">%</div>
+                  </div>
+                </PieChart>
                 <div className="Admin-SummaryDividerTot">
                   <div className="Admin-TotSumIn">
                     <div className="Admin-ZenInLab">User Net Flow</div>

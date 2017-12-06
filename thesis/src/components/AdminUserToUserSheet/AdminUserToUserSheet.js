@@ -187,7 +187,7 @@ class AdminUserToUserSheet extends Component {
     if(data){
       return data.map((el, i) => {
         return (
-           <tr className="main-tr" key={el._id}><td>{el.date}</td><td>{el.reason}</td><td>{el.from.username}</td><td>{el.to.username}</td><td>{el.amount}</td></tr>
+          <tr key={el.date}><td>{(new Date(Number(el.date))).toString()}</td><td>{el.reason}</td><td>{el.from.username}</td><td>{el.to.username}</td><td>{Number(el.amount)}</td></tr>
         )
       })
     }
@@ -196,7 +196,7 @@ class AdminUserToUserSheet extends Component {
   pageTotal(data, col){
     if(this.state.data){
       return data.reduce((acc, el) => {
-        return acc + el[col]
+        return acc + Number(el[col])
       }, 0)
     }
   }

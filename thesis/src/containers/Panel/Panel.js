@@ -32,7 +32,7 @@ class Panel extends Component {
         .then(res => {
           if (res.isAdmin) {
             if (!res.catalogN) this.setState({pending: ['catalog',],});
-            if (!res.usersIDN) this.setState({pending: [...this.state.pending, 'users',],});
+            if (!res.usersIdN) this.setState({pending: [...this.state.pending, 'users',],});
             this.setState({isAdmin:res.isAdmin,});
             this.setState({totalGiven:res.totalGiven,});
           } else {
