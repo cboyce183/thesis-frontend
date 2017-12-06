@@ -94,27 +94,6 @@
   color: white !important;
 }
 
-.InputLogin {
-  border-radius: 0 !important;
-  background-color: rgba(0,0,0,0.55) !important;
-  color: white !important;
-  height: 23% !important;
-  font-family: 'Raleway';
-  font-size: 1.6rem;
-  border: 1px solid white !important;
-  width: 100% !important;
-  margin-bottom: 15px;
-  transition: all 0s ease-in;
-}
-
-.InputLogin:focus{
-  background-color: rgba(0,0,0,0.6) !important;
-}
-
-.InputLogin::-webkit-input-placeholder {
-  color: white;
-}
-
 .LandingForm {
   margin: auto;
   width: 45%;
