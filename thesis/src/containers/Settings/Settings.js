@@ -8,6 +8,7 @@ import ManageUsers from '../../components/MangageUsers/ManageUsers';
 import '../../components/PopUp/PopUp.css';
 import SketchPicker from 'react-color';
 import reactCSS from 'reactcss';
+import Loader from '../../components/Loader/Loader';
 
 class Settings extends Component {
   constructor(props){
@@ -56,9 +57,7 @@ class Settings extends Component {
         .then(res => res.json())
         .then(res => {
           if (res.isAdmin) {
-            // console.log(res)
-            if (!res.catalogN) this.setState({pending: ['catalogN',],});
-            if (!res.usersIdN) this.setState({pending: [...this.state.pending, 'usersIdN',],});
+            console.log(res);
             this.setState({isAdmin:res.isAdmin, logo:res.logo, weeklyAllow: res.weeklyAllow, name:res.companyName, address:res.address,});
           } else {
             this.setState({available: res.availableCurrency, received: res.receivedCurrency, firstName: res.firstName, username: res.username, profilePic: res.profilePic, position: res.position, });
@@ -131,7 +130,7 @@ class Settings extends Component {
 
   handleFiles = files => {
     this.setState({
-      imagePath:files.base64,
+      logo:files.base64,
       uploaded: true,
     })
   }
@@ -179,15 +178,37 @@ class Settings extends Component {
   }
 
   renderLogoPicker = () => {
-    return this.state.uploaded
+    return this.state.logo
       ? (
-        <img
-          className="img-company-reg-logo"
-          name="logo"
-          onChange={this.handleFieldChange}
-          src={this.state.imagePath}
-          alt='company Logo'
-        />
+        <div>
+          <img
+            className="SettingsImgLogo"
+            name="logo"
+            onChange={this.handleFieldChange}
+            src={this.state.logo}
+            alt='company Logo'
+          />
+          {this.state.editing ?
+            (
+              <ReactFileReader base64={true} handleFiles={this.handleFiles}>
+                <div
+                  onChange={this.handleFieldChange}
+                  name="color"
+                  className="settings-btn"
+                  type="submit"
+                >Upload new Logo</div>
+              </ReactFileReader>
+            ) : (
+              <div
+                onChange={this.handleFieldChange}
+                style={{backgroundColor: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,}}
+                name="color"
+                className="settings-btn GreyedOut"
+                type="submit"
+              >Upload new Logo</div>
+            )
+          }
+        </div>
       ) : (
         <ReactFileReader base64={true} handleFiles={this.handleFiles}>
           <div className="logo-upload-container">
@@ -234,131 +255,155 @@ class Settings extends Component {
     const popup = this.state.popped ? this.renderPopUp() : null;
 
     return  !this.state.isAdmin ? (
-      <div className='MaxWidth'>
-        <div className="cls-btn">
-          <Close link="/panel"/>
-        </div>
-        <div className="header-settings">
-          <h3 className='settings-label'>User Settings</h3>
-        </div>
-        <div className='settings-container'>
-          <div className='settings-info'>
-            <input
-              className="u-full-width settings-input"
-              type="text"
-              name="firstName"
-              placeholder={this.state.firstName}
-              disabled={!this.state.editing}
-              onChange={this.handleFieldChange}
-            />
-            <input
-              className="u-full-width settings-input"
-              type="text"
-              name="position"
-              disabled={!this.state.editing}
-              placeholder={this.state.position}
-              onChange={this.handleFieldChange}
-            />
-            <input
-              className="u-full-width settings-input"
-              type="text"
-              name="username"
-              placeholder={this.state.username}
-              disabled={!this.state.editing}
-              onChange={this.handleFieldChange}
-            />
-          </div>
-          <div className='settings-img'>
-            <div className="img-input-settings">
-              <div className='add-logo'>
-                {this.renderLogoPicker()}
-              </div>
-            </div>
-            <div className='edit-btn-settings'>
-              <div
-                className="settings-btn"
-                onClick={this.state.editing ? this.updateUserSettings : this.handleSettingsInfo}
-              >{this.state.editing ? 'Save' : 'Edit'}</div>
-            </div>
-          </div>
-        </div>
-        <p className='pwr-by-settings'>Powered by Zendama</p>
-      </div>
-    ) :
-      (
-        <div>
-          {popup}
+      this.state.loaded
+        ? (
           <div className='MaxWidth'>
             <div className="cls-btn">
               <Close link="/panel"/>
             </div>
             <div className="header-settings">
-              <h3>Admin Settings</h3>
+              <h3 className='settings-label'>User Settings</h3>
             </div>
-            <div>
-              <div className="container-settings">
-                <div className='settings-info'>
-                  <input
-                    className="u-full-width settings-input"
-                    type="text"
-                    name="name"
-                    placeholder={this.state.name}
-                    disabled={!this.state.editing}
-                    onChange={this.handleFieldChange}
-                  />
-                  <input
-                    className="u-full-width settings-input"
-                    type="text"
-                    name="address"
-                    placeholder={this.state.address}
-                    disabled={!this.state.editing}
-                    onChange={this.handleFieldChange}
-                  />
-                  <input
-                    className="u-full-width settings-input"
-                    type="number"
-                    name="weeklyAllow"
-                    placeholder={this.state.weeklyAllow}
-                    disabled={!this.state.editing}
-                    onChange={this.handleFieldChange}
-                  />
-                  <div className="admin-set-btns">
-                    <div
-                      className="settings-btn"
-                      onClick={this.state.editing ? this.updateUserSettings : this.handleSettingsInfo}
-                    >{this.state.editing ? 'Save' : 'Edit'}</div>
-                    <div
-                      className="settings-btn"
-                      type="submit"
-                      onClick={this.handlePopUp}
-                    >Manage Users</div>
+            <div className='settings-container'>
+              <div className='settings-info'>
+                <input
+                  className="u-full-width settings-input"
+                  type="text"
+                  name="firstName"
+                  placeholder={this.state.firstName}
+                  disabled={!this.state.editing}
+                  onChange={this.handleFieldChange}
+                />
+                <input
+                  className="u-full-width settings-input"
+                  type="text"
+                  name="position"
+                  disabled={!this.state.editing}
+                  placeholder={this.state.position}
+                  onChange={this.handleFieldChange}
+                />
+                <input
+                  className="u-full-width settings-input"
+                  type="text"
+                  name="username"
+                  placeholder={this.state.username}
+                  disabled={!this.state.editing}
+                  onChange={this.handleFieldChange}
+                />
+              </div>
+              <div className='settings-img'>
+                <div className="img-input-settings">
+                  <div className='add-logo'>
+                    {this.renderLogoPicker()}
                   </div>
                 </div>
-                <div className='settings-container'>
-                  <div className='up-theme'>
-                    <div className="add-logo">
-                      {this.renderLogoPicker()}
-                    </div>
-                    <div
-                      style={styles.swatch}
-                      onClick={ this.handleClick}
-                      onChange={this.handleFieldChange}
-                      name="color"
-                      className="settings-btn"
-                      type="submit"
-                    >Theme color</div>
-                    { this.state.displayColorPicker ? <div style={ styles.popover }>
-                      <div style={ styles.cover } onClick={ this.handleClose }/>
-                      <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
-                    </div> : null }
-                  </div>
+                <div className='edit-btn-settings'>
+                  <div
+                    className="settings-btn"
+                    onClick={this.state.editing ? this.updateUserSettings : this.handleSettingsInfo}
+                  >{this.state.editing ? 'Save' : 'Edit'}</div>
                 </div>
               </div>
-
             </div>
             <p className='pwr-by-settings'>Powered by Zendama</p>
           </div>
-        </div>
+        ) : (
+          <div className="MaxWidth">
+            <div className="PanelPosition">
+              <div className="Header">
+              </div>
+              <Loader/>
+              <h6>powered by Zendama</h6>
+            </div>
+          </div>
+        )
+    ) :
+      (
+        this.state.loaded ? (
+          <div>
+            {popup}
+            <div className='MaxWidth'>
+              <div className="cls-btn">
+                <Close link="/panel"/>
+              </div>
+              <div className="header-settings">
+                <h3>Admin Settings</h3>
+              </div>
+              <div>
+                <div className="container-settings">
+                  <div className='settings-info'>
+                    <input
+                      className="u-full-width settings-input"
+                      type="text"
+                      name="name"
+                      placeholder={this.state.name}
+                      disabled={!this.state.editing}
+                      onChange={this.handleFieldChange}
+                    />
+                    <input
+                      className="u-full-width settings-input"
+                      type="text"
+                      name="address"
+                      placeholder={this.state.address}
+                      disabled={!this.state.editing}
+                      onChange={this.handleFieldChange}
+                    />
+                    <input
+                      className="u-full-width settings-input"
+                      type="number"
+                      name="weeklyAllow"
+                      placeholder={this.state.weeklyAllow}
+                      disabled={!this.state.editing}
+                      onChange={this.handleFieldChange}
+                    />
+                    <div className="admin-set-btns">
+                      <div
+                        style={{backgroundColor: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,}}
+                        className="settings-btn"
+                        onClick={this.state.editing ? this.updateUserSettings : this.handleSettingsInfo}
+                      >{this.state.editing ? 'Save' : 'Edit'}</div>
+                      <div
+                        style={{backgroundColor: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,}}
+                        className="settings-btn"
+                        type="submit"
+                        onClick={this.handlePopUp}
+                      >Manage Users</div>
+                    </div>
+                  </div>
+                  <div className='settings-container'>
+                    <div className='up-theme'>
+                      <div className="add-logo">
+                        {this.renderLogoPicker()}
+                      </div>
+                      <div
+                        style={styles.swatch}
+                        onClick={ this.handleClick}
+                        onChange={this.handleFieldChange}
+                        name="color"
+                        className="settings-btn"
+                        type="submit"
+                      >Theme color</div>
+                      { this.state.displayColorPicker ? <div style={ styles.popover }>
+                        <div style={ styles.cover } onClick={ this.handleClose }/>
+                        <SketchPicker color={ this.state.color } onChange={ this.handleChange } />
+                      </div> : null }
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className='pwr-by-settings'>Powered by Zendama</p>
+            </div>
+          </div>
+        ) : (
+          <div className="MaxWidth">
+            <div className="PanelPosition">
+              <div className="Header">
+              </div>
+              <Loader/>
+              <h6>powered by Zendama</h6>
+            </div>
+          </div>
+        )
       );
   }
 }
