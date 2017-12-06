@@ -95,7 +95,7 @@ class Panel extends Component {
           <div className="Header">
             {nextSteps}
             <div className="Logout">
-              <h6 onClick={this.handleLogout} style={{marginRight:'5vw'}} className="Logout">logout</h6>
+              <h6 onClick={this.handleLogout} style={{marginRight:'5vw', marginLeft:'5vw'}} className="Logout">logout</h6>
             </div>
           </div>
           <div className="PanelContainer">
