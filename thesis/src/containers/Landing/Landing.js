@@ -1,7 +1,7 @@
 import React, { Component, } from 'react';
 import './Landing.css';
-// import { Route, } from 'react-router-dom';
-//import 'gsap';
+import {TweenMax, TweenLite, Elastic, TimelineMax, TimelineLite} from 'gsap';
+import ReactDOM from 'react-dom';
 import { Link, } from 'react-router-dom';
 import  base64  from 'base-64';
 class Landing extends Component {
@@ -13,12 +13,26 @@ class Landing extends Component {
       password: null,
     }
   }
+  progAnimInit = () => {
+    const tl = new TimelineLite();
+    tl.from(ReactDOM.findDOMNode(this.throwit), 2, {drawSVG:0})
+      .from(ReactDOM.findDOMNode(this.catchit), 2, {drawSVG:0})
+    tl.timeScale(1);
+  }
+  animateTitle = (target) => {
+    TweenMax.to(ReactDOM.findDOMNode(target), 5, {color:'purple', yoyo:true, repeat:Infinity});
+  }
+  animateHands = (target) => {
+    TweenMax.to(ReactDOM.findDOMNode(target), 1, {marginBottom:'-60px', yoyo:true, repeat:Infinity, ease:'linear'});
+  }
   loginRedir = () => window.location = '/login';
   corporateRedir = () => window.location = '/about_corporate';
   personalRedir = () => window.location = '/about_personal';
 
   componentDidMount = () => {
     window.addEventListener('scroll',this.renderLogo);
+    this.animateTitle(this.title);
+    this.animateHands(this.hands);
   }
 
   saveAccessToken(token){
@@ -49,6 +63,35 @@ class Landing extends Component {
     })
   }
 
+  renderLoginForm = () => {
+    return !window.localStorage.getItem('token')
+      ? (
+        <div className="LoginForm">
+          <p>Already have an account?</p>
+          <input className="InputLogin"
+            type="email"
+            value={this.state.email}
+            placeholder="Email"
+            onFocus={() => this.setState({noAccess: false, email: '',})}
+            onChange={(e) => this.setState({email: e.target.value,})}
+          />
+          <input type="password" className="InputLogin"
+            value={this.state.password}
+            placeholder="Password"
+            onFocus={() => this.setState({noAccess: false, password: '',})}
+            onChange={(e) => this.setState({password: e.target.value,})}
+          />
+          <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="login" />
+        </div>
+      ) : (
+        <div className="LoginForm">
+          <Link to="/panel">
+            <input type="submit" className='TakeMeToPanel' value="take me to my panel" />
+          </Link>
+        </div>
+      )
+  }
+
   renderLogo = () => {
     let {logo,} = this.state
     window.scrollY > 350
@@ -63,7 +106,7 @@ class Landing extends Component {
           <div className="HeaderWrapper">
             <div className="HeaderLogoWrapper">
               <img className={`HeaderLogo${!this.state.logo ? ' HideIt' : ''}`} alt="logo" src={require('../../assets/zendamalogo-purple.png')} />
-              <h1 className="landing-title-text">Zendama</h1>
+              <h1 className="landing-title-text" ref={e => {this.title = e;}}>Zendama</h1>
             </div>
             <div className="HeaderMenu">
             </div>
@@ -76,23 +119,7 @@ class Landing extends Component {
               <div className="LogoTextWrap">
                 <h1>Go together if you want to go far</h1>
               </div>
-              <div className="LoginForm">
-                <p>Already have an account?</p>
-                <input className="InputLogin"
-                  type="email"
-                  value={this.state.email}
-                  placeholder="Email"
-                  onFocus={() => this.setState({noAccess: false, email: '',})}
-                  onChange={(e) => this.setState({email: e.target.value,})}
-                />
-                <input type="password" className="InputLogin"
-                  value={this.state.password}
-                  placeholder="Password"
-                  onFocus={() => this.setState({noAccess: false, password: '',})}
-                  onChange={(e) => this.setState({password: e.target.value,})}
-                />
-                <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="login" />
-              </div>
+              {this.renderLoginForm()}
             </div>
           </div>
         </div>
@@ -109,7 +136,7 @@ class Landing extends Component {
         </div>
         <div className="PersonalSection">
           <div className="Purple">
-            <div className="MainSection">
+            <div className="MainSection" style={{overflow:'hidden'}}>
               <div className="MainSectionText">
                 <p className='landing-desc-txt'>What can Zendama do for your company?</p>
                 <p className='landing-desc-alt-txt'>Zendama will encourage a sense of responsability amongst your employees, both over their own work and the work of colleagues; it will promote a culture of sharing each other's success and collaboration. For HR departments, it will also double as an incredible tool: detecting bottlenecks, finding topics/tasks your employees are struggling with or trully valuable employees has never been this simple!</p>
@@ -117,16 +144,16 @@ class Landing extends Component {
                   <input type="submit" className='landing-button' value="i wanna know more" />
                 </Link>
               </div>
-              <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}}></div>
+              <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/solidarity.svg')})`,}} ref={e => {this.hands = e;}}></div>
             </div>
           </div>
           <div className="MainSection">
-            <div className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}}></div>
+            <div id="programming" className="SectionImage" style={{backgroundImage:`url(${require('../../assets/programming.svg')})`, marginRight: '60px', backgroundPosition: 'center',}} ref={e => {this.logogo = e;}}></div>
             <div className="MainSectionText">
               <p className='landing-desc-txt'>How does it work?</p>
               <p className='landing-desc-alt-txt'>So you're a tech nerd! Zendama uses blockchain technology to safely handle all Zen transactions within your company; our tech stach in general is pretty cool, so feel free to check it out below.</p>
               <Link className="LinkTunnel" to="/HowitWorks">
-                <input type="submit" className='SectionDividerButton' onClick={this.loginRequest.bind(this, this.state)} value="i wanna know more" />
+                <input type="submit" className='SectionDividerButton' value="i wanna know more" />
               </Link>
             </div>
           </div>

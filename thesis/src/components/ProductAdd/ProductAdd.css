@@ -1,3 +1,98 @@
 .Unavailable.Clickable {
   cursor: pointer;
 }
+
+.ProductAddWrap {
+  width: 100%;
+  height: 88%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ProductAddImageWrap {
+  width: 40% !important;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.ProductAddDescriptionWrap {
+  width: 60%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Shorten {
+  justify-content: center;
+}
+
+.BasicInput {
+  height: 32px !important;
+  width: 80% !important;
+  border-radius: 0 !important;
+  font-family: 'Raleway' !important;
+  resize: none !important;
+}
+
+.TextareaInput {
+  height: 65px !important;
+  width: 80% !important;
+  border: 1px solid #D0D0D0 !important;
+  border-radius: 0 !important;
+  font-family: 'Raleway';
+  text-overflow: wrap;
+}
+
+.TextareInput:focus {
+  outline: none;
+  border-color: black;
+}
+
+.CreateButton {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 35px;
+}
+
+.ServiceImageContainer {
+  background-color: #ddd;
+  border-radius: 25px;
+  padding: 15px;
+  border-style: dashed;
+  border-color: #bbb;
+  opacity: 0.5;
+  width: 350px;
+  height: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+}
+
+.ServiceImageContainer:hover {
+  opacity: 0.8;
+}
+
+.ServiceImageResulting {
+  width: 350px;
+  height: 220px;
+}
+
+.PopUpImgWrapServiceAdd {
+  width: 390px;
+  height: 220px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  background-size: cover;
+}
