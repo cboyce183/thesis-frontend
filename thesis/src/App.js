@@ -6,7 +6,6 @@ import './App.css';
 import Landing from './containers/Landing/Landing';
 import Panel from './containers/Panel/Panel';
 import CompanyRegistry from './containers/CompanyRegistry/CompanyRegistry';
-import Login from './containers/Login/Login';
 import TipOrPay from './containers/TipOrPay/TipOrPay';
 import Ledger from './containers/Ledger/Ledger';
 import Catalog from './containers/Catalog/Catalog';
@@ -25,7 +24,6 @@ class App extends Component {
         <Route exact path="/" component={Landing}/>
         <Route path="/panel" component={Panel}/>
         <Route path="/companyregistry" component={CompanyRegistry}/>
-        <Route path="/login" component={Login}/>
         <Route path="/tiporpay" component={TipOrPay}/>
         <Route path="/ledger" component={Ledger}/>
         <Route path="/catalog" component={Catalog}/>

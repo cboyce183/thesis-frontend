@@ -6,12 +6,20 @@ import '../../App.css';
 import './Loader.css';
 
 class PanelSquare extends Component {
+  constructor(){
+    super();
+    this.landed = false;
+  }
   scrambler = (target, text) => {
-    return TweenMax.to(ReactDOM.findDOMNode(target), 1.5, {scrambleText:{text:text, chars:"10", revealDelay:0.2, speed:0.3}});
+    if (this.landed) return TweenMax.to(ReactDOM.findDOMNode(target), 1.5, {scrambleText:{text:text, chars:"10", revealDelay:0.2, speed:0.3}});
   }
   componentDidMount(){
+    this.landed = true;
     setTimeout(() => this.scrambler(this.scrambled, 'There appears to be a connection problem...'), 10000);
     setTimeout(() => this.scrambler(this.scrambled2, 'Please try again in a few minutes.'), 11000);    
+  }
+  componentWillUnmount(){
+    this.landed = false;
   }
   render() {
     return (
