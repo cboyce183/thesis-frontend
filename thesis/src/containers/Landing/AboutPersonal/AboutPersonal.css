@@ -1,3 +1,7 @@
+.body{
+  overflow: hidden;
+}
+
 .LandingHeader {
   width: 100%;
   height: 60px;
@@ -27,12 +31,14 @@
 .landing-title-text {
   /* position: absolute; */
   /* z-index: 2; */
+  background-color: white;
   font-size: 2.7rem;
   line-height: 4.2rem;
   font-weight: 300;
   letter-spacing: 0.15vw;
   margin: 0;
   color: black;
+  margin-right: 50px;
 }
 
 .HideIt {
@@ -60,30 +66,17 @@
 .LandingBanner {
   width: 100vw;
   height: 100vh;
-  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../assets/banner.jpg');
+  background-image:  linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)),url('../../../assets/banner.jpg');
   background-position: center, bottom;
   background-size: cover, cover;
   background-repeat: no-repeat;
 }
 
 .LandingTitle {
-
   height: 100%;
   width: 50%;
   display: flex;
   align-items: center;
-}
-
-@keyframes logoinit1 {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 
 .LandingLogo {
@@ -91,11 +84,10 @@
   width: 100%;
   height: 20%;
   margin-bottom: 2.4rem;
-  background-image: url('../../assets/zendamalogo-white.png');
+  background-image: url('../../../assets/zendamalogo-white.png');
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  animation: logoinit1 0.8s ease-in;
 }
 
 .LogoTextWrap > h1 {
@@ -135,11 +127,6 @@
 
 .LoginForm {
   height: 37%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .LoginForm > p {
@@ -161,30 +148,6 @@
 }
 
 .landing-button:hover {
-  background-color: rgb(146, 126, 178) !important;
-  color: white !important;
-}
-
-.LoginForm > a {
-  align-self: center;
-}
-
-.TakeMeToPanel {
-  height: 23% !important;
-  width: 210px !important;
-  align-self: center;
-  margin-bottom: 150px;
-  background-color: rgba(255,255,255,0.9) !important;
-  color: rgb(146, 126, 178) !important;
-  border: solid 1px !important;
-  border-color: white !important;
-  padding: 20px !important;
-  border-radius: 0 !important;
-  transition: all 0.2s ease !important;
-  line-height: 3px !important;
-}
-
-.TakeMeToPanel:hover {
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
 }
@@ -227,9 +190,9 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton {
+.SectionDividerButton-personal {
   height: 9% !important;
-  width: 210px !important;
+  width: 200px !important;
   background-color: rgb(146, 126, 178) !important;
   color: white !important;
   transition: all 0.2s ease !important;
@@ -239,7 +202,7 @@
   margin-top: 20px;
 }
 
-.SectionDividerButton:hover {
+.SectionDividerButton-b:hover {
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
@@ -314,6 +277,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-left: 12px;
+  margin-right: 12px;
 }
 
 .landing-business {
@@ -321,19 +286,21 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: 105vw;
   height: 20vh;
   background: linear-gradient(rgb(217,217,252), rgba(217, 217, 252, 0.65), rgb(217,217,252));
   padding-top: 5vh;
   padding-bottom: 5vh;
 }
 
-.landing-desc {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.landing-desc-per {
   padding-top:5vh;
   padding-bottom:10vh;
+  background-color: white;
+}
+
+.landing-desc-per p{
+  color: black;
 }
 
 .landing-desc-txt {
@@ -369,13 +336,12 @@
 
 .landing-bottom-bar {
   background-color: rgb(217,217,252);
-  width: 100vw;
-  height: 5vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 1vh;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
 }
 
 .spacer {
@@ -394,17 +360,101 @@
   width: 0px;
 }
 
-.landing-desc-corp {
-  border-width: 20px;
-  border-style: solid;
-  border-color: white;
-  overflow-y: scroll;
-  margin: 20px;
-}
 
 .landing-desc-personal {
     height: stretch;
     max-width: 80vw;
-    padding: 15px;
-    overflow-y: scroll;
+    padding: 50px;
+    margin-top: 8%;
+    display: flex;
+}
+
+
+.twitter-icon{
+  margin-right: 50px;
+}
+
+.settings-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  border: solid 1px;
+  padding: 0 15px 0 15px;
+  background-color: #b494d0;
+  color: white;
+  transition: all 0.2s ease;
+  margin-top: 2.5vh;
+  text-decoration: none;
+}
+
+.settings-btn a{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.settings-btn:hover {
+  background-color: rgba(100, 69, 128, 1);
+  color: white;
+}
+
+.about-personal-img{
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/sharethelove.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  overflow-y:hidden;
+  overflow-x:hidden;
+  height: 550px;
+  width: 600px;
+  padding: 40px;
+}
+
+.words-aboutper{
+  height: 300px;
+  margin-left: 40%;
+  padding: 40px;
+}
+
+.about-personal-banner{
+  width: 100vw;
+  height: 50vh;
+  background:
+  linear-gradient(
+    rgba(57, 12, 132, 0.45),
+    rgba(67, 36, 95, 1)
+  ),
+  url("../../../assets/sharethelove.jpg");
+  background-size: cover, cover;
+  background-position: center, bottom;
+  background-repeat: no-repeat;
+  color: white;
+}
+
+.personal-label{
+  color:white;
+  line-height: 5;
+  padding-left: 50px;
+}
+
+
+.sec2-words{
+  margin-right: 50%;
+  padding: 40px;
+}
+
+.section2-personal{
+  background-color: #917EB3;
+}
+
+.sign-up-works{
+  color: white !important;
+  margin-top: 35px !important;
 }

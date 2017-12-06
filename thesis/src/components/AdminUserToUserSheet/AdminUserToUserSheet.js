@@ -214,17 +214,17 @@ class AdminUserToUserSheet extends Component {
   render() {
     return (
       <div className="Admin-SheetContainer">
-        <table>
-          <thead>
-            <tr>
-            <th>Date</th><th>Reason</th> <th>Giver</th> <th>Recipient</th> <th>Amount</th>
+        <table className="main-table">
+          <thead className="main-thead">
+            <tr className="main-tr">
+            <th className="main-th">Date</th><th className="main-th">Reason</th> <th className="main-th">Giver</th> <th className="main-th">Recipient</th> <th className="main-th">Amount</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="main-tbody">
              {this.UserToUserTransactionList(this.state.transactionsToDisplay)}
           </tbody>
-          <tfoot>
-            <tr>
+          <tfoot className="main-tfoot">
+            <tr className="main-tr">
             <td className="da-button" onClick={this.applyFilter}>Filter</td> <td className="da-button" onClick={this.resetFilter}>Reset</td> <td></td> <td></td> <td>Total: {this.pageTotal(this.state.data, 'amount')}</td>
             </tr>
           </tfoot>

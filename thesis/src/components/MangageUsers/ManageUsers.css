@@ -45,8 +45,8 @@ ul li {
 }
 
 .u-cff:hover{
-  background-color: rgba(88, 51, 161, 0.685);
-  color: white;
+  background-color: rgba(215, 29, 5, 0.94);
+  fill: white;
 }
 
 .search-bar {

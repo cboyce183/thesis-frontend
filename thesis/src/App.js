@@ -14,8 +14,9 @@ import Settings from './containers/Settings/Settings';
 import Logout from './containers/Logout/Logout';
 import UserSignup from './containers/UserSignup/UserSignup';
 import UserWallet from './containers/UserWallet/UserWallet';
-import AboutCorporate from './containers/Landing/AboutCorporate.js';
-import AboutPersonal from './containers/Landing/AboutPersonal.js';
+import AboutCorporate from './containers/Landing/AboutCorporate/AboutCorporate.js';
+import AboutPersonal from './containers/Landing/AboutPersonal/AboutPersonal.js';
+import HowitWorks from './containers/Landing/HowitWorks/HowitWorks.js';
 
 class App extends Component {
   render() {
@@ -34,6 +35,7 @@ class App extends Component {
         <Route path="/user-wallet" component={UserWallet}/>
         <Route path="/about_corporate" component={AboutCorporate}/>
         <Route path="/about_personal" component={AboutPersonal}/>
+        <Route path="/howitworks" component={HowitWorks}/>
       </div>
     );
   }

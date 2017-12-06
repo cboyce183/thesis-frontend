@@ -20,7 +20,35 @@
 .cogwheel {
   fill: green;
 }
+.main-table {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
+  border-collapse: collapse;
+}
+.main-table .main-thead , .main-table .main-tfoot{
+  flex: 0 0 auto;
+  width: calc(100% - 0.9em);
+}
+.main-table .main-tbody {
+  flex: 1 1 auto;
+  display: block;
+  overflow-y: scroll;
+}
+.main-table .main-tbody .main-tr, .main-table .main-tfoot .main-tr{
+  width: 100%;
+}
+.main-table .main-thead, .main-table .main-tbody .main-tr , .main-table .main-tfoot{
+  display: table;
+  table-layout: fixed;
+}
 
+.main-tfoot {
+  height: 20px;
+  border-top: 1px solid rgba(0,0,0,0.12);
+  margin-bottom:15px;
+}
 /*
 * Skeleton V2.0.4
 * Copyright 2014, Dave Gamache

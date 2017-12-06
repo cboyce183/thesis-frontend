@@ -207,7 +207,7 @@ class UserWallet extends Component {
     if(this.state.transactionsToDisplay) {
       return this.state.transactionsToDisplay.map((el, i) => {
         return (
-          <tr key={el._id}>
+          <tr key={el._id} className="main-tr">
             <td><img className="TranscationPicImg" alt="" src={el.profilePic}/></td>
             <td>{el.username}</td>
             <td>{el.date}</td>
@@ -457,11 +457,11 @@ class UserWallet extends Component {
                 </div>
 
                 <table className="main-table">
-                    <thead><tr><th>user</th><th>id</th><th>date</th><th>given</th><th>received</th><th>net</th></tr></thead>
-                    <tbody>
+                    <thead className="main-thead"><tr className="main-tr"><th className="main-th">user</th><th className="main-th">id</th><th className="main-th">date</th><th className="main-th">given</th><th className="main-th">received</th><th className="main-th">net</th></tr></thead>
+                    <tbody className="main-table">
                      {this.transactionList()}
                     </tbody>
-                    <tfoot><tr><th></th><th></th><th></th><th>{this.pageTotal('spent')}</th><th>{this.pageTotal('received')}</th><th>{this.pageTotal('received') - this.pageTotal('spent')}</th></tr></tfoot>
+                    <tfoot className="main-tfoot"><tr className="main-tr"><th className="main-th"></th><th className="main-th"></th><th className="main-th"></th><th className="main-th">{this.pageTotal('spent')}</th><th className="main-th">{this.pageTotal('received')}</th><th className="main-th">{this.pageTotal('received') - this.pageTotal('spent')}</th></tr></tfoot>
                 </table>
                 <div className="TransactionOverflowBox">
                   {this.displayingNavigationPage()}
