@@ -102,24 +102,50 @@ class UserWallet extends Component {
 
 
   getInit(){
-    fetch('https://private-3a61ed-zendama.apiary-mock.com/user-wallet', {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
-    })
-      .then(r => r.json())
-      .then(res => this.setState({accountInfo: res,}))
-      .then(zenStat => this.manageZenFlowStats())
-      .then(update => {
-        this.companySpentStats();
-        this.companyRecStats();
-        this.filteringTransactionsForPanel(0, 14)
-        this.filterUserNamesForSelection()
-        this.setState({loaded: true,})
-        this.totalNumberOfPagesNeeded()
+    if (window.localStorage.getItem('token')) {
+      fetch('http://192.168.0.37:4200/company',
+        {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
+        })
+        .then(res => res.json())
+        .then(r => console.log("user information", r))
+        .then(res => {
+          if (res.isAdmin) {
+            this.setState({isAdmin:res.isAdmin,});
+          } else {
+            console.log("company response", res)
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+          }
+        })
+        .catch(e => console.error(e));
+
+
+      fetch('http://192.168.0.37:4200/admin-transactions', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
       })
+        .then(r => r.json())
+        .then(r => console.log(r))
+        .then(res => this.setState({accountInfo: res,}))
+        .then(zenStat => this.manageZenFlowStats())
+        .then(update => {
+          this.companySpentStats();
+          this.companyRecStats();
+          this.filteringTransactionsForPanel(0, 14)
+          this.filterUserNamesForSelection()
+          this.setState({loaded: true,})
+          this.totalNumberOfPagesNeeded()
+        })
+    } else {
+      window.location = '/login';
+    }
   }
 
   componentDidMount(){
