@@ -1,6 +1,6 @@
 import React, { Component, } from 'react';
 import './Landing.css';
-import {TweenMax, TweenLite, Elastic, TimelineMax, TimelineLite} from 'gsap';
+import {TweenMax, TimelineLite,} from 'gsap';
 import ReactDOM from 'react-dom';
 import { Link, } from 'react-router-dom';
 import  base64  from 'base-64';
