@@ -35,7 +35,7 @@ class PanelSquare extends Component {
       <Link className="Hovering" style={{textDecoration:'none',}} to={this.props.link}>
         <div className="PanelSquare" style={{backgroundColor:this.props.backgroundColor}}>
           <div className="Wrapper">
-            <h5>{this.props.title}</h5>
+            <h5 style={{color:this.props.textColor}}>{this.props.title}</h5>
             {summary}
           </div>
         </div>
@@ -47,7 +47,7 @@ class PanelSquare extends Component {
             className="PanelImg"
             alt={this.props.alter}
             src={this.props.image}
-            style={{transform: "scale(" + this.props.imgScale + ")"}}
+            style={{transform: "scale(" + this.props.imgScale + ")", fill:this.props.textColor}}
           />
         </div>
       </Link>
