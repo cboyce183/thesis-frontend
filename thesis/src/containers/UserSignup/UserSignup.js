@@ -54,7 +54,7 @@ class UserSignup extends Component {
         profilePic:  this.state.UserImage,
         email:  this.state.email,
         password:  this.state.password2,
-        userName: this.state.userName,
+        username: this.state.userName,
         firstName: this.state.firstName,
         lastName: this.state.lastName,
       }
