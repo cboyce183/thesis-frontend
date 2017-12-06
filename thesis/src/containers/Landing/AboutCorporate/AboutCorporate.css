@@ -354,13 +354,6 @@ body{
   width: 0px;
 }
 
-.landing-desc-corporate {
-  border-width: 20px;
-  border-style: solid;
-  border-color: white;
-  margin: 20px;
-}
-
 .corp-toggle{
   color:white;
 }
@@ -414,7 +407,7 @@ padding-left: 50px;
 
 .section1{
   text-align: center;
-  padding: 50px;
+  padding: 70px;
 }
 
 .section1 p{
@@ -442,13 +435,23 @@ padding-left: 50px;
 }
 
 .section2{
+  display: flex;
   padding: 50px;
-  padding-left: 200px;
 /* background-color: blue; */
   width: 100vw;
   background-color: #917EB3;
 }
 
-.words-sections2{
-  margin-right: 50%;
+.icon-corporate{
+  width: 40%;
+  background-image: url('../../../assets/keyhole (1).svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  padding-left: 250px;
+}
+
+.security-words{
+  padding-left: 50px;
+  padding-right: 200px;
 }
