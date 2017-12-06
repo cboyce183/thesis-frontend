@@ -400,9 +400,8 @@
   ),
   url("../../../assets/howitworks.jpg");
   background-size: cover, cover;
-  background-position: center, bottom;
+  background-position: 0%, 53%;
   background-repeat: no-repeat;
-
 }
 
 .how-label{
@@ -417,7 +416,7 @@ background-color:#917EB3;
 }
 
 .works-section1-label{
-  font-size: 30px;
+  font-size: 25px;
   padding-left: 50px;
 }
 

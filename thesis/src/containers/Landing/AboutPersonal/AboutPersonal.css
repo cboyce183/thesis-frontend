@@ -159,11 +159,12 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton-personal {
+.SectionDividerButton-about-personal {
   height: 9% !important;
-  width: 200px !important;
-  background-color: rgb(146, 126, 178) !important;
-  color: white !important;
+  width: 117px !important;
+  background-color: white !important;
+  color: rgb(146, 126, 178) !important;
+  border: solid 1px rgb(146, 126, 178) !important;
   transition: all 0.2s ease !important;
   padding: 20px !important;
   border-radius: 0 !important;
@@ -171,10 +172,31 @@
   margin-top: 20px;
 }
 
-.SectionDividerButton-b:hover {
+.SectionDividerButton-about-personal-to {
+  height: 9% !important;
+  width: 117px !important;
   background-color: white !important;
   color: rgb(146, 126, 178) !important;
   border: solid 1px rgb(146, 126, 178) !important;
+  transition: all 0.2s ease !important;
+  padding: 20px !important;
+  border-radius: 0 !important;
+  line-height: 3px !important;
+  margin-top: 20px;
+  margin-right: 15px;
+}
+
+
+.SectionDividerButton-about-personal-to:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  border: solid 1px white !important;
+}
+
+.SectionDividerButton-about-personal:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  border: solid 1px white !important;
 }
 
 .MainSectionText {
@@ -367,22 +389,6 @@
   color: white;
 }
 
-.about-personal-img{
-  background:
-  linear-gradient(
-    rgba(57, 12, 132, 0.45),
-    rgba(67, 36, 95, 1)
-  ),
-  url("../../../assets/sharethelove.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  overflow-y:hidden;
-  overflow-x:hidden;
-  height: 550px;
-  width: 600px;
-  padding: 40px;
-}
-
 .words-aboutper{
   height: 300px;
   padding: 40px;
@@ -399,7 +405,8 @@
   ),
   url("../../../assets/sharethelove.jpg");
   background-size: cover, cover;
-  background-position: center, bottom;
+  background-position-x: 0%;
+  background-position-y: 29%;
   background-repeat: no-repeat;
   color: white;
 }
@@ -426,8 +433,8 @@
 }
 
 .icon-personal{
-  height: 100%;
-  width: 40%;
+  height: 85%;
+  width: 60%;
   background-image: url('../../../assets/thumbs-up.svg');
   background-repeat: no-repeat;
   background-position: bottom;
