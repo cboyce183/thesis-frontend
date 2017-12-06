@@ -156,22 +156,23 @@
   justify-content: space-between;
 }
 
-.SectionDividerButton-b {
+.SectionDividerButton-works {
   height: 9% !important;
   width: 117px !important;
-  background-color: rgb(146, 126, 178) !important;
-  color: white !important;
+  background-color: white !important;
+  color: rgb(146, 126, 178) !important;
   transition: all 0.2s ease !important;
   padding: 20px !important;
   border-radius: 0 !important;
   line-height: 3px !important;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 70%;
 }
 
-.SectionDividerButton-b:hover {
-  background-color: white !important;
-  color: rgb(146, 126, 178) !important;
-  border: solid 1px rgb(146, 126, 178) !important;
+.SectionDividerButton-works:hover {
+  background-color: rgb(146, 126, 178) !important;
+  color: white !important;
+  border: solid 1px white !important;
 }
 
 .MainSectionText {
@@ -246,8 +247,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 12px;
-  margin-right: 12px;
 }
 
 .landing-business {
@@ -362,7 +361,6 @@
 .corp-toggle-works{
   line-height: 23px;
   padding: 40px;
-  margin-right: 45%;
 }
 
 .settings-btn{
@@ -434,4 +432,18 @@ background-color:#917EB3;
 
 .para-1{
   margin-top: 50px;
+}
+
+.section1-personal{
+  display: flex;
+}
+
+.icon-howitworks{
+  width: 50%;
+  background-image: url('../../../assets/pay-per-click.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  padding-right: 250px;
+  margin-bottom: 50px;
 }

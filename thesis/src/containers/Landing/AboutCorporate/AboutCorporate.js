@@ -25,21 +25,22 @@ class AboutCorporate extends Component {
             </ul>
           </div>
           <div className='section2'>
-
-          <div className='words-sections2'>
-            <p>We take security seriously.</p>
-            <ul>
-              <li> Zendama doesn't handle any real money transactions our end, nor do we store any financial details, so the chance of theft is precisely zero.</li>
-              <li> Our financial systems are built upon Zendomo - our own blockchain system built upon the amazing Hyperledger Fabric framework. This bleeding edge technology provides the security and transparency of currencies like Bitcoin, with an immutable ledger where all transactions are recorded. You can see a complete unalterable history of transactions in seconds. There is simply no cheating it.</li>
-              <li> We collect only the bare minimum of user information to make the system work, and all information stored is protected by the industry standard protocols that are used by the biggest tech giants.</li>
-              <li> We don't give user information away to anyone - not for marketing reasons, not for research, nor for anything.</li>
-            </ul>
-            <div className='landing-button' onClick={this.loginRedir}>Sign-up</div>
-            <Link to='/'>
-              <div className='landing-button'>Back</div>
-            </Link>
+            <div className='words-sections2'>
+              <div className='security-words'>
+                <p>We take security seriously.</p>
+                <ul>
+                  <li> Zendama doesn't handle any real money transactions our end, nor do we store any financial details, so the chance of theft is precisely zero.</li>
+                  <li> Our financial systems are built upon Zendomo - our own blockchain system built upon the amazing Hyperledger Fabric framework. This bleeding edge technology provides the security and transparency of currencies like Bitcoin, with an immutable ledger where all transactions are recorded. You can see a complete unalterable history of transactions in seconds. There is simply no cheating it.</li>
+                  <li> We collect only the bare minimum of user information to make the system work, and all information stored is protected by the industry standard protocols that are used by the biggest tech giants.</li>
+                  <li> We don't give user information away to anyone - not for marketing reasons, not for research, nor for anything.</li>
+                </ul>
+                <div className='landing-button' onClick={this.loginRedir}>Sign-up</div>
+                <Link to='/'>
+                  <div className='landing-button'>Back</div>
+                </Link>
+              </div>
             </div>
-
+            <div className='icon-corporate'></div>
           </div>
         </div>
       </div>

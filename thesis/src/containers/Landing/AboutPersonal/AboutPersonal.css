@@ -246,8 +246,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-left: 12px;
-  margin-right: 12px;
 }
 
 .landing-business {
@@ -264,7 +262,6 @@
 
 .landing-desc-per {
   padding-top:5vh;
-  padding-bottom:10vh;
   background-color: white;
 }
 
@@ -388,8 +385,8 @@
 
 .words-aboutper{
   height: 300px;
-  margin-left: 40%;
   padding: 40px;
+  display: flex;
 }
 
 .about-personal-banner{
@@ -426,4 +423,19 @@
 .sign-up-works{
   color: white !important;
   margin-top: 35px !important;
+}
+
+.icon-personal{
+  height: 100%;
+  width: 40%;
+  background-image: url('../../../assets/thumbs-up.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+  padding-left: 250px;
+}
+
+.section1-personal-words{
+  margin-left: 5%;
+  margin-right: 9%;
 }
