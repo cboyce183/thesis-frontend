@@ -1,7 +1,5 @@
 import React, { Component, } from 'react';
 
-// import { Link, } from 'react-router-dom';
-
 import Loader from '../../components/Loader/Loader';
 import Close from '../../components/Close/Close';
 import DropDown from '../../components/DropDown/DropDown';
@@ -33,12 +31,10 @@ class TipOrPay extends Component {
             'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
         })
         .then(res => res.json())
-        // .then(r => console.log(r))
         .then(res => {
           if (res.isAdmin) {
             this.setState({isAdmin:res.isAdmin,});
           } else {
-            console.log("company response", res)
             this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
           }
         })
@@ -53,7 +49,6 @@ class TipOrPay extends Component {
         })
         .then(res => res.json())
         .then(res => {
-          console.log("res", res)
           this.setState({loaded: true, userList:res.users,});
         })
         .catch(e => console.error(e));
@@ -78,7 +73,6 @@ class TipOrPay extends Component {
   }
 
   handleTip = (quantity, motive) => {
-    console.log(quantity, motive, this.state.selected)
     fetch('http://192.168.0.37:4200/tip', {
       method: 'PUT',
       body: JSON.stringify({
@@ -148,7 +142,6 @@ class TipOrPay extends Component {
   }
 
   render() {
-    console.log("trhe state", this.state)
     const message = this.renderButtonMessage();
     const buttonClass = this.renderButtonClass(message);
     const remaining = this.renderRemainder(this.state);
@@ -186,7 +179,7 @@ class TipOrPay extends Component {
                     placeholder="Message *"
                   />
                   <input
-                    className="extra-css ${buttonClass}"
+                    className={`extra-css ${buttonClass}`}
                     type="submit"
                     value={message}
                     onClick={() => this.handleTip(this.quantity.value, this.reason.value)}

@@ -79,7 +79,7 @@ class Panel extends Component {
     });
     return (
       <div className="NextSteps">
-        <img src={require('../../assets/right-arrow.svg')} className="arrow-left"/>
+        <img alt="left arrow" src={require('../../assets/right-arrow.svg')} className="arrow-left"/>
         {steps}
       </div>
     );
