@@ -121,9 +121,14 @@
 
 #UnderLineElement{
   margin-top:10px;
-  padding-bottom:10px;  
+  padding-bottom:10px;
   border-bottom: solid;
   border-width: thin;
+}
+
+.main-tr-wallet{
+  width: 100%;
+  background-color: blue;
 }
 
 #ZenLargeDelta{
@@ -131,9 +136,9 @@
   font-weight: bold;
 }
 
-.SheetContainer{
+.SheetContainer-wallet{
   display: flex;
-  max-height: 40vh;
+  max-height: 65vh;
   flex-direction: column;
 }
 

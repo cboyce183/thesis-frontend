@@ -66,7 +66,7 @@ class Ledger extends Component {
           this.setState({DisplayUserToUser: true,})
         })
     } else {
-      window.location = '/login';
+      window.location = '/';
     }
   }
 
