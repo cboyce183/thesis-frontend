@@ -43,6 +43,18 @@ class PopUp extends Component {
     this.props.unpop({})
   }
 
+  renderWidthAndHeight = () => {
+    if (this.props.width && this.props.height) {
+      return {width: `${this.props.width}`, height: `${this.props.height}`,};
+    } else if (this.props.width) {
+      return {width: `${this.props.width}`, height: '650px',};
+    } else if (this.props.height) {
+      return {width: '450px', height: `${this.props.height}`,};
+    } else {
+      return {width: '450px', height: '650px',};
+    }
+  }
+
   render() {
     return (
       <div className="PopUpDisplay">
@@ -51,7 +63,7 @@ class PopUp extends Component {
           className="PopUpOverlay"
         >
         </div>
-        <div className="PopUp" style={this.props.width ? {width: `${this.props.width}`,} : {width: '450px',}}>
+        <div className="PopUp" style={this.renderWidthAndHeight()}>
           {this.props.children}
         </div>
       </div>
