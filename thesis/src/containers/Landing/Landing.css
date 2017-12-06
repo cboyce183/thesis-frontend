@@ -106,7 +106,8 @@
   border-radius: 0 !important;
   background-color: rgba(0,0,0,0.55) !important;
   color: white !important;
-  height: 23% !important;
+  height: 42px !important;
+  flex-shrink: 0 !important;
   font-family: 'Raleway';
   font-size: 1.6rem;
   border: 1px solid white !important;
@@ -134,6 +135,7 @@
 }
 
 .LoginForm {
+  margin-top: 20px;
   height: 37%;
   width: 100%;
   display: flex;
