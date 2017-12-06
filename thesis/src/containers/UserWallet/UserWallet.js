@@ -10,13 +10,15 @@ class UserWallet extends Component {
     super(props)
     this.state = {
       loaded: false,
-      token:  '',
-      accountInfo: null,
+      userTransactions: null,
+      userSpentCompTotal: null,
+      userToUserCompTotal: null,
+      userInfo: null,
       ZenFlowStats: {ZenIn: '-', ZenOut: '-', DZen: '-',},
       CompSpentPer: {ZenOut: 100, CompSpent: 400, UserPercentage: '0%',},
       CompRecPer: {ZenIn: 100, CompRec: 100, UserPercentage: '50%',},
       transactionPage: [0, 14,],
-      transactionsToDisplay: null,
+      // transactionsToDisplay: null,
       userList: [],
       selected: '',
       pageNumber: 1,
@@ -29,78 +31,6 @@ class UserWallet extends Component {
     }
   }
 
-  filterUserNamesForSelection(){
-    const userNameArr = []
-    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      if(userNameArr.indexOf(el.username) === -1) {
-        acc.push({img: el.profilePic, username: el.username, id: el.userid,});
-        userNameArr.push(el.username);
-        return acc
-      } else {
-        return acc
-      }
-    }, [])
-    this.setState({userList: res,})
-  }
-
-  handleUserSelection = (value) => {
-    this.filteringNamesForPanel(value)
-    this.setState({selected: value,})
-  }
-
-  filteringTransactionsForPanel(start, end){
-    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      if(i >= start && i <= end) {
-        acc.push(el);
-        return acc
-      } else {
-        return acc
-      }
-    }, [])
-    this.setState({transactionsToDisplay: res,})
-  }
-
-  filteringNamesForPanel(name){
-    const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-      if(name === el.userid) {
-        acc.push(el);
-        console.log(acc)
-        return acc
-      } else {
-        return acc
-      }
-    }, [])
-    this.setState({transactionsToDisplay: res,})
-  }
-
-  filteringSpentForPanel(min, max, popperType){
-    let res;
-    if(popperType === 'popperDate') {
-      const whichCol = 'date'
-      res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-        if(new Date(el[whichCol]) > new Date(min) && new Date(el[whichCol]) < new Date (max)) {
-          acc.push(el);
-          return acc
-        } else {
-          return acc
-        }
-      }, [])
-    } else {
-      let whichCol;
-      popperType === 'popperSpent' ? (whichCol = 'spent') :  (whichCol = 'received')
-      res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
-        if(el[whichCol] > min && el[whichCol] < max) {
-          acc.push(el);
-          return acc
-        } else {
-          return acc
-        }
-      }, [])
-    }
-    this.setState({transactionsToDisplay: res,})
-  }
-
-
   getInit(){
     if (window.localStorage.getItem('token')) {
       fetch('http://192.168.0.37:4200/company',
@@ -112,13 +42,11 @@ class UserWallet extends Component {
             'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
         })
         .then(res => res.json())
-        .then(r => console.log("user information", r))
         .then(res => {
           if (res.isAdmin) {
-            this.setState({isAdmin:res.isAdmin,});
+            this.setState({isAdmin:res.isAdmin, userInfo: res,});
           } else {
-            console.log("company response", res)
-            this.setState({available: res.availableCurrency, received: res.receivedCurrency,});
+            this.setState({available: res.availableCurrency, received: res.receivedCurrency, userInfo: res,});
           }
         })
         .catch(e => console.error(e));
@@ -132,53 +60,131 @@ class UserWallet extends Component {
           'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
       })
         .then(r => r.json())
-        .then(r => console.log(r))
-        .then(res => this.setState({accountInfo: res,}))
-        .then(zenStat => this.manageZenFlowStats())
+        .then(res => this.setState({
+          userTransactions: res.recentTransactions.sort((a, b) =>  b.date - a.date),
+          userSpentCompTotal: res.userSpentCompTotal,
+          userToUserCompTotal: res.userToUserCompTotal,}))
         .then(update => {
-          this.companySpentStats();
-          this.companyRecStats();
-          this.filteringTransactionsForPanel(0, 14)
+          // this.companySpentStats();
+          // this.companyRecStats();
+          this.filteringTransactionsForPanel(0, 8)
           this.filterUserNamesForSelection()
           this.setState({loaded: true,})
           this.totalNumberOfPagesNeeded()
         })
     } else {
-      window.location = '/login';
+      window.location = '/';
     }
   }
 
+  filteringTransactionsForPanel(start, end){
+    const res = this.state.userTransactions.reduce((acc,el, i) => {
+
+      if(i >= start && i <= end) {
+        acc.push(el);
+        return acc
+      } else {
+        return acc
+      }
+    }, [])
+    this.setState({userTransactions: res,})
+  }
+
+  filterUserNamesForSelection(){
+    // const userNameArr = []
+    // const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+    //   if(userNameArr.indexOf(el.username) === -1) {
+    //     acc.push({img: el.profilePic, username: el.username, id: el.userid,});
+    //     userNameArr.push(el.username);
+    //     return acc
+    //   } else {
+    //     return acc
+    //   }
+    // }, [])
+    // this.setState({userList: res,})
+  }
+
+  handleUserSelection = (value) => {
+    // this.filteringNamesForPanel(value)
+    // this.setState({selected: value,})
+  }
+
+
+
+  filteringNamesForPanel(name){
+    // const res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+    //   if(name === el.userid) {
+    //     acc.push(el);
+    //     console.log(acc)
+    //     return acc
+    //   } else {
+    //     return acc
+    //   }
+    // }, [])
+    // this.setState({userTransactions: res,})
+  }
+
+  filteringSpentForPanel(min, max, popperType){
+    // let res;
+    // if(popperType === 'popperDate') {
+    //   const whichCol = 'date'
+    //   res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+    //     if(new Date(el[whichCol]) > new Date(min) && new Date(el[whichCol]) < new Date (max)) {
+    //       acc.push(el);
+    //       return acc
+    //     } else {
+    //       return acc
+    //     }
+    //   }, [])
+    // } else {
+    //   let whichCol;
+    //   popperType === 'popperSpent' ? (whichCol = 'spent') :  (whichCol = 'received')
+    //   res = this.state.accountInfo.recentTransactions.reduce((acc,el, i) => {
+    //     if(el[whichCol] > min && el[whichCol] < max) {
+    //       acc.push(el);
+    //       return acc
+    //     } else {
+    //       return acc
+    //     }
+    //   }, [])
+    // }
+    // this.setState({userTransactions: res,})
+  }
+
+
+
   componentDidMount(){
-    this.setState({token: window.localStorage.getItem('token'),})
     this.getInit();
   }
 
   incrementThePage(){
-    if(this.state.pageNumber < this.state.pageTotal) {
-      this.filteringTransactionsForPanel(14,29)
-      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber + 1,}))
-    }
+    // if(this.state.pageNumber < this.state.pageTotal) {
+    //   this.filteringTransactionsForPanel(14,29)
+    //   this.setState((prevState, props) => ({pageNumber: prevState.pageNumber + 1,}))
+    // }
   }
 
   decrementThePage(){
-    if (this.state.pageNumber > 1){
-      this.filteringTransactionsForPanel(0,14)
-      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber - 1,}))
-    }
+    // if (this.state.pageNumber > 1){
+    //   this.filteringTransactionsForPanel(0,14)
+    //   this.setState((prevState, props) => ({pageNumber: prevState.pageNumber - 1,}))
+    // }
   }
 
   pageTotal(col){
-    if (this.state.transactionsToDisplay) {
-      return this.state.transactionsToDisplay.reduce((acc, el) => {
+    if (this.state.recentTransactions) {
+      return this.state.userTransactions.reduce((acc, el) => {
         return acc + el[col]
       }, 0)
     }
   }
 
   totalNumberOfPagesNeeded(){
-    const recTranLength = this.state.accountInfo.recentTransactions.length
-    const nPagesRequired = Math.round(recTranLength/14)
-    this.setState({pageTotal: nPagesRequired,})
+    if(this.state.recentTransactions){
+      const recTranLength = this.state.recentTransactions.length
+      const nPagesRequired = Math.round(recTranLength/14)
+      this.setState({pageTotal: nPagesRequired,})
+    }
   }
 
   displayingNavigationPage(){
@@ -204,16 +210,26 @@ class UserWallet extends Component {
 
 
   transactionList(){
-    if(this.state.transactionsToDisplay) {
-      return this.state.transactionsToDisplay.map((el, i) => {
+    if(this.state.userTransactions && this.state.userInfo) {
+
+      return this.state.userTransactions.map((el, i) => {
+        const bool1 = el.from.username ===  this.state.userInfo.username; // they gave
+        const bool2 = el.to.username !==  null; // and they didn
+        console.log("bool1", bool1, el)
         return (
           <tr key={el._id} className="main-tr">
-            <td><img className="TranscationPicImg" alt="" src={el.profilePic}/></td>
-            <td>{el.username}</td>
-            <td>{el.date}</td>
-            <td>{el.spent ? el.spent : '-'}</td>
-            <td>{el.received ? el.received : '-'}</td>
-            <td>{el.amount}</td>
+            <td>{((new Date(Number(el.date))).getDate())+'-'+((new Date(Number(el.date))).getMonth() + 1 )+'-'+((new Date(Number(el.date))).getFullYear())}</td>
+            <td><img className="TranscationPicImg" alt="" src={
+              bool1 ? el.to.profilePic : el.from.profilePic
+            }/></td>
+            <td>{
+              bool1 ? (el.to.username ? el.to.username : 'admin' ): (el.from.username ? el.from.username : 'admin' )
+            }</td>
+            <td>{ bool1 && bool2 ? el.amount : '-'}</td>
+            <td>{ !bool1 ? el.amount : '-'}</td>
+            <td>{ bool1 && !bool2 ? el.amount : '-'}</td>
+            <td>{ bool1 && !bool2 ? el.fromBalanceTokens : (!bool1 ? el.toBalanceTokens : '-') }</td>
+            <td>{ bool1 && bool2 ? el.fromBalanceCredits : '-' }</td>
           </tr>
         )
       })
@@ -221,7 +237,7 @@ class UserWallet extends Component {
   }
 
   manageZenFlowStats(){
-    const res = this.state.accountInfo.recentTransactions.reduce((acc, el) => {
+    const res = this.state.recentTransactions.reduce((acc, el) => {
       return el.spent ? ([acc[0] + el.spent, acc[1],]) : ([acc[0], el.received + acc[1],])
     }, [0,0,])
     this.setState({ZenFlowStats: {ZenOut: res[0], ZenIn: res[1], DZen: res[1] - res[0],},})
@@ -229,7 +245,7 @@ class UserWallet extends Component {
 
   companySpentStats(){
     const user = this.state.ZenFlowStats.ZenOut;
-    const comp = this.state.accountInfo.compTotalSpent;
+    const comp = this.state.userSpentCompTotal;
     const prec = (Math.round((user/(user+comp)*100)*10)/10).toString() + '%';
     this.setState({CompSpentPer: {
       ZenOut: user,
@@ -243,7 +259,7 @@ class UserWallet extends Component {
 
   companyRecStats(){
     const user = this.state.ZenFlowStats.ZenIn;
-    const comp = this.state.accountInfo.compTotalRecived;
+    const comp = this.state.userToUserCompTotal;
     const prec = (Math.round((user/(comp+user)*100)*10)/10).toString() + '%';
     this.setState({CompRecPer: {
       ZenIn: user,
@@ -252,124 +268,124 @@ class UserWallet extends Component {
   }
 
   popUp(title, popperType){
-    if(this.state[popperType]) {
-      if(title === 'Filter Date'){
-        return (
-          <div className="popUp">
-            <div className="PopUpBlock">
-              <div className="FilterPopupHeader">
-                <div className="FilterTitle">{title}</div>
-              </div>
-              <div  className="FilterPopupBody">
-                <div className="FilterVal">
-                  <label className="FilterLabs">From: </label>
-                  <input ref={((el) => this.fromDate = el)} type="date"/>
-                </div>
-                <div className="FilterVal">
-                  <label className="FilterLabs">To: </label>
-                  <input ref={((el) => this.toDate = el)} type="date"/>
-                </div>
-              </div>
-              <div  className="FilterPopupTail">
-                <input onClick={() => {
-                  console.log(this.fromDate.value, this.toDate.value)
-                  this.filteringSpentForPanel(this.fromDate.value, this.toDate.value, popperType)
-                  this.setState({[popperType]: false,})
-                }}
-                className="PopupFilter" type="submit" value="Filter"
-                />
-                <input onClick={() => {
-                  this.setState({[popperType]: false,})
-                }}
-                className="PopupFilter" type="submit" value="Back"
-                />
-              </div>
-            </div>
-          </div>
-        )
-      } else {
-        return(
-          <div className="popUp">
-            <div className="PopUpBlock">
-              <div className="FilterPopupHeader">
-                <div className="FilterTitle">{title}</div>
-              </div>
-              <div className="FilterPopupBody">
-                <div className="FilterVal">
-                  <label className="FilterLabs">Min: </label>
-                  <input ref={((el) => this.SpendMin = el)} placeholder={0} className="InputFilter" step={50} type="number"/>
-                </div>
-                <div className="FilterVal">
-                  <label className="FilterLabs">Max: </label>
-                  <input ref={((el) => this.SpendMax = el)} placeholder={500} className="InputFilter" step={50} type="number"/>
-                </div>
-              </div>
-              <div className="FilterPopupTail">
-                <input onClick={() => {
-                  this.filteringSpentForPanel(this.SpendMin.value, this.SpendMax.value, popperType)
-                  this.setState({[popperType]: false,})
-                }}
-                className="PopupFilter" type="submit" value="Filter"
-                />
-                <input onClick={() => {
-                  this.setState({[popperType]: false,})
-                }}
-                className="PopupFilter" type="submit" value="Back"
-                />
-              </div>
-            </div>
-          </div>
-        )
-      }
-    }
+    // if(this.state[popperType]) {
+    //   if(title === 'Filter Date'){
+    //     return (
+    //       <div className="popUp">
+    //         <div className="PopUpBlock">
+    //           <div className="FilterPopupHeader">
+    //             <div className="FilterTitle">{title}</div>
+    //           </div>
+    //           <div  className="FilterPopupBody">
+    //             <div className="FilterVal">
+    //               <label className="FilterLabs">From: </label>
+    //               <input ref={((el) => this.fromDate = el)} type="date"/>
+    //             </div>
+    //             <div className="FilterVal">
+    //               <label className="FilterLabs">To: </label>
+    //               <input ref={((el) => this.toDate = el)} type="date"/>
+    //             </div>
+    //           </div>
+    //           <div  className="FilterPopupTail">
+    //             <input onClick={() => {
+    //               console.log(this.fromDate.value, this.toDate.value)
+    //               this.filteringSpentForPanel(this.fromDate.value, this.toDate.value, popperType)
+    //               this.setState({[popperType]: false,})
+    //             }}
+    //             className="PopupFilter" type="submit" value="Filter"
+    //             />
+    //             <input onClick={() => {
+    //               this.setState({[popperType]: false,})
+    //             }}
+    //             className="PopupFilter" type="submit" value="Back"
+    //             />
+    //           </div>
+    //         </div>
+    //       </div>
+    //     )
+    //   } else {
+    //     return(
+    //       <div className="popUp">
+    //         <div className="PopUpBlock">
+    //           <div className="FilterPopupHeader">
+    //             <div className="FilterTitle">{title}</div>
+    //           </div>
+    //           <div className="FilterPopupBody">
+    //             <div className="FilterVal">
+    //               <label className="FilterLabs">Min: </label>
+    //               <input ref={((el) => this.SpendMin = el)} placeholder={0} className="InputFilter" step={50} type="number"/>
+    //             </div>
+    //             <div className="FilterVal">
+    //               <label className="FilterLabs">Max: </label>
+    //               <input ref={((el) => this.SpendMax = el)} placeholder={500} className="InputFilter" step={50} type="number"/>
+    //             </div>
+    //           </div>
+    //           <div className="FilterPopupTail">
+    //             <input onClick={() => {
+    //               this.filteringSpentForPanel(this.SpendMin.value, this.SpendMax.value, popperType)
+    //               this.setState({[popperType]: false,})
+    //             }}
+    //             className="PopupFilter" type="submit" value="Filter"
+    //             />
+    //             <input onClick={() => {
+    //               this.setState({[popperType]: false,})
+    //             }}
+    //             className="PopupFilter" type="submit" value="Back"
+    //             />
+    //           </div>
+    //         </div>
+    //       </div>
+    //     )
+    //   }
+    // }
   }
   applyFilter = () => {
-    switch (this.state.filter) {
-    case 'date':
-      return (
-        <input onClick={ () => {
-          this.setState({popperDate: true,})
-        }}
-        className="RemoveFilterButton" type="submit" value="by date"
-        />
-      );
-    case 'received':
-      return (
-        <input onClick={ () => {
-          this.setState({popperRec: true,})
-        }}
-        className="RemoveFilterButton" type="submit" value="by received"
-        />
-      );
-    case 'spent':
-      return (
-        <input onClick={ () => {
-          this.setState({popperSpent: true,})
-        }}
-        className="RemoveFilterButton" type="submit" value="by spent"
-        />
-      );
-    default:
-      return (
-        <div onClick={this.toggleFilter}>
-          {this.renderFilter()}
-        </div>
-      );
-    }
+    // switch (this.state.filter) {
+    // case 'date':
+    //   return (
+    //     <input onClick={ () => {
+    //       this.setState({popperDate: true,})
+    //     }}
+    //     className="RemoveFilterButton" type="submit" value="by date"
+    //     />
+    //   );
+    // case 'received':
+    //   return (
+    //     <input onClick={ () => {
+    //       this.setState({popperRec: true,})
+    //     }}
+    //     className="RemoveFilterButton" type="submit" value="by received"
+    //     />
+    //   );
+    // case 'spent':
+    //   return (
+    //     <input onClick={ () => {
+    //       this.setState({popperSpent: true,})
+    //     }}
+    //     className="RemoveFilterButton" type="submit" value="by spent"
+    //     />
+    //   );
+    // default:
+    //   return (
+    //     <div onClick={this.toggleFilter}>
+    //       {this.renderFilter()}
+    //     </div>
+    //   );
+    // }
   }
   toggleFilter = () => {
-    this.setState({ filterpop: !this.state.filterpop })
+    // this.setState({ filterpop: !this.state.filterpop,})
   }
   renderFilter = () => {
-    if (!this.state.filterpop) return ( <div className="popdownsr">filter</div> );
-    return (
-      <div className="popdown">
-            <div className="popdownjr" onClick={() => this.setState({popperDate:true})}>Date</div>
-            <div className="popdownjr" onClick={() => this.setState({popperRec:true})}>Zen received</div>
-            <div className="popdownjr" onClick={() => this.setState({popperSpent:true})}>Zen given</div>
-            <div className="popdownjr" onClick={() => this.filteringTransactionsForPanel(0,14)}>Reset</div>
-      </div>
-    );
+    // if (!this.state.filterpop) return ( <div className="popdownsr">filter</div> );
+    // return (
+    //   <div className="popdown">
+    //     <div className="popdownjr" onClick={() => this.setState({popperDate:true,})}>Date</div>
+    //     <div className="popdownjr" onClick={() => this.setState({popperRec:true,})}>Zen received</div>
+    //     <div className="popdownjr" onClick={() => this.setState({popperSpent:true,})}>Zen given</div>
+    //     <div className="popdownjr" onClick={() => this.filteringTransactionsForPanel(0,14)}>Reset</div>
+    //   </div>
+    // );
   }
   render() {
     console.log('this', this.state)
@@ -389,41 +405,44 @@ class UserWallet extends Component {
                 <div className="SummaryDivider">
                   <div className="SummaryDividerPie">
                     <div style={{display:'flex'}}>
-                    <PieChart className="PercentSpent pie1"
-                      startAngle={0}
-                      radius={50}
-                      lineWidth={30}
-                      paddingAngle={3}
-                      animationDuration={2000}
-                      animate={true}
-                      data={[
-                        { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
-                        { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#ddd',},]}
-                    >
-                      <div className="PerSpentText">
-                        <div className="SpentTitle">GIVEN</div>
-                        <div className="SpentPer">{
-                          (Math.round(this.state.accountInfo.yourTotalGiven/
-                            this.state.accountInfo.compTotalGiven*1000)/10)
-                        }%</div>
-                      </div>
-                    </PieChart>
-                    <PieChart className="PercentSpent pie2"
-                      startAngle={0}
-                      radius={50}
-                      lineWidth={30}
-                      paddingAngle={3}
-                      animationDuration={2000}
-                      animate={true}
-                      data={[
-                        { value: this.state.CompRecPer.ZenIn, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
-                        { value: this.state.CompRecPer.CompRec, key: 2, color: '#ddd',},]}
-                    >
-                      <div className="PerRecivedText">
-                        <div className="SpentTitle">RECEIVED</div>
-                        <div className="SpentPer">{this.state.CompRecPer.UserPercentage}</div>
-                      </div>
-                    </PieChart>
+                      <PieChart className="PercentSpent pie1"
+                        startAngle={0}
+                        radius={50}
+                        lineWidth={30}
+                        paddingAngle={3}
+                        animationDuration={2000}
+                        animate={true}
+                        data={[
+                          // { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
+                          // { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#ddd',},
+                        ]}
+                      >
+                        <div className="PerSpentText">
+                          <div className="SpentTitle">GIVEN</div>
+                          <div className="SpentPer">{
+
+
+                            // (Math.round(this.state.accountInfo.yourTotalGiven/
+                            //   this.state.accountInfo.compTotalGiven*1000)/10)
+                          }%</div>
+                        </div>
+                      </PieChart>
+                      <PieChart className="PercentSpent pie2"
+                        startAngle={0}
+                        radius={50}
+                        lineWidth={30}
+                        paddingAngle={3}
+                        animationDuration={2000}
+                        animate={true}
+                        data={[
+                          { value: this.state.CompRecPer.ZenIn, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
+                          { value: this.state.CompRecPer.CompRec, key: 2, color: '#ddd',},]}
+                      >
+                        <div className="PerRecivedText">
+                          <div className="SpentTitle">RECEIVED</div>
+                          <div className="SpentPer">{this.state.CompRecPer.UserPercentage}</div>
+                        </div>
+                      </PieChart>
                     </div>
                   </div>
                 </div>
@@ -442,7 +461,7 @@ class UserWallet extends Component {
                   </div>
                 </div>
               </div>
-              <div className="SheetContainer">
+              <div className="SheetContainer-wallet">
                 <div className="BalenceHeader">
                   <div className="DropDownDiv">
                     <DropDown
@@ -457,8 +476,8 @@ class UserWallet extends Component {
                 </div>
 
                 <table className="main-table">
-                    <thead className="main-thead"><tr className="main-tr"><th className="main-th">user</th><th className="main-th">id</th><th className="main-th">date</th><th className="main-th">given</th><th className="main-th">received</th><th className="main-th">net</th></tr></thead>
-                    <tbody className="main-table">
+                    <thead className="main-thead"><tr className="main-tr"><th className="main-th">date</th><th className="main-th">user</th><th className="main-th">id</th><th className="main-th">given</th><th className="main-th">received</th><th className="main-th">spent</th><th className="main-th">net token</th><th className="main-th">net credit</th></tr></thead>
+                    <tbody className="main-tbody">
                      {this.transactionList()}
                     </tbody>
                     <tfoot className="main-tfoot"><tr className="main-tr"><th className="main-th"></th><th className="main-th"></th><th className="main-th"></th><th className="main-th">{this.pageTotal('spent')}</th><th className="main-th">{this.pageTotal('received')}</th><th className="main-th">{this.pageTotal('received') - this.pageTotal('spent')}</th></tr></tfoot>

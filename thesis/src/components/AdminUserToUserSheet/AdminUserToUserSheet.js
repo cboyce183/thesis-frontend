@@ -187,7 +187,7 @@ class AdminUserToUserSheet extends Component {
     if(data){
       return data.map((el, i) => {
         return (
-          <tr key={el.date}><td>{(new Date(Number(el.date))).toString()}</td><td>{el.reason}</td><td>{el.from.username}</td><td>{el.to.username}</td><td>{Number(el.amount)}</td></tr>
+          <tr key={el.date} className="main-tr"><td>{((new Date(Number(el.date))).getDate())+'-'+((new Date(Number(el.date))).getMonth() + 1 )+'-'+((new Date(Number(el.date))).getFullYear())}</td><td>{el.reason.length > 25 ? el.reason.split('').splice(0,25).join('')+'...' : el.reason}</td><td>{el.from.username}</td><td>{el.to.username}</td><td>{Number(el.amount)}</td></tr>
         )
       })
     }
