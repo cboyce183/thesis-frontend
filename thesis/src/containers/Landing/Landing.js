@@ -84,11 +84,9 @@ class Landing extends Component {
           <input type="submit" className='landing-button' onClick={this.loginRequest.bind(this, this.state)} value="login" />
         </div>
       ) : (
-        <div className="LoginForm">
-          <Link to="/panel">
-            <input type="submit" className='TakeMeToPanel' value="take me to my panel" />
-          </Link>
-        </div>
+        <Link to="/panel">
+          <input type="submit" className='TakeMeToPanel' value="take me to my panel" />
+        </Link>
       )
   }
 
