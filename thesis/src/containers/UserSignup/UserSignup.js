@@ -118,9 +118,9 @@ class UserSignup extends Component {
 
   renderImageChange = (image) => {
     if (!image) {
-      return <div className="ProfilePicBox"><p>Upload a profile picture</p></div>
+      return <div className="ProfilePicBoxSignUp"><p>Upload a profile picture</p></div>
     } else {
-      return <img alt="" src={image} className="ProfilePic"style={{maxHeight:'200px'}}/>
+      return <img alt="" src={image} className="ProfilePicSignUp"/>
     }
   }
 
@@ -137,9 +137,9 @@ class UserSignup extends Component {
       <div>
         {this.renderCroppingPopUp()}
         <div className="Container">
-          <div className="MainPannel">
+          <div className="MainPanel">
             <div className="UserInputContainer">
-              <h4 style={{alignSelf:'center', paddingBottom:'5vh',}}>User Sign-up</h4>
+              <h4>User Sign-up</h4>
               <div className="UserInputBox">
                 <div className="LoginDetails">
                   <input
@@ -185,7 +185,7 @@ class UserSignup extends Component {
                   <input
                     type="password"
                     name="password2"
-                    className="u-full-width"
+                    className="u-full-width LastInputPassword"
                     id="pass2"
                     value={this.state.password2}
                     placeholder="Confirm password"
@@ -195,21 +195,21 @@ class UserSignup extends Component {
                 <div className="LoginSend">
                   <div
                     style={{ zIndex:1, }}
-                    className="ProfilePicBoxWrapper"
+                    className="ProfilePicBoxWrapperSignUp"
                     onClick={() => this.setState({popped: true,})}
                   >
                     {this.renderImageChange(this.state.UserImage)}
                   </div>
                   <div className="SignupBox">
-                    <div
-                      onClick={this.handleSignUpProcess}
-                      className="nxt-btn-cp" style={{fontSize:'15px',}}
-                    >Sign-up</div>
                     {this.renderPasswordWarning(this.state.passwordWarning)}
                     {this.renderEmailWarning(this.state.emailWarning)}
                   </div>
                 </div>
               </div>
+              <div
+                onClick={this.handleSignUpProcess}
+                className="nxt-btn-cp SignUpButton" style={{fontSize:'15px',}}
+              >Sign-up</div>
             </div>
           </div>
           <div className="NewCompanyRout">
