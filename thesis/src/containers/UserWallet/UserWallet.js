@@ -4,6 +4,7 @@ import './UserWallet.css'
 import Loader from './../../components/Loader/Loader'
 import Close from '../../components/Close/Close';
 import DropDown from '../../components/DropDown/DropDown';
+import viridis from './../../assets/verdis.json'
 
 class UserWallet extends Component {
   constructor(props){
@@ -31,9 +32,9 @@ class UserWallet extends Component {
     }
   }
 
-  getInit(){
+  async getInit(){
     if (window.localStorage.getItem('token')) {
-      fetch('http://192.168.0.37:4200/company',
+      await fetch('http://192.168.0.37:4200/company',
         {
           method: 'GET',
           headers: {
@@ -46,6 +47,7 @@ class UserWallet extends Component {
           if (res.isAdmin) {
             this.setState({isAdmin:res.isAdmin, userInfo: res,});
           } else {
+
             this.setState({available: res.availableCurrency, received: res.receivedCurrency, userInfo: res,});
           }
         })
@@ -60,17 +62,19 @@ class UserWallet extends Component {
           'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},
       })
         .then(r => r.json())
+        // .then(a =>         console.log("the response form teh db", a))
         .then(res => this.setState({
           userTransactions: res.recentTransactions.sort((a, b) =>  b.date - a.date),
           userSpentCompTotal: res.userSpentCompTotal,
           userToUserCompTotal: res.userToUserCompTotal,}))
-        .then(update => {
+        .then(async (update) => {
           // this.companySpentStats();
           // this.companyRecStats();
-          this.filteringTransactionsForPanel(0, 8)
-          this.filterUserNamesForSelection()
-          this.setState({loaded: true,})
-          this.totalNumberOfPagesNeeded()
+          await this.filteringTransactionsForPanel(0, 8)
+          await this.filterUserNamesForSelection()
+          await this.totalNumberOfPagesNeeded()
+          await this.manageZenFlowStats()
+          await this.setState({loaded: true,})
         })
     } else {
       window.location = '/';
@@ -79,7 +83,6 @@ class UserWallet extends Component {
 
   filteringTransactionsForPanel(start, end){
     const res = this.state.userTransactions.reduce((acc,el, i) => {
-
       if(i >= start && i <= end) {
         acc.push(el);
         return acc
@@ -87,8 +90,9 @@ class UserWallet extends Component {
         return acc
       }
     }, [])
-    this.setState({userTransactions: res,})
+    this.setState({pageTransactions: res,})
   }
+
 
   filterUserNamesForSelection(){
     // const userNameArr = []
@@ -158,31 +162,32 @@ class UserWallet extends Component {
   }
 
   incrementThePage(){
-    // if(this.state.pageNumber < this.state.pageTotal) {
-    //   this.filteringTransactionsForPanel(14,29)
-    //   this.setState((prevState, props) => ({pageNumber: prevState.pageNumber + 1,}))
-    // }
+    if(this.state.pageNumber < this.state.pageTotal) {
+      this.filteringTransactionsForPanel(8,14)
+      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber + 1,}))
+    }
   }
 
   decrementThePage(){
-    // if (this.state.pageNumber > 1){
-    //   this.filteringTransactionsForPanel(0,14)
-    //   this.setState((prevState, props) => ({pageNumber: prevState.pageNumber - 1,}))
-    // }
+    if (this.state.pageNumber > 1){
+      this.filteringTransactionsForPanel(0,7)
+      this.setState((prevState, props) => ({pageNumber: prevState.pageNumber - 1,}))
+    }
   }
 
   pageTotal(col){
-    if (this.state.recentTransactions) {
-      return this.state.userTransactions.reduce((acc, el) => {
-        return acc + el[col]
-      }, 0)
+    if (this.state.pageTransactions) {
+      // return this.state.pageTransactions.reduce((acc, el) => {
+      //   return acc + Number(el.amount)
+      // }, 0)
+      return "."
     }
   }
 
   totalNumberOfPagesNeeded(){
-    if(this.state.recentTransactions){
-      const recTranLength = this.state.recentTransactions.length
-      const nPagesRequired = Math.round(recTranLength/14)
+    if(this.state.userTransactions){
+      const recTranLength = this.state.userTransactions.length
+      const nPagesRequired = Math.round(recTranLength/9)
       this.setState({pageTotal: nPagesRequired,})
     }
   }
@@ -210,14 +215,14 @@ class UserWallet extends Component {
 
 
   transactionList(){
-    if(this.state.userTransactions && this.state.userInfo) {
+    if(this.state.pageTransactions && this.state.userInfo) {
 
-      return this.state.userTransactions.map((el, i) => {
+      return this.state.pageTransactions.map((el, i) => {
         const bool1 = el.from.username ===  this.state.userInfo.username; // they gave
         const bool2 = el.to.username !==  null; // and they didn
-        console.log("bool1", bool1, el)
+        // console.log("bool1", bool1, el)
         return (
-          <tr key={el._id} className="main-tr">
+          <tr key={i} className="main-tr">
             <td>{((new Date(Number(el.date))).getDate())+'-'+((new Date(Number(el.date))).getMonth() + 1 )+'-'+((new Date(Number(el.date))).getFullYear())}</td>
             <td><img className="TranscationPicImg" alt="" src={
               bool1 ? el.to.profilePic : el.from.profilePic
@@ -236,11 +241,43 @@ class UserWallet extends Component {
     }
   }
 
-  manageZenFlowStats(){
-    const res = this.state.recentTransactions.reduce((acc, el) => {
-      return el.spent ? ([acc[0] + el.spent, acc[1],]) : ([acc[0], el.received + acc[1],])
-    }, [0,0,])
-    this.setState({ZenFlowStats: {ZenOut: res[0], ZenIn: res[1], DZen: res[1] - res[0],},})
+  async manageZenFlowStats(){
+    // console.log(" enter the function ")
+    if(this.state.userTransactions && this.state.userInfo) {
+      // sum the recieved
+      // console.log("zen stats")
+      const recieved = await this.state.userTransactions.reduce((acc, el) => {
+        // console.log("zen recived stats", el)
+        const bool1 = el.from.username ===  this.state.userInfo.username; // they gave
+        if( !bool1){
+          console.log(" if statement", el.amount)
+          return Number(el.amount) + acc
+        } else {
+          return acc;
+        }
+      }, 0)
+      // sum the spent
+      const spent = await this.state.userTransactions.reduce((acc, el) => {
+        const bool1 = el.from.username ===  this.state.userInfo.username; // they gave
+        const bool2 = el.to.username !==  null; // and they didn
+        if( bool1 && !bool2 ){
+          return Number(el.amount) + acc
+        } else {
+          return acc
+        }
+      }, 0)
+
+      const given = await this.state.userTransactions.reduce((acc, el) => {
+        const bool1 = el.from.username ===  this.state.userInfo.username; // they gave
+        const bool2 = el.to.username !==  null; // and they didn
+        if( bool1 && bool2  ){
+          return Number(el.amount) + acc
+        } else {
+          return acc
+        }
+      }, 0)
+      this.setState({ZenFlowStats: {Given: given , ZenOut: spent, ZenIn: recieved, DZen: recieved - spent,},})
+    }
   }
 
   companySpentStats(){
@@ -388,7 +425,7 @@ class UserWallet extends Component {
     // );
   }
   render() {
-    console.log('this', this.state)
+    console.log('the state', this.state)
     if (this.state.loaded) {
       return (
         <div className="WalletWrapper">
@@ -413,17 +450,35 @@ class UserWallet extends Component {
                         animationDuration={2000}
                         animate={true}
                         data={[
-                          // { value: this.state.accountInfo.yourTotalGiven, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
-                          // { value: this.state.accountInfo.compTotalGiven, key: 2, color: '#ddd',},
+                          { value:  this.state.userToUserCompTotal - this.state.ZenFlowStats.Given, key: 1, color: viridis[0],},
+                          { value: this.state.ZenFlowStats.Given, key: 2, color: viridis[50],},
                         ]}
                       >
                         <div className="PerSpentText">
                           <div className="SpentTitle">GIVEN</div>
                           <div className="SpentPer">{
-
-
-                            // (Math.round(this.state.accountInfo.yourTotalGiven/
-                            //   this.state.accountInfo.compTotalGiven*1000)/10)
+                            (Math.round(this.state.ZenFlowStats.Given/
+                              (this.state.userToUserCompTotal)*1000)/10)
+                          }%</div>
+                        </div>
+                      </PieChart>
+                      <PieChart className="PercentSpent pie1"
+                        startAngle={0}
+                        radius={50}
+                        lineWidth={30}
+                        paddingAngle={3}
+                        animationDuration={2000}
+                        animate={true}
+                        data={[
+                          { value:  this.state.userToUserCompTotal - this.state.ZenFlowStats.ZenIn, key: 1, color: viridis[44],},
+                          { value: this.state.ZenFlowStats.ZenIn, key: 2, color: viridis[88],},
+                        ]}
+                      >
+                        <div className="PerSpentText">
+                          <div className="SpentTitle">RECIEVED</div>
+                          <div className="SpentPer">{
+                            (Math.round(this.state.ZenFlowStats.ZenIn/
+                              (this.state.userToUserCompTotal)*1000)/10)
                           }%</div>
                         </div>
                       </PieChart>
@@ -435,12 +490,15 @@ class UserWallet extends Component {
                         animationDuration={2000}
                         animate={true}
                         data={[
-                          { value: this.state.CompRecPer.ZenIn, key: 1, color: 'rgba(88, 51, 161, 0.65)',},
-                          { value: this.state.CompRecPer.CompRec, key: 2, color: '#ddd',},]}
+                          { value: this.state.userSpentCompTotal - this.state.ZenFlowStats.ZenOut, key: 1, color: viridis[99],},
+                          { value: this.state.ZenFlowStats.ZenOut, key: 2, color: viridis[66],},]}
                       >
                         <div className="PerRecivedText">
-                          <div className="SpentTitle">RECEIVED</div>
-                          <div className="SpentPer">{this.state.CompRecPer.UserPercentage}</div>
+                          <div className="SpentTitle">SPENT</div>
+                          <div className="SpentPer">{
+                            (Math.round(this.state.ZenFlowStats.ZenOut/
+                                (this.state.userSpentCompTotal)*1000)/10)
+                          } % </div>
                         </div>
                       </PieChart>
                     </div>
@@ -448,15 +506,15 @@ class UserWallet extends Component {
                 </div>
                 <div className="SummaryDividerTot">
                   <div className="TotSumIn">
-                    <div className="ZenInLab">Income</div>
+                    <div className="ZenInLab">Received</div>
                     <div className="ZenInNum">{this.state.ZenFlowStats.ZenIn}</div>
                   </div>
                   <div className="TotSumIn" id="UnderLineElement">
-                    <div className="ZenInLab">Outgoing</div>
+                    <div className="ZenInLab">Spent</div>
                     <div className="ZenInNum">{this.state.ZenFlowStats.ZenOut}</div>
                   </div>
                   <div className="TotSumIn">
-                    <div className="ZenInLab">Total</div>
+                    <div className="ZenInLab">remaining</div>
                     <div className="ZenInNum" id="ZenLargeDelta">{this.state.ZenFlowStats.DZen}</div>
                   </div>
                 </div>
@@ -480,7 +538,7 @@ class UserWallet extends Component {
                     <tbody className="main-tbody">
                      {this.transactionList()}
                     </tbody>
-                    <tfoot className="main-tfoot"><tr className="main-tr"><th className="main-th"></th><th className="main-th"></th><th className="main-th"></th><th className="main-th">{this.pageTotal('spent')}</th><th className="main-th">{this.pageTotal('received')}</th><th className="main-th">{this.pageTotal('received') - this.pageTotal('spent')}</th></tr></tfoot>
+                    <tfoot className="main-tfoot"><tr className="main-tr"><th className="main-th"></th><th className="main-th"></th><th className="main-th"></th><th className="main-th">{this.pageTotal('spent')}</th><th className="main-th">{this.pageTotal('received')}</th><th className="main-th">{this.pageTotal('received')}</th></tr></tfoot>
                 </table>
                 <div className="TransactionOverflowBox">
                   {this.displayingNavigationPage()}

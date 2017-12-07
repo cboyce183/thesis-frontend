@@ -148,6 +148,7 @@ class TipOrPay extends Component {
   }
 
   render() {
+    console.log("tip or pay state", this.state)
     const message = this.renderButtonMessage();
     const buttonClass = this.renderButtonClass(message);
     const remaining = this.renderRemainder(this.state);
