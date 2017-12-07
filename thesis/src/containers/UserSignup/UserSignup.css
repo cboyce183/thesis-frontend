@@ -3,8 +3,17 @@
   height: 100vh;
 }
 
+.MainPanel {
+  height: 90%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .PopUpBackground{
-  z-index: 10;  
+  z-index: 10;
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -22,12 +31,50 @@
   background-color: white;
 }
 
+.UserInputBox {
+  width: 100%;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SignUpButton {
+  margin: 0 !important;
+}
+
 .UserInputContainer{
+  margin: auto;
+  height: 40%;
+  width: 100%;
   flex: 1;
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.LastInputPassword {
+  margin: 0 !important;
+}
+
+.LoginDetails {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: flex-start;
+}
+
+.LoginSend {
+  width: 380px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .NewCompanyRout{
@@ -46,7 +93,7 @@
   font-weight: bold;
   margin-left: 5px;
   color: 'black';
-  text-decoration: none;  
+  text-decoration: none;
 }
 
 .CompSignPageRoute:hover{
@@ -61,25 +108,29 @@
   color: red;
   font-size: 10px;
 }
-.ProfilePicBoxWrapper{
-  flex: 1;
-  background-color: transparent;
-  margin: 20px;
+
+.ProfilePicBoxWrapperSignUp{
+  height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 200px;
 }
-.ProfilePicBox{
-  flex: 1;
+
+.ProfilePicBoxSignUp{
+  margin: auto;
   background-color: transparent;
-  margin: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   border: dashed;
-  border-radius: 25px;
   opacity: 0.5;
   border-color: grey;
-  height: 200px;
+  height: 78%;
+  width: 78%;
+}
+
+.ProfilePicSignUp {
+  height: 78%;
+  width: 78%;
 }
