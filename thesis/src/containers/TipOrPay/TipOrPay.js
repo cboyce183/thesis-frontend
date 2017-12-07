@@ -73,21 +73,27 @@ class TipOrPay extends Component {
   }
 
   handleTip = (quantity, motive) => {
-    fetch('http://192.168.0.37:4200/tip', {
-      method: 'PUT',
-      body: JSON.stringify({
-        id: this.state.selected,
-        amount: quantity,
-        reason: motive,
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},})
-      .then(res => {
-        if (res.status === 200) this.setState({success: true, attempted: true,})
-        else this.setState({success: false, attempted: true,})
-      });
+    if (this.state.selected && quantity) {
+      this.setState({attempting: true,})
+      fetch('http://192.168.0.37:4200/tip', {
+        method: 'PUT',
+        body: JSON.stringify({
+          id: this.state.selected,
+          amount: quantity,
+          reason: motive,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + window.localStorage.getItem('token'),},})
+        .then(res => {
+          if (res.status === 200) this.setState({success: true, attempted: true,})
+          else this.setState({success: false, attempted: true,})
+          setTimeout(() => window.location.reload(), 2000);
+        });
+    } else {
+      alert('please fill in the form');
+    }
   }
 
   //======================= RENDERING
@@ -148,7 +154,7 @@ class TipOrPay extends Component {
     const highlight = this.state.max
       ? 'Highlight'
       : '';
-    return this.state.loaded ? (
+    return this.state.loaded && !this.state.attempting ? (
       <div className="MaxWidth">
         <div className="Centering">
           <div className="Shadow">

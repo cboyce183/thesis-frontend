@@ -95,10 +95,14 @@ class Catalog extends Component {
     )
   }
 
+  renderAttemptingLoader() {
+    this.setState({attempting: true,})
+  }
+
   renderPopUp(product) {
-    console.log("product", product)
     return (
       <ProductPopUp
+        loaderFunc={this.renderAttemptingLoader.bind(this)}
         isAdmin={this.state.isAdmin}
         available={this.state.received}
         id={product.id}
@@ -124,7 +128,7 @@ class Catalog extends Component {
     const availableZen = !this.state.isAdmin
       ? (<h4 className="AvailableZenCatalog">Available Zen: {this.state.received}ż</h4>)
       : null;
-    return this.state.loaded ? (
+    return this.state.loaded && !this.state.attempting ? (
       <div className="MaxWidth">
         <div className="CatalogPosition">
           {popped}

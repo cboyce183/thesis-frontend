@@ -95,7 +95,7 @@ class ProductPopUp extends Component {
     else if (finalPrice === 0 && !this.props.isService) this.handleButtonStates(1);
     else if (finalPrice > this.props.available) this.handleButtonStates(4);
     else {
-      console.log("the props",this.props)
+      this.props.loaderFunc();
       fetch(`http://192.168.0.37:4200/catalog/product/${this.props.id}`, {
         method: 'POST',
         headers: {
@@ -109,7 +109,10 @@ class ProductPopUp extends Component {
           price: finalPrice,
           name: this.props.title,
         }),
-      }).then(res => this.handleButtonStates(3));
+      }).then(res => {
+        this.handleButtonStates(3);
+        setTimeout(() => window.location.reload(), 2000);
+      });
     }
   }
 
